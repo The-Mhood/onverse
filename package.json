@@ -1,0 +1,95 @@
+{
+  "name": "musiconverse",
+  "productName": "MusicOnVerse",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "main": "electron/main.cjs",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build && node scripts/inline-dist.mjs",
+    "preview": "vite preview",
+    "dist": "npm run build && electron-builder --mac dmg",
+    "dist:notarized": "npm run build && set -a && source ~/.freebuff/mov-sign.env && set +a && electron-builder --mac dmg",
+    "dist:legacy": "npm run build && electron-builder --mac -c electron-builder.legacy.cjs",
+    "icon": "node scripts/make-icon.mjs"
+  },
+  "devDependencies": {
+    "@electron/notarize": "^3.1.1",
+    "@tailwindcss/vite": "^4.3.3",
+    "daisyui": "^5.7.28",
+    "electron": "^44.2.0",
+    "electron-builder": "^26.15.3",
+    "tailwindcss": "^4.3.3",
+    "vite": "^8.2.2"
+  },
+  "dependencies": {
+    "design-agent": "^1.0.0",
+    "electron-updater": "^6.8.9",
+    "lamejs": "^1.2.1",
+    "three": "^0.185.1"
+  },
+  "build": {
+    "appId": "com.mov.musiconverse",
+    "productName": "MusicOnVerse",
+    "files": [
+      "dist/**/*",
+      "electron/**/*"
+    ],
+    "afterSign": "electron/notarize.cjs",
+    "directories": {
+      "output": "release",
+      "buildResources": "build"
+    },
+    "publish": [
+      {
+        "provider": "generic",
+        "url": "https://updates.example.com/musiconverse/mac"
+      }
+    ],
+    "asar": true,
+    "mac": {
+      "category": "public.app-category.music",
+      "icon": "build/icon.icns",
+      "artifactName": "${productName}-${version}-${arch}.${ext}",
+      "hardenedRuntime": true,
+      "gatekeeperAssess": false,
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "arm64",
+            "x64"
+          ]
+        },
+        {
+          "target": "zip",
+          "arch": [
+            "arm64",
+            "x64"
+          ]
+        }
+      ]
+    },
+    "dmg": {
+      "title": "MusicOnVerse 1.0.0",
+      "iconSize": 128,
+      "contents": [
+        {
+          "x": 160,
+          "y": 220
+        },
+        {
+          "x": 380,
+          "y": 220,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    }
+  },
+  "allowScripts": {
+    "electron-winstaller@5.4.0": true,
+    "fsevents@2.3.3": true
+  }
+}
