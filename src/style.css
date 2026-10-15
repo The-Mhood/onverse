@@ -1460,3 +1460,31 @@ body.dragging::after {
   .daw-track { grid-template-columns: 1fr; }
 }
 .daw-strip .proto-tag { margin-left: 0; white-space: normal; display: block; width: fit-content; max-width: 100%; }
+
+/* ---- Orbit composition (UI-005, ?orbit=1 only): the landing card becomes a left-hand text overlay, as in the
+   approved mock. Scoped to body.orbit-mode, so the DAW and the other workspaces keep their panels. ---- */
+body.orbit-mode .panel-center#panelIdle {
+  position: absolute;
+  left: 5.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: min(560px, 46vw);
+  align-items: flex-start;
+  text-align: left;
+  padding: 0;
+  background: linear-gradient(90deg, rgba(5, 7, 11, 0.7) 0%, rgba(5, 7, 11, 0.35) 70%, rgba(5, 7, 11, 0) 100%);
+  border: 0;
+  outline: 0;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+body.orbit-mode .panel-center#panelIdle .idle-glyph { display: none; }
+body.orbit-mode .panel-center#panelIdle .idle-actions { justify-content: flex-start; }
+body.orbit-mode .panel-center#panelIdle h1 { font-size: clamp(1.5rem, 2.9vw, 2.4rem); line-height: 1.1; white-space: nowrap; }
+
+/* ---- AI Fix sidebar: shrunk, not removed (UI-006/007 presentation). Bindings in main.js are unchanged:
+   #btnFix -> runFix, #btnReportToggle -> reportRail.toggle("hidden"). A hidden report rail takes no space. ---- */
+.report-rail.hidden { display: none; }
+.report-rail { width: min(280px, 24vw); max-height: 62vh; border-radius: 12px; }
+.report-rail .report-body { font-size: 0.78rem; }
+.fix-row .btn-fix { animation: none; min-height: 2.25rem; padding: 0 0.9rem; font-size: 0.72rem; letter-spacing: 0.08em; box-shadow: none; }

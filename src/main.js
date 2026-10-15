@@ -776,6 +776,8 @@ bindAskTargets(document, askSylune)
 
 /* Shared cosmic shell (UI-007): decorative and non-interactive. Orbit suppresses its own planets. */
 cosmicEnv = mountCosmicEnvironment({ root: document.body, orbit: ORBIT_SPIKE })
+// Orbit composition: the idle landing card becomes a left-hand overlay (see style.css, body.orbit-mode).
+document.body.classList.toggle("orbit-mode", ORBIT_SPIKE)
 cosmicEnv.setWorkspace(WORKSPACE_FOR_MODE[state.mode] ?? "analysis")
 
 /* UI-005 Orbit HUD: a bottom-right card with the three landmark chips. Mounted only with ?orbit=1, so the DAW

@@ -237,7 +237,7 @@ export function createStage(canvas) {
 
   /* ---- ringed foreground body: striated rings crossing the lower frame ---- */
   const ringBody = new THREE.Group()
-  ringBody.position.set(-760, 330, -1400)
+  ringBody.position.set(-712, 18, -1544) // upper-left, cropped by the top edge (projects to ~17%W, 10%H)
   ringBody.rotation.set(-1.18, 0, 0.22)
   scene.add(ringBody)
   const bodyMat = new THREE.MeshStandardMaterial({ color: 0x8f7b63, roughness: 0.92, metalness: 0 })
@@ -250,7 +250,7 @@ export function createStage(canvas) {
 
   /* ---- second ringed body, lower right: its ring arcs across the horizon (composition per the approved mock) ---- */
   const ringBody2 = new THREE.Group()
-  ringBody2.position.set(900, -300, -1250)
+  ringBody2.position.set(543, -362, -1007) // right-hand arc crossing the limb (projects to ~84%W, 50%H; clear of the planet)
   ringBody2.rotation.set(-1.05, 0, -0.35)
   scene.add(ringBody2)
   const body2 = new THREE.Mesh(new THREE.SphereGeometry(190, 96, 72), new THREE.MeshStandardMaterial({ color: 0x9a8670, roughness: 0.9, metalness: 0 }))
@@ -311,7 +311,7 @@ export function createStage(canvas) {
    * The camera keeps its current viewing direction and eases to a standoff from the landmark.
    * Under reduced motion it jumps. Any user drag cancels an ease in progress. ---- */
   const LANDMARKS = [
-    { obj: ringBody, radius: 780 },    // 1 Project: ringed body, top left
+    { obj: ringBody, radius: 780 },    // 1 Project: ringed body, upper left
     { obj: giant, radius: 1100 },      // 2 Reference: banded gas giant, top
     { obj: moons[2], radius: 150 },    // 3 Master: largest cratered moon, right
   ]
