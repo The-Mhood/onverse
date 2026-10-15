@@ -1,5 +1,7 @@
 # UI baseline decision — agent-b / COORD-005
 
+> **Historical checkpoint, superseded in part on 2026-10-15:** the owner subsequently authorized whole-PR #3 review/fixes and merge if it passes, and settled the UI choices. [COORD-006 / UI-004 handoff](UI_IMPLEMENTATION_HANDOFF.md) governs actual M publication, the exclusive dated reservation, safe same-branch fast-forward and conditional Slice A start. Keep the graph/preservation evidence below; do not use the old read-only restriction or extra-owner-approval gate to block the new scoped grant. No merge/worker receipt is inferred from either pre-merge document.
+
 **Decision date: 2026-10-15. Strategy: keep the UI branch based on `main` and wait for the reviewed prerequisites to merge. No UI history rewrite, branch switch, reset, or immediate PR merge is authorized by this decision.** This record supplements [AGENTS.md](../../AGENTS.md) and the [work queue](WORK_QUEUE.md). It is an integration/authorization decision, not a feature implementation.
 
 ## 1. Verified facts and limits

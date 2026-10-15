@@ -19,7 +19,7 @@ Owner instructions govern scope and consequential decisions, subject to the exec
 - Published starting point for this onboarding unit: `e5229d8f601423a70fdeb946ab80112f650fa82c`. Onboarding changes come after it; inspect live HEAD rather than pinning future work to this older commit.
 - At recovery, `main` was `ce02cf90ecdb0f9729817e2bfe449f0e42969d31`; [PR #3](https://github.com/The-Mhood/onverse/pull/3) was open/draft, engineering branch into `main`. Its check rollup was empty, not green CI.
 - The owner explicitly authorized recovery of mismatched local metadata. All 50 non-ignored working files and the complete inventory matched published `e5229d8` before and after fetch plus `git reset --mixed e5229d8f601423a70fdeb946ab80112f650fa82c`; the tree was clean and connectivity passed afterward. No working-file contents were discarded. Cause of the discrepancy was not established. **This one recovery is not blanket reset permission for a future worker.**
-- Codex is no longer active. The later owner-reported agent-b fixed UI session and authorized read-only scope are recorded in the [UI baseline decision](UI_BASELINE_DECISION.md) and latest queue notice. Its runtime/exact checkout/acknowledgment remain unverified. The main-based wait decision and pinned audit source are unchanged by CORE-007; these architecture drafts grant no UI editing reservation or implementation permission.
+- Codex is inactive. The [2026-10-15 UI handoff](UI_IMPLEMENTATION_HANDOFF.md) supersedes COORD-005's read-only wait with the owner-settled Slice A scope and dated exclusive UI reservation. Actual M/merge evidence is published in the COORD-006 result on PR #3, never invented in advance. Agent-b independently checks its fixed branch/cleanliness/collisions/ancestry, fast-forwards only if safe, and publishes ownership acknowledgment before edits. Runtime/checkout/receipt/start remain unverified here. Architecture drafts alone grant no writes or future capability implementation.
 - Prior unpublished external work remains unknown. Preserve any work discovered later. Historical Codex records are evidence, not current ownership grants.
 
 If connected to `main` without these documents, inspect the published engineering branch read-only (GitHub or fetched refs) after auditing the checkout. Do not switch over dirty work, treat missing docs as permission to start fresh, or independently select an implementation base.
@@ -40,7 +40,7 @@ Vanilla JavaScript/DOM with Vite 8, Tailwind 4/daisyUI 5, Three.js, and Electron
 | `src/audio/processor.js` | Audio decoding, one-buffer OfflineAudioContext processing, encoders/download helpers; not a multitrack or managed-asset pipeline. |
 | `src/audio/reference.js` | Reference resolution/analysis behavior; preserve supported reference workflows and privacy boundaries. |
 | `electron/main.cjs`, `preload.cjs` | Isolated desktop shell, external navigation, update bridge. No project/media filesystem repository IPC. |
-| `index.html` | Entry and external Google-font requests; offline/privacy and typography considerations. |
+| `index.html` | Entry; old interface still requests Google fonts. Reviewed local assets under `src/assets/fonts/` are prepared; Slice A wires them/notices and removes CDN requests. |
 | `tests/unit/`, `tests/audio/`, `tests/fixtures/` | Built-in Node tests and synthetic fixtures; inspect what each assertion actually proves. |
 | `scripts/validation/` | Isolated loudness candidate and pinned native-reference tooling, not production integration. |
 | `package.json`, `package-lock.json`, `vite.config.ts` | Scripts, dependencies, and build configuration; lead-approved scope only. |
@@ -84,7 +84,7 @@ Run applicable checks, recording exact commands, exit codes, limitations, and sk
 
 ```bash
 # Existing default regression suites:
-node --test tests/audio/analyzerRegression.test.js tests/audio/integratedLoudnessCandidate.test.js tests/unit/analysisService.test.js tests/unit/buildProcessingPlan.test.js
+node --test tests/unit/*.test.js tests/audio/*.test.js
 node scripts/test-analyze.mjs
 
 # Strict diagnostic: expected to expose the three known legacy LUFS failures.
@@ -94,7 +94,7 @@ MUSICONVERSE_STRICT_AUDIO_REGRESSIONS=1 node --test tests/audio/analyzerRegressi
 npm run build
 ```
 
-Audit baseline: default 145 tests / 142 passes / 3 explicit known legacy LUFS TODO cases / 0 unexpected failures. Strict legacy diagnostics remain 47 tests / 44 passes / 3 known loudness failures; do not hide them, loosen tolerances, or promote TODOs to claim correctness. Candidate/reference agreement is isolated synthetic research, not normative certification, full-track performance proof, or a production replacement. Dangerous normalization/gain remains unresolved. See the metering contract and queue for exact evidence.
+COORD-006 review baseline: default 154 tests / 151 passes / 3 explicit known legacy LUFS TODO cases / 0 unexpected failures, including nine actual-controller boundary tests. The earlier 145/142 snapshot is historical. Strict legacy diagnostics remain 47 tests / 44 passes / 3 known loudness failures; do not hide them, loosen tolerances, or promote TODOs to claim correctness. Candidate/reference agreement is isolated synthetic research, not normative certification, full-track performance proof, or a production replacement. Dangerous normalization/gain remains unresolved. See the metering contract and queue for exact evidence.
 
 No test/lint/typecheck/UI-test npm scripts are configured. No new dependencies without owner approval. No browser/listening/macOS/export/packaging/recovery result is implied by Node tests or a build. Owner-side testing remains deferred, not completed.
 

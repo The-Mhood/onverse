@@ -9,7 +9,7 @@ A local audio analysis, processing, and conversion prototype evolving toward a p
 | [AGENTS.md](AGENTS.md) | Collaboration authority, ownership, isolation, review, and safety rules |
 | [Project guide](docs/engineering/PROJECT_GUIDE.md) | Actual capabilities, source map, contracts, limitations, and validation |
 | [Work queue](docs/engineering/WORK_QUEUE.md) | Current coordination state and historical task/result evidence |
-| [Design brief](docs/design/DESIGN_BRIEF.md) | Canonical owner-supplied UI direction; not implementation approval |
+| [Design brief](docs/design/DESIGN_BRIEF.md) | Canonical settled visual direction; scoped implementation is governed by the dated handoff |
 | [agent-b master prompt](docs/engineering/AGENT_B_MASTER_PROMPT.md) | Reusable onboarding context; deliberately assigns no feature/task |
 | [Metering contract and research](docs/engineering/AUDIO_METERING_CONTRACT.md) | Proposed interfaces, measured evidence, and unresolved audio-safety limits |
 | [Architecture working draft](docs/ARCHITECTURE.md) | Proposed session/Linked Sessions semantics, transaction/recovery rules and proof gate; not an installed API |
@@ -19,11 +19,11 @@ Read the rules, guide, current queue notice, and design brief before changing an
 
 ## Repository state and collaboration
 
-The lead works on `arena/b25c318e-onverse`; engineering and this onboarding material are delivered through [draft PR #3](https://github.com/The-Mhood/onverse/pull/3), targeting `main`. Do not assume `main` contains them. Recheck live refs and PR state; branch names and documentation are not proof of synchronization.
+The lead works on fixed `arena/b25c318e-onverse`; engineering/onboarding is delivered through [PR #3](https://github.com/The-Mhood/onverse/pull/3) into `main`. The owner authorized its merge only after whole-PR review/fixes. The [2026-10-15 handoff](docs/engineering/UI_IMPLEMENTATION_HANDOFF.md) and COORD-006 result on that PR supply the actual merge M and conditional Slice A grant. Recheck live refs/PR result: pre-merge documents and branch names do not prove integration.
 
 The separate [draft architecture PR #1](https://github.com/The-Mhood/onverse/pull/1) remains **unmerged**. CORE-007 explicitly reconciles its architecture, product vision and roadmap at the existing paths as working drafts for review, with attribution and later Linked Sessions constraints. These are not installed APIs, accepted POC defaults, executed tests or a PR merge. Its original README/engineering standards are not adopted; overlapping files require deliberate reconciliation, not a wholesale merge merely to onboard an agent.
 
-The lead owns architecture, audio/application/domain contracts, coordination, and integration. The owner reports **agent-b** on a separate fixed UI branch; Codex is no longer active. The [UI baseline decision](docs/engineering/UI_BASELINE_DECISION.md) keeps it main-based, authorizes read-only preflight/audit/proposal, and blocks implementation pending the reviewed base and exact scope. Worker acknowledgment/runtime remain unverified here. This new architecture draft neither retargets that snapshot nor grants writes. Keep unknown/unpublished previous work intact.
+The lead owns architecture/audio/application/domain contracts and integration. **agent-b**, on its separate fixed UI branch, receives the exclusive dated Slice A presentation reservation in the handoff, activated after actual M and its own preservation/ancestry/ownership acknowledgment; no new owner approval is needed for the settled choices. Orbit Mode is a later separate feature-flagged spike with unchanged createStage API. Worker checkout/receipt/start remain unverified here; preserve all unknown/unpublished work. Codex is inactive. Architecture drafts do not grant implementation of future capabilities.
 
 ## Local development
 
@@ -45,11 +45,11 @@ For a proxied development preview, bind to `0.0.0.0` and allow the actual previe
 ### Existing checks
 
 ```bash
-node --test tests/audio/analyzerRegression.test.js tests/audio/integratedLoudnessCandidate.test.js tests/unit/analysisService.test.js tests/unit/buildProcessingPlan.test.js
+node --test tests/unit/*.test.js tests/audio/*.test.js
 node scripts/test-analyze.mjs
 ```
 
-At the 2026-10-15 audit: **145 tests, 142 passes, 3 known legacy LUFS TODO cases, 0 unexpected failures**. This is not complete audio correctness or professional mastering certification. Strict diagnostics, limitations, and UI verification requirements are in the [project guide](docs/engineering/PROJECT_GUIDE.md).
+At the 2026-10-15 COORD-006 review: **154 tests, 151 passes, 3 known legacy LUFS TODO cases, 0 unexpected failures** (includes nine actual-controller failure-boundary cases). This is not complete audio correctness or professional mastering certification. Strict diagnostics, limitations, and UI verification requirements are in the [project guide](docs/engineering/PROJECT_GUIDE.md).
 
 No npm test/lint/typecheck/UI-test scripts are currently configured. Report missing tooling as unconfigured, not passed. Do not add dependencies or run signing/release/update operations without separately approved scope.
 

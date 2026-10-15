@@ -4,13 +4,13 @@
 
 - The product owner decides product scope, visual direction, major architecture changes, dependencies, external costs, and destructive actions.
 - The lead/coordinator owns architecture, application contracts, core audio engineering, task assignment, review, and integration recommendations.
-- Codex is no longer active. The owner now reports **agent-b** as the UI/UX collaborator on fixed branch `arena/ced77c2a-onverse`. Its exact checkout/runtime and acknowledgment remain to be verified. The [UI baseline decision](docs/engineering/UI_BASELINE_DECISION.md) authorizes read-only preflight/audit/proposal only; UI implementation remains blocked. No editing workspace or file reservation is granted by onboarding. Workers do not independently change architecture or shared interfaces.
+- Codex is no longer active. The owner reports **agent-b** on fixed branch `arena/ced77c2a-onverse`; its actual checkout/runtime and acknowledgment remain independently unverified. The [2026-10-15 UI implementation handoff](docs/engineering/UI_IMPLEMENTATION_HANDOFF.md) supersedes the old read-only/main-wait restriction with a bounded Slice A grant, effective only after verified PR #3 merge M, worker preservation/ancestry preflight and published ownership acknowledgment. Onboarding alone grants nothing. Workers do not independently change architecture or shared interfaces.
 - These rules establish a Git-based collaboration protocol, not an automatic scheduler, agent launcher, or permission to implement the full roadmap.
 - Follow [issue #2](https://github.com/The-Mhood/onverse/issues/2), with the product owner's later direction to defer a custom orchestration platform. No new orchestration runtime or dependency is authorized.
 
 ## Current UI integration decision
 
-Keep agent-b's fixed branch main-based; wait for reviewed prerequisites to merge. Do not rebase/switch/reset it or silently treat the lead branch as the UI integration base. Read-only audit reference is `370190c180682eb45edbdd9029a33b7e58c605dd` plus the later [decision record](docs/engineering/UI_BASELINE_DECISION.md). No future main merge SHA is invented. A later reviewed main SHA, guarded fast-forward-only update, proposal approval, dependency acceptance, exact file ownership and worker acknowledgment must precede implementation. Read the complete decision for evidence, scope and stop conditions.
+The owner explicitly authorizes whole-PR #3 review, substantive fixes and `gh pr merge 3 --merge` if review passes. Keep agent-b on its same main-based fixed branch: after actual M is published in the COORD-006 PR #3 result, independently verify objects/ancestry/cleanliness/ignored collisions and use `git merge --ff-only M` only if its HEAD is an ancestor. Never reset/rebase/switch/force/discard to bypass divergence. No future SHA is invented. The [handoff](docs/engineering/UI_IMPLEMENTATION_HANDOFF.md) supplies the dated exclusive `src/main.js` reservation, exact allow/deny paths, settled visual/font/texture/error decisions and mechanically activated worker acknowledgment. No extra owner round-trip for these settled decisions; no claim the worker received or started the task. Old COORD-005/UI-003 notices are historical where superseded.
 
 ## Architecture references
 
@@ -49,7 +49,7 @@ Each worker implementation requires its own branch and separate worktree or clon
 
 These defaults are not active editing grants. The coordinator must check exact paths and prefix/pattern intersections before assigning work. A directory grant overlaps every contained file. Renames/deletes count against both affected paths. Forbidden paths win over allowed paths; changing the allowlist requires review first.
 
-Separate branches do not resolve overlapping ownership. If two tasks need the same file, serialize them or establish a separate, approved shared-interface task. Record the active reservation and worker acknowledgment in the queue before either starts. Do not release a reservation merely because a worker stopped responding.
+Separate branches do not resolve overlapping ownership. If two tasks need the same file, serialize them or establish a separate, approved shared-interface task. Record the active reservation and actual worker acknowledgment before edits (queue plus the linked GitHub result/acknowledgment when the scoped handoff defines mechanical activation). UI-004 reserves its exact UI paths for agent-b at the dated handoff; lead freezes them, and worker publishes preflight/ownership acknowledgment before starting. Do not release a reservation merely because a worker stopped responding.
 
 ## Task lifecycle and dispatch gates
 
@@ -74,9 +74,9 @@ Current engineering interfaces, introduced on the engineering branch:
 
 The analysis service does not yet provide workers, cancellation, persistent projects, or undo. UI work must not imply those capabilities exist. Do not duplicate processing logic or introduce a second authoritative processor state in UI code.
 
-When UI implementation is requested, agent-b first submits a UI audit and design proposal identifying affected files, workflow changes, accessibility/responsiveness, required core interfaces, and regressions to test. The lead reviews architectural compatibility before implementation. Any required shared-contract change is a separately assigned core task; UI must wait for its acceptance.
+For UI-004, the owner has settled the visual target/sequence and the lead has bounded architectural compatibility in the handoff. Agent-b publishes its actual audit/preflight, file/check plan and ownership acknowledgment before implementation; do not ask the owner to reapprove Reference 1/2, ground-up presentation, self-hosting or Slice A first. Material new product/dependency/contract choices still require appropriate review. Any shared-contract change remains a separate core task; UI waits for its acceptance.
 
-The owner-supplied direction is Logic-inspired professional DAW usability with an original restrained dark/celestial identity, not a clone or a gaming/SaaS dashboard. Read the canonical design brief. Notify the owner before look changes and obtain review of the proposed palette/gradient/layout before implementation; the brief is not palette or implementation approval. Core work must not duplicate agent-b's UI work.
+Read the canonical design brief: Reference 1 is the visual target, Reference 2 layout structure only; ground-up professional dark/celestial presentation, not an old-interface extension. Notify before look changes; derive coherent implementation tokens from the approved target and report them for review, rather than blocking on another request for the same settled decision. Material departures need review. Slice A precedes a separately assigned, feature-flagged Orbit spike; reduced-motion camera work is in the spike. Core work must not duplicate agent-b's UI work.
 
 ## Required product and safety invariants
 
@@ -102,12 +102,12 @@ The project guide records current capabilities and future boundaries; do not inf
 Existing core checks, run from the repository root when applicable:
 
 ```bash
-node --test tests/audio/analyzerRegression.test.js tests/audio/integratedLoudnessCandidate.test.js tests/unit/analysisService.test.js tests/unit/buildProcessingPlan.test.js
+node --test tests/unit/*.test.js tests/audio/*.test.js
 node scripts/test-analyze.mjs
 npm run build
 ```
 
-The current default suite has 145 tests / 142 passes / 3 explicit known LUFS TODO cases. No npm test/lint/typecheck/UI-test scripts are configured; report missing checks as unconfigured, never passed. Strict diagnostics and unresolved audio/gain limits are in the project guide.
+The current default suite has 154 tests / 151 passes / 3 explicit known LUFS TODO cases, including nine actual-controller boundary tests. No npm test/lint/typecheck/UI-test scripts are configured; report missing checks as unconfigured, never passed. Strict diagnostics and unresolved audio/gain limits are in the project guide.
 
 A build writes ignored output: it is not part of a read-only audit or dry run. Document-only tasks should verify paths, links, scope, and whitespace; avoid dependency installation or builds unless justified. Add task-specific tests for changed behavior. UI integration also requires import, reference analysis, processing, adjustments, A/B, crop/seek, and export checks appropriate to its diff.
 

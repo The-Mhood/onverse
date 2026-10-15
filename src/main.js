@@ -903,18 +903,14 @@ function makeTarget(kind, analysis) {
 async function runAnalysis() {
   if (!state.buffer || state.busy) return
   state.busy = true
-  stopPlayback()
-  state.ab = "orig"
-  updateAbUI()
-  renderRefAreas()
-  const prep = await ensureReferenceReady()
-  if (!prep.ok) {
-    state.busy = false
-    renderRefAreas()
-    return
-  }
-  showProgress(true, "Analyzing…")
   try {
+    stopPlayback()
+    state.ab = "orig"
+    updateAbUI()
+    renderRefAreas()
+    const prep = await ensureReferenceReady()
+    if (!prep.ok) return
+    showProgress(true, "Analyzing…")
     const analysis = await analysisService.analyze(state.buffer, (v) => {
       setProgress(v)
       const labels = ["Reading waveform…", "Measuring loudness…", "Scanning spectrum…", "Checking pitch…", "Analyzing stereo…", "Finding tempo…", "Finalizing…"]
@@ -945,7 +941,7 @@ async function runAnalysis() {
     toast(`Analysis complete — ${shown} · ${scores.overall}/100`)
   } catch (err) {
     console.error(err)
-    toast(`Analysis failed: ${err.message || err}`)
+    toast(`Analysis failed: ${err?.message || String(err)}`)
   } finally {
     state.busy = false
     showProgress(false)

@@ -1,10 +1,10 @@
 # MusicOnVerse canonical design brief
 
-**Recorded: 2026-10-15. Status: owner-supplied direction and review constraints, not an approved UI implementation, final palette, or assigned task.** [AGENTS.md](../../AGENTS.md) governs ownership; [PROJECT_GUIDE.md](../engineering/PROJECT_GUIDE.md) distinguishes implemented capabilities from future DAW concepts. This is the single design-direction brief; task-specific audits/proposals should reference it, not create competing briefs.
+**Updated: 2026-10-15. Status: owner-settled visual/sequence decisions; Slice A implementation follows the bounded [COORD-006/UI-004 handoff](../engineering/UI_IMPLEMENTATION_HANDOFF.md) after actual merge M and worker preflight/ownership acknowledgment.** [AGENTS.md](../../AGENTS.md) governs ownership; [PROJECT_GUIDE.md](../engineering/PROJECT_GUIDE.md) distinguishes implemented capabilities from future DAW concepts. This is the single design-direction brief; task-specific audits/proposals should reference it, not create competing briefs.
 
 ## Identity and usability
 
-Logic Pro is the primary reference for layout clarity, production workflow, density, and professional usability, **not a skin to clone**. MusicOnVerse must retain its own classy, welcoming, professional dark/celestial identity. It must not feel like a beginner toy, game interface, or SaaS dashboard.
+**Reference 1 is the visual target; Reference 2 is layout structure only. Ground-up redesign of presentation, not an extension/skin of the old interface.** Logic Pro remains a professional-usability reference, not an additional competing visual/layout target. MusicOnVerse must retain its own classy, welcoming, professional dark/celestial identity. It must not feel like a beginner toy, game interface, or SaaS dashboard.
 
 The working surface is functional first. Waveforms, meters, names, time values, editing precision, and long-session comfort outrank decoration. Cosmic styling belongs chiefly in branding, onboarding/empty states, and restrained peripheral accents. No moving/glowing layer may reduce readability, obscure audio, steal focus, or consume resources needed for playback/rendering.
 
@@ -12,7 +12,11 @@ Preserve working interactions and contracts. A visual rearrangement does not aut
 
 ## Workspace direction and priority
 
-Implement only after a scoped proposal and review, in this order:
+**Slice A comes first:** current-capability shell, navigation, transport and central workspace, readable responsive states and preserved existing actions. The owner has approved the target/sequence; agent-b supplies its bounded file/check plan and reports concrete tokens/results, not another request to settle the same choices.
+
+**Orbit Mode follows as a separate spike**, after Slice A acceptance, in a separate module behind a default-off feature flag. Keep the existing `createStage` API unchanged. Reduced-motion **camera** behavior belongs to that spike, not Slice A. Compare ringed planet, moon terminator, atmospheric limb and ring to Reference 1 at **1120×700 and 1480×920**, reporting actual matches/gaps. No such comparison has been performed by the lead.
+
+Longer-term component priorities below are not a mandate to invent missing features in Slice A:
 
 1. Shell and clear navigation.
 2. Transport, timeline, and central workspace.
@@ -29,7 +33,7 @@ Proposals should establish clear transport/context, a dominant editing surface, 
 
 ## Token system to specify in the proposal
 
-Reuse/evolve the existing CSS theme intentionally. Record approved values here after review; no final colour hex values, gradient, font acquisition, or measurements have been selected in this documentation unit.
+Define a coherent ground-up token/component system from Reference 1, using Reference 2 only for layout. Reusing proven behavior does not require extending the old visual theme. Record actual token values/results in the worker delivery for coordinator review; no final measured colour/gradient values are invented here. Ordinary implementation choices within the approved reference do not require another owner round-trip; material departures do.
 
 | Semantic family | Required design decisions |
 | --- | --- |
@@ -43,7 +47,7 @@ Reuse/evolve the existing CSS theme intentionally. Record approved values here a
 | Shape/depth | Consistent corners, borders, shadows; depth communicates hierarchy, not gratuitous glow |
 | Motion | Minimal transitions; reduced-motion/static-workspace behavior and performance budgets |
 
-Avoid tiny, widely tracked uppercase labels for essential controls/data. Use a readable system/fallback stack while reviewing existing remote-font privacy/offline behavior; no new font/dependency without appropriate approval and licensing review. Colour/gradient implementation still needs owner review. Do not infer palette approval from approval of this brief.
+Avoid tiny, widely tracked uppercase labels for essential controls/data. Font option A is concretely mapped to approved **self-hosting**: sparse Orbitron brand/display, readable Rajdhani UI, Share Tech Mono readouts, and system fallbacks. Pinned WOFF2/OFL assets and provenance are [reviewed and prepared](../../src/assets/fonts/README.md); Slice A removes runtime Google-font requests, uses explicit inline packaging and exposes complete licences. No npm dependency is added. Typography, fallback glyph coverage and actual contrast still need UI checks. Do not infer unmeasured accessibility or licence compliance in a shipped bundle merely from source files existing.
 
 ## Reusable component vocabulary
 
@@ -63,7 +67,7 @@ Names and imported metadata are untrusted: render text safely, do not interpolat
 - Keep values/units readable, permit zoom/scaling, and make dense desktop controls usable without sacrificing touch hit areas in narrow layouts.
 - Collapse/reveal secondary panes at smaller widths; do not squeeze the entire desktop DAW into unreadable miniatures. Preserve access to core actions and clear navigation.
 - Evaluate representative desktop and narrow web viewports. Electron currently enforces a 1120 x 700 minimum; web mobile support is a separate test claim.
-- Fully calm reduced-motion behavior should be proposed for the Three.js scene as well as CSS. Background visual energy must not be required to understand playback or status.
+- Preserve existing CSS reduced-motion behavior in Slice A. Fully calm **camera** behavior is part of the later Orbit Mode spike, not a Slice A dependency. Background energy is never required to understand playback or status.
 - Long-session comfort, meter/waveform clarity, and stable layout take priority over showcasing effects.
 
 ## State and capability honesty
@@ -74,8 +78,8 @@ Future linked-item UI must distinguish a usable committed asset, a newer source 
 
 ## Ownership and review
 
-agent-b is the intended UI owner after appointment; onboarding itself assigns no task. A requested UI implementation first needs an audit/proposal showing layout/components, affected files, applicable states, accessibility/responsiveness, core dependencies, and regression checks. Lead reviews architecture/contracts; owner reviews product/visual choices before broad changes.
+agent-b owns the bounded Slice A presentation reservation under the dated handoff once actual M and its independent preflight/ownership acknowledgment activate the grant. Onboarding alone is not an assignment. Publish the audit/file/check plan before edits; lead reviews contract preservation and results. The owner has settled Reference 1/2, ground-up presentation, self-hosting and Slice A/spike order; do not ask again. New consequential product/dependency/contract departures still require review.
 
-Likely presentation areas are `src/style.css`, scoped DOM presentation in `src/main.js`, `src/ui/draw.js`, and later `src/scene.js`/font declarations in `index.html`. These are **not editing grants**. `src/main.js` always needs an exclusive handoff. DSP/application/domain/storage/IPC/configuration/dependencies remain lead-owned unless explicitly coordinated.
+The handoff—not this general brief—defines the exact file allowlist/denylist. Slice A includes scoped presentation in `src/main.js`, styles/entry and specified new presentation/font/texture/test paths; it excludes `src/ui/draw.js` and scene/camera implementation. `src/main.js` has a dated exclusive handoff; no concurrent lead editing. DSP/application/domain/storage/IPC/configuration/dependencies remain protected. Use locally generated/procedural textures, no texture CDN; static local assets use explicit inline imports. Required reference-provenance wording is in the handoff; no unsupported chart-track fingerprint or standards-grade claim.
 
 Review the actual diff and functioning workflows, not screenshots alone. Run applicable regression/build checks, supply a runnable preview and screenshots where supported, and report manual/keyboard/viewport checks and omissions. No new test dependency without approval, no invented browser/macOS/listening results, and no automatic merge.
