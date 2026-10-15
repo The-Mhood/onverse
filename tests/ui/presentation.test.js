@@ -197,7 +197,8 @@ test("Slice A does not modify denied paths", () => {
     }
   })
   const changed = [...new Set([...published, ...working, ...extra])]
-  const denied = /^(src\/(audio|application|domain|scene)\/|src\/scene\.js$|src\/ui\/draw\.js$|electron\/|package(-lock)?\.json$|vite\.config|scripts\/|docs\/|tests\/(unit|audio)\/|tests\/fixtures\/)/
+  // COORD-010 (2026-10-15) grants src/scene.js, src/scene/** and src/ui/draw.js as visual surfaces.
+  const denied = /^(src\/(audio|application|domain)\/|electron\/|package(-lock)?\.json$|vite\.config|scripts\/|docs\/|tests\/(unit|audio)\/|tests\/fixtures\/)/
   const allowedDocs = new Set(["docs/design/proposals/agent-b-daw-sylune-proposal.md"])
   const offending = changed.filter((f) => denied.test(f) && !allowedDocs.has(f))
   assert.deepEqual(offending, [], "denied paths changed")

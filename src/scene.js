@@ -1,5 +1,5 @@
 /* MusicOnVerse — cinematic 3D stage.
- * A slow-drifting nebula of violet particles, an audio-reactive spectrum ring,
+ * A slow-drifting nebula of steel-blue particles, an audio-reactive spectrum ring,
  * rotating wireframe torus and a pulsing core. The whole camera eases toward
  * the pointer like a high-end product film.
  */
@@ -23,17 +23,18 @@ function radialTexture(inner, outer) {
   return tex
 }
 
-const PURPLES = [
-  new THREE.Color("#7c3aed"),
-  new THREE.Color("#a855f7"),
-  new THREE.Color("#c084fc"),
-  new THREE.Color("#e879f9"),
-  new THREE.Color("#6366f1"),
+// Palette from Reference 1: steel, blue, pale ink, warm accent.
+const PALETTE = [
+  new THREE.Color("#4a6f8f"),
+  new THREE.Color("#7fa9cc"),
+  new THREE.Color("#a9c4dc"),
+  new THREE.Color("#b89d84"),
+  new THREE.Color("#6f8aa6"),
 ]
 
 export function createStage(canvas) {
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
-  const drift = reduced ? 0.12 : 1
+  const drift = reduced ? 0 : 1 // reduced motion: no automatic camera, spin or drift (pointer look still works)
 
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true })
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
@@ -58,7 +59,7 @@ export function createStage(canvas) {
     pos[i * 3] = r * Math.sin(phi) * Math.cos(theta)
     pos[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta) * 0.7
     pos[i * 3 + 2] = -2 - r * Math.cos(phi) * 0.6
-    const c = PURPLES[Math.floor(Math.random() * PURPLES.length)]
+    const c = PALETTE[Math.floor(Math.random() * PALETTE.length)]
     col[i * 3] = c.r
     col[i * 3 + 1] = c.g
     col[i * 3 + 2] = c.b
@@ -87,7 +88,7 @@ export function createStage(canvas) {
   const baseY = 0.35
   for (let i = 0; i < BARS; i++) {
     const a = (i / BARS) * Math.PI * 2
-    const c = PURPLES[i % PURPLES.length].clone().lerp(new THREE.Color("#f0abfc"), i / BARS * 0.4)
+    const c = PALETTE[i % PALETTE.length].clone().lerp(new THREE.Color("#dfe6ee"), i / BARS * 0.4)
     const mat = new THREE.MeshBasicMaterial({
       color: c,
       transparent: true,
@@ -107,7 +108,7 @@ export function createStage(canvas) {
 
   /* ---- rotating torus rings ---- */
   const ringMat = new THREE.MeshBasicMaterial({
-    color: 0x8b5cf6,
+    color: 0x4a6f8f,
     wireframe: true,
     transparent: true,
     opacity: 0.16,
@@ -118,14 +119,14 @@ export function createStage(canvas) {
   ring1.rotation.x = Math.PI / 2.4
   world.add(ring1)
   const ring2 = new THREE.Mesh(new THREE.TorusGeometry(5.4, 0.025, 8, 90), ringMat.clone())
-  ring2.material.color.set(0xc084fc)
+  ring2.material.color.set(0xb89d84)
   ring2.material.opacity = 0.1
   ring2.rotation.x = Math.PI / 2.4 + 0.35
   world.add(ring2)
 
   /* ---- core glow ---- */
   const glowMat = new THREE.SpriteMaterial({
-    map: radialTexture("rgba(168,85,247,0.9)", "rgba(168,85,247,0)"),
+    map: radialTexture("rgba(127,169,204,0.6)", "rgba(127,169,204,0)"),
     transparent: true,
     opacity: 0.5,
     blending: THREE.AdditiveBlending,

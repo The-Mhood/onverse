@@ -20,8 +20,8 @@ test("createStage keeps the scene.js contract: setSpectrum, setEnergy, setPlayin
   }
 })
 
-test("scene.js and package.json are byte-identical to the approved baseline M", () => {
-  assert.equal(sha256("src/scene.js"), "fb2ed8f5c3e9eadcd2c1bd3ddc96154f545971a614ae15160f88881a55d75b40")
+test("package.json is byte-identical to the approved baseline (dependency boundary)", () => {
+  // scene.js is a granted visual surface under COORD-010; its checks live in tests/ui/paletteStatic.test.js.
   assert.equal(sha256("package.json"), "c800164ee6719b2eee5967a9f0f12682795d468ff3927b7f03815870e2f999a0")
 })
 

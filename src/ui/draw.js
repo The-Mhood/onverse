@@ -58,7 +58,7 @@ export function drawRadar(canvas, scores) {
       const [x, y] = pt(i % n, r)
       i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y)
     }
-    ctx.strokeStyle = "rgba(168,132,255,0.10)"
+    ctx.strokeStyle = "rgba(127,169,204,0.10)"
     ctx.lineWidth = 1
     ctx.stroke()
   }
@@ -69,14 +69,14 @@ export function drawRadar(canvas, scores) {
     ctx.beginPath()
     ctx.moveTo(cx, cy)
     ctx.lineTo(x, y)
-    ctx.strokeStyle = "rgba(168,132,255,0.12)"
+    ctx.strokeStyle = "rgba(127,169,204,0.12)"
     ctx.stroke()
   }
 
   // data polygon
   const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, R)
-  grad.addColorStop(0, "rgba(168,85,247,0.55)")
-  grad.addColorStop(1, "rgba(99,102,241,0.28)")
+  grad.addColorStop(0, "rgba(127,169,204,0.45)")
+  grad.addColorStop(1, "rgba(74,111,143,0.28)")
   ctx.beginPath()
   for (let i = 0; i <= n; i++) {
     const r = R * clamp((scores[keys[i % n]] || 0) / 100, 0.05, 1)
@@ -86,9 +86,9 @@ export function drawRadar(canvas, scores) {
   ctx.closePath()
   ctx.fillStyle = grad
   ctx.fill()
-  ctx.strokeStyle = "rgba(232,121,249,0.9)"
+  ctx.strokeStyle = "rgba(127,169,204,0.9)"
   ctx.lineWidth = 1.6
-  ctx.shadowColor = "rgba(232,121,249,0.6)"
+  ctx.shadowColor = "rgba(127,169,204,0.45)"
   ctx.shadowBlur = 12
   ctx.stroke()
   ctx.shadowBlur = 0
@@ -100,13 +100,13 @@ export function drawRadar(canvas, scores) {
     const [x, y] = pt(i, R * clamp((scores[keys[i]] || 0) / 100, 0.05, 1))
     ctx.beginPath()
     ctx.arc(x, y, 3, 0, Math.PI * 2)
-    ctx.fillStyle = "#f0abfc"
-    ctx.shadowColor = "rgba(232,121,249,0.9)"
+    ctx.fillStyle = "#b89d84"
+    ctx.shadowColor = "rgba(184,157,132,0.7)"
     ctx.shadowBlur = 8
     ctx.fill()
     ctx.shadowBlur = 0
     const [lx, ly] = pt(i, R + 15)
-    ctx.fillStyle = "rgba(240,239,255,0.62)"
+    ctx.fillStyle = "rgba(223,230,238,0.62)"
     ctx.fillText(labels[i], lx, ly + 3)
   }
 }
@@ -146,9 +146,9 @@ export function drawWaveform(canvas, buffer, { progress = 0, overlay = null, reg
   if (region && region.in < region.out) {
     const x0 = clamp(region.in, 0, 1) * w
     const x1 = clamp(region.out, 0, 1) * w
-    ctx.fillStyle = "rgba(232,121,249,0.10)"
+    ctx.fillStyle = "rgba(127,169,204,0.10)"
     ctx.fillRect(x0, 0, Math.max(1, x1 - x0), h)
-    ctx.strokeStyle = "rgba(232,121,249,0.85)"
+    ctx.strokeStyle = "rgba(127,169,204,0.85)"
     ctx.lineWidth = 1
     ctx.setLineDash([4, 3])
     ctx.beginPath()
@@ -160,19 +160,19 @@ export function drawWaveform(canvas, buffer, { progress = 0, overlay = null, reg
     ctx.setLineDash([])
   }
 
-  draw(buffer, "rgba(168,85,247,0.85)", 0.9)
-  if (overlay) draw(overlay, "rgba(52,211,153,0.7)", 0.7)
+  draw(buffer, "rgba(127,169,204,0.85)", 0.9)
+  if (overlay) draw(overlay, "rgba(111,184,168,0.7)", 0.7)
 
   // progress glow
   if (progress > 0) {
     const x = clamp(progress, 0, 1) * w
     const g = ctx.createLinearGradient(x - 22, 0, x, 0)
-    g.addColorStop(0, "rgba(232,121,249,0)")
-    g.addColorStop(1, "rgba(232,121,249,0.85)")
+    g.addColorStop(0, "rgba(184,157,132,0)")
+    g.addColorStop(1, "rgba(184,157,132,0.85)")
     ctx.fillStyle = g
     ctx.fillRect(x - 22, 0, 22, h)
-    ctx.fillStyle = "#f0abfc"
-    ctx.shadowColor = "rgba(232,121,249,0.9)"
+    ctx.fillStyle = "#b89d84"
+    ctx.shadowColor = "rgba(184,157,132,0.7)"
     ctx.shadowBlur = 10
     ctx.fillRect(x - 1, 0, 2, h)
     ctx.shadowBlur = 0
