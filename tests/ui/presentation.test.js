@@ -193,3 +193,19 @@ test("the mode label no longer claims a conversational feature", () => {
   assert.doesNotMatch(main, /CONVERSE/)
   assert.match(main, /◈ SCAN<\/button>/)
 })
+
+// UI-005 Orbit HUD wiring (agent-b): keys and chips reach the stage only in Orbit Mode.
+test("main.js routes landmark keys and chips to the stage only when ORBIT_SPIKE is on", () => {
+  const main = read("src/main.js")
+  assert.match(main, /import \{ landmarkForKey, ORBIT_LANDMARKS \} from "\.\/orbit\/orbitKeys\.js"/)
+  assert.match(main, /if \(ORBIT_SPIKE\) \{\s*const landmark = landmarkForKey\(e\)/)
+  assert.match(main, /new CustomEvent\("orbit:focus", \{ detail: \{ index \} \}\)/)
+  assert.match(main, /if \(ORBIT_SPIKE\) \{\s*const hud = document\.createElement\("aside"\)/)
+  assert.match(main, /data-orbit-focus="\$\{l\.index\}"/)
+})
+
+test("the Orbit HUD states only working controls: no toggle and no unimplemented claims", () => {
+  const main = read("src/main.js")
+  assert.doesNotMatch(main, /Enter studio|Project saved locally|Desktop exploration|Essential music controls/)
+  assert.doesNotMatch(main, /data-orbit-mode/)
+})

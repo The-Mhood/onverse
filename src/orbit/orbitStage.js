@@ -1,7 +1,8 @@
 /* MusicOnVerse — Orbit Mode planetary stage (UI-005 spike, behind ?orbit=1).
  * Same contract as src/scene.js: createStage(canvas) -> { setSpectrum, setEnergy, setPlaying, dispose }.
  * Procedural Three.js only: shader planets, a striated ring, cratered moons, a nebula backdrop.
- * Camera: deliberate OrbitControls drag/zoom; no automatic camera movement. */
+ * Camera: deliberate OrbitControls drag/zoom, plus user-triggered landmark focus (keys 1–3 or the chips).
+ * The focus move is eased, and instant when prefers-reduced-motion is set. There is no automatic camera movement. */
 import * as THREE from "three"
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js"
 import { craterTexture, ringTextures } from "./orbitTextures.js"
@@ -236,7 +237,7 @@ export function createStage(canvas) {
 
   /* ---- ringed foreground body: striated rings crossing the lower frame ---- */
   const ringBody = new THREE.Group()
-  ringBody.position.set(-520, -330, -1500)
+  ringBody.position.set(-760, 330, -1400)
   ringBody.rotation.set(-1.18, 0, 0.22)
   scene.add(ringBody)
   const bodyMat = new THREE.MeshStandardMaterial({ color: 0x8f7b63, roughness: 0.92, metalness: 0 })
@@ -246,6 +247,18 @@ export function createStage(canvas) {
   const ringMat = new THREE.MeshStandardMaterial({ map: ringTex.color, alphaMap: ringTex.alpha, transparent: true, side: THREE.DoubleSide, roughness: 0.85, metalness: 0, depthWrite: false })
   const ring = new THREE.Mesh(ringGeometry(380, 780), ringMat)
   ringBody.add(ring)
+
+  /* ---- second ringed body, lower right: its ring arcs across the horizon (composition per the approved mock) ---- */
+  const ringBody2 = new THREE.Group()
+  ringBody2.position.set(900, -300, -1250)
+  ringBody2.rotation.set(-1.05, 0, -0.35)
+  scene.add(ringBody2)
+  const body2 = new THREE.Mesh(new THREE.SphereGeometry(190, 96, 72), new THREE.MeshStandardMaterial({ color: 0x9a8670, roughness: 0.9, metalness: 0 }))
+  ringBody2.add(body2)
+  const ring2Tex = ringTextures(23)
+  const ring2Mat = new THREE.MeshStandardMaterial({ map: ring2Tex.color, alphaMap: ring2Tex.alpha, transparent: true, side: THREE.DoubleSide, roughness: 0.85, metalness: 0, depthWrite: false })
+  const ring2 = new THREE.Mesh(ringGeometry(240, 480), ring2Mat)
+  ringBody2.add(ring2)
 
   /* ---- cratered moons on the right ---- */
   const craters = craterTexture(7)
@@ -294,6 +307,34 @@ export function createStage(canvas) {
   controls.maxPolarAngle = Math.PI - 0.25
   controls.update()
 
+  /* ---- landmark focus: keys 1–3 and the chips dispatch "orbit:focus" on the canvas (index 0–2).
+   * The camera keeps its current viewing direction and eases to a standoff from the landmark.
+   * Under reduced motion it jumps. Any user drag cancels an ease in progress. ---- */
+  const LANDMARKS = [
+    { obj: ringBody, radius: 780 },    // 1 Project: ringed body, top left
+    { obj: giant, radius: 1100 },      // 2 Reference: banded gas giant, top
+    { obj: moons[2], radius: 150 },    // 3 Master: largest cratered moon, right
+  ]
+  let focusEase = null
+  const focusCenter = new THREE.Vector3()
+  function onFocus(event) {
+    const lm = LANDMARKS[event && event.detail ? event.detail.index : -1]
+    if (!lm) return
+    lm.obj.getWorldPosition(focusCenter)
+    const dir = camera.position.clone().sub(controls.target).normalize()
+    const standoff = Math.min(controls.maxDistance * 0.9, Math.max(controls.minDistance * 1.2, lm.radius * 3))
+    const toPos = focusCenter.clone().addScaledVector(dir, standoff)
+    if (reduced) {
+      controls.target.copy(focusCenter)
+      camera.position.copy(toPos)
+      controls.update()
+      return
+    }
+    focusEase = { fromT: controls.target.clone(), toT: focusCenter.clone(), fromP: camera.position.clone(), toP: toPos, t0: -1, dur: 900 }
+  }
+  canvas.addEventListener("orbit:focus", onFocus)
+  controls.addEventListener("start", () => { focusEase = null })
+
   /* ---- sizing ---- */
   function resize() {
     const w = canvas.clientWidth || 1, h = canvas.clientHeight || 1
@@ -326,6 +367,14 @@ export function createStage(canvas) {
     energy += (targetEnergy - energy) * 0.1
     uniforms.uTime.value = t
     uniforms.uEnergy.value = energy * amp
+    if (focusEase) {
+      if (focusEase.t0 < 0) focusEase.t0 = now
+      const u = Math.min(1, (now - focusEase.t0) / focusEase.dur)
+      const e = 1 - Math.pow(1 - u, 3)
+      controls.target.lerpVectors(focusEase.fromT, focusEase.toT, e)
+      camera.position.lerpVectors(focusEase.fromP, focusEase.toP, e)
+      if (u >= 1) focusEase = null
+    }
     controls.update()
     renderer.render(scene, camera)
   }
@@ -343,6 +392,7 @@ export function createStage(canvas) {
     dispose() {
       disposed = true
       cancelAnimationFrame(raf)
+      canvas.removeEventListener("orbit:focus", onFocus)
       if (ro) ro.disconnect()
       else window.removeEventListener("resize", resize)
       controls.dispose()

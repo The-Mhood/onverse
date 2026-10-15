@@ -59,3 +59,19 @@ test("no downloaded images or remote URLs in the spike", () => {
     assert.doesNotMatch(read(f), /\.(png|jpg|jpeg|webp)"/, f)
   }
 })
+
+// UI-005 landmark focus (keys 1–3 / chips). Static checks on the stage source.
+test("landmark focus: three landmarks, a canvas event, an eased move, and reduced-motion jump", () => {
+  const src = read("src/orbit/orbitStage.js")
+  assert.match(src, /canvas\.addEventListener\("orbit:focus", onFocus\)/)
+  assert.match(src, /canvas\.removeEventListener\("orbit:focus", onFocus\)/, "dispose must remove the listener")
+  assert.equal([...src.matchAll(/\{ obj: [^,]+, radius: \d+ \}/g)].length, 3, "exactly three landmarks")
+  assert.match(src, /if \(reduced\) \{[\s\S]*?controls\.update\(\)[\s\S]*?return/, "reduced motion jumps without easing")
+  assert.match(src, /controls\.addEventListener\("start", \(\) => \{ focusEase = null \}\)/, "a user drag cancels an ease")
+  assert.doesNotMatch(src, /autoRotate\s*=\s*true/)
+})
+
+test("the stage contract is unchanged by the focus work: no new exports", () => {
+  const exports = [...read("src/orbit/orbitStage.js").matchAll(/^export (function|const|let|class) (\w+)/gm)].map((m) => m[2])
+  assert.deepEqual(exports, ["createStage"])
+})

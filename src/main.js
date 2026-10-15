@@ -4,6 +4,7 @@ import { createErrorRegion } from "./ui/presentation/errorRegion.js"
 import { mountLicenceDialog } from "./ui/presentation/licenceDialog.js"
 import { createStage as createSceneStage } from "./scene.js"
 import { createStage as createOrbitStage } from "./orbit/orbitStage.js"
+import { landmarkForKey, ORBIT_LANDMARKS } from "./orbit/orbitKeys.js"
 /* UI-005 spike: Orbit Mode planetary stage, used only when the URL carries ?orbit=1. */
 const ORBIT_SPIKE = new URLSearchParams(window.location.search).get("orbit") === "1"
 const createStage = ORBIT_SPIKE ? createOrbitStage : createSceneStage
@@ -678,6 +679,27 @@ app.innerHTML = `
 
 /* ================= stage ================= */
 const stage = createStage($("#stage"))
+
+/* UI-005 Orbit HUD: a bottom-right card with the three landmark chips. Mounted only with ?orbit=1, so the DAW
+ * view is unchanged. Chips and keys 1–3 both send "orbit:focus" to the stage (the stage owns the camera). */
+function focusOrbitLandmark(index) {
+  $("#stage").dispatchEvent(new CustomEvent("orbit:focus", { detail: { index } }))
+}
+if (ORBIT_SPIKE) {
+  const hud = document.createElement("aside")
+  hud.className = "orbit-hud"
+  hud.setAttribute("aria-label", "Orbit Mode navigation")
+  hud.innerHTML = `
+    <p class="orbit-hud-hint">Drag to look · Scroll to approach · Press 1–3 to focus a landmark</p>
+    <div class="orbit-hud-chips">
+      ${ORBIT_LANDMARKS.map((l) => `<button class="orbit-chip" type="button" data-orbit-focus="${l.index}"><kbd>${l.key}</kbd> ${l.label}</button>`).join("")}
+    </div>`
+  hud.addEventListener("click", (e) => {
+    const chip = e.target.closest("[data-orbit-focus]")
+    if (chip) focusOrbitLandmark(Number(chip.dataset.orbitFocus))
+  })
+  document.body.appendChild(hud)
+}
 
 /* ================= refs ================= */
 const fileInput = $("#fileInput")
@@ -1849,6 +1871,10 @@ window.addEventListener("drop", (e) => {
 /* keyboard */
 window.addEventListener("keydown", (e) => {
   if (e.target.matches("input, select, textarea")) return
+  if (ORBIT_SPIKE) {
+    const landmark = landmarkForKey(e)
+    if (landmark !== null) { e.preventDefault(); focusOrbitLandmark(landmark); return }
+  }
   if (e.code === "Space" && !e.target.matches("button")) {
     e.preventDefault()
     togglePlay()

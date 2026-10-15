@@ -1344,3 +1344,48 @@ body.dragging::after {
   font-size: 0.72rem;
   line-height: 1.5;
 }
+
+/* ================= Orbit HUD (UI-005, only mounted with ?orbit=1) ================= */
+.orbit-hud {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 20;
+  max-width: 320px;
+  padding: 14px 16px;
+  border: 1px solid var(--pf-line);
+  border-radius: var(--radius-box);
+  background: rgba(7, 11, 17, 0.72);
+  color: var(--color-base-content);
+  backdrop-filter: blur(6px);
+}
+.orbit-hud-hint {
+  margin: 0 0 10px;
+  font-family: var(--pf-font-ui);
+  font-size: 0.9rem;
+  line-height: 1.4;
+  opacity: 0.85;
+}
+.orbit-hud-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.orbit-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border: 1px solid var(--pf-line-strong);
+  border-radius: var(--radius-field);
+  background: transparent;
+  color: var(--color-base-content);
+  font-family: var(--pf-font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+}
+.orbit-chip:hover { border-color: var(--color-primary); }
+.orbit-chip kbd {
+  padding: 0 5px;
+  border: 1px solid var(--pf-line);
+  border-radius: 4px;
+  font: inherit;
+  color: var(--color-primary);
+}
