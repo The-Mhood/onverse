@@ -1,6 +1,7 @@
 import "./style.css"
 import { createStage } from "./scene.js"
-import { analyze, analyzeFast, scoreAnalysis, buildIssues, buildFixPlan, targetFromFeatures } from "./audio/analyzer.js"
+import { scoreAnalysis, buildIssues, buildFixPlan, targetFromFeatures } from "./audio/analyzer.js"
+import { analysisService } from "./application/analysis/analysisService.js"
 import { matchGenre, GENRES, CATEGORIES, categoryById, categoryProfile, BAND_KEYS, BAND_META } from "./audio/genre.js"
 import { decodeFile, convert, masterFix, saveBlob, saveText, supportedRecorders, encodeWav } from "./audio/processor.js"
 import { resolveStreamUrl, fetchPreviewBuffer, profileForResolved } from "./audio/reference.js"
@@ -398,7 +399,7 @@ async function applyCrop() {
       updateTime(0)
       syncSeekUI()
       toast("Cropped B · FIXED — re-measuring the mastered copy…")
-      const ffast = await analyzeFast(trimmed, () => {})
+      const ffast = await analysisService.analyzeFast(trimmed, () => {})
       if (state.fixed === trimmed) {
         state.fixedFast = ffast
         renderFixSummary()
@@ -804,7 +805,7 @@ async function ensureReferenceReady() {
     if (!r.file.feat) {
       showProgress(true, "Analyzing your reference track…")
       try {
-        const feat = await analyze(r.file.buf, (v) => {
+        const feat = await analysisService.analyze(r.file.buf, (v) => {
           setProgress(v)
           if (v < 0.68) setProgressLabel("Analyzing your reference track…")
           else if (v < 0.96) setProgressLabel("Scanning reference spectrum…")
@@ -833,7 +834,7 @@ async function ensureReferenceReady() {
         setProgress(0.35)
         setProgressLabel("Analyzing reference preview…")
         u.buf = ab
-        u.feat = await analyze(ab, (v) => setProgress(0.35 + v * 0.65))
+        u.feat = await analysisService.analyze(ab, (v) => setProgress(0.35 + v * 0.65))
       } catch (err) {
         console.error(err)
         toast("Couldn't fetch the Apple preview audio — using the mastered profile for its genre instead.")
@@ -914,7 +915,7 @@ async function runAnalysis() {
   }
   showProgress(true, "Analyzing…")
   try {
-    const analysis = await analyze(state.buffer, (v) => {
+    const analysis = await analysisService.analyze(state.buffer, (v) => {
       setProgress(v)
       const labels = ["Reading waveform…", "Measuring loudness…", "Scanning spectrum…", "Checking pitch…", "Analyzing stereo…", "Finding tempo…", "Finalizing…"]
       const i = Math.min(labels.length - 1, Math.floor(v * labels.length))
@@ -1114,7 +1115,7 @@ async function runFix() {
   try {
     const plan = state.autoPlan || state.fixPlan
     const fixed = await masterFix(state.buffer, plan, (stage) => { $("#fixLabel").textContent = stage + "…" })
-    const fixedFast = await analyzeFast(fixed, () => {})
+    const fixedFast = await analysisService.analyzeFast(fixed, () => {})
     state.fixed = fixed
     state.fixedFast = fixedFast
     state.tweaks = { trimDb: 0, gluePct: 100, width: 0, band: { sub: 0, bass: 0, low: 0, mid: 0, high: 0, presence: 0, air: 0 } }
@@ -1594,7 +1595,7 @@ async function rerenderFixed() {
   try {
     const fixed = await masterFix(state.buffer, plan, (st) => setTweakStatus((st || "").toUpperCase() + "…"))
     if (epoch !== state.tweakEpoch) return
-    const fixedFast = await analyzeFast(fixed, () => {})
+    const fixedFast = await analysisService.analyzeFast(fixed, () => {})
     if (epoch !== state.tweakEpoch) return
     state.fixed = fixed
     state.fixedFast = fixedFast
