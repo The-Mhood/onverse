@@ -1,0 +1,174 @@
+/* SYLUNE panel and header control (presentation only, UI-006).
+   Tokens come from src/style.css: --color-*, --pf-line*, --pf-font-*, --pf-cyan (focus). No new colours. */
+
+.sylune-host { position: relative; z-index: 65; }
+
+.sylune-panel {
+  position: fixed;
+  top: 64px;
+  right: 12px;
+  width: min(380px, calc(100vw - 24px));
+  max-height: calc(100vh - 84px);
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  border: 1px solid var(--pf-line-strong);
+  border-radius: 12px;
+  background: var(--color-base-100);
+  color: var(--color-base-content);
+  font-family: var(--pf-font-ui);
+  font-size: 15px;
+  line-height: 1.4;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+}
+.sylune-panel[hidden] { display: none; }
+
+.sylune-head { display: flex; align-items: center; gap: 10px; }
+.sylune-title {
+  margin: 0;
+  font-family: var(--pf-font-display);
+  font-size: 15px;
+  letter-spacing: 0.14em;
+  color: var(--color-base-content);
+}
+.sylune-title:focus-visible,
+.sylune-panel button:focus-visible,
+.sylune-panel textarea:focus-visible,
+.sylune-panel label:focus-visible { outline: 2px solid var(--pf-cyan); outline-offset: 2px; }
+.sylune-mode {
+  margin-left: auto;
+  font-family: var(--pf-font-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  padding: 2px 8px;
+  border: 1px solid var(--pf-line);
+  border-radius: 999px;
+  color: var(--color-primary);
+}
+.sylune-close {
+  width: 30px; height: 30px;
+  border: 1px solid var(--pf-line-strong);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--color-base-content);
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.sylune-notice {
+  margin: 0;
+  padding: 8px 10px;
+  border: 1px dashed var(--pf-line-strong);
+  border-radius: 8px;
+  font-size: 13px;
+  color: var(--color-base-content);
+}
+.sylune-notice[data-tone="prototype"] { border-color: var(--pf-warm); color: var(--pf-warm); }
+
+.sylune-block { display: flex; flex-direction: column; gap: 6px; }
+.sylune-heading {
+  margin: 0;
+  font-family: var(--pf-font-mono);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  color: var(--color-primary);
+  text-transform: uppercase;
+}
+.sylune-context,
+.sylune-phase,
+.sylune-result,
+.sylune-cancel,
+.sylune-plan-summary,
+.sylune-foot,
+.sylune-proto-note { margin: 0; }
+.sylune-phase { font-family: var(--pf-font-display); font-size: 14px; letter-spacing: 0.04em; }
+.sylune-cancel { font-size: 13px; color: var(--color-base-content); opacity: 0.9; }
+.sylune-result { font-size: 14px; }
+.sylune-error {
+  margin: 0;
+  padding: 8px 10px;
+  border: 1px solid var(--color-error);
+  border-radius: 8px;
+  color: var(--color-error);
+  font-size: 13px;
+}
+.sylune-foot { font-size: 12px; color: var(--color-base-content); opacity: 0.85; }
+.sylune-proto-note { font-family: var(--pf-font-mono); font-size: 11px; color: var(--pf-warm); }
+
+.sylune-progress { width: 100%; height: 8px; accent-color: var(--color-primary); }
+
+.sylune-ask { display: flex; flex-direction: column; gap: 6px; }
+.sylune-text {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 8px 10px;
+  border: 1px solid var(--pf-line-strong);
+  border-radius: 8px;
+  background: var(--color-base-200);
+  color: var(--color-base-content);
+  font-family: var(--pf-font-ui);
+  font-size: 15px;
+  resize: vertical;
+}
+.sylune-text::placeholder { color: var(--color-base-content); opacity: 0.7; }
+
+.sylune-btn {
+  align-self: flex-start;
+  min-height: 34px;
+  padding: 6px 12px;
+  border: 1px solid var(--pf-line-strong);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--color-base-content);
+  font-family: var(--pf-font-ui);
+  font-size: 14px;
+  cursor: pointer;
+}
+.sylune-btn[aria-pressed="true"] { border-color: var(--color-primary); color: var(--color-primary); }
+.sylune-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.sylune-btn-primary { background: var(--color-primary); border-color: var(--color-primary); color: var(--color-primary-content); }
+.sylune-btn-small { min-height: 28px; font-size: 12px; padding: 4px 8px; }
+.sylune-btn[hidden] { display: none; }
+
+.sylune-plan {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px;
+  border: 1px solid var(--color-accent);
+  border-radius: 8px;
+}
+.sylune-plan[hidden] { display: none; }
+.sylune-plan .sylune-btn { margin-right: 8px; }
+
+.sylune-proto-controls { display: flex; flex-wrap: wrap; gap: 6px; }
+.sylune-proto-controls[hidden] { display: none; }
+
+/* Ask SYLUNE affordances placed on app objects. Keyboard-reachable buttons, not hover-only menus. */
+.sylune-ask-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 26px;
+  padding: 2px 8px;
+  border: 1px solid var(--pf-line-strong);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--color-primary);
+  font-family: var(--pf-font-mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+}
+.sylune-ask-btn:focus-visible { outline: 2px solid var(--pf-cyan); outline-offset: 2px; }
+
+@media (max-width: 640px) {
+  .sylune-panel { top: auto; bottom: 8px; right: 8px; max-height: 70vh; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sylune-panel { transition: none; }
+}
