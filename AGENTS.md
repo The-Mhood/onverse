@@ -4,7 +4,7 @@
 
 - The product owner decides product scope, visual direction, major architecture changes, dependencies, external costs, and destructive actions.
 - The lead/coordinator owns architecture, application contracts, core audio engineering, task assignment, review, and integration recommendations.
-- Codex is the UI/UX design and frontend implementation worker. Other workers receive bounded assignments; they do not independently change architecture or shared interfaces.
+- Codex is no longer active. The intended UI/UX collaborator is **agent-b**, awaiting product-owner appointment and a separately scoped task. No runtime, dispatch, editing workspace, or file reservation is granted by onboarding. Workers do not independently change architecture or shared interfaces.
 - These rules establish a Git-based collaboration protocol, not an automatic scheduler, agent launcher, or permission to implement the full roadmap.
 - Follow [issue #2](https://github.com/The-Mhood/onverse/issues/2), with the product owner's later direction to defer a custom orchestration platform. No new orchestration runtime or dependency is authorized.
 
@@ -21,7 +21,7 @@ Pinned proposal references, not claims of accepted architecture:
 
 ## Before every assignment
 
-1. Read this file and [the work queue](docs/engineering/WORK_QUEUE.md).
+1. Read [README.md](README.md), this file, the [project guide](docs/engineering/PROJECT_GUIDE.md), the latest notices/results in [the work queue](docs/engineering/WORK_QUEUE.md), and the [canonical design brief](docs/design/DESIGN_BRIEF.md). The [agent-b master prompt](docs/engineering/AGENT_B_MASTER_PROMPT.md) supplies reusable context, not an assignment.
 2. Inspect the directory, current branch, full working-tree status, recent commits, remotes, and worktrees. Compare relevant local and remote refs; do not assume remote-tracking refs are current.
 3. Preserve existing edits, including untracked files. Never reset, clean, stash, overwrite, force-push, switch away from active work, or remove worktrees without explicit authorization.
 4. Record the task ID, exact base SHA, execution environment, owner, branch/worktree, dependencies, allowed paths, forbidden paths, acceptance criteria, and checks before editing.
@@ -37,12 +37,12 @@ Each worker implementation requires its own branch and separate worktree or clon
 | `src/audio/**` | Lead/core | DSP, measurement, processing, codecs, and reference mechanisms |
 | `src/application/**`, `src/domain/**` | Lead/core | Use cases, contracts, and domain rules |
 | Core unit tests, audio fixtures/tests | Lead/core | Assign exact test paths per task |
-| UI audit and design proposal | Codex | Audit/proposal must be reviewed before UI implementation |
-| `src/style.css` and approved presentation files | Codex after review | Visual changes only within the approved task |
+| UI audit and design proposal | agent-b after appointment | Audit/proposal must be reviewed before UI implementation; no task granted by onboarding |
+| `src/style.css` and approved presentation files | agent-b after appointment/review | Visual changes only within the approved task |
 | `src/main.js` | Exclusive assignment by lead | Shared UI/state/workflow hotspot; never concurrent edits |
 | `src/ui/draw.js`, `src/scene.js` | Explicit assignment after review | Presentation changes must preserve waveform/playback semantics |
 | Electron, build/configuration, manifests, lockfile | Lead approval | No incidental edits or dependency changes |
-| `AGENTS.md`, `docs/engineering/WORK_QUEUE.md` | Coordinator | Workers submit updates through task/PR results |
+| `AGENTS.md`, onboarding/context/design-brief documents, `docs/engineering/WORK_QUEUE.md` | Coordinator | Workers propose changes through task/PR results; no competing canonical briefs |
 
 These defaults are not active editing grants. The coordinator must check exact paths and prefix/pattern intersections before assigning work. A directory grant overlaps every contained file. Renames/deletes count against both affected paths. Forbidden paths win over allowed paths; changing the allowlist requires review first.
 
@@ -71,9 +71,21 @@ Current engineering interfaces, introduced on the engineering branch:
 
 The analysis service does not yet provide workers, cancellation, persistent projects, or undo. UI work must not imply those capabilities exist. Do not duplicate processing logic or introduce a second authoritative processor state in UI code.
 
-Codex first submits a UI audit and design proposal identifying affected files, workflow changes, accessibility/responsiveness, required core interfaces, and regressions to test. The lead reviews architectural compatibility before implementation. Any required shared-contract change is a separately assigned core task; UI must wait for its acceptance.
+When UI implementation is requested, agent-b first submits a UI audit and design proposal identifying affected files, workflow changes, accessibility/responsiveness, required core interfaces, and regressions to test. The lead reviews architectural compatibility before implementation. Any required shared-contract change is a separately assigned core task; UI must wait for its acceptance.
 
-The product owner wants a new colour gradient. Notify them and obtain their visual direction before visual implementation; do not choose the gradient or independently redesign the interface. Core work must not duplicate Codex's UI work.
+The owner-supplied direction is Logic-inspired professional DAW usability with an original restrained dark/celestial identity, not a clone or a gaming/SaaS dashboard. Read the canonical design brief. Notify the owner before look changes and obtain review of the proposed palette/gradient/layout before implementation; the brief is not palette or implementation approval. Core work must not duplicate agent-b's UI work.
+
+## Required product and safety invariants
+
+The project guide records current capabilities and future boundaries; do not infer implementation from proposals. Source is presently a single-buffer prototype, not a multitrack/session engine.
+
+- Preserve the working audio/UI flows and existing contracts. No broad controller/framework rewrite or new dependency without a separately approved scope.
+- Future UI intent flows through validated application operations and pure domain/state transitions to async repositories/storage; no second authoritative UI model or component-localStorage project store.
+- Linked Sessions is general-purpose. Track transfers, selected-track sums, actual bus stems, and full mixes are distinct. Stable IDs, pinned relevant revisions, explicit render rules, immutable managed assets, provenance, atomic commit/history, and restart recovery are required.
+- Source edits never silently replace destination audio. Explicit affected-item updates must preserve destination processing/routing/automation/placement, unrelated items, and the prior valid asset on failure/cancellation/incompatibility. Use relevant dependencies, not global session revisions, for currentness; never rebind by name.
+- Chains record exact used revisions and distinguish local currentness from stale upstream ancestry. No silent cascading update; reject cycles and unresolved unsafe dependencies. Future AI must use the same validated approved operations and cannot override manual linked updates.
+- Imported/AI data is untrusted: parsing does not mutate active state; validate targets, units, ranges, capabilities, and permissions before approved application. No arbitrary generated code/shell/filesystem execution, silent uploads/costs, or mutable originals.
+- Prove high-risk mechanisms with a minimum real end-to-end render/storage/update test before dependent expansion. Mocks alone do not prove audio quality, persistence recovery, plugin support, or cancellation.
 
 ## Verification and review
 
@@ -87,10 +99,12 @@ The product owner wants a new colour gradient. Notify them and obtain their visu
 Existing core checks, run from the repository root when applicable:
 
 ```bash
-node --test tests/unit/analysisService.test.js tests/unit/buildProcessingPlan.test.js
+node --test tests/audio/analyzerRegression.test.js tests/audio/integratedLoudnessCandidate.test.js tests/unit/analysisService.test.js tests/unit/buildProcessingPlan.test.js
 node scripts/test-analyze.mjs
 npm run build
 ```
+
+The current default suite has 145 tests / 142 passes / 3 explicit known LUFS TODO cases. No npm test/lint/typecheck/UI-test scripts are configured; report missing checks as unconfigured, never passed. Strict diagnostics and unresolved audio/gain limits are in the project guide.
 
 A build writes ignored output: it is not part of a read-only audit or dry run. Document-only tasks should verify paths, links, scope, and whitespace; avoid dependency installation or builds unless justified. Add task-specific tests for changed behavior. UI integration also requires import, reference analysis, processing, adjustments, A/B, crop/seek, and export checks appropriate to its diff.
 
@@ -113,6 +127,8 @@ No automatic merge. Before integration, recheck the base, combined diff, affecte
 ## Runtime and automation boundary
 
 The audited environment has `git`, `gh`, Node/npm, and Python. No `codex`, `arena`, or `claude` executable was found on PATH, and no agent-launch API was verified. This does not establish what exists on the user's Mac.
+
+Use `git` for local version-control operations and `gh` for GitHub PR/issue/check records when available; report access/tool blockers rather than inventing success. Broad permissions do not replace a scoped task, preservation of work, or actual integration review.
 
 GitHub tasks, PRs, checks, and worker-authored result comments are the shared communication channel. The coordinator retrieves published results directly rather than asking the product owner to relay every task. Publishing assignments or changing GitHub records is a mutation and must be reported; local queue entries alone do not dispatch an agent.
 

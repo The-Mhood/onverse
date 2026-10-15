@@ -1,0 +1,115 @@
+# Project guide: actual state and collaboration context
+
+**Snapshot: 2026-10-15.** This is a source map and onboarding guide, not a second target-architecture specification or an implementation assignment. Re-audit live code, Git, queue notices, and PRs before acting. [AGENTS.md](../../AGENTS.md) governs collaboration; [WORK_QUEUE.md](WORK_QUEUE.md) records tasks and evidence.
+
+## 1. Read order and source of truth
+
+1. [README.md](../../README.md): entry point and branch availability.
+2. [AGENTS.md](../../AGENTS.md): authority, ownership, safety, and review.
+3. This guide and the latest notices/results in [WORK_QUEUE.md](WORK_QUEUE.md).
+4. [DESIGN_BRIEF.md](../design/DESIGN_BRIEF.md): canonical UI direction and approval boundaries.
+5. Relevant source/tests; [AUDIO_METERING_CONTRACT.md](AUDIO_METERING_CONTRACT.md) when numeric/audio behavior or its presentation is affected.
+6. Only as needed, the pinned unmerged proposals below.
+
+Owner instructions govern scope and consequential decisions, subject to the execution environment's higher-priority constraints. For what is implemented, inspect source and tests rather than inferring features from a roadmap, package name, mockup, or passing mock. When code and required behavior differ, report the gap; do not redefine the requirement to fit the implementation.
+
+## 2. Git and collaborator status
+
+- Lead environment: Arena Linux, `/home/user/onverse`, fixed branch `arena/b25c318e-onverse`. Other agents must discover their own paths/runtime; do not assume this filesystem or tool access.
+- Published starting point for this onboarding unit: `e5229d8f601423a70fdeb946ab80112f650fa82c`. Onboarding changes come after it; inspect live HEAD rather than pinning future work to this older commit.
+- At recovery, `main` was `ce02cf90ecdb0f9729817e2bfe449f0e42969d31`; [PR #3](https://github.com/The-Mhood/onverse/pull/3) was open/draft, engineering branch into `main`. Its check rollup was empty, not green CI.
+- The owner explicitly authorized recovery of mismatched local metadata. All 50 non-ignored working files and the complete inventory matched published `e5229d8` before and after fetch plus `git reset --mixed e5229d8f601423a70fdeb946ab80112f650fa82c`; the tree was clean and connectivity passed afterward. No working-file contents were discarded. Cause of the discrepancy was not established. **This one recovery is not blanket reset permission for a future worker.**
+- Codex is no longer active. agent-b is the intended UI collaborator, awaiting owner appointment and a specific scoped task; no runtime, dispatch, branch, acknowledgment, or editing reservation is established by these documents.
+- Prior unpublished external work remains unknown. Preserve any work discovered later. Historical Codex records are evidence, not current ownership grants.
+
+If connected to `main` without these documents, inspect the published engineering branch read-only (GitHub or fetched refs) after auditing the checkout. Do not switch over dirty work, treat missing docs as permission to start fresh, or independently select an implementation base.
+
+## 3. Current application and source map
+
+Vanilla JavaScript/DOM with Vite 8, Tailwind 4/daisyUI 5, Three.js, and Electron 44. There is no application framework migration, centralized session store, or project repository installed.
+
+| Path | Actual responsibility / caution |
+| --- | --- |
+| `src/main.js` | In-memory single-buffer state, DOM templates, events, panel/mode selection, import, analysis, playback/A–B, crop, processing, conversion, references. Shared hotspot: exclusive ownership only. |
+| `src/style.css` | Existing theme/tokens, layout, visual states, responsive rules, CSS reduced-motion handling. |
+| `src/ui/draw.js` | Waveform peak caching and waveform/radar drawing; preserve time/channel/playback semantics. |
+| `src/scene.js` | Three.js celestial background. Reduced motion reduces movement but does not currently stop the render loop. |
+| `src/application/analysis/analysisService.js` | Async-shaped local analysis boundary; not a worker, scheduler, validator, or cancellation implementation. |
+| `src/domain/processors/buildProcessingPlan.js` | Pure processing-plan construction; not validation of AI/imported commands. |
+| `src/audio/analyzer.js`, `dsp.js`, `genre.js` | Production measurement/DSP/classification; unresolved loudness/true-peak/gain limitations. |
+| `src/audio/processor.js` | Audio decoding, one-buffer OfflineAudioContext processing, encoders/download helpers; not a multitrack or managed-asset pipeline. |
+| `src/audio/reference.js` | Reference resolution/analysis behavior; preserve supported reference workflows and privacy boundaries. |
+| `electron/main.cjs`, `preload.cjs` | Isolated desktop shell, external navigation, update bridge. No project/media filesystem repository IPC. |
+| `index.html` | Entry and external Google-font requests; offline/privacy and typography considerations. |
+| `tests/unit/`, `tests/audio/`, `tests/fixtures/` | Built-in Node tests and synthetic fixtures; inspect what each assertion actually proves. |
+| `scripts/validation/` | Isolated loudness candidate and pinned native-reference tooling, not production integration. |
+| `package.json`, `package-lock.json`, `vite.config.ts` | Scripts, dependencies, and build configuration; lead-approved scope only. |
+| `build/`, `public/` | Existing icons/assets; do not delete tracked icon sources as generated clutter. |
+
+### Preserve working interactions
+
+File/drop/demo import; file/catalog/URL reference flows as currently supported; full/fast analysis and reports; waveform/radar/meters; playback, rate, seek, A–B; crop and region export; manual adjustments and single-buffer processing; WAV/MP3/available recorder conversion and downloads.
+
+"Converse" in the present interface does not prove an AI command executor exists. The `design-agent` dependency is not evidence of an integrated agent. Buffer loading resets processing/tweak state: **do not use whole-buffer reload as a linked-item replacement mechanism**.
+
+### Missing capabilities / technical limits
+
+No session/track/bus/group domain aggregates, stable DAW entity/revision graph, durable project/media store, history/undo, multitrack graph renderer, Linked Sessions, hosted plugins, or validated AI operation executor are implemented. Existing reference/catalog identifiers are not a DAW track identity model.
+
+Decoding uses an AudioContext; existing offline processing uses the supplied buffer's length/rate/channels. Timing, resampling, channel meaning, latency/tails, automation, shared returns/sidechains, plugin support, full-track memory budgets, and render cancellation need explicit contracts and real tests. Float WAV export currently clamps samples, so it is not automatically a transparent internal intermediate. Object URLs/downloads do not constitute persistent managed assets.
+
+## 4. Architectural direction and Linked Sessions invariants
+
+This section records owner constraints for future work, not a completed architecture or permission to implement it. Evolve a modular monolith in small steps; preserve current DSP behind interfaces before considering replacements. No premature microservices, orchestrator, framework/TypeScript conversion, or external-plugin claims.
+
+Future boundaries should follow UI intent -> validated application action -> pure domain/state transition -> async repository -> storage/API. Keep selectors outside presentation, await reads, debounce suitable writes, and never create a second authoritative UI state or component-localStorage project store.
+
+Linked Sessions is a **general production workflow**, not a mix-to-master special case:
+
+- Distinguish one track, an explicit selected-track combined group, an actual routed bus stem, a full stereo mix, and multiple independent linked items. No source separation from a stereo file is implied.
+- Use stable session/track/bus/group/item IDs, pinned snapshots/relevant revisions, complete render configuration/fingerprints, and immutable destination-managed assets. Names/paths are not identity.
+- Source edits **never silently replace transferred audio**. Item/selected/all updates require an explicit affected-item plan and approved operation. AI uses the same operations and cannot bypass this manual-update rule.
+- Determine currentness from relevant audio/control dependencies, not the whole session revision. Independent vocal edits must not stale Drums; relevant conga edits must flag Drums without changing its committed asset. Shared processing/sidechains can make another track genuinely relevant; explain that dependency.
+- Include processing/parameters, gain/pan/automation, routing/sends/returns/buses, sidechains/shared state, and explicit mute/solo/bypass/render rules. Missing, deleted, replaced, rerouted, or changed group members need explicit handling; never rebind by name.
+- Resolve/validate a pinned source graph -> render -> validate PCM/metadata -> check compatibility -> atomically commit asset/provenance/history. Failure, cancellation, incompatibility, or a crash must preserve the previous valid destination asset.
+- Preserve destination processing, routing, automation, placement, and unrelated items. Define duration/alignment/layout changes, rollback/undo, restart recovery, and safe asset retention before claiming support.
+- Support chains/branches with exact revisions at every hop. Distinguish immediate-source currentness from stale ancestry. Never silently refresh upstream sessions; reject cycles and do not assume unresolved graph edges are safe.
+
+**First mechanism gate:** selected group -> real combined destination asset with IDs/revision -> relevant source edit leaves it intact -> explicit update replaces only the intended binding, preserving destination processing/unrelated items -> restart verification. Real render/storage mechanisms must be proved, not mocked. Expand transfer types and graph cases afterward, mapping all 20 owner-supplied scenarios to unit, real-render, persistence/recovery, and UI tests. Those scenarios are not implemented tests today; recover/confirm the full scenario list before claiming coverage.
+
+Imported/AI data is untrusted. Parsing cannot mutate active state; review/approval precedes application. Validate target IDs, parameters, units, ranges, capabilities, permissions, and compatibility. No generated code/shell/filesystem execution, silent uploads, paid jobs, secrets in the client, or mutable shared originals. Versioned manifests/external media, non-destructive originals, atomic save/recovery/relink/history are prerequisites, not existing features.
+
+## 5. Architecture proposal boundary
+
+[PR #1](https://github.com/The-Mhood/onverse/pull/1), `architecture/product-foundation` at `eedc24cb38c21d1a4be6186593c7ae7fcb8c6f85`, was open/draft and unmerged at this audit. Its documents are not installed in this branch:
+
+- [Architecture proposal](https://github.com/The-Mhood/onverse/blob/eedc24cb38c21d1a4be6186593c7ae7fcb8c6f85/docs/ARCHITECTURE.md)
+- [Product vision proposal](https://github.com/The-Mhood/onverse/blob/eedc24cb38c21d1a4be6186593c7ae7fcb8c6f85/docs/PRODUCT_VISION.md)
+- [Roadmap proposal](https://github.com/The-Mhood/onverse/blob/eedc24cb38c21d1a4be6186593c7ae7fcb8c6f85/docs/ROADMAP.md)
+- [Engineering standards proposal](https://github.com/The-Mhood/onverse/blob/eedc24cb38c21d1a4be6186593c7ae7fcb8c6f85/docs/ENGINEERING_STANDARDS.md)
+
+Do not silently adopt/copy/merge them for onboarding. Lead/product review must reconcile them explicitly with the current work, including the new Linked Sessions invariants. Any older general trusted-auto-apply language must not override mandatory manual linked updates. This guide maps that gap; it does not create an alternative full architecture spec.
+
+## 6. Validation and honest reporting
+
+Run applicable checks, recording exact commands, exit codes, limitations, and skipped work. A read-only audit must not install or build into the checkout. For document-only work, verify links, paths, scope, fences, and whitespace; a build is usually unnecessary.
+
+```bash
+# Existing default regression suites:
+node --test tests/audio/analyzerRegression.test.js tests/audio/integratedLoudnessCandidate.test.js tests/unit/analysisService.test.js tests/unit/buildProcessingPlan.test.js
+node scripts/test-analyze.mjs
+
+# Strict diagnostic: expected to expose the three known legacy LUFS failures.
+MUSICONVERSE_STRICT_AUDIO_REGRESSIONS=1 node --test tests/audio/analyzerRegression.test.js
+
+# When applicable and dependencies are available/authorized:
+npm run build
+```
+
+Audit baseline: default 145 tests / 142 passes / 3 explicit known legacy LUFS TODO cases / 0 unexpected failures. Strict legacy diagnostics remain 47 tests / 44 passes / 3 known loudness failures; do not hide them, loosen tolerances, or promote TODOs to claim correctness. Candidate/reference agreement is isolated synthetic research, not normative certification, full-track performance proof, or a production replacement. Dangerous normalization/gain remains unresolved. See the metering contract and queue for exact evidence.
+
+No test/lint/typecheck/UI-test npm scripts are configured. No new dependencies without owner approval. No browser/listening/macOS/export/packaging/recovery result is implied by Node tests or a build. Owner-side testing remains deferred, not completed.
+
+UI changes require checks appropriate to the diff: import, references, analysis, processing/manual tweaks, A–B/playback/rate/seek, crop/export, conversion; keyboard/focus/contrast, empty/loading/error/disabled states, viewport behavior, and reduced motion. Provide preview/screenshots where tooling supports it; report unavailable checks honestly. Bind remote previews to `0.0.0.0`, allow only the necessary host/origin, and use relative browser-facing service URLs. The Electron minimum window is currently 1120 x 700; web responsiveness must be evaluated separately.
+
+Keep Electron context isolation/sandboxing and Node-disabled rendering intact. Future filesystem IPC must be narrow, validated, and permission-scoped. CSP/link/path/package validation and the placeholder updater feed need release/security review; onboarding is not a security certification. No signing, notarization, updater installation, release, branch deletion, or merge just to make a check look complete.

@@ -6,6 +6,15 @@ This is a coordinator-maintained task and result record under [AGENTS.md](../../
 
 Snapshot date: 2026-10-15. Re-audit Git and worker acknowledgments before assignment; this file is not proof of current remote state.
 
+## Current handoff notice — 2026-10-15 (supersedes historical activity claims)
+
+- The owner states **Codex no longer works with us**. UI-001/UI-002 are cancelled as Codex assignments; this is not a claim that any external process was terminated or unpublished work was removed. Retain the historical evidence below and preserve any work discovered later.
+- **agent-b is the intended future UI collaborator**, not yet appointed/dispatched/acknowledged here. The owner will give specific instructions separately. No new UI task, active workspace, implementation permission, or file reservation is granted by onboarding.
+- Start with [README.md](../../README.md), [AGENTS.md](../../AGENTS.md), [PROJECT_GUIDE.md](PROJECT_GUIDE.md), and the [canonical design brief](../design/DESIGN_BRIEF.md). The [master prompt](AGENT_B_MASTER_PROMPT.md) is reusable context, not an assignment. Current owner instructions and this notice supersede older references to active Codex work or future Codex handoffs.
+- Local metadata recovery is complete: all 50 non-ignored files and the full inventory matched published `e5229d8f601423a70fdeb946ab80112f650fa82c` before and after the owner's specifically authorized fetch/mixed reset; clean tree and connectivity verified. No files were discarded; cause unknown. See COORD-004 for the recovery/onboarding scope.
+- At this checkpoint, remote main remained `ce02cf9`; engineering PR #3 and architecture PR #1 remained open/draft. PR #1's proposals remain unmerged/uninstalled. Current engineering delivery is not merge, release, production-meter acceptance, or completed user-side testing.
+- All dated baseline tables and result snapshots below remain historical. COORD-003's latest publication record supersedes its earlier local-only delivery statements. No prior research/publication reservation remains active; COORD-004 is the only new documentation scope, with no UI/core reservation.
+
 ## Verified baseline
 
 | Item | Audited value |
@@ -75,7 +84,7 @@ Do not skip dependencies because a prerequisite has a commit or passing tests. R
 | --- | --- | --- | --- | --- |
 | COORD-001 | Coordinator | accepted | None; product owner approved the next documentation step after audit | Audit report in this conversation; no file changes |
 | COORD-002 | Coordinator | accepted | COORD-001 accepted; product owner reviewed the result and authorized publication | Two coordination documents; see Git history and coordinator publication report |
-| UI-001 | Codex, externally active per product owner | blocked | Coordinator proposal review awaits published audit/design and actual branch/base | External UI/UX work reported; no proposal received here |
+| UI-001 | Codex (historical) | cancelled | Owner ended Codex collaboration; no transfer of assignment to agent-b | Prior blocked audit/proposal record retained; unpublished external work unknown |
 | CORE-001 | Coordinator | accepted | COORD-002 accepted; product owner directed continued core work while Codex handles UI | Evidence accepted for progression; published in draft PR #3 |
 | CORE-002 | Coordinator | accepted | CORE-001 accepted; product owner directed continuation with the bounded fix | Automated evidence accepted for progression; published in draft PR #3; macOS checks pending |
 | CORE-003 | Coordinator | submitted | CORE-002 accepted for progression; product owner requested the next core step | Published for review in draft PR #3; 89 passes, 3 LUFS TODO cases; macOS checks pending |
@@ -83,7 +92,8 @@ Do not skip dependencies because a prerequisite has a commit or passing tests. R
 | CORE-005 | Coordinator | accepted | Owner directed the proposed candidate comparison after reviewing reference-harness results | Published in draft PR #3; accepted for isolated POC progression only, not production/API/conformance/merge approval |
 | CORE-006 | Coordinator | submitted | CORE-005 evidence accepted for isolated POC; COORD-002 accepted; exact new paths acknowledged | Published in draft PR #3; 53 ordinary tests and 56-fixture comparison; production unchanged |
 | COORD-003 | Coordinator | submitted | COORD-002 accepted; owner authorized publishing the submitted research batch for draft review | Published eight-path commit 1e4192c to existing draft PR #3; no integration or merge |
-| UI-002 | Codex, externally active per product owner | blocked | Coordinator integration review awaits UI-001 and actual diff, approvals, isolation and ownership evidence | External activity reported; implementation state unverified here |
+| UI-002 | Codex (historical) | cancelled | Owner ended Codex collaboration; no UI implementation grant exists | Prior blocked implementation record retained; no replacement task dispatched |
+| COORD-004 | Coordinator | submitted | Owner explicitly authorized Git recovery/publication and requested repo onboarding; no dependency on acceptance/merge of metering research or PR #1 | Six-document onboarding/recovery unit verified locally; publication result below; owner review pending |
 
 ### COORD-001 — Audit actual Git state and execution tools
 
@@ -117,6 +127,8 @@ Do not skip dependencies because a prerequisite has a commit or passing tests. R
 - **Next after acceptance:** UI-001 remains blocked until its runtime/publication route is available; CORE-001 needs its test-only plan approved. Read-only UI audit and disjoint core work can proceed in parallel only after their own gates clear.
 
 ### UI-001 — Codex UI audit and design proposal, no application edits
+
+**Current disposition: cancelled by owner role replacement on 2026-10-15.** The original blocked scope below is retained as history, not an active assignment or reservation. It is not reassigned to agent-b.
 
 - **Owner / runtime:** Codex assigned by product owner; actual worker identity, runtime, and launch route unverified here. Status is `blocked`, not dispatched.
 - **Dependencies:** COORD-002 accepted; Codex must acknowledge rules and access a reviewed snapshot containing both engineering refactors. No dependency on merging PR #1.
@@ -223,6 +235,8 @@ Do not skip dependencies because a prerequisite has a commit or passing tests. R
 - **Delivery / results / review:** Published research commit `1e4192c44abbcfb27835d62ac8c86d72429dd8ed` to draft PR #3, actual title/body and head/base verified. Latest COORD-003 record below supersedes earlier local-only delivery snapshots. Publication is separate from reviewer acceptance and merge. Next is review and a bounded production validity/provenance/gain-safety proposal, not unapproved caller wiring.
 
 ### UI-002 — Implement an approved UI slice
+
+**Current disposition: cancelled by owner role replacement on 2026-10-15.** The original blocked scope below is retained as history, not an active assignment or reservation. It is not reassigned to agent-b.
 
 - **Owner / runtime:** Codex proposed; no launch or assignment verified. Status `blocked`.
 - **Dependencies:** UI-001 accepted; product-owner colour-gradient direction; lead-approved architecture/interface plan; acceptance of every required shared-contract task.
@@ -515,3 +529,20 @@ npm run build
 ```
 
 Expected current default total: 145 tests / 142 passes / 3 explicit known legacy LUFS TODO cases. Strict legacy diagnostic command above still exits 1 with those three failures. Optional reference reproduction requires the existing compatible compiler/Node/gh toolchain and is documented in the metering contract/PR; no automatic installation or Mac execution is claimed.
+
+
+## COORD-004 — Authorized Git metadata recovery and agent-b onboarding
+
+- **Owner / runtime / attempt:** Coordinator, Arena Linux, attempt 1. Owner explicitly authorized fetch plus mixed reset to the published SHA and requested an arranged project guide and reusable agent-b master prompt, not a feature assignment. Broader Git permission does not require merging/deleting unfinished work.
+- **Dependencies:** Owner authorization and verified file preservation. No prerequisite acceptance of CORE-004/006 proposals or PR #1; this unit does not implement those proposals or alter their statuses.
+- **Base / branch / workspace:** Recovered `e5229d8f601423a70fdeb946ab80112f650fa82c`; fixed `arena/b25c318e-onverse`; `/home/user/onverse`; sole worktree. Prior local HEAD was `ce02cf90ecdb0f9729817e2bfe449f0e42969d31`; published content was intact. No worker workspace or agent dispatch.
+- **Exact allowed files / reservation:** `AGENTS.md`, `README.md`, `docs/engineering/PROJECT_GUIDE.md`, `docs/design/DESIGN_BRIEF.md`, `docs/engineering/AGENT_B_MASTER_PROMPT.md`, `docs/engineering/WORK_QUEUE.md`. Coordinator announced and exclusively acknowledged these six documentation paths before edits. Release this documentation reservation only after verified publication/clean-tree checks; it grants no UI/core ownership.
+- **Forbidden changes:** All application/audio/UI source, tests/fixtures, package/lock/configuration/Electron, tracked icons, generated assets, adoption of PR #1 documents, and new dependencies. No source moves, framework refactor, task assignment to agent-b, automatic merge, deletion, release, or force push.
+- **Allowed Git/GitHub actions:** Fetch existing history/remote refs, the exact approved mixed reset after complete hash checks, scoped documentation commit/push only to the fixed branch, and update existing draft PR #3's body with onboarding scope/evidence. Leave main, PR #1, other branches, and historical research intact.
+- **Acceptance criteria:** Git local metadata agrees with the published content without losing files; a navigable reading order/current code map and canonical design direction exist; current roles are accurate while history is preserved; the master prompt gives standing context/guardrails but explicitly waits for the owner's specific task. Distinguish implemented vs proposed, published vs merged, actual tests vs skipped work, and onboarding vs dispatch.
+- **Recovery actually executed:** Retrieved the pinned published recursive tree with `gh api`, compared all 50 file blob hashes plus full non-ignored inventory and absence of staged changes; `git fetch origin`; checked live refs/open draft PRs; `git reset --mixed e5229d8f601423a70fdeb946ab80112f650fa82c`; verified every hash again, correct HEAD/clean tree, and `git fsck --connectivity-only`. Refreshed existing main/architecture tracking refs without checking out or changing them. The clone remains shallow intentionally; recovery did not require rewriting or expanding unrelated history.
+- **Actual diagnostic errors:** An initial read-only `gh api` call used unsupported `--recursive`; it failed before any Git recovery and was corrected to the API query `?recursive=1`, then the full verification passed. A later inspection tried a nonexistent `README-BUILD.md` and a not-yet-fetched architecture tracking ref; inspected actual `README-BUILD.txt` and fetched that existing ref explicitly. Neither error was a source failure or reason for destructive cleanup.
+- **Validation actually run:** Exact six-document scope; 48 protected published file hashes unchanged; 30 relative document links resolved; fenced blocks/text bounds/trailing whitespace checked; 12 unique acyclic queue records; cancelled Codex assignments and explicit no-task/no-dispatch wording checked; `git diff --check` passed. The first documentation validator used an unjustified 400-line cap and rejected the already-long historical queue; corrected the validator to a text-byte bound without deleting history, then all checks passed. Fresh combined Node suite: 145 tests / 142 passes / 3 known LUFS TODOs / zero failures; `node scripts/test-analyze.mjs` all sanity checks passed.
+- **Not run / limitations:** No install, build, fresh strict/native-reference research run, browser/preview/screenshots/listening/macOS/packaging/recovery/plugin test, new lint/type/UI tooling, or security certification. No source code changed. Tailwind/daisyUI may scan repository text, so documentation-only scope is not a claim of generated CSS byte identity or browser equivalence. Previously recorded strict failures and unsafe gain remain unresolved.
+- **Delivery / review:** Six-document batch is `submitted` for review, not self-accepted. Its actual commit is identifiable by this path's Git history. Commit/push and draft PR #3 body read-back follow this local result; the publication verification will be reported separately. No merge, release, agent appointment, or UI approval is inferred. The coordinator documentation reservation expires only on verified push plus a clean tree; no worker editing grant follows.
+- **Risks / next:** The current README intentionally maps the actual engineering branch while PR #1 also proposes a README; reconcile that overlap explicitly when reviewing PR #1 rather than replacing this guide wholesale. Architecture-baseline adoption and full Linked Sessions design remain lead/product checkpoints. agent-b appointment, runtime/isolation, exact task/base/paths, acknowledgments, and any visual implementation approval are still required. Do not infer an assignment from this handoff.
