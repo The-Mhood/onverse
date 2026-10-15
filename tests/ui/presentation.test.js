@@ -229,8 +229,11 @@ test("main.js routes landmark keys and chips to the stage only when ORBIT_SPIKE 
   assert.match(main, /data-orbit-focus="\$\{l\.index\}"/)
 })
 
-test("the Orbit HUD states only working controls: no toggle and no unimplemented claims", () => {
+test("the Orbit HUD makes no false save claim and adds no fake mode toggle", () => {
+  // Owner decision (2026-10-15): Reference 2 copy and controls. The save status must match real state:
+  // no project persistence exists yet, so it reads "Not saved · session only", never "Project saved locally".
   const main = read("src/main.js")
-  assert.doesNotMatch(main, /Enter studio|Project saved locally|Desktop exploration|Essential music controls/)
+  assert.doesNotMatch(main, /Project saved locally/)
+  assert.match(main, /Not saved · session only/)
   assert.doesNotMatch(main, /data-orbit-mode/)
 })

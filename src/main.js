@@ -492,12 +492,17 @@ app.innerHTML = `
       <div class="brand-tag">AUDIO INTELLIGENCE</div>
     </div>
   </div>
+  ${ORBIT_SPIKE ? `<div class="orbit-switch" role="group" aria-label="View">
+    <button class="orbit-switch-btn" type="button" data-orbit-view="converse" aria-pressed="true">Orbit</button>
+    <button class="orbit-switch-btn" type="button" data-orbit-view="daw" aria-pressed="false">DAW</button>
+  </div>` : ""}
   <div class="mode-switch tabs tabs-box" id="modeSwitch" role="group" aria-label="Studio mode">
     <button class="tab tab-active mode-btn" data-mode="converse" aria-pressed="true" type="button">◈ SCAN</button>
     <button class="tab mode-btn" data-mode="convert" aria-pressed="false" type="button">⇄ CONVERT</button>
     <button class="tab mode-btn" data-mode="daw" aria-pressed="false" type="button">▦ DAW · PROTOTYPE</button>
   </div>
   <div class="top-actions">
+    ${ORBIT_SPIKE ? `<span class="orbit-status"><span class="orbit-status-dot" aria-hidden="true"></span>Not saved · session only</span>` : ""}
     <div class="tooltip tooltip-bottom" data-tip="Open audio from your local storage">
       <button id="btnUpload" class="btn btn-square btn-ghost btn-glow" type="button" aria-label="Open audio file">${ICONS.folder}</button>
     </div>
@@ -520,6 +525,19 @@ app.innerHTML = `
 
   <section class="stage-col">
     <div id="panelIdle" class="panel panel-center card card-border bg-base-200/70 p-8">
+      ${ORBIT_SPIKE ? `
+      <p class="orbit-eyebrow">CURRENT PLACE · AURORA ORBIT</p>
+      <h1 class="orbit-title">You are not<br>viewing space.<br>You are inside it.</h1>
+      <p class="orbit-sub">The camera breathes with the scene: a nearby giant cuts the stars, a moon drifts at distance, and the horizon holds the studio beneath your feet.</p>
+      <div class="orbit-actions">
+        <button class="orbit-btn orbit-btn-primary" id="btnOrbitStudio" type="button">Enter studio</button>
+        <button class="orbit-btn" id="btnOrbitReset" type="button">Reset view</button>
+      </div>
+      <div class="orbit-secondary">
+        <button class="orbit-link" id="btnIdleUpload" type="button">Open audio file</button>
+        <button class="orbit-link" id="btnIdleDemo" type="button">Generate demo track</button>
+      </div>
+      <div class="idle-hint">or drop a file anywhere · wav · mp3 · m4a · ogg · flac · aiff</div>` : `
       <div class="idle-glyph" aria-hidden="true">${ICONS.wave}</div>
       <h1 class="glow-text">FORGE YOUR SOUND</h1>
       <p class="idle-sub">Local audio analysis, reference comparison, processing and conversion.</p>
@@ -527,7 +545,7 @@ app.innerHTML = `
         <button class="btn btn-primary btn-glow" id="btnIdleUpload" type="button">OPEN AUDIO FILE</button>
         <button class="btn btn-ghost" id="btnIdleDemo" type="button">GENERATE DEMO TRACK</button>
       </div>
-      <div class="idle-hint">or drop a file anywhere · wav · mp3 · m4a · ogg · flac · aiff</div>
+      <div class="idle-hint">or drop a file anywhere · wav · mp3 · m4a · ogg · flac · aiff</div>`}
     </div>
 
     <div id="panelFile" class="panel panel-file card card-border bg-base-200/70 p-6 hidden">
@@ -777,7 +795,7 @@ bindAskTargets(document, askSylune)
 /* Shared cosmic shell (UI-007): decorative and non-interactive. Orbit suppresses its own planets. */
 cosmicEnv = mountCosmicEnvironment({ root: document.body, orbit: ORBIT_SPIKE })
 // Orbit composition: the idle landing card becomes a left-hand overlay (see style.css, body.orbit-mode).
-document.body.classList.toggle("orbit-mode", ORBIT_SPIKE)
+document.body.classList.toggle("orbit-mode", ORBIT_SPIKE && state.mode === "converse")
 cosmicEnv.setWorkspace(WORKSPACE_FOR_MODE[state.mode] ?? "analysis")
 
 /* UI-005 Orbit HUD: a bottom-right card with the three landmark chips. Mounted only with ?orbit=1, so the DAW
@@ -790,7 +808,8 @@ if (ORBIT_SPIKE) {
   hud.className = "orbit-hud"
   hud.setAttribute("aria-label", "Orbit Mode navigation")
   hud.innerHTML = `
-    <p class="orbit-hud-hint">Drag to look · Scroll to approach · Press 1–3 to focus a landmark</p>
+    <p class="orbit-hud-title">Desktop exploration</p>
+    <p class="orbit-hud-hint">Drag to look. Scroll to approach. Use 1–3 to focus a celestial landmark. Essential music controls never move.</p>
     <div class="orbit-hud-chips">
       ${ORBIT_LANDMARKS.map((l) => `<button class="orbit-chip" type="button" data-orbit-focus="${l.index}"><kbd>${l.key}</kbd> ${l.label}</button>`).join("")}
     </div>`
@@ -864,6 +883,8 @@ function setMode(mode) {
     b.setAttribute("aria-pressed", String(b.dataset.mode === mode))
   })
   if (cosmicEnv) cosmicEnv.setWorkspace(WORKSPACE_FOR_MODE[mode] ?? "analysis")
+  document.body.classList.toggle("orbit-mode", ORBIT_SPIKE && mode === "converse")
+  document.querySelectorAll("[data-orbit-view]").forEach((b) => b.setAttribute("aria-pressed", String((b.dataset.orbitView === "daw") === (mode === "daw"))))
   renderPanels()
 }
 
@@ -1864,6 +1885,11 @@ $("#btnAnalyze").onclick = runAnalysis
 document.querySelectorAll('[data-action="analyze"]').forEach((b) => (b.onclick = runAnalysis))
 
 $("#btnFix").onclick = runFix
+if (ORBIT_SPIKE) {
+  document.querySelectorAll("[data-orbit-view]").forEach((b) => b.addEventListener("click", () => setMode(b.dataset.orbitView === "daw" ? "daw" : "converse")))
+  $("#btnOrbitStudio").onclick = () => setMode("daw")
+  $("#btnOrbitReset").onclick = () => $("#stage").dispatchEvent(new CustomEvent("orbit:reset"))
+}
 document.querySelectorAll('[data-action="fix"]').forEach((b) => (b.onclick = runFix))
 
 $("#btnConvertGo").onclick = () => { setMode("convert") }

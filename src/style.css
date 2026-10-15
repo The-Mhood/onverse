@@ -1465,10 +1465,13 @@ body.dragging::after {
    approved mock. Scoped to body.orbit-mode, so the DAW and the other workspaces keep their panels. ---- */
 body.orbit-mode .panel-center#panelIdle {
   position: absolute;
-  left: 5.5rem;
-  top: 50%;
+  left: 4.3vw;
+  top: 56%;
+  bottom: auto;
+  right: auto;
+  height: auto;
   transform: translateY(-50%);
-  width: min(560px, 46vw);
+  width: min(520px, 44vw);
   align-items: flex-start;
   text-align: left;
   padding: 0;
@@ -1480,7 +1483,6 @@ body.orbit-mode .panel-center#panelIdle {
 }
 body.orbit-mode .panel-center#panelIdle .idle-glyph { display: none; }
 body.orbit-mode .panel-center#panelIdle .idle-actions { justify-content: flex-start; }
-body.orbit-mode .panel-center#panelIdle h1 { font-size: clamp(1.5rem, 2.9vw, 2.4rem); line-height: 1.1; white-space: nowrap; }
 
 /* ---- AI Fix sidebar: shrunk, not removed (UI-006/007 presentation). Bindings in main.js are unchanged:
    #btnFix -> runFix, #btnReportToggle -> reportRail.toggle("hidden"). A hidden report rail takes no space. ---- */
@@ -1488,3 +1490,108 @@ body.orbit-mode .panel-center#panelIdle h1 { font-size: clamp(1.5rem, 2.9vw, 2.4
 .report-rail { width: min(280px, 24vw); max-height: 62vh; border-radius: 12px; }
 .report-rail .report-body { font-size: 0.78rem; }
 .fix-row .btn-fix { animation: none; min-height: 2.25rem; padding: 0 0.9rem; font-size: 0.72rem; letter-spacing: 0.08em; box-shadow: none; }
+
+/* ---- Orbit view, following Reference 2 (?orbit=1 only, body.orbit-mode). Purpose-built for Orbit, not the
+   DAW chrome: a quiet top bar, the scene full-bleed, a left text overlay and a bottom-right card. Functional
+   controls stay reachable: the Orbit/DAW switch, Enter studio, Reset view, open file, demo track. ---- */
+body.orbit-mode .rail { display: none; }
+body.orbit-mode .mode-switch { display: none; }
+body.orbit-mode .topbar { position: relative; z-index: 5; background: transparent; border-bottom: 0; box-shadow: none; }
+body.orbit-mode .brand-mark, body.orbit-mode .brand-tag { display: none; }
+body.orbit-mode .brand-name { font-size: 0.8rem; letter-spacing: 0.22em; text-transform: uppercase; }
+body.orbit-mode .brand-name span { font-weight: 400; }
+.orbit-switch {
+  display: inline-flex;
+  padding: 3px;
+  border: 1px solid rgba(223, 230, 238, 0.16);
+  border-radius: 8px;
+  background: rgba(7, 11, 16, 0.5);
+}
+.orbit-switch-btn {
+  min-height: 2rem;
+  padding: 0 1.1rem;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: rgba(223, 230, 238, 0.72);
+  font: 500 0.82rem/1 "Rajdhani", system-ui, sans-serif;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+}
+.orbit-switch-btn[aria-pressed="true"] { background: rgba(223, 230, 238, 0.14); color: #dfe6ee; }
+.orbit-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-right: 0.6rem;
+  color: rgba(223, 230, 238, 0.7);
+  font: 400 0.78rem/1 "Share Tech Mono", ui-monospace, monospace;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+.orbit-status-dot { width: 6px; height: 6px; border-radius: 50%; background: #d9b26b; }
+.orbit-eyebrow {
+  margin: 0;
+  color: rgba(223, 230, 238, 0.66);
+  font: 400 0.72rem/1.2 "Share Tech Mono", ui-monospace, monospace;
+  letter-spacing: 0.22em;
+}
+.orbit-title {
+  margin: 0.2rem 0 0;
+  color: #f2f5f8;
+  font: 500 clamp(1.7rem, 2.6vw, 2.3rem)/1.12 "Rajdhani", system-ui, sans-serif;
+  letter-spacing: 0;
+  text-shadow: 0 1px 14px rgba(5, 7, 11, 0.6);
+}
+.orbit-sub {
+  margin: 0.9rem 0 0;
+  max-width: 30ch;
+  color: rgba(223, 230, 238, 0.82);
+  font: 400 0.92rem/1.45 "Rajdhani", system-ui, sans-serif;
+}
+.orbit-actions { display: flex; gap: 0.7rem; margin-top: 1.1rem; flex-wrap: wrap; }
+.orbit-btn {
+  min-height: 2.5rem;
+  padding: 0 1.2rem;
+  border: 1px solid rgba(223, 230, 238, 0.36);
+  border-radius: 6px;
+  background: transparent;
+  color: #dfe6ee;
+  font: 500 0.92rem/1 "Rajdhani", system-ui, sans-serif;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+}
+.orbit-btn-primary { background: rgba(223, 230, 238, 0.86); border-color: transparent; color: #0b121b; }
+.orbit-btn:hover { border-color: rgba(223, 230, 238, 0.6); }
+.orbit-secondary { display: flex; gap: 1.1rem; margin-top: 0.9rem; flex-wrap: wrap; }
+.orbit-link {
+  padding: 0.2rem 0;
+  border: 0;
+  background: none;
+  color: rgba(223, 230, 238, 0.7);
+  font: 500 0.82rem/1.2 "Rajdhani", system-ui, sans-serif;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+body.orbit-mode .panel-center#panelIdle .idle-hint { margin-top: 0.8rem; font-size: 0.7rem; opacity: 0.7; }
+.orbit-hud {
+  right: 30px !important;
+  bottom: 30px !important;
+  width: min(350px, 31vw);
+  padding: 14px 16px;
+  border-radius: 10px;
+  background: rgba(7, 11, 16, 0.72);
+  border: 1px solid rgba(223, 230, 238, 0.14);
+  box-shadow: none;
+}
+.orbit-hud-title { margin: 0 0 4px; color: #f2f5f8; font: 600 0.98rem/1.2 "Rajdhani", system-ui, sans-serif; }
+.orbit-hud-hint { margin: 0 0 10px; color: rgba(223, 230, 238, 0.8); font: 400 0.86rem/1.4 "Rajdhani", system-ui, sans-serif; }
+
+/* ---- Header layering: the full-bleed scene canvas and the cosmic layer are positioned, so an unpositioned
+   header painted underneath them in the DAW view. The header is raised above the scene in every view. ---- */
+.topbar { position: relative; z-index: 5; }
+/* The Orbit card is Orbit-only: it must not cover the DAW mixer. */
+body:not(.orbit-mode) .orbit-hud { display: none; }
+/* The save status describes the Orbit view only; it is hidden in the DAW header so the studio bar stays on one row. */
+body:not(.orbit-mode) .orbit-status { display: none; }

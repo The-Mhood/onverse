@@ -5,7 +5,7 @@
  * The focus move is eased, and instant when prefers-reduced-motion is set. There is no automatic camera movement. */
 import * as THREE from "three"
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js"
-import { craterTexture, ringTextures } from "./orbitTextures.js"
+import { ringTextures } from "./orbitTextures.js"
 
 const clamp01 = (v) => Math.min(1, Math.max(0, v))
 
@@ -209,7 +209,7 @@ export function createStage(canvas) {
   const TERRA_R = 2500
   const terraMat = new THREE.ShaderMaterial({ vertexShader: PLANET_VS, fragmentShader: TERRA_FS, uniforms })
   const terra = new THREE.Mesh(new THREE.SphereGeometry(TERRA_R, 160, 120), terraMat)
-  terra.position.set(0, -TERRA_R - 100, 0)
+  terra.position.set(0, -TERRA_R - 640, 0) // limb near 84% of frame height, as in Reference 2
   scene.add(terra)
   const halo = new THREE.Mesh(
     new THREE.SphereGeometry(TERRA_R * 1.035, 160, 120),
@@ -224,33 +224,27 @@ export function createStage(canvas) {
     new THREE.SphereGeometry(1100, 160, 120),
     new THREE.ShaderMaterial({ vertexShader: PLANET_VS, fragmentShader: GIANT_FS, uniforms: giantUniforms }),
   )
-  giant.position.set(-100, 760, -1900)
+  giant.position.set(0, 1501, -1873) // above the frame; Reference landmark brings it in
   giant.rotation.z = 0.12
   scene.add(giant)
 
-  const giantSmall = new THREE.Mesh(
-    new THREE.SphereGeometry(520, 128, 96),
-    new THREE.ShaderMaterial({ vertexShader: PLANET_VS, fragmentShader: GIANT_FS, uniforms: { ...uniforms, uTint: { value: new THREE.Vector3(0.9, 0.85, 0.8) } } }),
-  )
-  giantSmall.position.set(-1050, 1000, -1150)
-  scene.add(giantSmall)
 
   /* ---- ringed foreground body: striated rings crossing the lower frame ---- */
   const ringBody = new THREE.Group()
-  ringBody.position.set(-712, 18, -1544) // upper-left, cropped by the top edge (projects to ~17%W, 10%H)
-  ringBody.rotation.set(-1.18, 0, 0.22)
+  ringBody.position.set(-757, 188, -2065) // upper-left, cropped by the top edge (projects to ~23%W, 0%H)
+  ringBody.rotation.set(-0.75, 0, 0.1)
   scene.add(ringBody)
-  const bodyMat = new THREE.MeshStandardMaterial({ color: 0x8f7b63, roughness: 0.92, metalness: 0 })
+  const bodyMat = new THREE.MeshStandardMaterial({ color: 0xc2a886, roughness: 0.8, metalness: 0, emissive: 0x20170e, emissiveIntensity: 1 }) // warm lit planet, Reference 2
   const body = new THREE.Mesh(new THREE.SphereGeometry(300, 128, 96), bodyMat)
   ringBody.add(body)
   const ringTex = ringTextures(11)
   const ringMat = new THREE.MeshStandardMaterial({ map: ringTex.color, alphaMap: ringTex.alpha, transparent: true, side: THREE.DoubleSide, roughness: 0.85, metalness: 0, depthWrite: false })
-  const ring = new THREE.Mesh(ringGeometry(380, 780), ringMat)
+  const ring = new THREE.Mesh(ringGeometry(300, 780), ringMat)
   ringBody.add(ring)
 
   /* ---- second ringed body, lower right: its ring arcs across the horizon (composition per the approved mock) ---- */
   const ringBody2 = new THREE.Group()
-  ringBody2.position.set(543, -362, -1007) // right-hand arc crossing the limb (projects to ~84%W, 50%H; clear of the planet)
+  ringBody2.position.set(455, -693, -677) // lower-right arc crossing the limb (projects to ~85%W, 102%H)
   ringBody2.rotation.set(-1.05, 0, -0.35)
   scene.add(ringBody2)
   const body2 = new THREE.Mesh(new THREE.SphereGeometry(190, 96, 72), new THREE.MeshStandardMaterial({ color: 0x9a8670, roughness: 0.9, metalness: 0 }))
@@ -261,14 +255,12 @@ export function createStage(canvas) {
   ringBody2.add(ring2)
 
   /* ---- cratered moons on the right ---- */
-  const craters = craterTexture(7)
   const moonSpecs = [
-    { p: [820, 40, -1900], r: 62 },
-    { p: [1080, -40, -2300], r: 40 },
-    { p: [1350, 230, -3200], r: 150 },
+    { p: [653, -205, -1335], r: 150 }, // grey moon, right (projects to ~83%W, 29%H)
   ]
+  // Smooth grey moon on the right, as in Reference 2 (no crater texture).
   const moons = moonSpecs.map(({ p, r }) => {
-    const m = new THREE.Mesh(new THREE.SphereGeometry(r, 96, 64), new THREE.MeshStandardMaterial({ map: craters, roughness: 1, metalness: 0 }))
+    const m = new THREE.Mesh(new THREE.SphereGeometry(r, 96, 64), new THREE.MeshStandardMaterial({ color: 0x9d9a96, roughness: 0.82, metalness: 0 }))
     m.position.set(...p)
     scene.add(m)
     return m
@@ -313,7 +305,7 @@ export function createStage(canvas) {
   const LANDMARKS = [
     { obj: ringBody, radius: 780 },    // 1 Project: ringed body, upper left
     { obj: giant, radius: 1100 },      // 2 Reference: banded gas giant, top
-    { obj: moons[2], radius: 150 },    // 3 Master: largest cratered moon, right
+    { obj: moons[0], radius: 150 },    // 3 Master: the grey moon, right
   ]
   let focusEase = null
   const focusCenter = new THREE.Vector3()
@@ -333,6 +325,14 @@ export function createStage(canvas) {
     focusEase = { fromT: controls.target.clone(), toT: focusCenter.clone(), fromP: camera.position.clone(), toP: toPos, t0: -1, dur: 900 }
   }
   canvas.addEventListener("orbit:focus", onFocus)
+  // "Reset view" (Orbit overlay): back to the start pose. Instant under reduced motion; no timers or tweens.
+  function onReset() {
+    focusEase = null
+    controls.target.copy(TARGET)
+    camera.position.copy(START)
+    controls.update()
+  }
+  canvas.addEventListener("orbit:reset", onReset)
   controls.addEventListener("start", () => { focusEase = null })
 
   /* ---- sizing ---- */
@@ -393,6 +393,7 @@ export function createStage(canvas) {
       disposed = true
       cancelAnimationFrame(raf)
       canvas.removeEventListener("orbit:focus", onFocus)
+      canvas.removeEventListener("orbit:reset", onReset)
       if (ro) ro.disconnect()
       else window.removeEventListener("resize", resize)
       controls.dispose()
@@ -404,7 +405,7 @@ export function createStage(canvas) {
           m.dispose()
         }
       })
-      craters.dispose()
+      moons.forEach((m) => { m.geometry.dispose(); m.material.dispose() })
       ringTex.color.dispose()
       ringTex.alpha.dispose()
       renderer.dispose()
