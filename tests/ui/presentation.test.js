@@ -191,5 +191,5 @@ test("analysis failures are routed through toast with the error flag, not a new 
 test("the mode label no longer claims a conversational feature", () => {
   const main = read("src/main.js")
   assert.doesNotMatch(main, /CONVERSE/)
-  assert.match(main, /◈ ANALYZE<\/button>/)
+  assert.match(main, /◈ SCAN<\/button>/)
 })

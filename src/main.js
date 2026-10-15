@@ -484,7 +484,7 @@ app.innerHTML = `
     </div>
   </div>
   <div class="mode-switch tabs tabs-box" id="modeSwitch" role="group" aria-label="Studio mode">
-    <button class="tab tab-active mode-btn" data-mode="converse" aria-pressed="true" type="button">◈ ANALYZE</button>
+    <button class="tab tab-active mode-btn" data-mode="converse" aria-pressed="true" type="button">◈ SCAN</button>
     <button class="tab mode-btn" data-mode="convert" aria-pressed="false" type="button">⇄ CONVERT</button>
   </div>
   <div class="top-actions">
@@ -529,7 +529,7 @@ app.innerHTML = `
         <div class="file-badges" id="fileBadges"></div>
       </div>
       <div class="file-actions">
-        <button id="btnAnalyze" class="btn btn-primary btn-glow" type="button">◈ ANALYZE MIX</button>
+        <button id="btnAnalyze" class="btn btn-primary btn-glow" type="button">◈ SCAN MIX</button>
         <button id="btnConvertGo" class="btn btn-ghost" type="button">⇄ CONVERT FORMAT</button>
       </div>
       <div id="progressWrap" class="progress-wrap hidden">
