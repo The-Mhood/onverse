@@ -25,18 +25,25 @@ export function hann(n) {
 /* ---------------- time domain ---------------- */
 function timeDomain(mono, chData) {
   const n = mono.length
-  let peak = 0, peakIdx = 0, dcSum = 0, clip = 0
+  let peak = 0, peakIdx = 0, dcSum = 0, clip = 0, energy = 0
   for (let i = 0; i < n; i++) {
-    const a = Math.abs(mono[i])
-    if (a > peak) { peak = a; peakIdx = i }
-    if (a >= 0.9992) clip++
+    let clipped = false, frameEnergy = 0
+    // Inspect channel samples before downmixing; opposite polarities can cancel.
+    for (const channel of chData) {
+      const sample = channel[i]
+      const magnitude = Math.abs(sample)
+      if (magnitude > peak) { peak = magnitude; peakIdx = i }
+      if (magnitude >= 0.9992) clipped = true
+      frameEnergy += sample * sample
+    }
+    if (clipped) clip++ // Count affected frames, not duplicated stereo samples.
+    energy += frameEnergy / chData.length
     dcSum += mono[i]
   }
   const peakDb = linToDb(peak)
   const dcOffset = dcSum / n
-  let rms = 0
-  for (let i = 0; i < n; i++) rms += mono[i] * mono[i]
-  rms = Math.sqrt(rms / n)
+  // Keep crest's RMS denominator consistent with the channel-aware sample peak.
+  const rms = Math.sqrt(energy / n)
   const rmsDb = linToDb(rms)
 
   // true peak via 4x linear oversampling
@@ -104,7 +111,11 @@ async function spectral(mono, sr, onProgress) {
   let count = 0, done = 0
   for (let f = 0; f < frames; f += stride) {
     const off = f * HOP
-    for (let i = 0; i < FFT_SIZE; i++) { re[i] = mono[off + i] * win[i]; im[i] = 0 }
+    // Short inputs still use one FFT window; zero-pad without reading past PCM.
+    for (let i = 0; i < FFT_SIZE; i++) {
+      re[i] = off + i < n ? mono[off + i] * win[i] : 0
+      im[i] = 0
+    }
     fft(re, im)
     for (let k = 1; k < FFT_SIZE / 2; k++) mag[k] += re[k] * re[k] + im[k] * im[k]
     count++
