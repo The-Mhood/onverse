@@ -4,9 +4,13 @@
 
 - The product owner decides product scope, visual direction, major architecture changes, dependencies, external costs, and destructive actions.
 - The lead/coordinator owns architecture, application contracts, core audio engineering, task assignment, review, and integration recommendations.
-- Codex is no longer active. The intended UI/UX collaborator is **agent-b**, awaiting product-owner appointment and a separately scoped task. No runtime, dispatch, editing workspace, or file reservation is granted by onboarding. Workers do not independently change architecture or shared interfaces.
+- Codex is no longer active. The owner now reports **agent-b** as the UI/UX collaborator on fixed branch `arena/ced77c2a-onverse`. Its exact checkout/runtime and acknowledgment remain to be verified. The [UI baseline decision](docs/engineering/UI_BASELINE_DECISION.md) authorizes read-only preflight/audit/proposal only; UI implementation remains blocked. No editing workspace or file reservation is granted by onboarding. Workers do not independently change architecture or shared interfaces.
 - These rules establish a Git-based collaboration protocol, not an automatic scheduler, agent launcher, or permission to implement the full roadmap.
 - Follow [issue #2](https://github.com/The-Mhood/onverse/issues/2), with the product owner's later direction to defer a custom orchestration platform. No new orchestration runtime or dependency is authorized.
+
+## Current UI integration decision
+
+Keep agent-b's fixed branch main-based; wait for reviewed prerequisites to merge. Do not rebase/switch/reset it or silently treat the lead branch as the UI integration base. Read-only audit reference is `370190c180682eb45edbdd9029a33b7e58c605dd` plus the later [decision record](docs/engineering/UI_BASELINE_DECISION.md). No future main merge SHA is invented. A later reviewed main SHA, guarded fast-forward-only update, proposal approval, dependency acceptance, exact file ownership and worker acknowledgment must precede implementation. Read the complete decision for evidence, scope and stop conditions.
 
 ## Architecture references
 
