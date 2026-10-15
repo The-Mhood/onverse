@@ -76,9 +76,9 @@ Do not skip dependencies because a prerequisite has a commit or passing tests. R
 | COORD-001 | Coordinator | accepted | None; product owner approved the next documentation step after audit | Audit report in this conversation; no file changes |
 | COORD-002 | Coordinator | accepted | COORD-001 accepted; product owner reviewed the result and authorized publication | Two coordination documents; see Git history and coordinator publication report |
 | UI-001 | Codex, externally active per product owner | blocked | Coordinator proposal review awaits published audit/design and actual branch/base | External UI/UX work reported; no proposal received here |
-| CORE-001 | Coordinator | accepted | COORD-002 accepted; product owner directed continued core work while Codex handles UI | Evidence accepted by product-owner direction to continue with the proposed narrow fix; publication pending |
-| CORE-002 | Coordinator | accepted | CORE-001 accepted; product owner directed continuation with the bounded fix | Automated evidence accepted for next-step progression; macOS verification and publication pending |
-| CORE-003 | Coordinator | submitted | CORE-002 accepted for progression; product owner requested the next core step | Corrected PCM metrics; 89 passes, 3 LUFS TODO cases; user macOS testing deferred |
+| CORE-001 | Coordinator | accepted | COORD-002 accepted; product owner directed continued core work while Codex handles UI | Evidence accepted for progression; published in draft PR #3 |
+| CORE-002 | Coordinator | accepted | CORE-001 accepted; product owner directed continuation with the bounded fix | Automated evidence accepted for progression; published in draft PR #3; macOS checks pending |
+| CORE-003 | Coordinator | submitted | CORE-002 accepted for progression; product owner requested the next core step | Published for review in draft PR #3; 89 passes, 3 LUFS TODO cases; macOS checks pending |
 | UI-002 | Codex, externally active per product owner | blocked | Coordinator integration review awaits UI-001 and actual diff, approvals, isolation and ownership evidence | External activity reported; implementation state unverified here |
 
 ### COORD-001 — Audit actual Git state and execution tools
@@ -136,7 +136,7 @@ Do not skip dependencies because a prerequisite has a commit or passing tests. R
 - **Reservation / acknowledgment:** Coordinator holds the two exact test paths and queue record for this attempt, acknowledged in the pre-edit message. No UI path reserved or touched. No visible overlapping remote branch/PR at start; unpublished external work cannot be inspected.
 - **Acceptance:** Deterministic synthetic PCM exercises the real analyzer/service. Check normal controls and polarity/short-input correctness properties. Known defects run as explicitly labelled TODO assertions by default, with an opt-in strict run exposing actual nonzero failures. Do not report TODO cases as passes or claim standards-grade measurements. No production audio behavior, parameter contract, or UI change.
 - **Planned checks:** New test suite and existing unit suites; strict known-defect reproduction using `MUSICONVERSE_STRICT_AUDIO_REGRESSIONS=1`; sanity script; syntax, diff scope/whitespace, and build checks. Commands/results will be appended after execution.
-- **Actual results / delivery / review:** See the historical CORE-001 result record below. Product owner subsequently replied `continue` to the short-input fix proposal, accepting the test evidence as its prerequisite. Tests remain preserved in the working tree; no publication or merge is implied by acceptance.
+- **Actual results / delivery / review:** See the historical CORE-001 result record below. Product owner subsequently replied `continue` to the short-input fix proposal, accepting the test evidence as its prerequisite. Tests are now published in commit `b64f051cc9f5fdac177ac47fa70c1812730d2771` and draft PR #3. Acceptance for progression does not imply merge.
 - **Risks:** Existing mono-fold-down and short FFT defects. TODO cases keep the ordinary gate usable but leave unresolved defects; successful strict assertions must become normal tests with their separately approved fixes. These fixtures prove signal properties, not standards compliance, decoder support, or listening quality.
 - **Next:** CORE-002 proposes the bounded short-FFT fix after acceptance of this evidence. No measurement change has been implemented or preapproved; UI integration remains independently review-gated.
 
@@ -151,7 +151,7 @@ Do not skip dependencies because a prerequisite has a commit or passing tests. R
 - **POC decision:** No separate POC needed for bounded array access and zero-padding; real analyzer regression tests validate this mechanism. No native, provider, or device integration is involved.
 - **Pre-change evidence:** Captured 48 complete-window full/fast results at 44.1/48 kHz, lengths 4096/4097/8192/24000, mono/in-phase/opposite-polarity stereo. Temporary V8 serialization retains typed arrays and non-finite values for exact post-change comparison; no binary fixture is added to Git. Permanent tests also record bounded spectral fingerprints as regression baselines, not calibrated measurements.
 - **Planned checks:** Promote six existing short-input assertions; compare short spectra with explicitly zero-padded inputs; verify source PCM/metadata; complete-window baseline parity; existing unit/control suites and sanity script; strict diagnostic run retaining unresolved stereo failures; production build and scope checks.
-- **Actual checks / delivery / review:** See the historical CORE-002 result record below. Product owner requested the next step and deferred macOS testing; automated evidence accepted for progression, not a claim of user-side verification or merge. Prior fixtures/tests and the short-input fix remain preserved in the working tree.
+- **Actual checks / delivery / review:** See the historical CORE-002 result record below. Product owner requested the next step and deferred macOS testing; automated evidence accepted for progression, not a claim of user-side verification or merge. Prior fixtures/tests and the short-input fix are now published in commit `b64f051cc9f5fdac177ac47fa70c1812730d2771` and draft PR #3; nothing is merged.
 - **Risks / next:** Very short audio has limited spectral information even after numeric safety is fixed. No result-shape change. Reassess actual Codex changes before integration; stereo/loudness work requires a separate proposal/review.
 
 ### CORE-003 — Channel-aware sample peak and clipping
@@ -165,7 +165,7 @@ Do not skip dependencies because a prerequisite has a commit or passing tests. R
 - **Acceptance:** Correct strongest-channel/anti-polarity/negative sample peaks; per-frame clipping counts, including overlapping clips and threshold controls; RMS/crest remain polarity-invariant and match hand-computable energies. Source PCM and result shapes preserved. Mono/identical-stereo compatibility checked. LUFS, true peak, and other out-of-scope outputs remain unchanged, including known defects.
 - **POC decision:** No separate POC needed for bounded PCM peak/count/energy calculations; analytical fixtures and real-analyzer regressions validate the mechanism. Meter-standard validation and live/offline integration remain outside this task.
 - **Planned checks:** Red-before-green regressions; promote two peak and one clipping TODO cases; real analyzer/unit/sanity suites; strict diagnostics expected to retain three LUFS failures; pre-change compatibility capture; production build, syntax, file ownership and queue checks.
-- **Actual results / commit / PR / review:** See CORE-003 result record below. Submitted locally, not committed/pushed, accepted, or merged. User-side testing remains deferred.
+- **Actual results / commit / PR / review:** See CORE-003 result and publication records below. Published as `b64f051cc9f5fdac177ac47fa70c1812730d2771`, submitted in draft PR #3; no merge or final acceptance of this fix. User-side testing remains deferred.
 - **Risks / next:** Changes to RMS/crest can legitimately change derived scores/compression recommendations for asymmetric or cancelling channels. Existing mono-based true-peak, spectrum, block dynamics, and LUFS may still disagree with corrected sample metrics; disclose rather than silently expanding scope. No standards-grade claim; macOS/listening checks deferred by product owner.
 
 ### UI-002 — Implement an approved UI slice
@@ -348,4 +348,38 @@ Current expected default summary: 89 passes, 3 explicit LUFS TODO cases, no unex
 MUSICONVERSE_STRICT_AUDIO_REGRESSIONS=1 node --test tests/audio/analyzerRegression.test.js
 ```
 
-No local user testing is required before the owner is ready, but unperformed checks remain unverified. The unpublished files must be retrieved before these new cases can run on another machine.
+No local user testing is required before the owner is ready, but unperformed checks remain unverified. The published branch must be retrieved before these new cases can run on another machine; see the publication record below.
+
+## Publication and review record
+
+This is the latest delivery state. Earlier result records describe the state at their original local submission and their historical test counts; they do not override this publication record.
+
+- **Authorization:** Product owner replied `proceed` to publishing the bounded core batch for review. This did not authorize a merge, new UI work, or LUFS/true-peak implementation.
+- **Core batch commit:** [`b64f051cc9f5fdac177ac47fa70c1812730d2771`](https://github.com/The-Mhood/onverse/commit/b64f051cc9f5fdac177ac47fa70c1812730d2771), `fix: handle short FFT windows and channel-aware sample measurements`.
+- **Publication:** `git push origin arena/b25c318e-onverse` succeeded. This commit contains the analyzer correction, synthetic fixtures, regression suite, and task/result updates. The working tree was clean after that commit/push.
+- **Review artifact:** [Draft PR #3 — Core foundation and bounded audio regression fixes](https://github.com/The-Mhood/onverse/pull/3), head `arena/b25c318e-onverse`, base `main`, open/draft verified after creation. It also includes the previously published processing-plan extraction, analysis-service boundary, and collaboration documents because those commits are not yet on `main`.
+- **Exact files in the core batch commit:** `src/audio/analyzer.js`, `tests/audio/analyzerRegression.test.js`, `tests/fixtures/audioBuffers.js`, `docs/engineering/WORK_QUEUE.md`. The earlier `src/main.js` changes visible in the overall PR are the approved delegation refactors, not a UI redesign in this batch.
+- **Rechecks before publication:** Combined suite again reported 92 tests / 89 passes / 3 known LUFS TODO cases / 0 unexpected failures; strict diagnostics exited 1 with 44 passes and the same three LUFS failures. Sanity script, three source/test syntax checks, protected-file diff checks, staged whitespace checks, and production build passed. Existing large-bundle warning remains.
+- **No acceptance inflation:** CORE-003 remains `submitted` for review. Publication does not resolve TODO cases, establish standards compliance, record unperformed macOS/listening tests, or merge anything into `main`.
+- **Architecture and UI:** PR #1 remains open/draft at `eedc24cb38c21d1a4be6186593c7ae7fcb8c6f85`, untouched. No published Codex branch/PR was visible at the pre-publication audit; external UI work remains unreviewed. No worker was launched or claimed to acknowledge ownership.
+- **Reservations:** Core implementation edits for this batch have ended; after the verified clean commit/push, release those editing reservations. Updating this publication record is coordinator-only administration, not a new core/UI assignment.
+- **This record:** A follow-up documentation-only commit records the actual core commit and PR URL. The PR head can advance for that record without changing the code under test. Its actual commit/push outcome is verified and reported by the coordinator after execution.
+- **Next eligible activity:** Owner/reviewer can inspect draft PR #3 and perform the deferred Mac workflow checks when ready. A loudness/true-peak validation contract may be proposed separately; no production meter change is authorized by this publication. Codex integration remains gated on its actual proposal/diff and shared-file review.
+
+### Retrieve on macOS without overwriting local work
+
+First inspect the existing clone:
+
+```bash
+cd /Users/mhoodpc/onverse
+git branch --show-current
+git status --short --branch --untracked-files=all
+```
+
+If on `arena/b25c318e-onverse` with a clean working tree and no worker using that checkout, update with:
+
+```bash
+git pull --ff-only origin arena/b25c318e-onverse
+```
+
+Otherwise stop before pulling or switching and account for local/Codex work. Do not reset, stash, or move it automatically. Then use the latest macOS test commands above. Installing dependencies is not necessary if the locked environment is already present; report install/build failures rather than changing dependencies ad hoc.
