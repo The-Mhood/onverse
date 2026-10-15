@@ -1305,3 +1305,56 @@ body.dragging::after {
   color: var(--color-base-content);
   opacity: 0.45;
 }
+/* ---- UI-004 Slice A: focus, persistent error region, font licences (presentation only) ---- */
+:focus-visible {
+  outline: 2px solid var(--pf-magenta);
+  outline-offset: 2px;
+}
+
+.error-region {
+  position: fixed;
+  top: 72px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 60;
+  width: min(560px, calc(100vw - 32px));
+  padding: 10px 14px;
+  border: 1px solid var(--color-error);
+  border-radius: 12px;
+  background: rgba(20, 13, 38, 0.94);
+  color: var(--color-base-content);
+  font-family: var(--pf-font-ui);
+  font-size: 0.95rem;
+}
+.error-region:empty {
+  display: none;
+}
+
+.licence-dialog {
+  width: min(720px, calc(100vw - 32px));
+  max-height: 80vh;
+  padding: 20px 24px;
+  border: 1px solid var(--pf-line-strong);
+  border-radius: 12px;
+  background: var(--pf-bg);
+  color: var(--color-base-content);
+}
+.licence-dialog::backdrop {
+  background: rgba(5, 3, 9, 0.7);
+}
+.licence-dialog h2 {
+  font-family: var(--pf-font-display);
+  font-size: 1.1rem;
+  letter-spacing: 0.08em;
+}
+.licence-body {
+  max-height: 52vh;
+  overflow: auto;
+  margin-top: 12px;
+}
+.licence-dialog pre {
+  white-space: pre-wrap;
+  font-family: var(--pf-font-mono);
+  font-size: 0.72rem;
+  line-height: 1.5;
+}

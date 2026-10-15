@@ -1,4 +1,7 @@
 import "./style.css"
+import "./assets/fonts/fonts.css"
+import { createErrorRegion } from "./ui/presentation/errorRegion.js"
+import { mountLicenceDialog } from "./ui/presentation/licenceDialog.js"
 import { createStage } from "./scene.js"
 import { scoreAnalysis, buildIssues, buildFixPlan, targetFromFeatures } from "./audio/analyzer.js"
 import { analysisService } from "./application/analysis/analysisService.js"
@@ -63,6 +66,7 @@ function ensureCtx() {
 }function updateAbUI() {
   document.querySelectorAll(".ab-btn").forEach((b) => {
     b.classList.toggle("tab-active", b.dataset.ab === state.ab)
+    b.setAttribute("aria-pressed", String(b.dataset.ab === state.ab))
     if (b.dataset.ab === "fixed") b.classList.toggle("disabled", !state.fixed)
   })
 }
@@ -77,7 +81,10 @@ function activeDuration() {
 
 function updateTransportUI() {
   const play = $("#btnPlay")
-  if (play) play.innerHTML = state.playing ? ICONS.stop : ICONS.play
+  if (play) {
+    play.innerHTML = state.playing ? ICONS.stop : ICONS.play
+    play.setAttribute("aria-label", state.playing ? "Pause" : "Play")
+  }
   const rate = $("#btnRate")
   if (rate) rate.textContent = `${state.rate}×`
   const crop = $("#btnCrop")
@@ -472,9 +479,9 @@ app.innerHTML = `
       <div class="brand-tag">AUDIO INTELLIGENCE</div>
     </div>
   </div>
-  <div class="mode-switch tabs tabs-box" id="modeSwitch" role="tablist">
-    <button class="tab tab-active mode-btn" data-mode="converse" role="tab" type="button">◈ CONVERSE</button>
-    <button class="tab mode-btn" data-mode="convert" role="tab" type="button">⇄ CONVERT</button>
+  <div class="mode-switch tabs tabs-box" id="modeSwitch" role="group" aria-label="Studio mode">
+    <button class="tab tab-active mode-btn" data-mode="converse" aria-pressed="true" type="button">◈ CONVERSE</button>
+    <button class="tab mode-btn" data-mode="convert" aria-pressed="false" type="button">⇄ CONVERT</button>
   </div>
   <div class="top-actions">
     <div class="tooltip tooltip-bottom" data-tip="Open audio from your local storage">
@@ -483,23 +490,24 @@ app.innerHTML = `
     <div class="tooltip tooltip-bottom" data-tip="Download output">
       <button id="btnDownload" class="btn btn-square btn-ghost btn-glow" type="button" aria-label="Download output">${ICONS.download}</button>
     </div>
+    <button id="btnLicences" class="btn btn-ghost btn-sm" type="button" aria-haspopup="dialog">Font licences</button>
   </div>
 </header>
 <main class="deck">
   <nav class="rail" aria-label="Studio tools">
-    <div class="tooltip tooltip-right" data-tip="Upload audio"><button class="btn btn-square btn-ghost" data-action="upload" type="button">${ICONS.folder}</button></div>
-    <div class="tooltip tooltip-right" data-tip="Generate demo track"><button class="btn btn-square btn-ghost" data-action="demo" type="button">${ICONS.music}</button></div>
-    <div class="tooltip tooltip-right" data-tip="Run analysis"><button class="btn btn-square btn-ghost" data-action="analyze" type="button">${ICONS.wave}</button></div>
-    <div class="tooltip tooltip-right" data-tip="One-click master fix"><button class="btn btn-square btn-ghost" data-action="fix" type="button">${ICONS.spark}</button></div>
-    <div class="tooltip tooltip-right" data-tip="Download output"><button class="btn btn-square btn-ghost" data-action="download" type="button">${ICONS.download}</button></div>
-    <div class="tooltip tooltip-right" data-tip="Reset session"><button class="btn btn-square btn-ghost" data-action="reset" type="button">${ICONS.reset}</button></div>
+    <div class="tooltip tooltip-right" data-tip="Upload audio"><button class="btn btn-square btn-ghost" data-action="upload" type="button" aria-label="Upload audio">${ICONS.folder}</button></div>
+    <div class="tooltip tooltip-right" data-tip="Generate demo track"><button class="btn btn-square btn-ghost" data-action="demo" type="button" aria-label="Generate demo track">${ICONS.music}</button></div>
+    <div class="tooltip tooltip-right" data-tip="Run analysis"><button class="btn btn-square btn-ghost" data-action="analyze" type="button" aria-label="Run analysis">${ICONS.wave}</button></div>
+    <div class="tooltip tooltip-right" data-tip="One-click master fix"><button class="btn btn-square btn-ghost" data-action="fix" type="button" aria-label="One-click master fix">${ICONS.spark}</button></div>
+    <div class="tooltip tooltip-right" data-tip="Download output"><button class="btn btn-square btn-ghost" data-action="download" type="button" aria-label="Download output">${ICONS.download}</button></div>
+    <div class="tooltip tooltip-right" data-tip="Reset session"><button class="btn btn-square btn-ghost" data-action="reset" type="button" aria-label="Reset session">${ICONS.reset}</button></div>
   </nav>
 
   <section class="stage-col">
     <div id="panelIdle" class="panel panel-center card card-border bg-base-200/70 p-8">
       <div class="idle-glyph" aria-hidden="true">${ICONS.wave}</div>
       <h1 class="glow-text">FORGE YOUR SOUND</h1>
-      <p class="idle-sub">Analyze your mix against the sonic fingerprint of Spotify's top tracks — then fix everything wrong with it in one click.</p>
+      <p class="idle-sub">Local audio analysis, reference comparison, processing and conversion.</p>
       <div class="idle-actions">
         <button class="btn btn-primary btn-glow" id="btnIdleUpload" type="button">OPEN AUDIO FILE</button>
         <button class="btn btn-ghost" id="btnIdleDemo" type="button">GENERATE DEMO TRACK</button>
@@ -544,16 +552,16 @@ app.innerHTML = `
         </div>
         <div class="transport">
           <div class="transport-cluster">
-            <button id="btnBack10" class="btn btn-square btn-ghost btn-sm" type="button" title="Back 10 seconds">«</button>
-            <button id="btnPlay" class="btn btn-square btn-ghost btn-glow size-13" type="button" title="Play / pause (space)">${ICONS.play}</button>
-            <button id="btnFwd10" class="btn btn-square btn-ghost btn-sm" type="button" title="Forward 10 seconds">»</button>
-            <button id="btnFwd30" class="btn btn-square btn-ghost btn-sm" type="button" title="Fast-forward 30 seconds">»»</button>
+            <button id="btnBack10" class="btn btn-square btn-ghost btn-sm" type="button" title="Back 10 seconds" aria-label="Back 10 seconds">«</button>
+            <button id="btnPlay" class="btn btn-square btn-ghost btn-glow size-13" type="button" title="Play / pause (space)" aria-label="Play">${ICONS.play}</button>
+            <button id="btnFwd10" class="btn btn-square btn-ghost btn-sm" type="button" title="Forward 10 seconds" aria-label="Forward 10 seconds">»</button>
+            <button id="btnFwd30" class="btn btn-square btn-ghost btn-sm" type="button" title="Fast-forward 30 seconds" aria-label="Fast-forward 30 seconds">»»</button>
             <button id="btnRate" class="btn btn-ghost btn-sm rate-btn" type="button" title="Cycle playback speed">1.0×</button>
           </div>
           <div class="time" id="timeNow">0:00.0</div>
           <div class="time total" id="timeTotal">0:00.0</div>
           <div class="transport-cluster">
-            <button id="btnTransportReset" class="btn btn-square btn-ghost btn-glow btn-sm" type="button" title="Back to start">${ICONS.reset}</button>
+            <button id="btnTransportReset" class="btn btn-square btn-ghost btn-glow btn-sm" type="button" title="Back to start" aria-label="Back to start">${ICONS.reset}</button>
           </div>
         </div>
         <div id="cropPanel" class="crop-panel hidden">
@@ -600,9 +608,9 @@ app.innerHTML = `
       <div id="refAreaAnalysis" class="ref-zone"></div>
       <div class="fix-row">
         <button id="btnFix" class="btn btn-accent btn-fix" type="button">⚡ ONE-CLICK MASTER FIX</button>
-        <div class="ab-toggle tabs tabs-box" id="abToggle" role="tablist">
-          <button class="tab tab-active ab-btn" data-ab="orig" role="tab" type="button">A · ORIGINAL</button>
-          <button class="tab ab-btn" data-ab="fixed" role="tab" type="button">B · FIXED</button>
+        <div class="ab-toggle tabs tabs-box" id="abToggle" role="group" aria-label="Playback source">
+          <button class="tab tab-active ab-btn" data-ab="orig" aria-pressed="true" type="button">A · ORIGINAL</button>
+          <button class="tab ab-btn" data-ab="fixed" aria-pressed="false" type="button">B · FIXED</button>
         </div>
         <button id="btnDownloadFixed" class="btn btn-ghost" type="button">⭳ SAVE FIXED</button>
       </div>
@@ -624,7 +632,7 @@ app.innerHTML = `
     <div id="panelConvert" class="panel panel-convert card card-border bg-base-200/70 p-6 hidden">
       <div class="conv-head">
         <h2>FORMAT FORGE</h2>
-        <p>Convert to any major audio extension — lossless, high-quality compressed, or web-ready.</p>
+        <p>Convert between the formats listed below. Conversion runs locally in your browser.</p>
       </div>
       <div class="conv-from" id="convFrom"></div>
       <div class="conv-grid" id="convGrid"></div>
@@ -657,6 +665,7 @@ app.innerHTML = `
   </aside>
 </main>
 <input type="file" id="fileInput" accept="audio/*,.wav,.mp3,.m4a,.aac,.ogg,.oga,.opus,.flac,.webm,.aiff,.aif,.wma" hidden />
+<div id="errorRegion" class="error-region" role="alert"></div>
 <div id="toast" class="toast toast-center toast-bottom">
   <div class="alert alert-soft alert-info" id="toastInner" role="status"></div>
 </div>
@@ -721,7 +730,10 @@ function showPanel(name) {
 
 function setMode(mode) {
   state.mode = mode
-  document.querySelectorAll(".mode-btn").forEach((b) => b.classList.toggle("tab-active", b.dataset.mode === mode))
+  document.querySelectorAll(".mode-btn").forEach((b) => {
+    b.classList.toggle("tab-active", b.dataset.mode === mode)
+    b.setAttribute("aria-pressed", String(b.dataset.mode === mode))
+  })
   renderPanels()
 }
 
@@ -741,6 +753,7 @@ function renderPanels() {
 
 /* ================= file loading ================= */
 async function loadBuffer(buffer, name, size, isDemo = false) {
+  errorRegion.clear()
   stopPlayback()
   state.buffer = buffer
   state.fileName = name
@@ -814,6 +827,7 @@ async function ensureReferenceReady() {
       } catch (err) {
         console.error(err)
         toast(`Couldn't analyze the reference track: ${err.message || err}`)
+        errorRegion.show(`Couldn't analyze the reference track: ${err.message || err}`)
         showProgress(false)
         return { ok: false }
       }
@@ -824,7 +838,8 @@ async function ensureReferenceReady() {
   // stream url
   if (!r.url) { toast("Paste a stream link first."); return { ok: false } }
   const u = r.url
-  if (u.error) { toast("That stream link couldn't be resolved — check it and try again."); return { ok: false } }
+  if (u.error) { toast("That stream link couldn't be resolved — check it and try again.")
+    errorRegion.show("That stream link couldn't be resolved — check it and try again."); return { ok: false } }
   if (!u.prepared) {
     if (u.meta.previewUrl) {
       // Apple Music exposes an official 30 s preview as real audio — that becomes the reference
@@ -837,7 +852,7 @@ async function ensureReferenceReady() {
         u.feat = await analysisService.analyze(ab, (v) => setProgress(0.35 + v * 0.65))
       } catch (err) {
         console.error(err)
-        toast("Couldn't fetch the Apple preview audio — using the mastered profile for its genre instead.")
+        toast("Couldn't fetch the Apple preview audio — using the built-in profile for its genre instead.")
         u.prepared = true
         showProgress(false)
         return { ok: true, kind: "profile" }
@@ -845,6 +860,7 @@ async function ensureReferenceReady() {
       showProgress(false)
     } else if (!u.meta.identityKnown) {
       toast("We couldn't identify that link. Try a direct track link, or upload the reference file instead.")
+      errorRegion.show("We couldn't identify that link. Try a direct track link, or upload the reference file instead.")
       return { ok: false }
     }
     u.prepared = true
@@ -874,23 +890,23 @@ function makeTarget(kind, analysis) {
   if (kind === "file") {
     const name = state.ref.file.name
     t.g = targetFromFeatures(state.ref.file.feat, { name: `"${name}"`, realm: "your reference track" })
-    t.meta = { title: `Your reference — "${name}"`, kindLabel: "YOUR REFERENCE TRACK", note: "analyzed sample-by-sample from your uploaded audio" }
+    t.meta = { title: `Your reference — "${name}"`, kindLabel: "YOUR REFERENCE TRACK", note: "measured locally from your uploaded audio" }
     return t
   }
   const u = state.ref.url
   if (kind === "url" && u && u.feat) {
     const label = `${u.meta.title || "reference"}${u.meta.artist ? ` — ${u.meta.artist}` : ""}`
     t.g = targetFromFeatures(u.feat, { name: `"${label}"`, realm: "the Apple Music preview reference" })
-    t.meta = { title: label, kindLabel: "STREAM REFERENCE · APPLE PREVIEW", note: "official 30 s preview decoded and measured — sample-level matching", platform: u.meta.platform }
+    t.meta = { title: label, kindLabel: "STREAM REFERENCE · APPLE PREVIEW", note: "measured Apple Music preview (30 s only; the full track is not analysed)", platform: u.meta.platform }
     return t
   }
-  // resolved stream link without audio → closest mastered profile for its platform genre
+  // resolved stream link without audio → closest built-in profile for its platform genre
   if (u && u.meta && u.meta.cat) {
     const base = profileForResolved(u.meta)
     if (base) {
       const label = `${u.meta.title || "track"}${u.meta.artist ? ` — ${u.meta.artist}` : ""}`.slice(0, 46)
-      t.g = { ...base, name: `"${label}"`, realm: "the mastered profile for its platform genre", urlTarget: true }
-      t.meta = { title: label, kindLabel: "STREAM REFERENCE · RESOLVED TRACK", note: "full streamed audio can't be decoded in the browser — matched the mastered profile for its genre on the platforms", platform: u.meta.platform, genre: u.meta.genre, cat: categoryById(u.meta.cat) }
+      t.g = { ...base, name: `"${label}"`, realm: "the built-in profile for its platform genre", urlTarget: true }
+      t.meta = { title: label, kindLabel: "STREAM REFERENCE · RESOLVED TRACK", note: "full streamed audio can't be decoded in the browser — matched a built-in genre profile for its genre on the platforms", platform: u.meta.platform, genre: u.meta.genre, cat: categoryById(u.meta.cat) }
       return t
     }
   }
@@ -1067,7 +1083,7 @@ function matchRowHtml(t) {
         <div class="match-label">${t.gm && t.gm.manual ? "REFERENCE · PLATFORM CATEGORY" : "DETECTED GENRE"}${m.fallback ? " · auto-fallback" : ""}</div>
         <div class="match-genre">${cat ? esc(cat.name) : esc(g.name)}${showSub ? `<span class="match-sub">${esc(m.subName)}</span>` : ""}${conf}</div>
         ${platformChips(cat)}
-        <div class="match-ref">${t.gm && t.gm.manual ? "manual lock — fingerprint of the top sub-genres under this platform category" : "matching fingerprints of top tracks in this sub-genre across Spotify, Apple Music & YouTube Music"}</div>
+        <div class="match-ref">${t.gm && t.gm.manual ? "manual lock — built-in genre profile for this platform category (illustrative, not a measured chart fingerprint)" : "built-in genre profile — illustrative comparison target, not a measured chart fingerprint"}</div>
       </div>
       ${cands}`
   }
@@ -1128,6 +1144,7 @@ async function runFix() {
   } catch (err) {
     console.error(err)
     toast(`Master fix failed: ${err.message || err}`)
+    errorRegion.show(`Master fix failed: ${err.message || err}`)
   } finally {
     state.busy = false
     $("#fixWrap").classList.add("hidden")
@@ -1212,6 +1229,7 @@ async function runConvert() {
   } catch (err) {
     console.error(err)
     toast(`Conversion failed: ${err.message || err}`)
+    errorRegion.show(`Conversion failed: ${err.message || err}`)
   } finally {
     state.busy = false
     $("#convProgress").classList.add("hidden")
@@ -1292,9 +1310,9 @@ function downloadReport() {
 
 /* ================= reference picker (catalog / own track / stream URL) ================= */
 const REF_TABS = [
-  { kind: "auto", name: "AUTO", tip: "platform category catalog", desc: "Compare against the mastered fingerprint of the closest platform category & sub-genre (Spotify / Apple Music / YouTube Music top tracks)." },
-  { kind: "file", name: "MY TRACK", tip: "upload a reference file", desc: "Use your own audio as the reference — MusicOnVerse measures it sample-by-sample and matches your mix to it exactly." },
-  { kind: "url", name: "STREAM URL", tip: "paste a music link", desc: "Paste a Spotify, Apple Music or YouTube Music link — the track is resolved and used as the reference." },
+  { kind: "auto", name: "AUTO", tip: "platform category catalog", desc: "Built-in genre profile: an illustrative target for the closest platform category and sub-genre. It is not a measured chart-track fingerprint." },
+  { kind: "file", name: "MY TRACK", tip: "upload a reference file", desc: "Measured uploaded reference: your file is analysed locally and compared with your mix." },
+  { kind: "url", name: "STREAM URL", tip: "paste a music link", desc: "Metadata-selected built-in profile, or a measured Apple Music preview (30 s only). The full streamed track is not analysed." },
 ]
 
 function buildRefHtml(sfx) {
@@ -1358,13 +1376,13 @@ function buildRefHtml(sfx) {
         ? `<span class="badge badge-success badge-xs font-mono">♪ PREVIEW MEASURED</span>`
         : meta.previewUrl
           ? `<span class="badge badge-info badge-xs font-mono">♪ 30 s OFFICIAL PREVIEW AVAILABLE</span>`
-          : `<span class="badge badge-warning badge-xs font-mono">MASTERED PROFILE MATCH</span>`
+          : `<span class="badge badge-warning badge-xs font-mono">BUILT-IN PROFILE</span>`
       status = `
       <div class="ref-resolved">
         <span class="ref-x" data-clr="url" data-sfx="${sfx}" role="button" title="Clear reference">×</span>
         <div class="ref-res-head">${esc(meta.title || "Track")}${meta.artist ? ` — <span class="ref-artist">${esc(meta.artist)}</span>` : ""}</div>
         <div class="ref-res-sub"><span class="badge badge-ghost badge-xs font-mono">${platBadge}</span>${genreChip}${audioChip}</div>
-        ${u.prepared && !u.feat ? `<div class="ref-hint">Streamed audio can't be decoded in the browser — this run matches the mastered profile above. Upload the track's file for exact sample-level matching.</div>` : ""}
+        ${u.prepared && !u.feat ? `<div class="ref-hint">Streamed audio can't be decoded in the browser — this run compares against the built-in profile above. Upload the track's file for a measured reference.</div>` : ""}
       </div>`
     }
     body = `
@@ -1463,6 +1481,7 @@ async function pickReferenceFile(file, sfx) {
   } catch (err) {
     console.error(err)
     toast("Couldn't decode that reference file.")
+    errorRegion.show("Couldn't decode that reference file.")
   }
 }
 
@@ -1483,7 +1502,7 @@ async function resolveReferenceUrl(raw, sfx) {
     return
   }
   if (meta.previewUrl) toast(`Resolved “${meta.title}” on Apple Music — fetching its official preview as the reference…`)
-  else if (meta.identityKnown) toast(`Resolved “${meta.title}” — will match the ${meta.genre || "detected"} mastered profile.`)
+  else if (meta.identityKnown) toast(`Resolved “${meta.title}” — will compare against the ${meta.genre || "detected"} built-in profile.`)
   if (state.buffer && !state.busy) runAnalysis()
 }
 
@@ -1695,6 +1714,7 @@ fileInput.onchange = async () => {
 }
 
 async function openFile(file) {
+  errorRegion.clear()
   try {
     const buffer = await decodeFile(file)
     loadBuffer(buffer, file.name, file.size)
@@ -1702,6 +1722,7 @@ async function openFile(file) {
   } catch (err) {
     console.error(err)
     toast(`Couldn't decode that file. Try a WAV, MP3, M4A, OGG, FLAC or AIFF.`)
+    errorRegion.show(`Couldn't decode that file. Try a WAV, MP3, M4A, OGG, FLAC or AIFF.`)
   }
 }
 
@@ -1721,6 +1742,9 @@ document.querySelectorAll('[data-action="fix"]').forEach((b) => (b.onclick = run
 $("#btnConvertGo").onclick = () => { setMode("convert") }
 $("#btnConvert").onclick = runConvert
 
+const errorRegion = createErrorRegion($("#errorRegion"))
+const licences = mountLicenceDialog()
+$("#btnLicences").onclick = () => licences.open()
 $("#btnPlay").onclick = togglePlay
 $("#btnBack10").onclick = () => seekBy(-10)
 $("#btnFwd10").onclick = () => seekBy(10)
@@ -1746,7 +1770,10 @@ $("#cropOut").addEventListener("input", () => onCropSlide("Out"))
 document.querySelectorAll(".ab-btn").forEach((b) => {
   b.onclick = () => {
     if (b.classList.contains("disabled")) return
-    document.querySelectorAll(".ab-btn").forEach((x) => x.classList.toggle("tab-active", x === b))
+    document.querySelectorAll(".ab-btn").forEach((x) => {
+      x.classList.toggle("tab-active", x === b)
+      x.setAttribute("aria-pressed", String(x === b))
+    })
     state.ab = b.dataset.ab
     if (state.playing) {
       const buf = activeBuffer()
@@ -1847,7 +1874,8 @@ function dismissBoot() {
   boot.classList.add("done")
   setTimeout(() => boot.remove(), 900)
 }
-setTimeout(dismissBoot, 2400)
+if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) dismissBoot()
+else setTimeout(dismissBoot, 2400)
 $("#boot").onclick = dismissBoot
 
 /* keep the CSS var on the score ring in sync on load */
