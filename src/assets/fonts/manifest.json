@@ -1,0 +1,111 @@
+{
+  "reviewedOn": "2026-10-15",
+  "delivery": "Self-hosted, unmodified Fontsource WOFF2 assets; no npm dependency added. See README.md for licence/distribution obligations.",
+  "packages": [
+    {
+      "package": "@fontsource-variable/orbitron",
+      "version": "5.3.0",
+      "license": "OFL-1.1",
+      "tarball": "https://registry.npmjs.org/@fontsource-variable/orbitron/-/orbitron-5.3.0.tgz",
+      "integrity": "sha512-KwW0YX1DJNqF0v86W1hZonuauypCFaltGdpB6qwCeu5bUyHoFpeZ84aAjChZSRF7RWZFithg/il0nMwYxJgqDA==",
+      "files": [
+        {
+          "path": "orbitron-OFL.txt",
+          "sourceMember": "package/LICENSE",
+          "bytes": 4388,
+          "sha256": "075b0137b7a19be521031442001478342ebafc1923f01092b8dc51afc4341041"
+        },
+        {
+          "path": "orbitron-latin-wght-normal.woff2",
+          "sourceMember": "package/files/orbitron-latin-wght-normal.woff2",
+          "bytes": 11800,
+          "sha256": "c25a9f9da5d9f3db1bf2a01474722dc9b377675b7bbab6d0dfda6902794fd1ed"
+        }
+      ]
+    },
+    {
+      "package": "@fontsource/rajdhani",
+      "version": "5.3.0",
+      "license": "OFL-1.1",
+      "tarball": "https://registry.npmjs.org/@fontsource/rajdhani/-/rajdhani-5.3.0.tgz",
+      "integrity": "sha512-oBJgSIibWJvVBKseme1JczqPLoDHN97LHti4uh0LjfcJqQoVmnQQlRKIpEjTJV559rmVQ6qbVZZwKwk2wkBTtw==",
+      "files": [
+        {
+          "path": "rajdhani-OFL.txt",
+          "sourceMember": "package/LICENSE",
+          "bytes": 4727,
+          "sha256": "078e327eb00525214cdce9780cfdf156141f137f1a095bec9798f470703d7d2d"
+        },
+        {
+          "path": "rajdhani-latin-400-normal.woff2",
+          "sourceMember": "package/files/rajdhani-latin-400-normal.woff2",
+          "bytes": 14976,
+          "sha256": "759a9000e47b028799d7a4ca602634a7ac7adf415775df070a335d18d9b66f38"
+        },
+        {
+          "path": "rajdhani-latin-500-normal.woff2",
+          "sourceMember": "package/files/rajdhani-latin-500-normal.woff2",
+          "bytes": 15084,
+          "sha256": "23afdb9b5b89b878fab04d80cc30bf41bb4f3f7e8be88e5f16a7cc7671cdb2dc"
+        },
+        {
+          "path": "rajdhani-latin-600-normal.woff2",
+          "sourceMember": "package/files/rajdhani-latin-600-normal.woff2",
+          "bytes": 15732,
+          "sha256": "433a7007e4747a02a790167a6efa2625855f013970ba49b9b739a5d3db8b2601"
+        },
+        {
+          "path": "rajdhani-latin-700-normal.woff2",
+          "sourceMember": "package/files/rajdhani-latin-700-normal.woff2",
+          "bytes": 15688,
+          "sha256": "5b7e4a6f97163c2636724d4de90304fc895653dcfe64c67a7a22f26331ca5c5f"
+        },
+        {
+          "path": "rajdhani-latin-ext-400-normal.woff2",
+          "sourceMember": "package/files/rajdhani-latin-ext-400-normal.woff2",
+          "bytes": 12388,
+          "sha256": "90721cae01bf677b419b28fec9896e50923c9e956817b85f4b6ab1e5ad028a56"
+        },
+        {
+          "path": "rajdhani-latin-ext-500-normal.woff2",
+          "sourceMember": "package/files/rajdhani-latin-ext-500-normal.woff2",
+          "bytes": 12380,
+          "sha256": "16fd373954f7569ad294444531caa2e7e5ffd1a6798c6df3f56b9faf691190c2"
+        },
+        {
+          "path": "rajdhani-latin-ext-600-normal.woff2",
+          "sourceMember": "package/files/rajdhani-latin-ext-600-normal.woff2",
+          "bytes": 13124,
+          "sha256": "f57c2b379ba92460d25730ef1f7b8745afb4eadb401d652900f2059f8ee2f2b6"
+        },
+        {
+          "path": "rajdhani-latin-ext-700-normal.woff2",
+          "sourceMember": "package/files/rajdhani-latin-ext-700-normal.woff2",
+          "bytes": 12964,
+          "sha256": "c6b9df58743ccca1236e9521720b135138309bc4149d5d027a9bd10183cc8ed5"
+        }
+      ]
+    },
+    {
+      "package": "@fontsource/share-tech-mono",
+      "version": "5.3.0",
+      "license": "OFL-1.1",
+      "tarball": "https://registry.npmjs.org/@fontsource/share-tech-mono/-/share-tech-mono-5.3.0.tgz",
+      "integrity": "sha512-hVEzVCzEid/fBfhggMyvkfDzn9ODrMihxC0EiOeQK3BuQNvdjmith2ERnoDNUkbW8zhufbKNuCgaSoT8LUNpuQ==",
+      "files": [
+        {
+          "path": "share-tech-mono-OFL.txt",
+          "sourceMember": "package/LICENSE",
+          "bytes": 4428,
+          "sha256": "9909bc951ab73dcf212a1675aab327ffafa853c2b8e8d11a066b1bcc57afeefb"
+        },
+        {
+          "path": "share-tech-mono-latin-400-normal.woff2",
+          "sourceMember": "package/files/share-tech-mono-latin-400-normal.woff2",
+          "bytes": 13500,
+          "sha256": "41e6b9f297f7d9a2df2aaa274092f76d2f72711a15ca455f7f4f4f92caf16b72"
+        }
+      ]
+    }
+  ]
+}
