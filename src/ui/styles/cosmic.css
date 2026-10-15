@@ -1,0 +1,81 @@
+/* Shared cosmic shell (UI-007). Decorative only: static, aria-hidden, pointer-events none.
+   Composition follows the approved mock (upper-left ringed world, right moons, lower-right ring arc,
+   blue limb along the bottom). Colours come from the sampled Reference 1 palette in src/style.css.
+   No animation, so reduced motion needs nothing extra. */
+
+.cosmic-env {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  background:
+    radial-gradient(900px 460px at 78% 108%, rgba(73, 101, 127, 0.22), transparent 70%),
+    radial-gradient(760px 340px at 12% -10%, rgba(74, 111, 143, 0.12), transparent 70%),
+    linear-gradient(180deg, transparent 58%, rgba(33, 40, 53, 0.42) 86%, rgba(5, 7, 11, 0.9) 100%);
+}
+
+.cosmic-env > span { position: absolute; display: block; }
+
+/* Limb along the bottom, from the Reference 1 atmosphere (#7490aa at low alpha). */
+.cosmic-horizon {
+  left: -15%;
+  right: -15%;
+  bottom: -62%;
+  height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(10, 16, 24, 0) 88%, rgba(116, 144, 170, 0.22) 97%, rgba(116, 144, 170, 0) 100%);
+}
+
+/* Faint nebula haze, kept low so it never reads as a glow effect. */
+.cosmic-nebula {
+  left: 30%;
+  top: 8%;
+  width: 60%;
+  height: 46%;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(37, 43, 49, 0.35), rgba(37, 43, 49, 0) 100%);
+}
+
+/* Upper-left ringed world, low contrast so it sits behind the panels. */
+.cosmic-ringed {
+  left: -6%;
+  top: 12%;
+  width: 34vw;
+  max-width: 460px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 36% 30%, rgba(73, 101, 127, 0.5) 0%, rgba(23, 30, 41, 0.9) 58%, rgba(10, 10, 10, 1) 100%);
+  box-shadow: inset -20px -14px 40px rgba(0, 0, 0, 0.55);
+}
+
+/* Right-hand moons, grey from the Reference 1 moon tone (#9d9290) at low alpha. */
+.cosmic-moon {
+  border-radius: 50%;
+  background: radial-gradient(circle at 34% 32%, rgba(157, 146, 144, 0.42), rgba(37, 43, 49, 0.9) 70%);
+  box-shadow: inset -6px -5px 12px rgba(0, 0, 0, 0.5);
+}
+.cosmic-moon-a { right: 9%; top: 18%; width: 70px; height: 70px; }
+.cosmic-moon-b { right: 18%; top: 44%; width: 34px; height: 34px; opacity: 0.8; }
+
+/* Ring arc in the lower right: a single thin arc, not a dashboard ring. */
+.cosmic-arc {
+  right: -18%;
+  bottom: 6%;
+  width: 62vw;
+  max-width: 820px;
+  height: 36vw;
+  max-height: 420px;
+  border-radius: 50%;
+  border: 1px solid rgba(184, 157, 132, 0.2);
+  border-left-color: transparent;
+  border-top-color: transparent;
+  transform: rotate(-14deg);
+}
+
+/* Each workspace shares the same environment. Only the emphasis changes, not the layout. */
+.cosmic-env[data-workspace="daw"] { background-color: rgba(5, 7, 11, 0.4); }
+
+/* With the real Orbit canvas enabled, that canvas is the environment. Decorative planets are suppressed. */
+.cosmic-env[data-orbit="1"] > span { display: none; }
