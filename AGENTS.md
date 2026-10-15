@@ -14,18 +14,17 @@ Keep agent-b's fixed branch main-based; wait for reviewed prerequisites to merge
 
 ## Architecture references
 
-[PR #1](https://github.com/The-Mhood/onverse/pull/1) is an architecture proposal. At the 2026-10-15 audit it was open, draft, and unmerged. Its documents are not present in the current engineering branch. Check its current state before relying on it; do not merge or copy it as part of coordination setup.
+CORE-007 explicitly reconciles three existing PR #1 proposal documents into the same canonical paths on the engineering branch, as **working drafts for review**, not implemented APIs or approved product defaults:
 
-Pinned proposal references, not claims of accepted architecture:
+- [Architecture](docs/ARCHITECTURE.md): actual-state boundary, retained modular-monolith direction, proposed session/link records, dependency semantics, safe render/update/recovery and the minimum real proof.
+- [Product vision](docs/PRODUCT_VISION.md): long-term intent, general Linked Sessions/manual-update promise, honest capability/design boundaries; commercial ideas remain unvalidated hypotheses.
+- [Roadmap](docs/ROADMAP.md): incremental proof gates and a proposed test crosswalk, not task dispatch or executed coverage.
 
-- [Architecture](https://github.com/The-Mhood/onverse/blob/eedc24cb38c21d1a4be6186593c7ae7fcb8c6f85/docs/ARCHITECTURE.md)
-- [Product vision](https://github.com/The-Mhood/onverse/blob/eedc24cb38c21d1a4be6186593c7ae7fcb8c6f85/docs/PRODUCT_VISION.md)
-- [Roadmap](https://github.com/The-Mhood/onverse/blob/eedc24cb38c21d1a4be6186593c7ae7fcb8c6f85/docs/ROADMAP.md)
-- [Engineering standards](https://github.com/The-Mhood/onverse/blob/eedc24cb38c21d1a4be6186593c7ae7fcb8c6f85/docs/ENGINEERING_STANDARDS.md)
+[PR #1](https://github.com/The-Mhood/onverse/pull/1) remains a separate unmerged draft at the inspected `eedc24cb38c21d1a4be6186593c7ae7fcb8c6f85`; source attribution is preserved in each revised document. Its original README and [engineering standards proposal](https://github.com/The-Mhood/onverse/blob/eedc24cb38c21d1a4be6186593c7ae7fcb8c6f85/docs/ENGINEERING_STANDARDS.md) are not adopted by this unit. Do not blindly merge/copy PR #1 over the revised working files; overlapping paths require explicit review. The working drafts do not satisfy an `accepted` dependency merely by existing or being published. Do not create a second competing architecture or design brief. This explicit architecture task does not relax the prohibition on adopting proposals incidentally during onboarding/coordination.
 
 ## Before every assignment
 
-1. Read [README.md](README.md), this file, the [project guide](docs/engineering/PROJECT_GUIDE.md), the latest notices/results in [the work queue](docs/engineering/WORK_QUEUE.md), and the [canonical design brief](docs/design/DESIGN_BRIEF.md). The [agent-b master prompt](docs/engineering/AGENT_B_MASTER_PROMPT.md) supplies reusable context, not an assignment.
+1. Read [README.md](README.md), this file, the [project guide](docs/engineering/PROJECT_GUIDE.md), the latest notices/results in [the work queue](docs/engineering/WORK_QUEUE.md), and the [canonical design brief](docs/design/DESIGN_BRIEF.md). The [agent-b master prompt](docs/engineering/AGENT_B_MASTER_PROMPT.md) supplies reusable context, not an assignment. Read the working architecture/roadmap when a task touches future state, session/link semantics or contracts; proposed interfaces are not permission to implement them.
 2. Inspect the directory, current branch, full working-tree status, recent commits, remotes, and worktrees. Compare relevant local and remote refs; do not assume remote-tracking refs are current.
 3. Preserve existing edits, including untracked files. Never reset, clean, stash, overwrite, force-push, switch away from active work, or remove worktrees without explicit authorization.
 4. Record the task ID, exact base SHA, execution environment, owner, branch/worktree, dependencies, allowed paths, forbidden paths, acceptance criteria, and checks before editing.

@@ -24,7 +24,7 @@ Read in this order:
 5. `docs/design/DESIGN_BRIEF.md` — canonical design direction and review gates.
 6. Source and tests relevant to the eventual task; `docs/engineering/AUDIO_METERING_CONTRACT.md` if audio/numeric behavior or presentation is affected.
 
-`docs/ARCHITECTURE.md`, `PRODUCT_VISION.md`, `ROADMAP.md`, and `ENGINEERING_STANDARDS.md` exist in separate draft **PR #1** at pinned commit **eedc24cb38c21d1a4be6186593c7ae7fcb8c6f85**; links are in the project guide. At preparation they were unmerged proposals, not installed or accepted architecture. Recheck current state. Do not copy/merge them for onboarding, create competing full specifications, or treat them as permission to implement future features. The lead must explicitly reconcile them with later owner requirements.
+The lead explicitly reconciles the original **PR #1** proposals at **eedc24cb38c21d1a4be6186593c7ae7fcb8c6f85** into `docs/ARCHITECTURE.md`, `docs/PRODUCT_VISION.md`, and `docs/ROADMAP.md` under CORE-007, at the same canonical paths, with attribution and later Linked Sessions requirements. Read them as **working drafts for review**, not installed APIs, accepted POC defaults, executed tests or task assignments. PR #1 remains unmerged; its original README and `docs/ENGINEERING_STANDARDS.md` are not adopted. Links/status are in the guide. Do not blindly merge/copy the originals over revised files, create competing full specs, or infer permission to build future features. The latest `docs/engineering/UI_BASELINE_DECISION.md` and queue govern any already-authorized task; this onboarding prompt creates no additional grant and does not retarget its pinned audit snapshot.
 
 ## Understand what is real
 

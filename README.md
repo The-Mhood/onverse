@@ -12,6 +12,8 @@ A local audio analysis, processing, and conversion prototype evolving toward a p
 | [Design brief](docs/design/DESIGN_BRIEF.md) | Canonical owner-supplied UI direction; not implementation approval |
 | [agent-b master prompt](docs/engineering/AGENT_B_MASTER_PROMPT.md) | Reusable onboarding context; deliberately assigns no feature/task |
 | [Metering contract and research](docs/engineering/AUDIO_METERING_CONTRACT.md) | Proposed interfaces, measured evidence, and unresolved audio-safety limits |
+| [Architecture working draft](docs/ARCHITECTURE.md) | Proposed session/Linked Sessions semantics, transaction/recovery rules and proof gate; not an installed API |
+| [Product vision](docs/PRODUCT_VISION.md) / [roadmap](docs/ROADMAP.md) | Reconciled intent and incremental proof/test plan; review drafts, not shipped features or task assignments |
 
 Read the rules, guide, current queue notice, and design brief before changing anything. The queue retains historical snapshots: read its latest notices/results, not just an older task entry.
 
@@ -19,9 +21,9 @@ Read the rules, guide, current queue notice, and design brief before changing an
 
 The lead works on `arena/b25c318e-onverse`; engineering and this onboarding material are delivered through [draft PR #3](https://github.com/The-Mhood/onverse/pull/3), targeting `main`. Do not assume `main` contains them. Recheck live refs and PR state; branch names and documentation are not proof of synchronization.
 
-The separate [draft architecture PR #1](https://github.com/The-Mhood/onverse/pull/1) remains an **unmerged proposal**, not the current implementation or an approved roadmap. Its proposed README is also not this current onboarding guide. Reconcile overlapping documentation explicitly during future review; do not replace this guide wholesale or merge the proposal merely to onboard an agent.
+The separate [draft architecture PR #1](https://github.com/The-Mhood/onverse/pull/1) remains **unmerged**. CORE-007 explicitly reconciles its architecture, product vision and roadmap at the existing paths as working drafts for review, with attribution and later Linked Sessions constraints. These are not installed APIs, accepted POC defaults, executed tests or a PR merge. Its original README/engineering standards are not adopted; overlapping files require deliberate reconciliation, not a wholesale merge merely to onboard an agent.
 
-The lead owns architecture, audio/application/domain contracts, coordination, and integration. The future UI collaborator is **agent-b**; Codex is no longer active. The owner will announce agent-b's appointment and specific work. Onboarding is not an editing grant, a task assignment, or evidence of dispatch. Keep unknown/unpublished previous work intact.
+The lead owns architecture, audio/application/domain contracts, coordination, and integration. The owner reports **agent-b** on a separate fixed UI branch; Codex is no longer active. The [UI baseline decision](docs/engineering/UI_BASELINE_DECISION.md) keeps it main-based, authorizes read-only preflight/audit/proposal, and blocks implementation pending the reviewed base and exact scope. Worker acknowledgment/runtime remain unverified here. This new architecture draft neither retargets that snapshot nor grants writes. Keep unknown/unpublished previous work intact.
 
 ## Local development
 
