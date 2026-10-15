@@ -126,7 +126,8 @@ test("mode and A/B toggles expose pressed state, not an unpaired tab pattern", (
   assert.doesNotMatch(main, /role="tablist"/)
   const modeBtns = main.match(/class="tab[^"]*mode-btn"[^>]*>/g) || []
   const abBtns = main.match(/class="tab[^"]*ab-btn"[^>]*>/g) || []
-  assert.equal(modeBtns.length, 2)
+  // Three studio modes: SCAN, CONVERT, and the labelled DAW prototype (UI-006). Count updated deliberately.
+  assert.equal(modeBtns.length, 3)
   assert.equal(abBtns.length, 2)
   for (const b of [...modeBtns, ...abBtns]) assert.match(b, /aria-pressed="(true|false)"/, b)
   assert.match(main, /b\.setAttribute\("aria-pressed", String\(b\.dataset\.ab === state\.ab\)\)/)
@@ -170,12 +171,35 @@ test("createErrorRegion rejects a missing element instead of failing silently", 
 
 // ---- Scope guard: Slice A must not touch lead- or scene-owned files ----
 
+// Scope is measured against the approved base (main) and the published branch head, not the local
+// snapshot ref. The local ref has no shared history with origin (see PR #5 preflight), so a diff
+// against it reports the whole snapshot. Working-tree files that differ from origin are added as well.
+// The only docs/ exception is the non-canonical agent-b proposal, which the lead explicitly allowed.
 test("Slice A does not modify denied paths", () => {
-  const changed = execFileSync("git", ["diff", "--name-only", "HEAD"], { cwd: root, encoding: "utf8" })
-    .split("\n")
-    .filter(Boolean)
+  const git = (args) => execFileSync("git", args, { cwd: root, encoding: "utf8" }).split("\n").filter(Boolean)
+  const origin = "origin/arena/ced77c2a-onverse"
+  const published = git(["diff", "--name-only", "2faa393", origin])
+  const working = git(["ls-tree", "-r", "--name-only", origin]).filter((f) => {
+    try {
+      const onDisk = readFileSync(join(root, f))
+      const inOrigin = execFileSync("git", ["show", `${origin}:${f}`], { cwd: root })
+      return !onDisk.equals(inOrigin)
+    } catch {
+      return true
+    }
+  })
+  const extra = git(["ls-files", "-o", "--exclude-standard"]).filter((f) => {
+    try {
+      git(["cat-file", "-e", `${origin}:${f}`])
+      return false
+    } catch {
+      return true
+    }
+  })
+  const changed = [...new Set([...published, ...working, ...extra])]
   const denied = /^(src\/(audio|application|domain|scene)\/|src\/scene\.js$|src\/ui\/draw\.js$|electron\/|package(-lock)?\.json$|vite\.config|scripts\/|docs\/|tests\/(unit|audio)\/|tests\/fixtures\/)/
-  const offending = changed.filter((f) => denied.test(f))
+  const allowedDocs = new Set(["docs/design/proposals/agent-b-daw-sylune-proposal.md"])
+  const offending = changed.filter((f) => denied.test(f) && !allowedDocs.has(f))
   assert.deepEqual(offending, [], "denied paths changed")
 })
 

@@ -1,6 +1,11 @@
 import "./style.css"
 import "./assets/fonts/fonts.css"
+import "./ui/styles/cosmic.css"
+import "./ui/styles/sylune.css"
 import { createErrorRegion } from "./ui/presentation/errorRegion.js"
+import { mountSylunePanel, bindAskTargets } from "./ui/presentation/sylune/panel.js"
+import { buildContext } from "./ui/presentation/sylune/contextActions.js"
+import { mountCosmicEnvironment } from "./ui/presentation/cosmicEnvironment.js"
 import { mountLicenceDialog } from "./ui/presentation/licenceDialog.js"
 import { createStage as createSceneStage } from "./scene.js"
 import { createStage as createOrbitStage } from "./orbit/orbitStage.js"
@@ -50,6 +55,9 @@ const state = {
 }
 
 /* ================= audio plumbing ================= */
+// Presentation-only: which cosmic workspace label each studio mode shows (UI-007). Set once the shell is mounted.
+const WORKSPACE_FOR_MODE = { converse: "analysis", convert: "convert", daw: "daw" }
+let cosmicEnv = null
 let actx = null
 let analyser = null
 let currentSource = null
@@ -487,6 +495,7 @@ app.innerHTML = `
   <div class="mode-switch tabs tabs-box" id="modeSwitch" role="group" aria-label="Studio mode">
     <button class="tab tab-active mode-btn" data-mode="converse" aria-pressed="true" type="button">◈ SCAN</button>
     <button class="tab mode-btn" data-mode="convert" aria-pressed="false" type="button">⇄ CONVERT</button>
+    <button class="tab mode-btn" data-mode="daw" aria-pressed="false" type="button">▦ DAW · PROTOTYPE</button>
   </div>
   <div class="top-actions">
     <div class="tooltip tooltip-bottom" data-tip="Open audio from your local storage">
@@ -495,6 +504,7 @@ app.innerHTML = `
     <div class="tooltip tooltip-bottom" data-tip="Download output">
       <button id="btnDownload" class="btn btn-square btn-ghost btn-glow" type="button" aria-label="Download output">${ICONS.download}</button>
     </div>
+    <button id="btnSylune" class="btn btn-ghost btn-sm sylune-toggle" type="button" aria-controls="sylune-root" aria-expanded="false">✦ SYLUNE</button>
     <button id="btnLicences" class="btn btn-ghost btn-sm" type="button" aria-haspopup="dialog">Font licences</button>
   </div>
 </header>
@@ -543,6 +553,7 @@ app.innerHTML = `
           <span class="badge badge-ghost badge-xs font-mono" id="playSide">A · ORIGINAL</span>
           <span class="player-name" id="playName">—</span>
           <button id="btnCrop" class="btn btn-ghost btn-xs crop-btn" type="button" title="Crop a region of the song — playback loops inside it">✂ CROP</button>
+          <button type="button" class="sylune-ask-btn" data-sylune-kind="waveform" data-sylune-label="Waveform">✦ Ask SYLUNE</button>
         </div>
         <div class="wave-shell">
           <canvas id="waveform" class="waveform"></canvas>
@@ -613,6 +624,7 @@ app.innerHTML = `
       <div id="refAreaAnalysis" class="ref-zone"></div>
       <div class="fix-row">
         <button id="btnFix" class="btn btn-accent btn-fix" type="button">⚡ ONE-CLICK MASTER FIX</button>
+      <button type="button" class="sylune-ask-btn" data-sylune-kind="processor" data-sylune-label="Master fix (manual, runs without SYLUNE)">✦ Ask SYLUNE</button>
         <div class="ab-toggle tabs tabs-box" id="abToggle" role="group" aria-label="Playback source">
           <button class="tab tab-active ab-btn" data-ab="orig" aria-pressed="true" type="button">A · ORIGINAL</button>
           <button class="tab ab-btn" data-ab="fixed" aria-pressed="false" type="button">B · FIXED</button>
@@ -629,6 +641,7 @@ app.innerHTML = `
           <span class="tweak-note">drag the pins to adjust the corrections baked into B · FIXED — it re-balances and re-renders automatically</span>
           <span id="tweakStatus" class="tweak-status"></span>
           <button id="btnTweakReset" class="btn btn-xs btn-ghost text-accent" type="button">⟲ RESET TO AUTO</button>
+          <button type="button" class="sylune-ask-btn" data-sylune-kind="parameter" data-sylune-label="Fine-tune corrections">✦ Ask SYLUNE</button>
         </div>
         <div id="tweakSliders" class="tweak-sliders"></div>
       </div>
@@ -669,6 +682,64 @@ app.innerHTML = `
     <div class="report-body" id="reportBody"></div>
   </aside>
 </main>
+<section id="panelDaw" class="panel panel-daw hidden" aria-labelledby="dawTitle" data-daw-prototype>
+  <h2 id="dawTitle" class="daw-title">DAW <span class="proto-tag">PROTOTYPE</span></h2>
+  <div class="proto-banner" role="note"><strong>PROTOTYPE — not implemented; no audio changes.</strong> This shows the intended DAW structure. There is no multitrack engine, recording, routing, plugin host or automation yet. Use SCAN and CONVERT for the working tools.</div>
+  <div class="daw-transport" role="group" aria-label="Transport (prototype, not implemented)">
+    <button type="button" class="btn btn-xs" disabled>▶ Play <span class="proto-tag">not implemented</span></button>
+    <button type="button" class="btn btn-xs" disabled>■ Stop <span class="proto-tag">not implemented</span></button>
+    <button type="button" class="btn btn-xs" disabled>● Record <span class="proto-tag">not implemented</span></button>
+    <button type="button" class="btn btn-xs" disabled>⟲ Cycle <span class="proto-tag">not implemented</span></button>
+    <span class="proto-tag">BAR 001.1.1 · 120 BPM · 4/4 — PROTOTYPE, not implemented</span>
+  </div>
+  <div class="daw-roles" aria-label="Current roles in this app (not DAW tracks)">
+    <span class="role-chip">Project: loaded buffer (current)</span>
+    <span class="role-chip">Reference: comparison source (current)</span>
+    <span class="role-chip">Master: processed view (current)</span>
+    <span class="proto-tag">These are current roles, not tracks in a session.</span>
+  </div>
+  <div class="daw-grid">
+    <div class="daw-arrange" aria-label="Arrangement (prototype)">
+      <div class="daw-ruler" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span></div>
+      <div class="daw-track" role="group" aria-label="Audio 1 · Lead vocal (prototype)">
+        <div class="daw-head"><strong>Audio 1 · Lead vocal</strong><span class="proto-tag">PROTOTYPE</span>
+          <button type="button" class="sylune-ask-btn" data-sylune-kind="track" data-sylune-label="Audio 1 · Lead vocal (prototype)">✦ Ask SYLUNE</button></div>
+        <div class="daw-lane"><span class="proto-region">illustrative region, no audio</span></div>
+      </div>
+      <div class="daw-track" role="group" aria-label="Audio 2 · Drums (prototype)">
+        <div class="daw-head"><strong>Audio 2 · Drums</strong><span class="proto-tag">PROTOTYPE</span>
+          <button type="button" class="sylune-ask-btn" data-sylune-kind="track" data-sylune-label="Audio 2 · Drums (prototype)">✦ Ask SYLUNE</button></div>
+        <div class="daw-lane"><span class="proto-region">illustrative region, no audio</span></div>
+      </div>
+      <div class="daw-track" role="group" aria-label="Audio 3 · Bass (prototype)">
+        <div class="daw-head"><strong>Audio 3 · Bass</strong><span class="proto-tag">PROTOTYPE</span>
+          <button type="button" class="sylune-ask-btn" data-sylune-kind="track" data-sylune-label="Audio 3 · Bass (prototype)">✦ Ask SYLUNE</button></div>
+        <div class="daw-lane"><span class="proto-region">illustrative region, no audio</span></div>
+      </div>
+      <div class="daw-track" role="group" aria-label="Bus 1 · Reverb (prototype)">
+        <div class="daw-head"><strong>Bus 1 · Reverb</strong><span class="proto-tag">PROTOTYPE</span>
+          <button type="button" class="sylune-ask-btn" data-sylune-kind="bus" data-sylune-label="Bus 1 · Reverb (prototype)">✦ Ask SYLUNE</button></div>
+        <div class="daw-lane"><span class="proto-tag">routing not implemented</span></div>
+      </div>
+      <div class="daw-track" role="group" aria-label="Automation (prototype)">
+        <div class="daw-head"><strong>Automation</strong><span class="proto-tag">not implemented</span></div>
+        <div class="daw-lane"><span class="proto-tag">no automation engine; nothing moves</span></div>
+      </div>
+    </div>
+    <div class="daw-mixer" aria-label="Mixer (prototype, not implemented)">
+      <div class="daw-strip"><strong>Audio 1</strong><span class="proto-tag">insert: not implemented</span><span class="proto-tag">pan / level: not implemented</span>
+        <button type="button" class="sylune-ask-btn" data-sylune-kind="track" data-sylune-label="Audio 1 channel strip (prototype)">✦ Ask</button></div>
+      <div class="daw-strip"><strong>Audio 2</strong><span class="proto-tag">insert: not implemented</span><span class="proto-tag">pan / level: not implemented</span>
+        <button type="button" class="sylune-ask-btn" data-sylune-kind="track" data-sylune-label="Audio 2 channel strip (prototype)">✦ Ask</button></div>
+      <div class="daw-strip"><strong>Audio 3</strong><span class="proto-tag">insert: not implemented</span><span class="proto-tag">pan / level: not implemented</span>
+        <button type="button" class="sylune-ask-btn" data-sylune-kind="track" data-sylune-label="Audio 3 channel strip (prototype)">✦ Ask</button></div>
+      <div class="daw-strip"><strong>Master out</strong><span class="proto-tag">master bus: not implemented</span>
+        <button type="button" class="sylune-ask-btn" data-sylune-kind="bus" data-sylune-label="Master out (prototype)">✦ Ask</button></div>
+    </div>
+  </div>
+  <p class="proto-note">Plugins: no plugin host. Buses and routing: not implemented. Recording: not implemented. SYLUNE cannot act on this view yet.</p>
+</section>
+<div id="sylune-root" class="sylune-host"></div>
 <input type="file" id="fileInput" accept="audio/*,.wav,.mp3,.m4a,.aac,.ogg,.oga,.opus,.flac,.webm,.aiff,.aif,.wma" hidden />
 <div id="errorRegion" class="error-region" role="alert"></div>
 <div id="toast" class="toast toast-center toast-bottom">
@@ -679,6 +750,33 @@ app.innerHTML = `
 
 /* ================= stage ================= */
 const stage = createStage($("#stage"))
+
+/* SYLUNE presentation (UI-006). No host is connected in this build: nothing is sent and no audio changes.
+   Manual controls on this page keep working without SYLUNE. */
+let sylunePanelOpen = false
+const btnSylune = $("#btnSylune")
+const sylune = mountSylunePanel({
+  root: $("#sylune-root"),
+  onOpenChange(open) {
+    sylunePanelOpen = open
+    btnSylune.setAttribute("aria-expanded", String(open))
+    if (!open && $("#sylune-root").contains(document.activeElement)) btnSylune.focus()
+  },
+})
+btnSylune.onclick = () => sylune.setOpen(!sylunePanelOpen)
+function currentWorkspaceKey() {
+  return ORBIT_SPIKE ? "orbit" : WORKSPACE_FOR_MODE[state.mode] ?? "analysis"
+}
+// Ask SYLUNE opens the panel with a descriptive, read-only context. Real IDs stay null.
+function askSylune({ kind, label }) {
+  sylune.setContext(buildContext({ workspace: currentWorkspaceKey(), target: { kind } }), { label })
+  sylune.setOpen(true)
+}
+bindAskTargets(document, askSylune)
+
+/* Shared cosmic shell (UI-007): decorative and non-interactive. Orbit suppresses its own planets. */
+cosmicEnv = mountCosmicEnvironment({ root: document.body, orbit: ORBIT_SPIKE })
+cosmicEnv.setWorkspace(WORKSPACE_FOR_MODE[state.mode] ?? "analysis")
 
 /* UI-005 Orbit HUD: a bottom-right card with the three landmark chips. Mounted only with ?orbit=1, so the DAW
  * view is unchanged. Chips and keys 1–3 both send "orbit:focus" to the stage (the stage owns the camera). */
@@ -763,10 +861,15 @@ function setMode(mode) {
     b.classList.toggle("tab-active", b.dataset.mode === mode)
     b.setAttribute("aria-pressed", String(b.dataset.mode === mode))
   })
+  if (cosmicEnv) cosmicEnv.setWorkspace(WORKSPACE_FOR_MODE[mode] ?? "analysis")
   renderPanels()
 }
 
 function renderPanels() {
+  if (state.mode === "daw") {
+    showPanel("Daw")
+    return
+  }
   if (!state.buffer) {
     showPanel("Idle")
     return
@@ -1871,6 +1974,8 @@ window.addEventListener("drop", (e) => {
 /* keyboard */
 window.addEventListener("keydown", (e) => {
   if (e.target.matches("input, select, textarea")) return
+  // SYLUNE panel, DAW prototype and list or menu widgets keep their own keys (no transport or Orbit shortcuts).
+  if (e.target instanceof Element && e.target.closest("#sylune-root, #panelDaw, [role='listbox'], [role='menu'], [role='slider']")) return
   if (ORBIT_SPIKE) {
     const landmark = landmarkForKey(e)
     if (landmark !== null) { e.preventDefault(); focusOrbitLandmark(landmark); return }

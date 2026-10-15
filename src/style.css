@@ -1389,3 +1389,74 @@ body.dragging::after {
   font: inherit;
   color: var(--color-primary);
 }
+
+/* ================= DAW prototype (UI-006, presentation only) =================
+   Inert, labelled structure. No engine is behind it. Every disabled control says "not implemented" in text. */
+.panel-daw {
+  width: min(1180px, calc(100% - 24px));
+  margin: 0 auto 16px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border: 1px solid var(--pf-line-strong);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--color-base-100) 94%, transparent);
+  color: var(--color-base-content);
+  position: relative;
+  z-index: 2;
+}
+.daw-title { margin: 0; font-family: var(--pf-font-display); font-size: 16px; letter-spacing: 0.12em; }
+.proto-tag {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 1px 6px;
+  border: 1px solid var(--color-accent);
+  border-radius: 4px;
+  font-family: var(--pf-font-mono);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  color: var(--pf-warm);
+  white-space: nowrap;
+}
+.proto-banner {
+  padding: 8px 10px;
+  border: 1px dashed var(--pf-warm);
+  border-radius: 8px;
+  font-size: 13px;
+  color: var(--color-base-content);
+}
+.daw-transport { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.daw-roles { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 12px; }
+.role-chip {
+  padding: 2px 8px;
+  border: 1px solid var(--pf-line-strong);
+  border-radius: 999px;
+  color: var(--color-base-content);
+}
+.daw-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(220px, 300px); gap: 10px; min-width: 0; }
+.daw-arrange, .daw-mixer { min-width: 0; border: 1px solid var(--pf-line); border-radius: 8px; overflow: auto; }
+.daw-ruler { display: flex; height: 22px; border-bottom: 1px solid var(--pf-line); font-family: var(--pf-font-mono); font-size: 10px; color: var(--color-base-content); }
+.daw-ruler span { flex: 1 0 90px; padding: 3px 6px; border-left: 1px solid var(--pf-line); opacity: 0.85; }
+.daw-track { display: grid; grid-template-columns: 210px minmax(0, 1fr); border-bottom: 1px solid var(--pf-line); min-height: 54px; }
+.daw-head { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; padding: 8px; border-right: 1px solid var(--pf-line); font-size: 13px; }
+.daw-lane { display: flex; align-items: center; padding: 8px; }
+.proto-region {
+  flex: 1;
+  padding: 6px 8px;
+  border: 1px dashed var(--pf-line-strong);
+  border-radius: 6px;
+  font-family: var(--pf-font-mono);
+  font-size: 11px;
+  color: var(--color-base-content);
+}
+.daw-mixer { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 1px; background: var(--pf-line); }
+.daw-strip { display: flex; flex-direction: column; gap: 6px; padding: 8px; background: var(--color-base-100); font-size: 12px; }
+.proto-note { margin: 0; font-size: 12px; color: var(--color-base-content); opacity: 0.9; }
+.daw-transport .btn[disabled] { opacity: 0.55; cursor: not-allowed; }
+
+@media (max-width: 860px) {
+  .daw-grid { grid-template-columns: 1fr; }
+  .daw-track { grid-template-columns: 1fr; }
+}
+.daw-strip .proto-tag { margin-left: 0; white-space: normal; display: block; width: fit-content; max-width: 100%; }

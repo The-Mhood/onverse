@@ -1,6 +1,16 @@
 # agent-b proposal: MusicOnVerse DAW structure, cosmic environment and SYLUNE
 
-Status: **proposal for lead review. Not canonical. Not an implementation grant.**
+Status: **non-canonical proposal. Updated for COORD-007 and COORD-008 (PR #5).** It is not a canonical design or queue document, and it does not change ownership by itself.
+
+Resolved since the first draft:
+- The `src/main.js` presentation reservation, plus `src/ui/presentation/sylune/**`, `src/ui/styles/sylune.css`, and `tests/ui/sylunePresentation.test.js`, is granted for presentation wiring only.
+- The inert, labelled, multi-track DAW and mixer prototype is authorised. Project, Reference and Master are current roles, not permanent tracks. Its controls say "not implemented" in visible text.
+- SYLUNE uses the published `mountSylunePanel({ root, onRequest, onOpenChange }) -> { setOpen, setContext, render, dispose }` port and DTOs. It does not use the earlier `askSylune` and `respondToProposal` protocol. Prototype states are local and labelled "Prototype — no audio changes".
+- The shared cosmic shell is authorised (`cosmicEnvironment.js`, `cosmic.css`, its tests). It is decorative, non-interactive and static.
+- Manual master-fix stays real and labelled as manual. It is not behind a SYLUNE gate.
+- Reference 1 remains the appearance reference. The Reference 2 mock aids shell layout only where that is compatible.
+
+Still open: the multitrack engine, the session model, and any functional SYLUNE execution, which belong to the lead's core work.
 Author: agent-b. Branch: `arena/ced77c2a-onverse`. Draft PR #5 carries the coordination request.
 Sources: the approved cosmic mockup (primary composition), Reference 1 (secondary: lighting, atmosphere, colour), and the Logic Pro structural screenshot (2026-10-15 14:04).
 
