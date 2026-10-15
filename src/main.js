@@ -5,6 +5,7 @@ import { matchGenre, GENRES, CATEGORIES, categoryById, categoryProfile, BAND_KEY
 import { decodeFile, convert, masterFix, saveBlob, saveText, supportedRecorders, encodeWav } from "./audio/processor.js"
 import { resolveStreamUrl, fetchPreviewBuffer, profileForResolved } from "./audio/reference.js"
 import { drawRadar, drawWaveform } from "./ui/draw.js"
+import { buildProcessingPlan } from "./domain/processors/buildProcessingPlan.js"
 
 /* ================= state ================= */
 const state = {
@@ -1569,26 +1570,7 @@ function setTweakStatus(t) {
 
 /* rebuild the fix plan with the user's slider offsets on top of the automatic one */
 function currentPlan() {
-  const base = state.autoPlan || state.fixPlan
-  if (!base) return null
-  const t = state.tweaks
-  const p = JSON.parse(JSON.stringify(base))
-  if (p.targetLufs != null) p.targetLufs = base.targetLufs + t.trimDb
-  else if (t.trimDb) p.gain = clampNum((p.gain || 1) * Math.pow(10, t.trimDb / 20), 0.1, 10)
-  if (p.compress) {
-    const s = t.gluePct / 100
-    p.compress = { ...p.compress, ratio: Math.max(1, 1 + (p.compress.ratio - 1) * s) }
-  }
-  const eqMap = new Map()
-  for (const e of base.eq || []) eqMap.set(e.k, e.gain)
-  for (const k of BAND_KEYS) {
-    const tw = t.band[k] || 0
-    if (tw) eqMap.set(k, clampNum((eqMap.get(k) || 0) + tw, -9, 9))
-  }
-  p.eq = [...eqMap.entries()].map(([k, gain]) => ({ k, gain }))
-  if (base.width != null) p.width = clampNum(base.width + t.width, -6, 6)
-  else if (t.width) p.width = t.width
-  return p
+  return buildProcessingPlan(state.autoPlan || state.fixPlan, state.tweaks, BAND_KEYS)
 }
 
 let tweakTimer = 0
