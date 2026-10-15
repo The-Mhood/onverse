@@ -3,7 +3,7 @@ import * as fs from 'node:fs/promises';
 import path from 'node:path';
 import { tmpdir } from 'node:os';
 import { pathToFileURL, fileURLToPath } from 'node:url';
-import { sha256 } from './linked-media-recovery-probe.mjs';
+import { sha256, probeTempParent } from './linked-media-recovery-probe.mjs';
 import { CASES, GROUP_FRAMES, DEST_FRAMES, MAX_ERROR, recipe, expectedGroup, expectedDestination,
   decode, fromTransport, compare, createMediaRoot, storeMedia, reader, nativeRender } from './offline-render-fixtures.mjs';
 
@@ -12,7 +12,7 @@ const PINS = {
   'puppeteer-core': { version:'25.14.0', integrity:'sha512-LQitnes3tBeVbdZ7V/4iwJPLZGgkl9uBVK0W7YYMh68j/3Y9eNuvj4yl+Fdo7zN0SuajOMrhd7aPj3DifK8k6A==' },
 };
 export async function auditTools(root) {
-  const parent=await fs.realpath(tmpdir());
+  const parent=await probeTempParent();
   if(typeof root!=='string' || path.dirname(root)!==parent || !path.basename(root).startsWith('onverse-browser-tools-') || await fs.realpath(root)!==root) throw Error('Only approved private temporary toolkit directory accepted');
   const stat=await fs.lstat(root);
   if(!stat.isDirectory() || stat.isSymbolicLink() || (stat.mode & 0o077)) throw Error('Toolkit root must be private');
@@ -28,7 +28,7 @@ export async function auditTools(root) {
     if(manifest.dependencies[name]!==pin.version || entry?.version!==pin.version || entry?.integrity!==pin.integrity || installed.version!==pin.version || installed.name!==name) throw Error('Toolkit pin mismatch');
   }
   for(const [name,entry] of Object.entries(lock.packages)) if(name) {
-    if(!/^node_modules\/(?:[a-zA-Z0-9@._-]+\/)*[a-zA-Z0-9._-]+$/.test(name) || !entry.resolved?.startsWith('https://registry.npmjs.org/') || !/^sha512-[A-Za-z0-9+/]+={0,2}$/.test(entry.integrity || '')) throw Error('Unapproved lock URL/integrity/path');
+    if(name.split('/').some(part=>part==='.' || part==='..') || !/^node_modules\/(?:[a-zA-Z0-9@._-]+\/)*[a-zA-Z0-9._-]+$/.test(name) || !entry.resolved?.startsWith('https://registry.npmjs.org/') || !/^sha512-[A-Za-z0-9+/]+={0,2}$/.test(entry.integrity || '')) throw Error('Unapproved lock URL/integrity/path');
     const installed=await read(`${name}/package.json`);
     if(installed.version!==entry.version) throw Error('Transitive version mismatch');
   }
@@ -47,7 +47,7 @@ function gate(actual,expected,label) {
 export async function run(tools) {
   if(process.platform!=='linux' || process.arch!=='x64') throw Error('Native probe requires approved Linux x64 runtime');
   const audit=await auditTools(tools);
-  const runtime=await fs.mkdtemp(path.join(await fs.realpath(tmpdir()),'onverse-browser-runtime-'));
+  const runtime=await fs.mkdtemp(path.join(await probeTempParent(),'onverse-browser-runtime-'));
   await fs.chmod(runtime,0o700);
   for(const name of ['home','cache','profile','fonts']) await fs.mkdir(path.join(runtime,name),{mode:0o700});
   const originalEnv={...process.env};

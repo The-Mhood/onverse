@@ -84,3 +84,40 @@ manual prepare/commit, compatibility and cancellation/promotion contracts; then
 join actual rendered bytes to this failure-tested mechanism. Keep prior valid
 audio and destination processing intact. No production contract is accepted by
 this report.
+
+## Continuation review and acceptance — 2026-10-15
+
+Reviewer: Arena lead/core, explicit owner-requested continuation review. This is
+**engineering acceptance of the isolated mechanism**, not external PR approval,
+merge authorization, production persistence acceptance or power-loss evidence.
+
+Audited the two published commits `130f1428c4cd567e60092b0fcdba8870d6e41220`
+and `9cab37bc482a49d96bd785aa2cc4d11c72606217`, exact seven-file PR scope, live
+main, ownership records and unchanged protected paths. Before fixes, the full
+211/208/3-TODO baseline and eleven-case CLI were independently reproduced.
+
+**Finding R1 (fixed, acceptance prerequisite):** `os.tmpdir()` trusts `TMPDIR`.
+The submitted createRoot/checkRoot therefore accepted a newly created private
+root below `/home/user/onverse-review-nontemp-NvzLde`, not system temp, when the
+environment pointed there. No repository/user-project files were touched by this
+reproduction. Existing wrong-root tests did not cover environment redirection.
+The fixed fixture now anchors to canonical Linux `/tmp`. CORE-010 alone may use
+an owner-private direct `onverse-browser-runtime-*` child of that anchor. An
+arbitrary TMPDIR (including a repository or nested probe directory) cannot widen
+that boundary. The native toolkit/runtime setup uses the same check. This is an
+explicit Linux test-harness restriction, not a portable application storage rule.
+
+New rejection regression was red on submitted code, green after the narrow fix.
+Current storage suite: **32 tests / 32 passes / 0 skips**. Full suite after the
+three review regressions: **214 tests / 211 passes / 3 unchanged LUFS TODOs /
+0 unexpected failures / 0 skips**. Sanity passes; strict legacy diagnostic still
+exits 1 with 44 passes/3 LUFS failures. All ten SIGKILL/artifact checks and normal
+completion reran; matching-byte O_NOFOLLOW scratch mutation was again detected.
+Current CLI evidence: `/tmp/onverse-review-storage-fixed.json`.
+
+**Accepted after R1 correction and reproduction**, within the limits above. No
+crash-recovery defect was found in the fixed two-generation protocol. Its known
+limits remain material: fixed byte-exact schema, one explicit operation, one
+writer, retained stages, no repair executor, cancellation, GC, arbitrary number
+of generations or ordered undo/redo. Those require integration tests; acceptance
+does not authorize copying the fixed g0/g1 validator into a general repository.

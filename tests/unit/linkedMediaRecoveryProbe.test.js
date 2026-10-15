@@ -4,7 +4,7 @@ import * as fs from 'node:fs/promises';
 import path from 'node:path';
 import { tmpdir } from 'node:os';
 import { BOUNDARIES, OLD, NEW, initialize, update, recover, child, requireChild,
-  pointer, generationBytes, journalBytes, checkRoot, sha256 } from '../../scripts/validation/linked-media-recovery-probe.mjs';
+  pointer, generationBytes, journalBytes, checkRoot, sha256, createRoot } from '../../scripts/validation/linked-media-recovery-probe.mjs';
 
 const linux = { skip: process.platform !== 'linux' ? 'Linux filesystem fixture only' : false };
 const put = (ctx, name, bytes) => fs.writeFile(path.join(ctx.root, name), bytes);
@@ -119,4 +119,22 @@ test('matching foreign media bytes behind symlink are refused', linux, async () 
   await fs.unlink(path.join(ctx.root, 'g0.f32'));
   await fs.symlink(path.join(foreign.root, 'g0.f32'), path.join(ctx.root, 'g0.f32'));
   await assert.rejects(recover(ctx), /No complete recovery route/);
+});
+
+test('environment-controlled TMPDIR cannot authorize a non-system-temp root', linux, async () => {
+  // Do not create fixture files in an arbitrary path: redirect only to this
+  // already-private owned fixture, then ensure rejection before any new write.
+  const ctx = await initialize();
+  const before = await fs.readdir(ctx.root);
+  const previous = process.env.TMPDIR;
+  try {
+    process.env.TMPDIR = ctx.root;
+    await assert.rejects(createRoot(), /Unapproved temporary parent/);
+    await assert.rejects(createRoot('offline-render'), /Unapproved temporary parent/);
+    await assert.rejects(checkRoot(ctx), /Unapproved temporary parent/);
+    assert.deepEqual(await fs.readdir(ctx.root), before);
+  } finally {
+    if (previous === undefined) delete process.env.TMPDIR;
+    else process.env.TMPDIR = previous;
+  }
 });

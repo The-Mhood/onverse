@@ -127,3 +127,35 @@ test('arbitrary toolkit directory refused before importing code',linux,async()=>
   await fs.writeFile(path.join(root,'package.json'),'{"private":true}');await fs.writeFile(path.join(root,'package-lock.json'),'{"lockfileVersion":3}');
   await assert.rejects(auditTools(root),/Unexpected toolkit manifest/);
 });
+
+test('toolkit audit refuses TMPDIR redirection before loading a toolkit',linux,async()=>{
+  const ctx=await createMediaRoot(),old=process.env.TMPDIR;
+  try {
+    process.env.TMPDIR=ctx.root;
+    await assert.rejects(auditTools(path.join(ctx.root,'onverse-browser-tools-forged')),/Unapproved temporary parent/);
+  } finally {
+    if(old===undefined)delete process.env.TMPDIR;else process.env.TMPDIR=old;
+  }
+});
+test('toolkit lock entries cannot traverse outside the private toolkit root',linux,async()=>{
+  const root=await fs.mkdtemp('/tmp/onverse-browser-tools-locktest-');await fs.chmod(root,0o700);
+  // Metadata-only fake install: nothing here is imported or executed.
+  const pins={
+    '@sparticuz/chromium':['153.0.0','sha512-jiGWqSvPMdu4+P9TilYqAR7yEGPEHINx+lCvE/NqNO/EHYzF/x1hUiI5T6ioVIt7dEy7n88byyT0vk+dnsgQwA=='],
+    'puppeteer-core':['25.14.0','sha512-LQitnes3tBeVbdZ7V/4iwJPLZGgkl9uBVK0W7YYMh68j/3Y9eNuvj4yl+Fdo7zN0SuajOMrhd7aPj3DifK8k6A=='],
+  };
+  const dependencies={},packages={};
+  for(const [name,[version,integrity]] of Object.entries(pins)) {
+    dependencies[name]=version;packages[`node_modules/${name}`]={version,integrity,resolved:`https://registry.npmjs.org/${name}/fixture.tgz`};
+    const folder=path.join(root,'node_modules',name);await fs.mkdir(folder,{recursive:true});
+    await fs.writeFile(path.join(folder,'package.json'),JSON.stringify({name,version}));
+  }
+  for(const name of ['@sparticuz/chromium/build/index.js','puppeteer-core/lib/puppeteer/puppeteer-core.js']) {
+    const file=path.join(root,'node_modules',name);await fs.mkdir(path.dirname(file),{recursive:true});await fs.writeFile(file,'// Never execute this test fixture.\n');
+  }
+  const foreign=await createMediaRoot();await put(foreign,'package.json','{"version":"1.0.0"}');
+  packages[`node_modules/../../${path.basename(foreign.root)}`]={version:'1.0.0',integrity:Object.values(pins)[0][1],resolved:'https://registry.npmjs.org/fixture.tgz'};
+  await fs.writeFile(path.join(root,'package.json'),JSON.stringify({private:true,dependencies}));
+  await fs.writeFile(path.join(root,'package-lock.json'),JSON.stringify({lockfileVersion:3,packages}));
+  await assert.rejects(auditTools(root),/Unapproved lock URL\/integrity\/path/);
+});

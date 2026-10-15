@@ -23,10 +23,24 @@ export function pcm(values) {
 export const OLD = pcm([.25,-.25,0,0,1.25,-1.5,.125,-.0625]);
 export const NEW = pcm([.5,-.5,0,0,1.75,-2,.25,-.125]);
 export const UNRELATED = pcm([.125,.125,0,0,.25,.25,0,0]);
+// os.tmpdir() honors TMPDIR; it is not itself a trusted containment anchor.
+// These Linux fixtures use /tmp, or CORE-010's direct private browser runtime.
+export async function probeTempParent(profile = 'linked-media') {
+  if (process.platform !== 'linux' || !profiles.has(profile)) throw Error('Linux fixture profile required');
+  const anchor = await fs.realpath('/tmp');
+  const parent = await fs.realpath(tmpdir());
+  if (parent === anchor) return parent;
+  if (profile === 'offline-render' && path.dirname(parent) === anchor &&
+      /^onverse-browser-runtime-[A-Za-z0-9]+$/.test(path.basename(parent))) {
+    const stat = await fs.lstat(parent);
+    if (stat.isDirectory() && !(stat.mode & 0o077) && stat.uid === process.getuid()) return parent;
+  }
+  throw Error('Unapproved temporary parent: use canonical Linux /tmp or a private browser runtime');
+}
 export async function createRoot(profile = 'linked-media') {
   if (process.platform !== 'linux') throw Error('Linux fixture only');
   if (!profiles.has(profile)) throw Error('Unknown profile');
-  const parent = await fs.realpath(tmpdir());
+  const parent = await probeTempParent(profile);
   const root = await fs.mkdtemp(path.join(parent, `onverse-${profile}-probe-`));
   await fs.chmod(root, 0o700);
   const owner = randomUUID();
@@ -40,7 +54,7 @@ function basename(name) {
 export async function checkRoot(ctx) {
   if (process.platform !== 'linux') throw Error('Linux fixture only');
   if (!ctx || !profiles.has(ctx.profile) || !uuid.test(ctx.owner)) throw Error('Invalid owner/profile');
-  const parent = await fs.realpath(tmpdir());
+  const parent = await probeTempParent(ctx.profile);
   if (path.dirname(ctx.root) !== parent || !path.basename(ctx.root).startsWith(`onverse-${ctx.profile}-probe-`)) throw Error('Not a private temporary probe root');
   const stat = await fs.lstat(ctx.root);
   if (!stat.isDirectory() || stat.isSymbolicLink() || (stat.mode & 0o077) || await fs.realpath(ctx.root) !== ctx.root) throw Error('Unsafe root');

@@ -207,3 +207,58 @@ relevant dependencies, explicit approval-bound prepare/commit, compatibility,
 destination preservation and cancellation barrier. Then join actual rendered media
 to a validated journal/generation transaction, test failure/restart and retained
 undo/redo. No operational UI or broad framework precedes that acceptance.
+
+## Continuation review and acceptance — 2026-10-15
+
+Reviewer: Arena lead/core, owner-requested technical review. **Accepted after the
+narrow R1/R2 corrections below**, only as isolated native-render/media evidence.
+This is not an independent external reviewer, GitHub approval, merge permission,
+product feature acceptance or normative/security certification.
+
+- **R1:** environment-controlled temp-root escape, shared with CORE-009. Corrected
+  using its canonical Linux `/tmp` guard; browser tool/runtime setup cannot
+  authorize an arbitrary non-temp parent through TMPDIR. Regression red before
+  correction, green afterward.
+- **R2:** auditTools' lock-path regex allowed `..` path segments. A metadata-only
+  fake installation demonstrated a lock-selected package.json read outside the
+  toolkit root; no fake code was imported/executed. Dot segments now reject
+  before file access. Regression red before correction, green afterward. Fixed
+  entry-point imports were never selected by these lock entries; this finding
+  concerned metadata-read containment, not demonstrated arbitrary execution.
+- Reviewed finally handling and reproduced post-launch primary failure, plus
+  simultaneous primary/cleanup errors, using **scratch copies only**. Actual
+  browser processes exited (PID no longer existed), both errors survived in the
+  AggregateError case, and complete environment/native tmpdir restoration passed.
+  A machine/driver SIGKILL or permanently wedged OS/browser is still not a proven
+  cleanup guarantee. No assertion of packet-level network isolation follows.
+
+Independent review execution used a **fresh scripts-disabled** installation of
+the approved exact pair, outside the repository. 43 packages; all lock URLs and
+SHA-512 records checked; live registry top-level integrity/licence metadata
+matched both documented pins. New lock SHA-256:
+`229c104fec2c37c36953816579c3d30975dae2b0259480af9973153ea02920c5`.
+Comparison confirmed the entire non-root package graph equals the original lock;
+root package naming accounts for the different lock hash. No claim of verifying
+an installed tree against hostile post-install tampering is added.
+
+Verified original report code hashes against Git blobs at submitted head
+`9cab37bc482a49d96bd785aa2cc4d11c72606217`. Repeated native execution twice after
+fixes using fresh private runtimes: **all five source hashes and both destination
+hashes equal the submitted evidence**, sources exact against oracle, both
+max destination errors `3.5762786865234375e-7` under unchanged `2e-6`, all three
+negative controls detected, zero observed page requests/errors. This independently
+reproduces numerical/media claims; it does not certify the original author's
+historical installation procedure or excluded target-platform tests.
+
+Current fixture/media suite: **28/28 pass**, not native executions. Combined suite:
+**214/211 pass/3 known TODOs/0 unexpected failures/0 skips**. Full review reports:
+`/tmp/onverse-review-native-1.json`, `/tmp/onverse-review-native-2.json`,
+`/tmp/onverse-review-evidence.json`. Scratch failure paths are recorded there.
+These are retained local diagnostics, not required portable dependencies.
+
+No broader implementation is accepted here. The next work must use these real
+native bytes in a validated generation/journal transaction, not a second separate
+media writer. Immutable source/dependency/provenance and cancellation/undo rules
+must be recorded before that implementation; the fixed g0/g1 storage fixture
+must be narrowly parameterized and regression-tested rather than blindly adopted
+as a production schema or replaced by a speculative storage framework.
