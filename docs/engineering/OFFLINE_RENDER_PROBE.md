@@ -229,6 +229,9 @@ product feature acceptance or normative/security certification.
   simultaneous primary/cleanup errors, using **scratch copies only**. Actual
   browser processes exited (PID no longer existed), both errors survived in the
   AggregateError case, and complete environment/native tmpdir restoration passed.
+  The injected cleanup exception occurred **after real browser.close succeeded**:
+  this tests error retention/restoration, not forced termination if close itself
+  hangs. Only the main browser PID's exit was asserted, not a process-tree audit.
   A machine/driver SIGKILL or permanently wedged OS/browser is still not a proven
   cleanup guarantee. No assertion of packet-level network isolation follows.
 
