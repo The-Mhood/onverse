@@ -1306,8 +1306,9 @@ body.dragging::after {
   opacity: 0.45;
 }
 /* ---- UI-004 Slice A: focus, persistent error region, font licences (presentation only) ---- */
-:focus-visible {
-  outline: 2px solid var(--pf-magenta);
+/* Keyboard focus uses the existing cyan token (about 10:1 on the dark surfaces; WCAG 2.2 needs 3:1 for focus indicators). */
+:is(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 2px solid var(--pf-cyan);
   outline-offset: 2px;
 }
 

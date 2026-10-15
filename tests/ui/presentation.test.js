@@ -178,3 +178,18 @@ test("Slice A does not modify denied paths", () => {
   const offending = changed.filter((f) => denied.test(f))
   assert.deepEqual(offending, [], "denied paths changed")
 })
+
+// ---- Error routing: one path through toast, no test-harness changes ----
+
+test("analysis failures are routed through toast with the error flag, not a new global", () => {
+  const main = read("src/main.js")
+  assert.match(main, /toast\(`Analysis failed: \$\{err\?\.message \|\| String\(err\)\}`, 3200, \{ error: true \}\)/)
+  assert.match(main, /function toast\(msg, ms = 3200, options = \{\}\) \{/)
+  assert.match(main, /if \(options\.error\) errorRegion\.show\(msg\)\s*\n\s*else errorRegion\.clear\(\)/)
+})
+
+test("the mode label no longer claims a conversational feature", () => {
+  const main = read("src/main.js")
+  assert.doesNotMatch(main, /CONVERSE/)
+  assert.match(main, /◈ ANALYZE<\/button>/)
+})

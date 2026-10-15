@@ -2,7 +2,11 @@ import "./style.css"
 import "./assets/fonts/fonts.css"
 import { createErrorRegion } from "./ui/presentation/errorRegion.js"
 import { mountLicenceDialog } from "./ui/presentation/licenceDialog.js"
-import { createStage } from "./scene.js"
+import { createStage as createSceneStage } from "./scene.js"
+import { createStage as createOrbitStage } from "./orbit/orbitStage.js"
+/* UI-005 spike: Orbit Mode planetary stage, used only when the URL carries ?orbit=1. */
+const ORBIT_SPIKE = new URLSearchParams(window.location.search).get("orbit") === "1"
+const createStage = ORBIT_SPIKE ? createOrbitStage : createSceneStage
 import { scoreAnalysis, buildIssues, buildFixPlan, targetFromFeatures } from "./audio/analyzer.js"
 import { analysisService } from "./application/analysis/analysisService.js"
 import { matchGenre, GENRES, CATEGORIES, categoryById, categoryProfile, BAND_KEYS, BAND_META } from "./audio/genre.js"
@@ -480,7 +484,7 @@ app.innerHTML = `
     </div>
   </div>
   <div class="mode-switch tabs tabs-box" id="modeSwitch" role="group" aria-label="Studio mode">
-    <button class="tab tab-active mode-btn" data-mode="converse" aria-pressed="true" type="button">◈ CONVERSE</button>
+    <button class="tab tab-active mode-btn" data-mode="converse" aria-pressed="true" type="button">◈ ANALYZE</button>
     <button class="tab mode-btn" data-mode="convert" aria-pressed="false" type="button">⇄ CONVERT</button>
   </div>
   <div class="top-actions">
@@ -704,12 +708,15 @@ const fmtHz = (hz) => (hz >= 1000 ? `${(hz / 1000).toFixed(1)} kHz` : `${Math.ro
 
 /* ================= toasts ================= */
 let toastTimer = 0
-function toast(msg, ms = 3200) {
+/* options.error routes the message to the persistent error region as well; any other toast clears it. */
+function toast(msg, ms = 3200, options = {}) {
   const wrap = $("#toast")
   $("#toastInner").textContent = msg
   wrap.classList.add("show")
   clearTimeout(toastTimer)
   toastTimer = setTimeout(() => wrap.classList.remove("show"), ms)
+  if (options.error) errorRegion.show(msg)
+  else errorRegion.clear()
 }
 
 /* ================= panels ================= */
@@ -826,8 +833,7 @@ async function ensureReferenceReady() {
         r.file.feat = feat
       } catch (err) {
         console.error(err)
-        toast(`Couldn't analyze the reference track: ${err.message || err}`)
-        errorRegion.show(`Couldn't analyze the reference track: ${err.message || err}`)
+        toast(`Couldn't analyze the reference track: ${err.message || err}`, 3200, { error: true })
         showProgress(false)
         return { ok: false }
       }
@@ -838,8 +844,7 @@ async function ensureReferenceReady() {
   // stream url
   if (!r.url) { toast("Paste a stream link first."); return { ok: false } }
   const u = r.url
-  if (u.error) { toast("That stream link couldn't be resolved — check it and try again.")
-    errorRegion.show("That stream link couldn't be resolved — check it and try again."); return { ok: false } }
+  if (u.error) { toast("That stream link couldn't be resolved — check it and try again.", 3200, { error: true }); return { ok: false } }
   if (!u.prepared) {
     if (u.meta.previewUrl) {
       // Apple Music exposes an official 30 s preview as real audio — that becomes the reference
@@ -859,8 +864,7 @@ async function ensureReferenceReady() {
       }
       showProgress(false)
     } else if (!u.meta.identityKnown) {
-      toast("We couldn't identify that link. Try a direct track link, or upload the reference file instead.")
-      errorRegion.show("We couldn't identify that link. Try a direct track link, or upload the reference file instead.")
+      toast("We couldn't identify that link. Try a direct track link, or upload the reference file instead.", 3200, { error: true })
       return { ok: false }
     }
     u.prepared = true
@@ -957,7 +961,7 @@ async function runAnalysis() {
     toast(`Analysis complete — ${shown} · ${scores.overall}/100`)
   } catch (err) {
     console.error(err)
-    toast(`Analysis failed: ${err?.message || String(err)}`)
+    toast(`Analysis failed: ${err?.message || String(err)}`, 3200, { error: true })
   } finally {
     state.busy = false
     showProgress(false)
@@ -1143,8 +1147,7 @@ async function runFix() {
     toast("Master fix complete — a corrected copy is ready. Listening to B · FIXED.")
   } catch (err) {
     console.error(err)
-    toast(`Master fix failed: ${err.message || err}`)
-    errorRegion.show(`Master fix failed: ${err.message || err}`)
+    toast(`Master fix failed: ${err.message || err}`, 3200, { error: true })
   } finally {
     state.busy = false
     $("#fixWrap").classList.add("hidden")
@@ -1228,8 +1231,7 @@ async function runConvert() {
     toast(`Converted to ${out.label} — download started.`)
   } catch (err) {
     console.error(err)
-    toast(`Conversion failed: ${err.message || err}`)
-    errorRegion.show(`Conversion failed: ${err.message || err}`)
+    toast(`Conversion failed: ${err.message || err}`, 3200, { error: true })
   } finally {
     state.busy = false
     $("#convProgress").classList.add("hidden")
@@ -1480,8 +1482,7 @@ async function pickReferenceFile(file, sfx) {
     if (state.buffer) runAnalysis()
   } catch (err) {
     console.error(err)
-    toast("Couldn't decode that reference file.")
-    errorRegion.show("Couldn't decode that reference file.")
+    toast("Couldn't decode that reference file.", 3200, { error: true })
   }
 }
 
@@ -1721,8 +1722,7 @@ async function openFile(file) {
     toast(`Loaded ${file.name}`)
   } catch (err) {
     console.error(err)
-    toast(`Couldn't decode that file. Try a WAV, MP3, M4A, OGG, FLAC or AIFF.`)
-    errorRegion.show(`Couldn't decode that file. Try a WAV, MP3, M4A, OGG, FLAC or AIFF.`)
+    toast(`Couldn't decode that file. Try a WAV, MP3, M4A, OGG, FLAC or AIFF.`, 3200, { error: true })
   }
 }
 
