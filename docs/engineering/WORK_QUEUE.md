@@ -1,5 +1,26 @@
 # MusicOnVerse engineering work queue
 
+## CURRENT DELIVERY — 2026-10-16: app recovered, published and verified
+
+Authoritative shared path: **PR4 / arena/14df8ffa-onverse**. Recovery6199230 based
+on2faa3939, deliberate normal8051 reconciliation3f429dd, cinematic integration6a9369a
+are pushed. Final follow-up records verification/current authority; no PR/main
+merge or release. P7e105a0's six scoped files are adopted exactly; host actions and
+transitions use the actual app and existing engines. P has direct source links,
+not a source hold; worker receipt/start is not inferred from publication.
+
+Fresh clean Git-archive checks:272tests/269PASS/0FAIL/3knownLUFSTODO; build/sanity
+PASS, production HTML byte-identical to browser proof. Full preserved working
+tree462tests/459PASS/0FAIL/3TODO includes190unpublished held-core cases. Real
+1120x700/1480x920 runtime, native entry/exit/focus, four-layer motion, reduced
+motion, audio/workflows/downloads/cleanup PASS on pinned Chromium CPU raster.
+Default SwiftShader emulation stalled; limitations and failed evidence retained.
+Full original01–13 pack recovered and individually inspected; provenance and
+palette/source/semantic mapping committed. See
+[delivery verification](DELIVERY_VERIFICATION_20261016.md), which supersedes older
+uncommitted/held UI banners and missing-entry blockers below. Unrelated held core,
+.arena/artifacts in P's tree, security/contracts/native acceptance remain protected.
+
 ## Purpose and current scope
 
 This is a coordinator-maintained task and result record under [AGENTS.md](../../AGENTS.md) and [issue #2](https://github.com/The-Mhood/onverse/issues/2). It is not a scheduler, file lock, worker launcher, or automatic result collector. Initial approval covered coordination documents, not an orchestration platform. Later owner-settled UI decisions and the bounded conditional Slice A grant are recorded in COORD-006 below; no general roadmap implementation permission follows.

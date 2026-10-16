@@ -20,7 +20,7 @@ const reviews = fileURLToPath(new URL('../../../reviews/', import.meta.url));
 await fs.mkdir(reviews, { recursive: true });
 const output = await fs.mkdtemp(path.join(reviews, 'workbench-browser-20261016-'));
 const originalEnv = { ...process.env };
-const report = { kind: motionOnly ? 'actual-production-cinematic-entry-only' : 'actual-production-entry-and-synthetic-workflows', output, node: process.version, tools: audit, checks: [], errors: [], console: [], requests: [], failedResponses: [], blockedRequests: [], screenshots: [], downloads: [], limits: ['Trusted local synthetic PCM only; no user media, real provider or listening.', 'Headless Chromium with disabled sandbox; not Electron/Mac/security qualification.', 'Screenshots reflect written reference roles, not unavailable numbered source images.'] };
+const report = { kind: motionOnly ? 'actual-production-cinematic-entry-only' : 'actual-production-entry-and-synthetic-workflows', output, node: process.version, tools: audit, checks: [], errors: [], console: [], requests: [], failedResponses: [], blockedRequests: [], screenshots: [], downloads: [], limits: ['Trusted local synthetic PCM only; no user media, real provider or listening.', 'Headless Chromium with disabled sandbox; not Electron/Mac/security qualification.', 'Original01–13 project reference pack recovered and inspected; runtime screenshots are not pixel-fidelity signoff.'] };
 let browser, page, cdp, phase = 'boot', primaryError;
 const downloadNames = new Map();
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
