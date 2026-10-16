@@ -1,0 +1,105 @@
+{
+  "baseline": "704fafdd3ba4c25fb62a14c775eb40624b951b60",
+  "reviewedPR8": "295e0d31716ceb9d8e7cd978381b46450ceb73ea",
+  "mergeBase": "6a9369ad28239513158b87aa5467304222c093dc",
+  "ancestryBeforeReconciliation": {
+    "deliveryOnly": 7,
+    "pr8Only": 7
+  },
+  "runtimeChanges": [],
+  "visualChanges": [],
+  "selectedPR8Changes": "Three lifecycle tests plus deterministic timer fixture, copied from295e0d3; existing six regressions retained unchanged.",
+  "regressionCause": "Inherited paths introduced in61992304043b39aa6ec85a64cf5a3bd447388094; fixed byf92fe04609cce2a007ee2f9535e14ea8eb221c87, absent fromPR8 ancestry.",
+  "tests": {
+    "inherited619Six": {
+      "pass": 0,
+      "fail": 6
+    },
+    "pr8At295Six": {
+      "pass": 0,
+      "fail": 6
+    },
+    "candidateSix": {
+      "pass": 6,
+      "fail": 0
+    },
+    "publishedSource": {
+      "pass": 368,
+      "fail": 0,
+      "cancelled": 0,
+      "skip": 0,
+      "todo": 0
+    },
+    "preservedWorkView": {
+      "pass": 558,
+      "fail": 0,
+      "cancelled": 0,
+      "skip": 0,
+      "todo": 0
+    },
+    "actualDirtyRoot": {
+      "pass": 557,
+      "fail": 1,
+      "failure": "tests/ui/entryShell.test.js:55 \u2014 build/icon.icns should be absent"
+    },
+    "focusedAudioAndWorkbench": {
+      "pass": 156,
+      "fail": 0
+    }
+  },
+  "build": {
+    "jsBytes": 243228,
+    "cssBytes": 179986,
+    "htmlBytes": 423837,
+    "htmlSha256": "b316b5ab6328c9b7f65716ff4166cab18ef768e937d0416ec3d448ed7185cb83",
+    "chunkWarning": false,
+    "byteIdenticalTo704": true
+  },
+  "browser": {
+    "result": "PASS",
+    "report": "/home/user/reviews/pr8-reconciliation-20261016/reviews/workbench-browser-20261016-GAtbZ4/report.json",
+    "reportSha256": "3b8f00b1700276bd56575bef4629959b45f60fac189459c6ac90e5dcb11028eb",
+    "checkGroups": 22,
+    "downloads": 13,
+    "screenshots": 32,
+    "unexpectedErrors": [],
+    "failedResponses": [],
+    "blockedRequests": [],
+    "nativeTrimCases": 12,
+    "maxSampleGainError": 7.436004728633705e-09,
+    "maxTargetError": 2.8320332390308067e-07,
+    "tolerance": 1e-06,
+    "contextsCreated": 10,
+    "contextsClosed": 10,
+    "fileOriginContextsCreated": 1,
+    "fileOriginContextsClosed": 1,
+    "privateRuntimeRemoved": true
+  },
+  "preservation": {
+    "initialPresent": 202,
+    "unchanged": 201,
+    "onlyChangedOriginalFile": "tests/unit/workbenchController.test.js (authorized selected tests/fixture)",
+    "heldFilesUnchanged": 68,
+    "originalIconsUnchanged": 12,
+    "deletedOriginalFiles": 0,
+    "normalFastForwardWithExternalFileView": true
+  },
+  "auditFull": {
+    "info": 0,
+    "low": 0,
+    "moderate": 9,
+    "high": 4,
+    "critical": 0,
+    "total": 13
+  },
+  "auditProductionOnly": {
+    "info": 0,
+    "low": 0,
+    "moderate": 0,
+    "high": 0,
+    "critical": 0,
+    "total": 0
+  },
+  "releaseReady": false,
+  "evidenceDirectory": "/home/user/reviews/pr8-reconciliation-20261016"
+}
