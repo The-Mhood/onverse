@@ -374,8 +374,8 @@ export function buildIssues(f, g, s) {
   const issues = []
   const positives = []
   /* what this run is being matched against (platform profiles vs user reference) */
-  const platformPhrase = g.realm || "Spotify's top tracks in this genre"
-  const besidePhrase = g.realm || "Spotify's top tracks"
+  const platformPhrase = g.realm || "the built-in genre profile for this genre"
+  const besidePhrase = g.realm || "the built-in genre profile"
 
   // loudness
   const ld = f.lufs - g.lufs
@@ -482,7 +482,7 @@ export function buildIssues(f, g, s) {
         severity: "warning",
         feature: "Tuning Offset",
         title: `Track is ${f.pitch.tuningCents > 0 ? "sharp" : "flat"} by ${round(Math.abs(f.pitch.tuningCents), 0)} cents`,
-        detail: "The whole track sits off concert pitch. Compared to Spotify's top tracks (which are tuned to A=440 Hz) it will feel slightly off even when the performance is perfect.",
+        detail: "The whole track sits off concert pitch. Compared to the built-in genre profile (which assumes A=440 Hz) it will feel slightly off even when the performance is perfect.",
         fix: { type: "retune", cents: -f.pitch.tuningCents },
         fixLabel: `Retune by ${round(Math.abs(f.pitch.tuningCents), 0)} cents to A=440`,
       })

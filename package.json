@@ -11,8 +11,7 @@
     "preview": "vite preview",
     "dist": "npm run build && electron-builder --mac dmg",
     "dist:notarized": "npm run build && set -a && source ~/.freebuff/mov-sign.env && set +a && electron-builder --mac dmg",
-    "dist:legacy": "npm run build && electron-builder --mac -c electron-builder.legacy.cjs",
-    "icon": "node scripts/make-icon.mjs"
+    "dist:legacy": "npm run build && electron-builder --mac -c electron-builder.legacy.cjs"
   },
   "devDependencies": {
     "@electron/notarize": "^3.1.1",
@@ -38,8 +37,7 @@
     ],
     "afterSign": "electron/notarize.cjs",
     "directories": {
-      "output": "release",
-      "buildResources": "build"
+      "output": "release"
     },
     "publish": [
       {
@@ -50,7 +48,6 @@
     "asar": true,
     "mac": {
       "category": "public.app-category.music",
-      "icon": "build/icon.icns",
       "artifactName": "${productName}-${version}-${arch}.${ext}",
       "hardenedRuntime": true,
       "gatekeeperAssess": false,

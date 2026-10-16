@@ -1,0 +1,39 @@
+/* Grounded celestial environment. The art is authored for this product and
+   embedded by Vite so the packaged file:// app has no remote asset dependency. */
+.workspace-root > .environment {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background-color: var(--mvo-space-0);
+  background-image:
+    linear-gradient(90deg, rgb(3 7 11 / 38%) 0%, rgb(3 7 11 / 12%) 43%, rgb(3 7 11 / 18%) 100%),
+    linear-gradient(180deg, rgb(3 7 11 / 20%) 0%, transparent 34%, rgb(3 7 11 / 24%) 64%, rgb(3 7 11 / 70%) 100%),
+    url("./assets/first-person-cosmic-horizon.jpg?inline");
+  background-repeat: no-repeat;
+  background-position: center, center, 56% 48%;
+  background-size: cover;
+}
+
+.workspace-root > .environment::before,
+.workspace-root > .environment::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  pointer-events: none;
+}
+
+/* Soft optical falloff keeps the perimeter dimensional without putting bloom
+   behind small functional text. No animation or moving star layer. */
+.workspace-root > .environment::before {
+  background:
+    radial-gradient(ellipse at 56% 45%, transparent 27%, rgb(3 7 10 / 12%) 66%, rgb(3 7 10 / 42%) 100%),
+    linear-gradient(180deg, rgb(4 9 13 / 10%), transparent 18%, transparent 72%, rgb(3 7 10 / 26%));
+}
+
+/* The low foreground reads as terrain/console shadow, joining the workspace to
+   the scene rather than framing it like a floating desktop window. */
+.workspace-root > .environment::after {
+  background: linear-gradient(180deg, transparent 48%, rgb(4 9 13 / 11%) 68%, rgb(4 9 13 / 42%) 100%);
+}
