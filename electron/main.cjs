@@ -31,7 +31,7 @@ function createWindow() {
     minHeight: 700,
     show: !SMOKE && !process.env.MOV_HIDE,
     backgroundColor: "#0b0517",
-    title: "MusicOnVerse — Audio Intelligence Studio",
+    title: "MusicOnVerse",
     autoHideMenuBar: true,
     webPreferences: {
       contextIsolation: true,
