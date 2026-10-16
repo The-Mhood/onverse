@@ -14,9 +14,8 @@ test("Orbit chrome is on only for ?orbit=1 in the Scan/Orbit view, and off in th
   assert.match(main, /document\.body\.classList\.toggle\("orbit-mode", ORBIT_SPIKE && state\.mode === "converse"\)/)
 })
 
-test("Orbit controls keep their bindings: view switch, Enter studio (DAW), Reset view (orbit:reset)", () => {
+test("Orbit controls keep their bindings: Enter studio (DAW), Reset view (orbit:reset)", () => {
   const main = read("src/main.js")
-  assert.match(main, /data-orbit-view=/)
   assert.match(main, /\$\("#btnOrbitStudio"\)\.onclick = \(\) => setMode\("daw"\)/)
   assert.match(main, /new CustomEvent\("orbit:reset"\)/)
   assert.match(read("src/orbit/orbitStage.js"), /canvas\.addEventListener\("orbit:reset", onReset\)/)

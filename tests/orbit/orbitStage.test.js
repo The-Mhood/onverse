@@ -36,7 +36,8 @@ test("the spike adds no dependency: only three and its bundled examples are impo
 
 test("the planetary flag is off by default and selects the orbit stage only for ?orbit=1", () => {
   const main = read("src/main.js")
-  assert.match(main, /const ORBIT_SPIKE = new URLSearchParams\(window\.location\.search\)\.get\("orbit"\) === "1"/)
+  assert.match(main, /const ORBIT_SPIKE = !CLASSIC_SCENE/)
+  assert.match(main, /const CLASSIC_SCENE = new URLSearchParams\(window\.location\.search\)\.get\("scene"\) === "classic"/)
   assert.match(main, /const createStage = ORBIT_SPIKE \? createOrbitStage : createSceneStage/)
 })
 

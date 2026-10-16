@@ -1494,8 +1494,6 @@ body.orbit-mode .panel-center#panelIdle .idle-actions { justify-content: flex-st
 /* ---- Orbit view, following Reference 2 (?orbit=1 only, body.orbit-mode). Purpose-built for Orbit, not the
    DAW chrome: a quiet top bar, the scene full-bleed, a left text overlay and a bottom-right card. Functional
    controls stay reachable: the Orbit/DAW switch, Enter studio, Reset view, open file, demo track. ---- */
-body.orbit-mode .rail { display: none; }
-body.orbit-mode .mode-switch { display: none; }
 body.orbit-mode .topbar { position: relative; z-index: 5; background: transparent; border-bottom: 0; box-shadow: none; }
 body.orbit-mode .brand-mark, body.orbit-mode .brand-tag { display: none; }
 body.orbit-mode .brand-name { font-size: 0.8rem; letter-spacing: 0.22em; text-transform: uppercase; }
@@ -1595,3 +1593,39 @@ body.orbit-mode .panel-center#panelIdle .idle-hint { margin-top: 0.8rem; font-si
 body:not(.orbit-mode) .orbit-hud { display: none; }
 /* The save status describes the Orbit view only; it is hidden in the DAW header so the studio bar stays on one row. */
 body:not(.orbit-mode) .orbit-status { display: none; }
+
+/* ================= Orbital shell (direction reset; presentation only) =================
+   One continuous sky. The three work modes are orbits around it: the station nav lives in the header and the
+   actions form a dock at the bottom centre. Desktop only (>= 1000 px); narrow screens keep their layout. */
+@media (min-width: 1000px) {
+  .deck { grid-template-columns: minmax(0, 1fr) 350px; padding: 16px 22px 92px; }
+  .rail {
+    position: fixed;
+    left: 50%;
+    bottom: 18px;
+    top: auto;
+    transform: translateX(-50%);
+    flex-direction: row;
+    gap: 6px;
+    padding: 7px 10px;
+    border-radius: 999px;
+    z-index: 30;
+    background: rgba(9, 13, 19, 0.72);
+    border-color: rgba(223, 230, 238, 0.14);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+  }
+}
+/* Station nav: three orbits, one active. Labels are unchanged. */
+.mode-switch {
+  padding: 3px;
+  border: 1px solid rgba(223, 230, 238, 0.14);
+  border-radius: 999px;
+  background: rgba(7, 11, 16, 0.5);
+}
+.mode-switch { flex: 0 0 auto; flex-wrap: nowrap; white-space: nowrap; }
+.mode-switch .tab { border-radius: 999px; padding: 0 1.1rem; }
+.top-actions { flex-wrap: nowrap; min-width: 0; }
+/* The environment steps back in the DAW so the studio stays legible; it stays visible in every view. */
+#stage { transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+body[data-view="daw"] #stage { opacity: 0.35; }
+body[data-view="convert"] #stage { opacity: 0.6; }

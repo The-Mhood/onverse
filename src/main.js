@@ -11,7 +11,9 @@ import { createStage as createSceneStage } from "./scene.js"
 import { createStage as createOrbitStage } from "./orbit/orbitStage.js"
 import { landmarkForKey, ORBIT_LANDMARKS } from "./orbit/orbitKeys.js"
 /* UI-005 spike: Orbit Mode planetary stage, used only when the URL carries ?orbit=1. */
-const ORBIT_SPIKE = new URLSearchParams(window.location.search).get("orbit") === "1"
+/* Cosmic environment is the default identity (direction reset). ?scene=classic keeps the previous scene. */
+const CLASSIC_SCENE = new URLSearchParams(window.location.search).get("scene") === "classic"
+const ORBIT_SPIKE = !CLASSIC_SCENE
 const createStage = ORBIT_SPIKE ? createOrbitStage : createSceneStage
 import { scoreAnalysis, buildIssues, buildFixPlan, targetFromFeatures } from "./audio/analyzer.js"
 import { analysisService } from "./application/analysis/analysisService.js"
@@ -492,17 +494,13 @@ app.innerHTML = `
       <div class="brand-tag">AUDIO INTELLIGENCE</div>
     </div>
   </div>
-  ${ORBIT_SPIKE ? `<div class="orbit-switch" role="group" aria-label="View">
-    <button class="orbit-switch-btn" type="button" data-orbit-view="converse" aria-pressed="true">Orbit</button>
-    <button class="orbit-switch-btn" type="button" data-orbit-view="daw" aria-pressed="false">DAW</button>
-  </div>` : ""}
   <div class="mode-switch tabs tabs-box" id="modeSwitch" role="group" aria-label="Studio mode">
     <button class="tab tab-active mode-btn" data-mode="converse" aria-pressed="true" type="button">◈ SCAN</button>
     <button class="tab mode-btn" data-mode="convert" aria-pressed="false" type="button">⇄ CONVERT</button>
     <button class="tab mode-btn" data-mode="daw" aria-pressed="false" type="button">▦ DAW · PROTOTYPE</button>
   </div>
   <div class="top-actions">
-    ${ORBIT_SPIKE ? `<span class="orbit-status"><span class="orbit-status-dot" aria-hidden="true"></span>Not saved · session only</span>` : ""}
+    <span class="orbit-status"><span class="orbit-status-dot" aria-hidden="true"></span>Not saved · session only</span>
     <div class="tooltip tooltip-bottom" data-tip="Open audio from your local storage">
       <button id="btnUpload" class="btn btn-square btn-ghost btn-glow" type="button" aria-label="Open audio file">${ICONS.folder}</button>
     </div>
@@ -515,12 +513,12 @@ app.innerHTML = `
 </header>
 <main class="deck">
   <nav class="rail" aria-label="Studio tools">
-    <div class="tooltip tooltip-right" data-tip="Upload audio"><button class="btn btn-square btn-ghost" data-action="upload" type="button" aria-label="Upload audio">${ICONS.folder}</button></div>
-    <div class="tooltip tooltip-right" data-tip="Generate demo track"><button class="btn btn-square btn-ghost" data-action="demo" type="button" aria-label="Generate demo track">${ICONS.music}</button></div>
-    <div class="tooltip tooltip-right" data-tip="Run analysis"><button class="btn btn-square btn-ghost" data-action="analyze" type="button" aria-label="Run analysis">${ICONS.wave}</button></div>
-    <div class="tooltip tooltip-right" data-tip="One-click master fix"><button class="btn btn-square btn-ghost" data-action="fix" type="button" aria-label="One-click master fix">${ICONS.spark}</button></div>
-    <div class="tooltip tooltip-right" data-tip="Download output"><button class="btn btn-square btn-ghost" data-action="download" type="button" aria-label="Download output">${ICONS.download}</button></div>
-    <div class="tooltip tooltip-right" data-tip="Reset session"><button class="btn btn-square btn-ghost" data-action="reset" type="button" aria-label="Reset session">${ICONS.reset}</button></div>
+    <div class="tooltip tooltip-top" data-tip="Upload audio"><button class="btn btn-square btn-ghost" data-action="upload" type="button" aria-label="Upload audio">${ICONS.folder}</button></div>
+    <div class="tooltip tooltip-top" data-tip="Generate demo track"><button class="btn btn-square btn-ghost" data-action="demo" type="button" aria-label="Generate demo track">${ICONS.music}</button></div>
+    <div class="tooltip tooltip-top" data-tip="Run analysis"><button class="btn btn-square btn-ghost" data-action="analyze" type="button" aria-label="Run analysis">${ICONS.wave}</button></div>
+    <div class="tooltip tooltip-top" data-tip="One-click master fix"><button class="btn btn-square btn-ghost" data-action="fix" type="button" aria-label="One-click master fix">${ICONS.spark}</button></div>
+    <div class="tooltip tooltip-top" data-tip="Download output"><button class="btn btn-square btn-ghost" data-action="download" type="button" aria-label="Download output">${ICONS.download}</button></div>
+    <div class="tooltip tooltip-top" data-tip="Reset session"><button class="btn btn-square btn-ghost" data-action="reset" type="button" aria-label="Reset session">${ICONS.reset}</button></div>
   </nav>
 
   <section class="stage-col">
@@ -884,7 +882,7 @@ function setMode(mode) {
   })
   if (cosmicEnv) cosmicEnv.setWorkspace(WORKSPACE_FOR_MODE[mode] ?? "analysis")
   document.body.classList.toggle("orbit-mode", ORBIT_SPIKE && mode === "converse")
-  document.querySelectorAll("[data-orbit-view]").forEach((b) => b.setAttribute("aria-pressed", String((b.dataset.orbitView === "daw") === (mode === "daw"))))
+  document.body.dataset.view = mode
   renderPanels()
 }
 
@@ -1886,7 +1884,6 @@ document.querySelectorAll('[data-action="analyze"]').forEach((b) => (b.onclick =
 
 $("#btnFix").onclick = runFix
 if (ORBIT_SPIKE) {
-  document.querySelectorAll("[data-orbit-view]").forEach((b) => b.addEventListener("click", () => setMode(b.dataset.orbitView === "daw" ? "daw" : "converse")))
   $("#btnOrbitStudio").onclick = () => setMode("daw")
   $("#btnOrbitReset").onclick = () => $("#stage").dispatchEvent(new CustomEvent("orbit:reset"))
 }
