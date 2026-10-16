@@ -69,7 +69,7 @@ The original full pack was recovered at project ref900f0733 on an existing branc
 via read-only GitHub API, without switching/merging it. All16original blobs,
 33,442,231bytes, verified; each numbered image01–13 actually inspected individually.
 13shared system,02grounded cosmic,05/09precision,04framing-only take precedence
- over the pack guide's older broad04recommendation. No fake DAW/SYLUNE capability.
+over the pack guide's older broad04recommendation. No fake DAW/SYLUNE capability.
 
 ## Icon failure investigated, not hidden
 
@@ -150,7 +150,13 @@ Measurements were taken without concurrent heavy unit suites:
 | 1120×700 | 297 /5016.37ms | 59.206 | 16.7ms | 83.27ms | 1 |
 | 1480×920 | 301 /5016.41ms | 60.003 | 16.8ms | 16.8ms | 0 |
 
-Both pass the declared budget; the single1120outlier is retained, not hidden.
+The table above is the first complete PASSgngknn. A separate final published
+replay atb9def81 also PASSed with exact source/build SHA verification. Its raw
+[report and compact genuine captures](evidence/workbench-20261016/README.md) are
+committed solely to make direct P/owner artifact review possible; fresh timing
+samples differ normally. This proof follow-up changes only documents/evidence,
+not the tested app or runner. Both pass the declared budget; the first1120outlier
+is retained, not hidden.
 Panel entry/exit were observed inside the activation's browser task, not a racy
 CDP poll after a420ms effect:40–42frame traces contain real intermediate opacity,
 transform, top-layer/display retirement and native focus restoration at BOTH
