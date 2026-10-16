@@ -25,8 +25,8 @@ test("index.html loads no remote font or CDN resources", () => {
 test("fonts.css has one @font-face per vendored WOFF2 with explicit ?inline URLs and no remote URLs", () => {
   const css = read(`${fontsDir}/fonts.css`)
   const faces = css.match(/@font-face\s*\{[^}]*\}/g) || []
-  assert.equal(faces.length, 10, "expected 10 @font-face rules")
-  for (const family of ["Orbitron", "Rajdhani", "Share Tech Mono"]) {
+  assert.equal(faces.length, 12, "expected 12 @font-face rules (Sora x2 added 2026-10-16)")
+  for (const family of ["Sora", "Orbitron", "Rajdhani", "Share Tech Mono"]) {
     assert.ok(faces.some((f) => f.includes(`font-family: '${family}'`)), `missing family ${family}`)
   }
   assert.doesNotMatch(css, /https?:\/\//)
@@ -48,11 +48,11 @@ test("every vendored font and licence file matches the pinned manifest (bytes an
       checked++
     }
   }
-  assert.equal(checked, 13)
+  assert.equal(checked, 16)
 })
 
 test("each typeface ships its complete SIL OFL 1.1 text", () => {
-  for (const name of ["orbitron-OFL.txt", "rajdhani-OFL.txt", "share-tech-mono-OFL.txt"]) {
+  for (const name of ["sora-OFL.txt", "orbitron-OFL.txt", "rajdhani-OFL.txt", "share-tech-mono-OFL.txt"]) {
     const txt = read(`${fontsDir}/${name}`)
     assert.match(txt, /SIL OPEN FONT LICENSE Version 1\.1/, name)
     assert.match(txt, /Copyright/, name)
@@ -62,7 +62,7 @@ test("each typeface ships its complete SIL OFL 1.1 text", () => {
 test("notices module embeds the licence texts with ?raw and renders them without innerHTML", () => {
   const notices = read(`${fontsDir}/notices.js`)
   assert.match(notices, /\?raw/)
-  for (const name of ["orbitron-OFL.txt", "rajdhani-OFL.txt", "share-tech-mono-OFL.txt"]) {
+  for (const name of ["sora-OFL.txt", "orbitron-OFL.txt", "rajdhani-OFL.txt", "share-tech-mono-OFL.txt"]) {
     assert.ok(notices.includes(name), `notices.js must import ${name}`)
   }
   const dialog = read("src/ui/presentation/licenceDialog.js")

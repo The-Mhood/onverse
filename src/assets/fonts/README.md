@@ -48,3 +48,10 @@ PY
 ```
 
 To reproduce acquisition, fetch each manifest tarball into a scratch directory, verify the full SHA-512 integrity before opening it, then read only the listed regular `sourceMember` entries. Never blindly extract a tarball into the checkout. Upgrades, modifications and extra font/dependency acquisitions require a new scoped review.
+
+## Sora (COORD-010 resolution 6213314954, 2026-10-16)
+
+- Package: `@fontsource-variable/sora` 5.3.0, licence OFL-1.1 (copyright The Sora Project Authors). Tarball SHA-256 `e0cff41b28e72b9441c7c599c310a9e4f13d44ac87d8d534746d50d6fbe9d726`; npm integrity `sha512-h8kHta4Z8SkfUGeI82TUy1n3rbrKpBRGwuk4t4qCwto5oEHxlbOFD2yGP+Df5fbmTXwKGn+o667vYp0E4K8Whw==`.
+- Vendored unmodified: `sora-latin-wght-normal.woff2` (weights 100–800), `sora-latin-ext-wght-normal.woff2`, and `sora-OFL.txt` (from `package/LICENSE`). Hashes are in `manifest.json`.
+- Used as the first family in `--pf-font-display` and `--pf-font-ui`. Orbitron, Rajdhani and Share Tech Mono stay in the stacks as fallbacks.
+- No npm dependency was added; the package was fetched only for review and the files were copied from it.

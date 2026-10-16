@@ -59,8 +59,8 @@
   --pf-line-strong: rgba(127, 169, 204, 0.4);
   --pf-warm: #b89d84;
   --pf-cyan: #22d3ee;
-  --pf-font-display: "Orbitron", "Rajdhani", system-ui, sans-serif;
-  --pf-font-ui: "Rajdhani", "Segoe UI", system-ui, sans-serif;
+  --pf-font-display: "Sora", "Orbitron", "Rajdhani", system-ui, sans-serif;
+  --pf-font-ui: "Sora", "Rajdhani", "Segoe UI", system-ui, sans-serif;
   --pf-font-mono: "Share Tech Mono", ui-monospace, monospace;
   --pf-glow: 0 0 18px rgba(127, 169, 204, 0.18);
   --pf-glow-strong: 0 0 26px rgba(127, 169, 204, 0.3);

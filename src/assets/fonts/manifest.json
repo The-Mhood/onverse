@@ -1,7 +1,35 @@
 {
-  "reviewedOn": "2026-10-15",
+  "reviewedOn": "2026-10-16",
   "delivery": "Self-hosted, unmodified Fontsource WOFF2 assets; no npm dependency added. See README.md for licence/distribution obligations.",
   "packages": [
+    {
+      "package": "@fontsource-variable/sora",
+      "version": "5.3.0",
+      "license": "OFL-1.1",
+      "tarball": "https://registry.npmjs.org/@fontsource-variable/sora/-/sora-5.3.0.tgz",
+      "integrity": "sha512-h8kHta4Z8SkfUGeI82TUy1n3rbrKpBRGwuk4t4qCwto5oEHxlbOFD2yGP+Df5fbmTXwKGn+o667vYp0E4K8Whw==",
+      "tarballSha256": "e0cff41b28e72b9441c7c599c310a9e4f13d44ac87d8d534746d50d6fbe9d726",
+      "files": [
+        {
+          "path": "sora-OFL.txt",
+          "sourceMember": "package/LICENSE",
+          "bytes": 4382,
+          "sha256": "1ec9623d38c445eb4dfe5fcc783e0f0ee728cc97ca157ce1f8cb2b3bf9d9b0d9"
+        },
+        {
+          "path": "sora-latin-wght-normal.woff2",
+          "sourceMember": "package/files/sora-latin-wght-normal.woff2",
+          "bytes": 33652,
+          "sha256": "fa26406eeda9a3c6ec3d9ea8813c3045d6dc755e30c716d5c094e8ef43be5a7f"
+        },
+        {
+          "path": "sora-latin-ext-wght-normal.woff2",
+          "sourceMember": "package/files/sora-latin-ext-wght-normal.woff2",
+          "bytes": 15548,
+          "sha256": "c163c536f68befd99a83d4f17e8b88030e7f54229688a45c44f70c7149db7385"
+        }
+      ]
+    },
     {
       "package": "@fontsource-variable/orbitron",
       "version": "5.3.0",

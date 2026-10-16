@@ -9,12 +9,16 @@ import { mountCosmicEnvironment } from "./ui/presentation/cosmicEnvironment.js"
 import { mountLicenceDialog } from "./ui/presentation/licenceDialog.js"
 import { createStage as createSceneStage } from "./scene.js"
 import { createStage as createOrbitStage } from "./orbit/orbitStage.js"
+import { createStage as createUniverseStage } from "./ui/presentation/universe/stage.js"
 import { landmarkForKey, ORBIT_LANDMARKS } from "./orbit/orbitKeys.js"
 /* UI-005 spike: Orbit Mode planetary stage, used only when the URL carries ?orbit=1. */
 /* Cosmic environment is the default identity (direction reset). ?scene=classic keeps the previous scene. */
 const CLASSIC_SCENE = new URLSearchParams(window.location.search).get("scene") === "classic"
 const ORBIT_SPIKE = !CLASSIC_SCENE
-const createStage = ORBIT_SPIKE ? createOrbitStage : createSceneStage
+// COORD-010 (6213314954): the shared universe stage is opt-in during the proof (?stage=universe).
+// Default (Orbit stage, rollback) and ?scene=classic are unchanged.
+const STAGE_PARAM = new URLSearchParams(window.location.search).get("stage")
+const createStage = !ORBIT_SPIKE ? createSceneStage : STAGE_PARAM === "universe" ? createUniverseStage : createOrbitStage
 import { scoreAnalysis, buildIssues, buildFixPlan, targetFromFeatures } from "./audio/analyzer.js"
 import { analysisService } from "./application/analysis/analysisService.js"
 import { matchGenre, GENRES, CATEGORIES, categoryById, categoryProfile, BAND_KEYS, BAND_META } from "./audio/genre.js"

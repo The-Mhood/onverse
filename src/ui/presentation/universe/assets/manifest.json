@@ -1,0 +1,23 @@
+{
+  "module": "src/ui/presentation/universe",
+  "status": "procedural only: no external art files ship with the universe stage",
+  "assets": [],
+  "generated": [
+    {
+      "id": "universe-procedural-sky-and-bodies",
+      "kind": "GLSL procedural shaders (shaders.js) and three.js primitives (stage.js)",
+      "provenance": "Written for this repository by agent-b under COORD-010 resolution 6213314954. No textures, models, sample images or fetched data.",
+      "labelling": "Procedural/generated imagery. Not an observed photograph and not a licensed third-party asset.",
+      "licence": "Repository licence applies to the authored code."
+    }
+  ],
+  "thirdParty": [
+    {
+      "id": "three",
+      "version": "0.185.1 (installed dependency, already in package.json)",
+      "use": "WebGL renderer, geometry and shader material used by the stage",
+      "note": "No new dependency is added by this module."
+    }
+  ],
+  "shippedFiles": []
+}

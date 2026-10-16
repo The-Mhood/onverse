@@ -38,7 +38,7 @@ test("the planetary flag is off by default and selects the orbit stage only for 
   const main = read("src/main.js")
   assert.match(main, /const ORBIT_SPIKE = !CLASSIC_SCENE/)
   assert.match(main, /const CLASSIC_SCENE = new URLSearchParams\(window\.location\.search\)\.get\("scene"\) === "classic"/)
-  assert.match(main, /const createStage = ORBIT_SPIKE \? createOrbitStage : createSceneStage/)
+  assert.match(main, /const createStage = !ORBIT_SPIKE \? createSceneStage : STAGE_PARAM === "universe" \? createUniverseStage : createOrbitStage/)
 })
 
 test("no automatic camera movement: autoRotate is off and reduced motion stops drift", () => {
