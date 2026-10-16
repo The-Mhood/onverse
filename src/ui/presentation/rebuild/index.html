@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark" />
+    <title>MusicOnVerse — presentation-only preview</title>
+    <link rel="stylesheet" href="./index.css" />
+    <style>
+      html, body { min-width: 320px; min-height: 100%; margin: 0; background: var(--mvo-space-0); }
+      .preview-note { color: var(--mvo-text-muted); font-size: .7rem; letter-spacing: .08em; text-transform: uppercase; }
+      .preview-title { max-width: 18ch; margin: .5rem 0 1rem; color: var(--mvo-text-primary); font-size: clamp(1.75rem, 3.6vw, 3.3rem); font-weight: 520; line-height: 1.06; letter-spacing: -.035em; }
+      .preview-copy { max-width: 54ch; color: var(--mvo-text-secondary); }
+      .preview-empty { display: grid; align-content: center; min-height: 10rem; margin-top: clamp(1.5rem, 5vh, 3.5rem); padding: clamp(1rem, 2vw, 1.5rem); border: 1px solid var(--mvo-border-default); border-radius: var(--mvo-radius-panel); background: linear-gradient(140deg, var(--mvo-panel-inspector-top), var(--mvo-panel-inspector-bottom)); }
+      .preview-empty h2 { margin: 0 0 .4rem; font-size: 1rem; font-weight: 600; }
+      .preview-empty p { max-width: 58ch; margin: 0; color: var(--mvo-text-muted); }
+      .preview-inspector-title { margin: 0 0 .75rem; font-size: .8rem; font-weight: 650; letter-spacing: .11em; text-transform: uppercase; }
+      .preview-inspector-copy { color: var(--mvo-text-secondary); font-size: .8125rem; }
+      .preview-footer-label { color: var(--mvo-text-muted); font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; }
+      @media (max-width: 900px) { .preview-empty { min-height: 8rem; } }
+    </style>
+  </head>
+  <body>
+    <section class="workspace-root" aria-label="MusicOnVerse presentation-only preview">
+      <div class="environment" aria-hidden="true"></div>
+      <header data-surface="header">
+        <div data-brand>MusicOnVerse</div>
+        <div class="preview-note">Presentation preview · no audio connected</div>
+      </header>
+      <div data-surface="body">
+        <main data-surface="workspace" aria-label="Preview workspace">
+          <p class="preview-note">Grounded environment · precise production surface</p>
+          <h1 class="preview-title">A quiet place to hear clearly.</h1>
+          <p class="preview-copy">This is a visual integration preview for the new shell. The cosmic environment is locally authored; no audio, analysis, transport, or production controls are connected on this page.</p>
+          <section class="preview-empty" role="status" aria-live="polite">
+            <h2>No source loaded</h2>
+            <p>In the application, the lead-owned shell will connect the existing single-file import and analysis operations here. No waveform or result is fabricated for this preview.</p>
+          </section>
+        </main>
+        <aside data-surface="inspector" aria-label="Presentation contract">
+          <h2 class="preview-inspector-title">Inspector surface</h2>
+          <p class="preview-inspector-copy">Reserved for truthful source, analysis, crop, and Master Fix details when supplied by the real controller.</p>
+          <p class="preview-note">No fake mixer · plugins · library · SYLUNE execution</p>
+        </aside>
+      </div>
+      <footer data-surface="transport" aria-label="Transport surface preview">
+        <span class="preview-footer-label">Transport surface</span>
+        <span class="preview-note">Preview only · no audio · no controls connected</span>
+      </footer>
+    </section>
+  </body>
+</html>

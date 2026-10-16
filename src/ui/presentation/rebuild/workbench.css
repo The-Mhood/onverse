@@ -1,0 +1,397 @@
+/* Presentation primitives for the lead-owned semantic shell.
+ * Expected shape: .workspace-root > .environment + header[data-surface=header]
+ * + [data-surface=body](main[data-surface=workspace] + aside[data-surface=inspector]).
+ * A real transport group may live inside the single-file editor. This file owns
+ * no product state, event bindings, or rendering lifecycle.
+ */
+html,
+body {
+  min-width: 320px;
+  min-height: 100%;
+  margin: 0;
+  background: var(--mvo-space-0);
+}
+
+.workspace-root,
+.workspace-root * {
+  box-sizing: border-box;
+}
+
+.workspace-root {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  gap: clamp(0.625rem, 1vw, 0.875rem);
+  width: 100%;
+  min-width: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: clamp(0.75rem, 1.35vw, 1.25rem);
+  overflow: hidden;
+  color: var(--mvo-text-primary);
+  background: var(--mvo-space-0);
+  font-family: var(--mvo-font-ui);
+  font-size: 0.875rem;
+  line-height: 1.45;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Keep all functional surfaces above the independent environmental veils. */
+.workspace-root > :not(.environment) {
+  position: relative;
+  z-index: 2;
+  min-width: 0;
+}
+
+.workspace-root button,
+.workspace-root input,
+.workspace-root select,
+.workspace-root textarea {
+  color: inherit;
+  font: inherit;
+}
+
+.workspace-root button {
+  min-width: 2.25rem;
+  min-height: 2.25rem;
+  border: 1px solid var(--mvo-border-default);
+  border-radius: var(--mvo-radius-control);
+  background: linear-gradient(180deg, var(--mvo-control-surface-top), var(--mvo-control-surface-bottom));
+  color: var(--mvo-text-primary);
+  cursor: pointer;
+  transition:
+    border-color var(--mvo-motion-fast) ease,
+    background-color var(--mvo-motion-fast) ease,
+    color var(--mvo-motion-fast) ease,
+    box-shadow var(--mvo-motion-fast) ease;
+}
+
+.workspace-root button:hover:not(:disabled):not([aria-disabled="true"]) {
+  border-color: var(--mvo-border-strong);
+  background: var(--mvo-control-surface-hover);
+}
+
+.workspace-root button:active:not(:disabled):not([aria-disabled="true"]) {
+  background: var(--mvo-selection-wash);
+}
+
+.workspace-root button:disabled,
+.workspace-root button[aria-disabled="true"] {
+  cursor: not-allowed;
+  color: var(--mvo-text-muted);
+  opacity: 0.58;
+}
+
+.workspace-root :focus-visible {
+  outline: 2px solid var(--mvo-focus);
+  outline-offset: 2px;
+}
+
+.workspace-root input:not([type="range"]),
+.workspace-root select,
+.workspace-root textarea {
+  min-height: 2.375rem;
+  border: 1px solid var(--mvo-border-default);
+  border-radius: var(--mvo-radius-control);
+  background: var(--mvo-surface-recessed);
+  color: var(--mvo-text-primary);
+}
+
+.workspace-root input[type="range"] {
+  accent-color: var(--mvo-accent-functional);
+}
+
+.workspace-root :is(input, output, time, [data-numeric]) {
+  font-variant-numeric: var(--mvo-numeric);
+}
+
+.workspace-root :is(code, kbd, samp, [data-mono]) {
+  font-family: var(--mvo-font-mono);
+  font-variant-numeric: var(--mvo-numeric);
+}
+
+/* Quiet top rail: identity stays secondary to the source/workspace. */
+.workspace-root > [data-surface="header"] {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--mvo-space-4x);
+  min-height: 2.875rem;
+  padding: 0 0.375rem 0.625rem;
+  border-bottom: 1px solid var(--mvo-border-subtle);
+  background: linear-gradient(180deg, var(--mvo-header-wash), transparent);
+}
+
+.workspace-root [data-brand] {
+  color: var(--mvo-brand-celestial);
+  font-size: 0.75rem;
+  font-weight: 650;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.workspace-root [data-eyebrow] {
+  color: var(--mvo-text-muted);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* Editor and inspector share a console plane. High opacity keeps numerical
+   detail stable; diffuse shadows and a faint top wash dissolve only the edges. */
+.workspace-root > [data-surface="body"] {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(15rem, 19rem);
+  gap: clamp(0.625rem, 1vw, 0.875rem);
+  min-width: 0;
+  min-height: 0;
+}
+
+.workspace-root [data-surface="workspace"],
+.workspace-root [data-surface="inspector"] {
+  position: relative;
+  isolation: isolate;
+  min-width: 0;
+  min-height: 0;
+  overflow: auto;
+  border: 1px solid var(--mvo-border-default);
+  border-radius: var(--mvo-radius-console);
+  box-shadow: var(--mvo-shadow-console), inset 0 1px var(--mvo-edge-highlight);
+  scrollbar-color: var(--mvo-scrollbar-thumb) transparent;
+  scrollbar-width: thin;
+  transition:
+    border-color var(--mvo-motion-surface) ease,
+    box-shadow var(--mvo-motion-surface) ease,
+    opacity var(--mvo-motion-panel) ease,
+    transform var(--mvo-motion-panel) cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.workspace-root [data-surface="workspace"] {
+  padding: clamp(1rem, 1.65vw, 1.625rem);
+  background:
+    radial-gradient(ellipse 76% 35% at 12% 0%, var(--mvo-workspace-light-wash) 0%, transparent 78%),
+    linear-gradient(148deg, var(--mvo-panel-workspace-top), var(--mvo-panel-workspace-bottom) 68%),
+    var(--mvo-surface-0);
+}
+
+.workspace-root [data-surface="workspace"]::before {
+  position: absolute;
+  top: 0;
+  right: 1rem;
+  left: 1rem;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--mvo-light-spill-cool), transparent);
+  content: "";
+  pointer-events: none;
+}
+
+.workspace-root [data-surface="inspector"] {
+  padding: clamp(0.875rem, 1.25vw, 1.25rem);
+  background:
+    radial-gradient(ellipse 66% 36% at 100% 0%, var(--mvo-inspector-light-wash) 0%, transparent 78%),
+    linear-gradient(165deg, var(--mvo-panel-inspector-top), var(--mvo-panel-inspector-bottom) 72%),
+    var(--mvo-surface-1);
+}
+
+.workspace-root [data-surface="inspector"] > :where(section, div) + :where(section, div) {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--mvo-border-subtle);
+}
+
+.workspace-root [data-surface="transport"] {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(0.5rem, 1vw, 1rem);
+  min-height: 3.625rem;
+  padding: 0.375rem clamp(0.75rem, 1.2vw, 1.125rem);
+  border: 1px solid var(--mvo-border-default);
+  border-radius: var(--mvo-radius-panel);
+  background:
+    radial-gradient(ellipse 52% 86% at 50% 0%, var(--mvo-transport-light-wash) 0%, transparent 82%),
+    linear-gradient(180deg, var(--mvo-panel-transport-top), var(--mvo-panel-transport-bottom));
+  box-shadow: var(--mvo-shadow-raised), inset 0 1px var(--mvo-edge-highlight);
+  transition:
+    border-color var(--mvo-motion-surface) ease,
+    box-shadow var(--mvo-motion-surface) ease,
+    opacity var(--mvo-motion-panel) ease,
+    transform var(--mvo-motion-panel) cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.workspace-root [data-surface="transport"] [data-role="time"] {
+  min-width: 5.25rem;
+  color: var(--mvo-text-secondary);
+  font-family: var(--mvo-font-mono);
+  font-variant-numeric: var(--mvo-numeric);
+  text-align: center;
+}
+
+/* Optional visual hooks for a host that already changes views. They only style
+   an explicitly marked real surface; they do not create or trigger a view. */
+.workspace-root :is([data-surface="workspace"], [data-surface="inspector"], [data-surface="transport"])[data-view-phase="enter"] {
+  animation: mvo-panel-settle-in var(--mvo-motion-panel) cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.workspace-root :is([data-surface="workspace"], [data-surface="inspector"], [data-surface="transport"])[data-view-phase="exit"] {
+  animation: mvo-panel-settle-out var(--mvo-motion-panel) cubic-bezier(0.4, 0, 0.6, 1) both;
+}
+
+@keyframes mvo-panel-settle-in {
+  from { opacity: 0; transform: translate3d(0, 0.35rem, 0) scale(0.997); }
+  to { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+}
+
+@keyframes mvo-panel-settle-out {
+  from { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+  to { opacity: 0; transform: translate3d(0, -0.2rem, 0) scale(0.998); }
+}
+
+/* Truthful rendering hooks: the stylesheet never fabricates waveform data. */
+.workspace-root [data-role="waveform"] {
+  display: block;
+  width: 100%;
+  min-height: 7rem;
+  border: 1px solid var(--mvo-border-subtle);
+  border-radius: var(--mvo-radius-control);
+  background: linear-gradient(180deg, var(--mvo-panel-waveform-top), var(--mvo-panel-waveform-bottom));
+}
+
+.workspace-root [data-role="waveform"] :is(path, polyline, line) {
+  vector-effect: non-scaling-stroke;
+}
+
+.workspace-root [data-role="selection"] {
+  border-inline: 1px solid var(--mvo-accent-selected);
+  background: var(--mvo-selection-wash);
+}
+
+.workspace-root [data-role="region-boundary"] {
+  width: 0.75rem;
+  border-inline-start: 2px solid var(--mvo-accent-functional);
+  cursor: ew-resize;
+}
+
+.workspace-root [data-role="timeline-ruler"] {
+  color: var(--mvo-text-muted);
+  font-family: var(--mvo-font-mono);
+  font-size: 0.6875rem;
+  font-variant-numeric: var(--mvo-numeric);
+}
+
+/* Reuse one semantic colour for the same track/region wherever it appears. */
+.workspace-root [data-track-color="voice"] { --mvo-current-track: var(--mvo-track-voice); }
+.workspace-root [data-track-color="rhythm"] { --mvo-current-track: var(--mvo-track-rhythm); }
+.workspace-root [data-track-color="low"] { --mvo-current-track: var(--mvo-track-low); }
+.workspace-root [data-track-color="harmony"] { --mvo-current-track: var(--mvo-track-harmony); }
+.workspace-root [data-track-color="texture"] { --mvo-current-track: var(--mvo-track-texture); }
+.workspace-root [data-track-color="neutral"] { --mvo-current-track: var(--mvo-track-neutral); }
+
+.workspace-root [data-role="track-marker"],
+.workspace-root [data-role="region-marker"] {
+  border-color: var(--mvo-current-track, var(--mvo-track-neutral));
+}
+
+.workspace-root [data-role="track-marker"]::before,
+.workspace-root [data-role="region-marker"]::before {
+  background: var(--mvo-current-track, var(--mvo-track-neutral));
+}
+
+.workspace-root [aria-live="polite"],
+.workspace-root [role="status"] {
+  color: var(--mvo-text-secondary);
+}
+
+@media (max-width: 1180px) {
+  .workspace-root {
+    gap: 0.625rem;
+    padding: 0.75rem;
+  }
+
+  .workspace-root > [data-surface="body"] {
+    grid-template-columns: minmax(0, 1fr) minmax(14rem, 16.5rem);
+    gap: 0.625rem;
+  }
+}
+
+@media (max-width: 900px) {
+  .workspace-root {
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    overflow: auto;
+  }
+
+  .workspace-root > [data-surface="body"] {
+    grid-template-columns: minmax(0, 1fr);
+    min-height: auto;
+  }
+
+  .workspace-root [data-surface="workspace"],
+  .workspace-root [data-surface="inspector"] {
+    max-height: none;
+  }
+
+  .workspace-root [data-surface="transport"] {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-height: 760px) and (min-width: 901px) {
+  .workspace-root {
+    gap: 0.5rem;
+    padding: 0.625rem 0.875rem;
+  }
+
+  .workspace-root > [data-surface="header"] {
+    min-height: 2.5rem;
+    padding-bottom: 0.375rem;
+  }
+
+  .workspace-root [data-surface="workspace"],
+  .workspace-root [data-surface="inspector"] {
+    border-radius: 0.75rem;
+  }
+
+  .workspace-root [data-surface="workspace"] {
+    padding: 0.875rem 1rem;
+  }
+
+  .workspace-root [data-surface="transport"] {
+    min-height: 3.125rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .workspace-root *,
+  .workspace-root *::before,
+  .workspace-root *::after,
+  .workspace-root::before {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation: none !important;
+  }
+
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .workspace-root [data-surface="workspace"],
+  .workspace-root [data-surface="inspector"],
+  .workspace-root [data-surface="transport"] {
+    background: var(--mvo-surface-solid);
+    box-shadow: var(--mvo-shadow-console);
+  }
+}
+
+@media (forced-colors: active) {
+  .workspace-root [data-surface="workspace"],
+  .workspace-root [data-surface="inspector"],
+  .workspace-root [data-surface="transport"] {
+    border: 1px solid CanvasText;
+  }
+
+  .workspace-root :focus-visible {
+    outline: 2px solid Highlight;
+  }
+}

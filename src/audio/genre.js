@@ -1,12 +1,10 @@
-/* MusicOnVerse — genre library modeled on the genre & sub-genre taxonomy of
- * the major music platforms (Spotify, Apple Music, YouTube Music).
- *
- * Categories mirror the platform "genres" users browse on each service
- * (Hip-Hop, R&B/Soul, Pop, Latin · Reggaeton, Afrobeats, Dance & Electronic,
- * Rock, Country, Folk, Blues, Jazz, Classical, Reggae). Every sub-genre under
- * a category carries a distilled mix fingerprint of that sub-genre's top
- * tracks — same feature space the analyzer measures (loudness LUFS, dynamic
- * crest, spectral centroid, stereo correlation & width, 7-band EQ balance).
+/* MusicOnVerse — built-in genre profiles and platform-category mappings.
+ * Category aliases and labels support reference resolution across Spotify,
+ * Apple Music, and YouTube Music. The numeric genre targets are illustrative
+ * hand-authored heuristics, not measurements of a chart-track corpus or
+ * independently verified platform recommendations. They use the same feature
+ * space the analyzer measures (loudness LUFS, dynamic crest, spectral centroid,
+ * stereo correlation and width, 7-band EQ balance).
  *
  * bands order: sub, bass, low, mid, high, presence, air
  */
@@ -115,7 +113,7 @@ export function categoryById(id) {
   return CATEGORIES.find((c) => c.id === id) || null
 }
 
-/* genre profile targeted by a category (its lead sub-genre fingerprint) */
+/* Built-in profile selected for a category (its first listed sub-genre). */
 export function categoryProfile(id) {
   const c = categoryById(id)
   if (!c) return null

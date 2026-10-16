@@ -1,0 +1,10 @@
+{
+  "testedRef": "b9def81615a998f5b3b4e0cce9547362af392db8",
+  "appImplementation": "6a9369ad28239513158b87aa5467304222c093dc",
+  "sharedBase": "2faa3939b9e109e5a9ed2e0d53130dc51c5abc9e",
+  "branch": "arena/14df8ffa-onverse",
+  "renderer": "Chromium CPU raster (--disable-gpu), no physical GPU qualification",
+  "result": "PASS",
+  "syntheticOnly": true,
+  "screenshots": "Unmodified actual production captures; complete set is in local review ZIP; compact subset committed solely for direct P/owner review"
+}

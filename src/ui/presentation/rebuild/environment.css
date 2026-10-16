@@ -1,0 +1,101 @@
+/* A grounded horizon image plus three independent, low-amplitude atmospheric
+   layers. Composited transform/opacity drift evolves gently without a canvas,
+   camera motion, or animated background repaint. The local art stays bundled. */
+.workspace-root > .environment {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  overflow: hidden;
+  contain: paint;
+  isolation: isolate;
+  pointer-events: none;
+  background-color: var(--mvo-space-0);
+  background-image:
+    linear-gradient(90deg, var(--mvo-scene-shade-left) 0%, var(--mvo-scene-shade-mid) 43%, var(--mvo-scene-shade-right) 100%),
+    linear-gradient(180deg, var(--mvo-scene-shade-top) 0%, transparent 34%, var(--mvo-scene-shade-band) 64%, var(--mvo-scene-shade-low) 100%),
+    url("./assets/first-person-cosmic-horizon.jpg?inline");
+  background-repeat: no-repeat;
+  background-position: center, center, 56% 48%;
+  background-size: cover;
+}
+
+/* Far field: broad nebular colour drifts against the fixed horizon image. */
+.workspace-root > .environment::before,
+.workspace-root > .environment::after {
+  position: absolute;
+  inset: -5%;
+  content: "";
+  pointer-events: none;
+}
+
+.workspace-root > .environment::before {
+  background:
+    radial-gradient(ellipse 38% 38% at 20% 36%, var(--mvo-atmosphere-violet) 0%, transparent 78%),
+    radial-gradient(ellipse 36% 34% at 72% 43%, var(--mvo-atmosphere-indigo) 0%, transparent 79%),
+    radial-gradient(ellipse at 56% 45%, transparent 27%, var(--mvo-scene-vignette-mid) 66%, var(--mvo-scene-vignette-edge) 100%),
+    linear-gradient(180deg, var(--mvo-scene-vignette-top), transparent 18%, transparent 72%, var(--mvo-scene-ground-veil));
+  opacity: 0.76;
+  transform: translate3d(-0.46%, 0.14%, 0) scale(1.025);
+  animation: mvo-nebula-drift var(--mvo-motion-environment-far) cubic-bezier(0.42, 0, 0.58, 1) -67s infinite alternate;
+}
+
+/* Mid field: warm/cool light spill slowly changes its relation to the horizon. */
+.workspace-root > .environment::after {
+  background:
+    radial-gradient(ellipse 25% 21% at 66% 52%, var(--mvo-atmosphere-amber) 0%, transparent 78%),
+    radial-gradient(ellipse 36% 28% at 38% 79%, var(--mvo-atmosphere-teal) 0%, transparent 80%),
+    radial-gradient(ellipse 32% 24% at 79% 36%, var(--mvo-atmosphere-rose) 0%, transparent 82%),
+    linear-gradient(180deg, transparent 48%, var(--mvo-scene-ground-mid) 68%, var(--mvo-scene-ground-bottom) 100%);
+  opacity: 0.58;
+  transform: translate3d(0.34%, -0.11%, 0) scale(1.02);
+  animation: mvo-horizon-drift var(--mvo-motion-environment-mid) cubic-bezier(0.42, 0, 0.58, 1) -53s infinite alternate;
+}
+
+/* Near field: a separate, especially faint light veil over the environment;
+   it remains below every functional surface and never intercepts input. */
+.workspace-root::before {
+  position: absolute;
+  z-index: 1;
+  inset: -4%;
+  content: "";
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 24% 22% at 16% 74%, var(--mvo-atmosphere-glacier) 0%, transparent 77%),
+    radial-gradient(ellipse 20% 22% at 82% 27%, var(--mvo-atmosphere-amber) 0%, transparent 80%),
+    radial-gradient(ellipse 28% 18% at 54% 91%, var(--mvo-atmosphere-teal) 0%, transparent 83%);
+  opacity: 0.32;
+  transform: translate3d(-0.28%, 0.1%, 0) scale(1.015);
+  animation: mvo-nearfield-drift var(--mvo-motion-environment-near) cubic-bezier(0.42, 0, 0.58, 1) -31s infinite alternate;
+}
+
+/* Each layer reaches its endpoints gently, then reverses with no loop jump.
+   The staggered periods give depth without a perceptible camera pan. */
+@keyframes mvo-nebula-drift {
+  from { transform: translate3d(-0.28%, 0.08%, 0) scale(1.025); }
+  to { transform: translate3d(0.28%, -0.08%, 0) scale(1.025); }
+}
+
+@keyframes mvo-horizon-drift {
+  from { transform: translate3d(0.18%, -0.08%, 0) scale(1.02); }
+  to { transform: translate3d(-0.2%, 0.08%, 0) scale(1.02); }
+}
+
+@keyframes mvo-nearfield-drift {
+  from { opacity: 0.32; transform: translate3d(-0.28%, 0.1%, 0) scale(1.015); }
+  to { opacity: 0.48; transform: translate3d(0.28%, -0.1%, 0) scale(1.02); }
+}
+
+@media (max-width: 900px) {
+  .workspace-root > .environment {
+    background-position: center, center, 59% 50%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .workspace-root::before,
+  .workspace-root > .environment::before,
+  .workspace-root > .environment::after {
+    animation: none !important;
+    transform: none !important;
+  }
+}

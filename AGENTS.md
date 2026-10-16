@@ -1,5 +1,33 @@
 # MusicOnVerse agent collaboration rules
 
+## CURRENT DELIVERY AUTHORITY — 2026-10-16
+
+The owner explicitly RELEASED the held app integration for recovery, publication
+and safe reconciliation. The former UI source-publication hold is superseded.
+Authoritative app: `arena/14df8ffa-onverse` / PR4, recovery6199230, normal8051
+history reconciliation3f429dd, cinematic implementation6a9369a. Main remains2faa3939;
+no main/PR8 merge or product/native acceptance is implied. See
+[delivery verification](docs/engineering/DELIVERY_VERIFICATION_20261016.md) and
+[full reference review](docs/design/REFERENCE_REVIEW_20261016.md).
+
+P is UI agent; B is retired. P7e105a0's six latest presentation paths were reviewed
+and integrated byte-identically. Lead owns main/index, workbench/analysis wiring,
+`src/ui/workbench/**` host adapter and combined tests; P retains presentation scope
+`src/ui/presentation/rebuild/**`. Compare exact published source before reconciling
+P's dirty tree; preserve .arena/artifacts/untracked/core. Coordinate scoped future
+deltas directly through GitHub, not owner relay or repeated ordinary approvals.
+No concurrent overwrite, blind pull/reset/clean, force/history rewrite, branch
+switch or unrelated held-core publication. DSP/models/storage/IPC/security/native
+lifecycle remain protected. No hidden old UI or fake DAW/SYLUNE capabilities.
+
+References01–13 are recovered/individually reviewed at project900f0733.13system,
+02first-person cosmic,05/09precision,04framing-only are current. Browser proof is
+actual root production entry, not the P preview. Clean published suite272tests
+(269pass/3knownTODO); broader dirty suite462(459pass/3TODO) includes unpublished
+core drafts. Both real viewports/motion/dialog/reduced-motion/audio proof passed
+with declared CPU raster; SwiftShader emulation stalls and native/Mac limits are
+explicit in the report. Older conflicting authority/status below is historical.
+
 ## Scope and authority
 
 - The product owner decides product scope, visual direction, major architecture changes, dependencies, external costs, and destructive actions.
