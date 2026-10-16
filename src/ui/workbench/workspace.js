@@ -64,8 +64,15 @@ export function mountWorkspace(root, { recorders = [] } = {}) {
       <div class="operation-progress" hidden><span class="progress-label">Working…</span><progress max="1" value="0" aria-label="Operation progress"></progress></div>
       <p class="operation-status" role="status" aria-live="polite">Ready. Audio processing stays local; resolving a stream reference requires internet access.</p>
       <div class="desktop-update" hidden role="status"><span></span><button type="button" class="install-update" hidden>Restart & install</button><button type="button" class="dismiss-update">Dismiss</button></div>
-      <footer class="studio-footer"><span>MusicOnVerse <span aria-hidden="true">/</span> LOCAL WORKBENCH</span><details><summary>Engine limits & future capabilities</summary><p>Known stereo loudness and peak/gain limitations remain. Check your result before delivery. This is not a standards-certified meter.</p><p>Multitrack arrangement, mixer/routing, plugin hosting, sound library and SYLUNE execution are not implemented here. No fake tracks or AI commands are shown. No project persistence or undo is exposed.</p></details></footer>
-    </div>`
+      <footer class="studio-footer"><span>MusicOnVerse <span aria-hidden="true">/</span> LOCAL WORKBENCH</span><button type="button" data-action="capabilities" aria-haspopup="dialog">Engine limits &amp; capabilities</button></footer>
+      <dialog class="capability-sheet" aria-labelledby="capability-title">
+      <header><h2 id="capability-title" tabindex="-1" autofocus>One source. Real processing.</h2><button data-action="close-capabilities" aria-label="Close scope and limits">Close</button></header>
+      <p class="capability-limit">Known stereo loudness and peak/gain limitations remain. Check your result before delivery. This is not a standards-certified meter; no project persistence or undo is exposed.</p>
+      <p>Import or generate a demo. Analyze your mix, compare a reference, play A/B, crop a region, apply Master Fix and manual adjustments, then export real audio.</p>
+      <p class="capability-limit">This is a single-source audio workbench. Multitrack, mixer routing, plugins, a media library and SYLUNE execution are not implemented. Local browser codec support varies.</p>
+      <p class="capability-limit">Browser verification is not packaged Mac qualification, device listening, or a release/standards certification.</p>
+    </dialog>
+  </div>`
   root.replaceChildren(template.content.cloneNode(true))
   const must = selector => {
     const node = root.querySelector(selector)
@@ -85,6 +92,21 @@ export function mountWorkspace(root, { recorders = [] } = {}) {
   }
   const events = new AbortController()
   let state, controller, oldRefCategory, lastIssues, lastBuffer, lastFixed, lastSide, lastCrop, lastWidth, observer
+  let previousAnalysis, previousFixed, previousRefSource, previousCropVisible = false
+  const sheet = must(".capability-sheet")
+  const palette = getComputedStyle(root)
+  const colors = {
+    grid: palette.getPropertyValue("--mvo-border-subtle").trim(),
+    original: palette.getPropertyValue("--mvo-accent-functional").trim(),
+    fixed: palette.getPropertyValue("--mvo-color-amber").trim(),
+  }
+  function reveal(element) {
+    if (!element || element.hidden || globalThis.matchMedia?.("(prefers-reduced-motion: reduce)").matches) return
+    // This invalidation occurs once per real content change, not on playback ticks.
+    delete element.dataset.viewPhase
+    void element.offsetWidth
+    element.dataset.viewPhase = "enter"
+  }
   function draw() {
     if (!state) return
     const canvas = elements["audio-waveform"], rect = canvas.getBoundingClientRect(), w = Math.max(1, Math.round(rect.width)), h = Math.max(1, Math.round(rect.height)), dpr = devicePixelRatio || 1
@@ -96,12 +118,12 @@ export function mountWorkspace(root, { recorders = [] } = {}) {
     canvas.width = w * dpr; canvas.height = h * dpr
     const ctx = canvas.getContext("2d"); if (!ctx) throw new Error("2D waveform rendering is unavailable")
     ctx.scale(dpr, dpr); ctx.clearRect(0, 0, w, h)
-    ctx.strokeStyle = "#283a3d"; ctx.lineWidth = 1
+    ctx.strokeStyle = colors.grid; ctx.lineWidth = 1
     for (let i = 0; i < 9; i++) { ctx.beginPath(); ctx.moveTo(i * w / 8, 0); ctx.lineTo(i * w / 8, h); ctx.stroke() }
     ctx.beginPath(); ctx.moveTo(0, h / 2); ctx.lineTo(w, h / 2); ctx.stroke()
     if (selected) {
       const peaks = peaksFor(selected, Math.max(1, Math.floor(w / 3)))
-      ctx.fillStyle = state.ab === "fixed" ? "#e9bc86" : "#8abdb2"
+      ctx.fillStyle = state.ab === "fixed" ? colors.fixed : colors.original
       for (let i = 0; i < peaks.length; i++) { const amplitude = Math.min(1, peaks[i]) * h * .43; ctx.fillRect(i * 3, h / 2 - amplitude, 1.6, Math.max(1, amplitude * 2)) }
     }
   }
@@ -122,7 +144,7 @@ export function mountWorkspace(root, { recorders = [] } = {}) {
       for (const which of ["in", "out"]) { const el = elements[`region-${which}`]; el.max = duration; if (document.activeElement !== el) el.value = s.crop[which].toFixed(2) }
       elements["region-highlight"].style.left = `${s.crop.in / duration * 100}%`; elements["region-highlight"].style.width = `${(s.crop.out - s.crop.in) / duration * 100}%`
     }
-    for (const [action, button] of Object.entries(buttons)) button.disabled = busy || (!["import", "demo", "reference"].includes(action) && !s.buffer)
+    for (const [action, button] of Object.entries(buttons)) button.disabled = busy || (!["import", "demo", "reference", "capabilities", "close-capabilities"].includes(action) && !s.buffer)
     buttons.fixed.disabled = busy || !s.fixed; buttons.fix.disabled = busy || !s.analysis
     buttons["save-fixed"].disabled = busy || !s.fixed; buttons.report.disabled = busy || !s.analysis
     buttons["reset-tweaks"].disabled = busy || !s.fixed
@@ -158,6 +180,12 @@ export function mountWorkspace(root, { recorders = [] } = {}) {
       input.disabled = !s.fixed || s.busy
       if (document.activeElement !== input) { input.value = v; input.previousElementSibling.textContent = v }
     }
+    buttons.capabilities.disabled = false; buttons["close-capabilities"].disabled = false
+    if (s.analysis && s.analysis !== previousAnalysis) reveal(must(".inspector"))
+    if (s.fixed && s.fixed !== previousFixed) reveal(must(".editor-panel"))
+    if (s.ref.src !== previousRefSource) reveal(elements[s.ref.src === "file" ? "file-reference" : s.ref.src === "url" ? "url-reference" : "profile-options"])
+    if (s.crop && !previousCropVisible) reveal(elements["region-controls"])
+    previousAnalysis = s.analysis; previousFixed = s.fixed; previousRefSource = s.ref.src; previousCropVisible = !!s.crop
     draw()
   }
   function toast(message) { elements["operation-status"].textContent = String(message) }
@@ -172,6 +200,7 @@ export function mountWorkspace(root, { recorders = [] } = {}) {
     controller = c; const on = (node, name, handler) => node.addEventListener(name, handler, { signal: events.signal })
     const invoke = async fn => { try { await fn() } catch (error) { console.error(error); toast(`Operation failed: ${error.message || error}`) } }
     const actions = {
+      capabilities: () => { buttons.capabilities.focus({ preventScroll: true }); sheet.showModal() }, "close-capabilities": () => sheet.close(),
       import: () => elements["mix-picker"].click(), demo: c.demo, analyze: c.runAnalysis, fix: c.runFix,
       play: c.togglePlay, back: () => c.seekBy(-10), forward: () => c.seekBy(10), rate: c.cycleRate,
       original: () => c.selectSide("orig"), fixed: () => c.selectSide("fixed"), crop: c.toggleCrop,
@@ -180,6 +209,12 @@ export function mountWorkspace(root, { recorders = [] } = {}) {
       reference: () => elements["reference-picker"].click(), "reset-tweaks": c.resetTweaks,
       convert: () => c.runConvert({ format: elements["output-format"].value, kbps: Number(elements["output-bitrate"].value), floatWav: elements["output-depth"].value === "float" }),
     }
+    on(root, "animationend", event => {
+      if (event.animationName === "mvo-panel-settle-in") delete event.target.dataset.viewPhase
+    })
+    on(must(".adjustments"), "toggle", event => {
+      if (event.target.open) reveal(elements["adjustment-inputs"])
+    })
     for (const [action, button] of Object.entries(buttons)) { if (!actions[action]) throw new Error(`Unwired workspace action: ${action}`); on(button, "click", () => invoke(actions[action])) }
     on(elements["mix-picker"], "change", () => { const f = elements["mix-picker"].files[0]; elements["mix-picker"].value = ""; if (f) invoke(() => c.openFile(f)) })
     on(elements["reference-picker"], "change", () => { const f = elements["reference-picker"].files[0]; elements["reference-picker"].value = ""; if (f) invoke(() => c.pickReferenceFile(f)) })
@@ -193,7 +228,7 @@ export function mountWorkspace(root, { recorders = [] } = {}) {
     for (const which of ["in", "out"]) on(elements[`region-${which}`], "change", () => c.setCrop(which, Number(elements[`region-${which}`].value)))
     on(elements["adjustment-inputs"], "input", event => { const input = event.target; if (!input.dataset.tweak) return; input.previousElementSibling.textContent = input.value; c.setTweak(input.dataset.tweak, Number(input.value)) })
     on(window, "keydown", event => {
-      if (event.target.closest("input,select,textarea,button,[contenteditable=true],summary,a")) return
+      if (sheet.open || event.target.closest("input,select,textarea,button,[contenteditable=true],summary,a")) return
       if (event.code === "Space") { event.preventDefault(); invoke(c.togglePlay) }
       if (event.code === "ArrowRight" || event.code === "ArrowLeft") { event.preventDefault(); c.seekBy((event.code === "ArrowRight" ? 1 : -1) * (event.shiftKey ? 10 : 5)) }
     })
@@ -211,5 +246,5 @@ export function mountWorkspace(root, { recorders = [] } = {}) {
     elements["install-update"].onclick = install
     elements["dismiss-update"].onclick = () => { box.hidden = true }
   }
-  return { render, toast, progress, showPanel, bind, update, dispose() { events.abort(); observer?.disconnect(); elements["install-update"].onclick = null; elements["dismiss-update"].onclick = null } }
+  return { render, toast, progress, showPanel, bind, update, dispose() { events.abort(); observer?.disconnect(); if (sheet.open) sheet.close(); elements["install-update"].onclick = null; elements["dismiss-update"].onclick = null } }
 }
