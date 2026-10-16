@@ -1,6 +1,6 @@
 # UI implementation handoff — COORD-006 / UI-004
 
-**Decision date: 2026-10-15 (Africa/Lagos).** Owner's final decisions supersede the earlier COORD-005 main-wait/read-only implementation restriction and the request to ask again about settled visual choices. Historical records remain evidence, not competing current instructions. [AGENTS.md](../../AGENTS.md) governs preservation; the [design brief](../design/DESIGN_BRIEF.md) remains the sole visual brief. This record supplies engineering decisions and a bounded assignment, not a second visual specification.
+**Historical handoff (decision date: 2026-10-15, Africa/Lagos), superseded for UI direction and file grants by UI-RESET-001 / issue #7 and the PR #8 review.** Its reference images, typography, Slice A/Orbit scope, and old path reservations are not current design authority. The new design is on hold until owner references arrive. Keep the technical measurements, provenance, constraints, and validation history below as historical evidence; do not treat this handoff as current implementation approval. [AGENTS.md](../../AGENTS.md) governs preservation.
 
 **Integration gate:** the lead reviews all of PR #3, fixes substantive findings, and uses the explicitly authorized `gh pr merge 3 --merge` only if review passes. The exact resulting main commit **M**, reviewed PR head, ancestry evidence and activation result are published in the **COORD-006 result comment on [PR #3](https://github.com/The-Mhood/onverse/pull/3)** after the operation. This file cannot contain its own future merge SHA. A proposed merge or this pre-merge document is not proof that M exists. Use the actual full published M, never a guessed SHA or a moving branch tip.
 
@@ -16,7 +16,7 @@
 
 This is **copy/wording provenance**, not a clipboard feature, asset identity hash or new measurement API.
 
-Source inspection: `src/audio/genre.js` defines numeric `GENRES`/category profiles directly; no measured chart-track corpus, collection recipe or corpus licence/provenance accompanies them. `index.html` currently advertises “fingerprints of Spotify's top tracks”; genre comments and UI labels are not evidence of that claim. Do not present platform strings or hard-coded targets as independently measured platform recommendations.
+Source inspection: `src/audio/genre.js` defines numeric `GENRES`/category profiles directly; no measured chart-track corpus, collection recipe or corpus licence/provenance accompanies them. The pre-reset entry metadata made an unsupported measured-platform-corpus claim; that copy has been removed. Genre comments and UI labels are not evidence of a measured corpus. Do not present platform strings or hard-coded targets as independently measured platform recommendations.
 
 Use these distinctions in Slice A, including entry-page metadata, explanatory text, reference labels and fallbacks:
 
@@ -47,7 +47,7 @@ Actual controller paths in `src/main.js`:
 ## 4. Font option A and texture packaging: resolved
 
 - **Option A = approved self-hosting**, concretely mapped here to Orbitron for sparse brand/display, Rajdhani for UI and Share Tech Mono for readouts, with system fallbacks. These are the existing verifiable families; no unavailable historical family proposal is fabricated.
-- Reviewed, unmodified WOFF2 subsets, complete OFL 1.1 notices, package versions/registry integrity and per-file SHA-256 hashes are vendored under [src/assets/fonts](../../src/assets/fonts/README.md). Three pinned Fontsource packages at 5.3.0, downloaded into scratch, integrity verified; no npm dependency, manifest/lock edit, lifecycle script, runtime CDN acquisition or fee. Review covers licence/dependency provenance, not a formal legal/binary security certification. Actual glyph/rendering checks remain UI acceptance work.
+- Historical record: reviewed, unmodified WOFF2 subsets, complete OFL 1.1 notices, package versions/registry integrity and per-file SHA-256 hashes were previously vendored under `src/assets/fonts/`. UI-RESET-001 later removed the unused font bytes, manifest, README and notices; no font binaries or runtime references remain. This provenance record does not approve those families for the replacement UI.
 - Slice A wires local `?inline` font URLs and accessible full `?raw` OFL text, and removes Google font links/preconnects. Assets are prepared in this baseline but **not yet wired into the old UI**. Don't mistake a successful baseline build for completed offline typography.
 - **Textures: locally generated/procedural, no CDN or downloaded planet-texture dependency.** Prefer the existing Three.js CanvasTexture mechanism for the later spike; deterministic local generation needs no network/source-asset licence acquisition. If a small static texture is needed for presentation, store a locally authored PNG with provenance in `src/assets/textures/` and import it explicitly with `?inline`. No unreviewed external artwork.
 - Existing `scripts/inline-dist.mjs` inlines JS/CSS, not arbitrary binary-relative URLs. An isolated proof using installed Vite and that exact inliner algorithm preserved a real inline WOFF2, a local PNG and full raw OFL text, with no external script/style/font/texture reference. This supports the packaging choice **at artifact level only**. Actual Slice A browser/file://, offline network and Electron behavior still require checks; no packaging configuration change is authorized/needed by this proof.
@@ -61,7 +61,7 @@ Actual controller paths in `src/main.js`:
 - `src/main.js`: presentation/templates and event binding only; preserve state schema, action semantics, awaited service calls, cleanup, reference decisions, processing/playback behavior and domain/application APIs. Ground-up DOM/CSS is allowed, not a core/controller/state rewrite.
 - `src/style.css`, `index.html`.
 - New presentation-only files under `src/ui/presentation/**` and `src/ui/styles/**`.
-- New `src/assets/fonts/fonts.css` and `src/assets/fonts/notices.js` for the reviewed assets; do not overwrite vendored binaries, notices or manifest.
+- The pre-reset proposal reserved `src/assets/fonts/fonts.css` and `notices.js`; that reservation is superseded. Do not recreate or wire font assets before new owner references.
 - New locally generated textures/provenance under `src/assets/textures/**`, with the inline packaging rule above.
 - New presentation tests under `tests/ui/**`, using existing tools; no new dependency/test runner.
 

@@ -1,13 +1,13 @@
 # Project guide: actual state and collaboration context
 
-**Snapshot: 2026-10-15.** This is a source map and onboarding guide, not a second target-architecture specification or an implementation assignment. Re-audit live code, Git, queue notices, and PRs before acting. [AGENTS.md](../../AGENTS.md) governs collaboration; [WORK_QUEUE.md](WORK_QUEUE.md) records tasks and evidence.
+**Historical snapshot: 2026-10-15.** This guide remains an actual-state/source map, not a target-architecture specification. **UI-RESET-001 status (2026-10-16):** `src/style.css`, `src/scene.js`, `src/ui/draw.js`, old icon/favicon/font assets, and the old entry template have been removed on PR #8. The neutral shell is not yet a usable frontend: `src/main.js` still mixes legacy view code with real controller operations, has dangling view references, and needs the lead-coordinated split before more functional edits. New visual design waits for owner references. Re-audit live code, Git, queue notices, and PRs before acting. [AGENTS.md](../../AGENTS.md) governs collaboration; [WORK_QUEUE.md](WORK_QUEUE.md) records tasks and evidence.
 
 ## 1. Read order and source of truth
 
 1. [README.md](../../README.md): entry point and branch availability.
 2. [AGENTS.md](../../AGENTS.md): authority, ownership, safety, and review.
 3. This guide and the latest notices/results in [WORK_QUEUE.md](WORK_QUEUE.md).
-4. [DESIGN_BRIEF.md](../design/DESIGN_BRIEF.md): canonical UI direction and approval boundaries.
+4. [DESIGN_BRIEF.md](../design/DESIGN_BRIEF.md): historical pre-reset direction; superseded until new owner references arrive.
 5. Relevant source/tests; [AUDIO_METERING_CONTRACT.md](AUDIO_METERING_CONTRACT.md) when numeric/audio behavior or its presentation is affected.
 6. [Architecture](../ARCHITECTURE.md), [product vision](../PRODUCT_VISION.md) and [roadmap](../ROADMAP.md) working drafts for future session/link work; read their explicit proposed-vs-implemented/review status. Source proposals remain pinned below.
 
@@ -30,25 +30,23 @@ Vanilla JavaScript/DOM with Vite 8, Tailwind 4/daisyUI 5, Three.js, and Electron
 
 | Path | Actual responsibility / caution |
 | --- | --- |
-| `src/main.js` | In-memory single-buffer state, DOM templates, events, panel/mode selection, import, analysis, playback/A–B, crop, processing, conversion, references. Shared hotspot: exclusive ownership only. |
-| `src/style.css` | Existing theme/tokens, layout, visual states, responsive rules, CSS reduced-motion handling. |
-| `src/ui/draw.js` | Waveform peak caching and waveform/radar drawing; preserve time/channel/playback semantics. |
-| `src/scene.js` | Three.js celestial background. Reduced motion reduces movement but does not currently stop the render loop. |
+| `src/main.js` | Mixed single-buffer controller and legacy presentation code. Old shell/renderer files were removed; module boot and dangling stage/draw references are under lead review. Do not make further functional edits before coordination. |
+| `src/style.css`, `src/scene.js`, `src/ui/draw.js` | Deleted by UI-RESET-001. The waveform peak calculation was extracted to `src/audio/waveformPeaks.js`; no production consumer is currently wired. |
 | `src/application/analysis/analysisService.js` | Async-shaped local analysis boundary; not a worker, scheduler, validator, or cancellation implementation. |
 | `src/domain/processors/buildProcessingPlan.js` | Pure processing-plan construction; not validation of AI/imported commands. |
 | `src/audio/analyzer.js`, `dsp.js`, `genre.js` | Production measurement/DSP/classification; unresolved loudness/true-peak/gain limitations. |
 | `src/audio/processor.js` | Audio decoding, one-buffer OfflineAudioContext processing, encoders/download helpers; not a multitrack or managed-asset pipeline. |
 | `src/audio/reference.js` | Reference resolution/analysis behavior; preserve supported reference workflows and privacy boundaries. |
 | `electron/main.cjs`, `preload.cjs` | Isolated desktop shell, external navigation, update bridge. No project/media filesystem repository IPC. |
-| `index.html` | Entry; old interface still requests Google fonts. Reviewed local assets under `src/assets/fonts/` are prepared; Slice A wires them/notices and removes CDN requests. |
+| `index.html` | Minimal non-designed entry shell with an accessible pending-reference status; no styles, font requests, favicon, or old layout markup. |
 | `tests/unit/`, `tests/audio/`, `tests/fixtures/` | Built-in Node tests and synthetic fixtures; inspect what each assertion actually proves. |
 | `scripts/validation/` | Isolated loudness candidate and pinned native-reference tooling, not production integration. |
 | `package.json`, `package-lock.json`, `vite.config.ts` | Scripts, dependencies, and build configuration; lead-approved scope only. |
-| `build/`, `public/` | Existing icons/assets; do not delete tracked icon sources as generated clutter. |
+| `build/`, `public/`, `src/assets/fonts/` | Old app icons, favicon, and unused vendored fonts have been removed under UI-RESET-001; no new visual assets are installed pending owner references. |
 
-### Preserve working interactions
+### Preserved controller operations (not currently reachable from the reset shell)
 
-File/drop/demo import; file/catalog/URL reference flows as currently supported; full/fast analysis and reports; waveform/radar/meters; playback, rate, seek, A–B; crop and region export; manual adjustments and single-buffer processing; WAV/MP3/available recorder conversion and downloads.
+The original controller source covers file/drop/demo import; file/catalog/URL reference flows; full/fast analysis and reports; waveform/radar/meters; playback, rate, seek, A–B; crop and region export; manual adjustments and single-buffer processing; WAV/MP3/available recorder conversion and downloads. The old DOM is gone and `src/main.js` still has unresolved view coupling, so these source paths are not evidence of a currently usable browser/Electron workflow. Lead coordination is required before further controller/view changes.
 
 "Converse" in the present interface does not prove an AI command executor exists. The `design-agent` dependency is not evidence of an integrated agent. Buffer loading resets processing/tweak state: **do not use whole-buffer reload as a linked-item replacement mechanism**.
 

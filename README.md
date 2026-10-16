@@ -1,6 +1,6 @@
 # MusicOnVerse
 
-A local audio analysis, processing, and conversion prototype evolving toward a professional music-production environment. **This repository does not yet implement a multitrack DAW, persistent sessions, Linked Sessions, external plugin hosting, or an AI command executor.**
+**UI reset status (2026-10-16):** the old stylesheet, procedural scene, canvas visualizer, template, and external icon/font assets have been removed; `src/main.js` still contains legacy render functions, inline icons, and DOM bindings awaiting lead-coordinated separation. The entry is a minimal pending-reference shell, and module boot is not yet validated. The replacement design is on hold until the owner supplies new references. Preserved audio, application, and domain code is not a claim that browser or desktop workflows currently boot or are usable. **This repository does not implement a multitrack DAW, persistent sessions, Linked Sessions, external plugin hosting, or an AI command executor.**
 
 ## Start here
 
@@ -9,17 +9,19 @@ A local audio analysis, processing, and conversion prototype evolving toward a p
 | [AGENTS.md](AGENTS.md) | Collaboration authority, ownership, isolation, review, and safety rules |
 | [Project guide](docs/engineering/PROJECT_GUIDE.md) | Actual capabilities, source map, contracts, limitations, and validation |
 | [Work queue](docs/engineering/WORK_QUEUE.md) | Current coordination state and historical task/result evidence |
-| [Design brief](docs/design/DESIGN_BRIEF.md) | Canonical settled visual direction; scoped implementation is governed by the dated handoff |
+| [Design brief](docs/design/DESIGN_BRIEF.md) | Historical pre-reset design direction; superseded until the owner supplies new references |
 | [agent-b master prompt](docs/engineering/AGENT_B_MASTER_PROMPT.md) | Reusable onboarding context; deliberately assigns no feature/task |
 | [Metering contract and research](docs/engineering/AUDIO_METERING_CONTRACT.md) | Proposed interfaces, measured evidence, and unresolved audio-safety limits |
 | [Architecture working draft](docs/ARCHITECTURE.md) | Proposed session/Linked Sessions semantics, transaction/recovery rules and proof gate; not an installed API |
 | [Product vision](docs/PRODUCT_VISION.md) / [roadmap](docs/ROADMAP.md) | Reconciled intent and incremental proof/test plan; review drafts, not shipped features or task assignments |
 
-Read the rules, guide, current queue notice, and design brief before changing anything. The queue retains historical snapshots: read its latest notices/results, not just an older task entry.
+Read the rules, guide, and latest reset/queue notices before changing anything. The existing design brief and UI handoff describe the superseded pre-reset direction; do not use them as the new visual authority. The queue retains historical snapshots: read its latest notices/results, not just an older task entry.
 
 ## Repository state and collaboration
 
-The lead works on fixed `arena/b25c318e-onverse`; engineering/onboarding is delivered through [PR #3](https://github.com/The-Mhood/onverse/pull/3) into `main`. The owner authorized its merge only after whole-PR review/fixes. The [2026-10-15 handoff](docs/engineering/UI_IMPLEMENTATION_HANDOFF.md) and COORD-006 result on that PR supply the actual merge M and conditional Slice A grant. Recheck live refs/PR result: pre-merge documents and branch names do not prove integration.
+The following collaboration details are a **2026-10-15 historical snapshot**. The later UI reset in issue #7 and lead review on PR #8 supersede its visual direction and UI ownership grants. Recheck current issue/PR state before acting; pre-merge documents and branch names do not prove integration.
+
+At that snapshot, engineering/onboarding was delivered through [PR #3](https://github.com/The-Mhood/onverse/pull/3) into `main`; the owner authorized its merge only after whole-PR review/fixes. COORD-006 records the actual merge M and conditional Slice A grant. The current reset does not authorize restoring that pre-reset interface.
 
 The separate [draft architecture PR #1](https://github.com/The-Mhood/onverse/pull/1) remains **unmerged**. CORE-007 explicitly reconciles its architecture, product vision and roadmap at the existing paths as working drafts for review, with attribution and later Linked Sessions constraints. These are not installed APIs, accepted POC defaults, executed tests or a PR merge. Its original README/engineering standards are not adopted; overlapping files require deliberate reconciliation, not a wholesale merge merely to onboard an agent.
 
@@ -53,7 +55,7 @@ At the 2026-10-15 COORD-006 review: **154 tests, 151 passes, 3 known legacy LUFS
 
 No npm test/lint/typecheck/UI-test scripts are currently configured. Report missing tooling as unconfigured, not passed. Do not add dependencies or run signing/release/update operations without separately approved scope.
 
-`README-BUILD.txt` contains older distribution instructions, including prebuilt/legacy/signing assumptions. It is historical packaging guidance, not proof that a prebuilt app is present or that macOS/legacy packaging works. The updater feed in `package.json` is a placeholder; signing, notarization, release feeds, and platform support require explicit validation before distribution.
+`README-BUILD.txt` records the current reset-shell and packaging status. Its command list describes configured scripts, not proof that macOS/legacy packaging works. The updater feed in `package.json` is a placeholder; signing, notarization, release feeds, and platform support require explicit validation before distribution.
 
 ## Change discipline
 

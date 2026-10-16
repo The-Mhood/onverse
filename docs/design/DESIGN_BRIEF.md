@@ -1,6 +1,6 @@
 # MusicOnVerse canonical design brief
 
-**Updated: 2026-10-15. Status: owner-settled visual/sequence decisions; Slice A implementation follows the bounded [COORD-006/UI-004 handoff](../engineering/UI_IMPLEMENTATION_HANDOFF.md) after actual merge M and worker preflight/ownership acknowledgment.** [AGENTS.md](../../AGENTS.md) governs ownership; [PROJECT_GUIDE.md](../engineering/PROJECT_GUIDE.md) distinguishes implemented capabilities from future DAW concepts. This is the single design-direction brief; task-specific audits/proposals should reference it, not create competing briefs.
+**Historical pre-reset brief (2026-10-15), superseded for visual direction and implementation scope by UI-RESET-001 / issue #7.** Do not use its references, palette, typography, Orbit plan, or Slice A grant as current design authority. The replacement design remains on hold until the owner supplies new references. Preserve this document as historical evidence; it is not an implementation assignment. [AGENTS.md](../../AGENTS.md) governs ownership; [PROJECT_GUIDE.md](../engineering/PROJECT_GUIDE.md) distinguishes implemented capabilities from future DAW concepts.
 
 ## Identity and usability
 
@@ -47,7 +47,7 @@ Define a coherent ground-up token/component system from Reference 1, using Refer
 | Shape/depth | Consistent corners, borders, shadows; depth communicates hierarchy, not gratuitous glow |
 | Motion | Minimal transitions; reduced-motion/static-workspace behavior and performance budgets |
 
-Avoid tiny, widely tracked uppercase labels for essential controls/data. Font option A is concretely mapped to approved **self-hosting**: sparse Orbitron brand/display, readable Rajdhani UI, Share Tech Mono readouts, and system fallbacks. Pinned WOFF2/OFL assets and provenance are [reviewed and prepared](../../src/assets/fonts/README.md); Slice A removes runtime Google-font requests, uses explicit inline packaging and exposes complete licences. No npm dependency is added. Typography, fallback glyph coverage and actual contrast still need UI checks. Do not infer unmeasured accessibility or licence compliance in a shipped bundle merely from source files existing.
+The superseded Slice A proposal had mapped font option A to self-hosted Orbitron, Rajdhani and Share Tech Mono. Those unused WOFF2 assets, manifests and OFL notices were removed under UI-RESET-001. No font family or typography treatment is approved for the replacement UI; wait for new owner references. This paragraph is historical, not a current style instruction.
 
 ## Reusable component vocabulary
 

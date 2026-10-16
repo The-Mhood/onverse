@@ -16,10 +16,17 @@ for (const file of readdirSync(join(dist, "assets"))) {
     const safe = content.replace(/<\/script/gi, "<\\/script")
     html = html.replace(
       new RegExp(`<script type="module"[^>]*${file.replace(/[-.]/g, "\\$&")}[^>]*></script>`),
-      () => `<script type="module">${safe}</script>`,
+      () => {
+        // The entry's import.meta.url becomes index.html after inlining. Vite's
+        // relative dynamic imports were authored relative to assets/index-*.js,
+        // so relocate only its sibling chunks under ./assets/ for HTTP and file://.
+        const relocated = safe.replace(/import\((['"`])\.\/(?!assets\/)([^'"`]+\.js)\1\)/g,
+          (_match, quote, chunk) => `import(${quote}./assets/${chunk}${quote})`)
+        return `<script type="module">${relocated}</script>`
+      },
     )
   }
 }
 
 writeFileSync(join(dist, "index.html"), html)
-console.log("inlined dist -> single file,", (html.length / 1024).toFixed(0), "kB")
+console.log("inlined initial CSS/JS; deferred chunks remain in dist/assets; entry HTML", (html.length / 1024).toFixed(0), "kB")
