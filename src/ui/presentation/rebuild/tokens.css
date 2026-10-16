@@ -1,44 +1,113 @@
-/* MusicOnVerse rebuild presentation tokens.
- * Values define a restrained, legible direction; they do not claim WCAG
- * conformance until measured against the rendered controls and text.
+/* MusicOnVerse presentation tokens — source-derived semantic palette.
+ * Reference-board swatches in REFERENCE-PALETTE.md are the canonical hue anchors.
+ * Values are visual direction, not a WCAG claim until the integrated controls
+ * are measured in their rendered states.
  */
 :root {
   color-scheme: dark;
 
-  --mvo-space-0: #04080d;
-  --mvo-space-1: #071018;
-  --mvo-surface-0: #09131c;
-  --mvo-surface-1: #0d1a24;
-  --mvo-surface-2: #12222d;
-  --mvo-surface-recessed: #050c12;
+  /* Reference 13 named swatches; other shades below are sampled supports. */
+  --mvo-color-abyss: #090d17;
+  --mvo-color-graphite: #171f2e;
+  --mvo-color-indigo: #384a81;
+  --mvo-color-violet: #8668b1;
+  --mvo-color-ion-teal: #47bfc0;
+  --mvo-color-glacier: #7cbdd8;
+  --mvo-color-amber: #d9a66d;
+  --mvo-color-rose: #c77d91;
+  --mvo-color-steel: #2d3648;
+  --mvo-color-charcoal: #222324;
+  --mvo-color-slate: #9f9fb1;
+  --mvo-color-meter-green: #75c76c;
+  --mvo-color-meter-green-shadow: #589a5b;
+  --mvo-color-record-red: #ac4e41;
 
-  --mvo-text-primary: #edf3f4;
-  --mvo-text-secondary: #c1cdd1;
-  --mvo-text-muted: #91a2a9;
-  --mvo-text-inverse: #071014;
+  /* Night foundation and practical, low-chroma work surfaces. */
+  --mvo-space-0: var(--mvo-color-abyss);
+  --mvo-space-1: var(--mvo-color-graphite);
+  --mvo-surface-0: #141e2d;
+  --mvo-surface-1: var(--mvo-color-graphite);
+  --mvo-surface-2: var(--mvo-color-steel);
+  --mvo-surface-neutral: var(--mvo-color-charcoal);
+  --mvo-surface-recessed: var(--mvo-color-abyss);
+  --mvo-surface-solid: #101621;
 
-  --mvo-brand-celestial: #a7c7d5;
-  --mvo-accent-functional: #8bd8c9;
-  --mvo-accent-selected: #82b5d2;
-  --mvo-focus: #c4f3df;
-  --mvo-success: #8ed3b4;
-  --mvo-warning: #edbd78;
-  --mvo-danger: #e89595;
-  --mvo-info: #9bc5df;
+  /* Near-opaque panel materials preserve precision over the moving scene. */
+  --mvo-panel-workspace-top: rgb(23 31 46 / 96%);
+  --mvo-panel-workspace-bottom: rgb(9 13 23 / 97%);
+  --mvo-panel-inspector-top: rgb(23 31 46 / 94%);
+  --mvo-panel-inspector-bottom: rgb(9 13 23 / 96%);
+  --mvo-panel-transport-top: rgb(23 31 46 / 97%);
+  --mvo-panel-transport-bottom: rgb(9 13 23 / 98%);
+  --mvo-panel-waveform-top: rgb(9 13 23 / 84%);
+  --mvo-panel-waveform-bottom: rgb(16 22 33 / 92%);
+  --mvo-control-surface-top: rgb(45 54 72 / 94%);
+  --mvo-control-surface-bottom: rgb(23 31 46 / 98%);
+  --mvo-control-surface-hover: rgb(45 54 72 / 98%);
+  --mvo-header-wash: rgb(9 13 23 / 36%);
+  --mvo-workspace-light-wash: rgb(71 191 192 / 6%);
+  --mvo-inspector-light-wash: rgb(134 104 177 / 7%);
+  --mvo-transport-light-wash: rgb(124 189 216 / 5%);
+  --mvo-edge-highlight: rgb(207 225 232 / 6%);
 
-  --mvo-border-subtle: rgb(161 190 200 / 13%);
-  --mvo-border-default: rgb(161 190 200 / 23%);
-  --mvo-border-strong: rgb(168 205 212 / 43%);
-  --mvo-selection-wash: rgb(107 167 190 / 19%);
+  /* Functional environment tints, deliberately lower in value than controls. */
+  --mvo-atmosphere-indigo: rgb(56 74 129 / 17%);
+  --mvo-atmosphere-violet: rgb(134 104 177 / 12%);
+  --mvo-atmosphere-teal: rgb(71 191 192 / 11%);
+  --mvo-atmosphere-glacier: rgb(124 189 216 / 10%);
+  --mvo-atmosphere-amber: rgb(217 166 109 / 10%);
+  --mvo-atmosphere-rose: rgb(199 125 145 / 8%);
+  --mvo-scene-shade-left: rgb(9 13 23 / 40%);
+  --mvo-scene-shade-mid: rgb(9 13 23 / 15%);
+  --mvo-scene-shade-right: rgb(9 13 23 / 22%);
+  --mvo-scene-shade-top: rgb(9 13 23 / 20%);
+  --mvo-scene-shade-band: rgb(9 13 23 / 24%);
+  --mvo-scene-shade-low: rgb(9 13 23 / 56%);
+  --mvo-scene-vignette-mid: rgb(9 13 23 / 13%);
+  --mvo-scene-vignette-edge: rgb(9 13 23 / 42%);
+  --mvo-scene-vignette-top: rgb(9 13 23 / 9%);
+  --mvo-scene-ground-mid: rgb(9 13 23 / 11%);
+  --mvo-scene-ground-bottom: rgb(9 13 23 / 42%);
+  --mvo-scene-ground-veil: rgb(9 13 23 / 25%);
+  --mvo-scrollbar-thumb: rgb(124 189 216 / 38%);
+  --mvo-shadow-ink-strong: rgb(0 0 0 / 38%);
+  --mvo-shadow-ink-soft: rgb(0 0 0 / 26%);
+  --mvo-light-spill-cool: rgb(71 191 192 / 18%);
+  --mvo-light-spill-warm: rgb(217 166 109 / 15%);
 
-  /* A stable semantic palette. Bind identities to these tokens once, then
-     reuse the same mapping for a track header, region, inspector, and meter. */
-  --mvo-track-voice: #c7a9df;
-  --mvo-track-rhythm: #e3b778;
-  --mvo-track-low: #80b5d0;
-  --mvo-track-harmony: #80c9bd;
-  --mvo-track-texture: #d3939e;
-  --mvo-track-neutral: #a7b8bf;
+  /* Readable neutral type; accents are not used as small body copy. */
+  --mvo-text-primary: #edf2f5;
+  --mvo-text-secondary: #c3ced8;
+  --mvo-text-muted: #98a8b8;
+  --mvo-text-inverse: var(--mvo-color-abyss);
+
+  --mvo-brand-celestial: var(--mvo-color-glacier);
+  --mvo-accent-functional: var(--mvo-color-ion-teal);
+  --mvo-accent-selected: var(--mvo-color-glacier);
+  --mvo-focus: var(--mvo-color-glacier);
+  --mvo-success: var(--mvo-color-meter-green);
+  --mvo-warning: var(--mvo-color-amber);
+  --mvo-danger: var(--mvo-color-record-red);
+  --mvo-info: var(--mvo-color-glacier);
+  --mvo-selection-wash: rgb(71 191 192 / 17%);
+  --mvo-success-wash: rgb(117 199 108 / 15%);
+  --mvo-warning-wash: rgb(217 166 109 / 16%);
+  --mvo-danger-wash: rgb(172 78 65 / 17%);
+
+  --mvo-border-subtle: rgb(159 159 177 / 14%);
+  --mvo-border-default: rgb(124 189 216 / 25%);
+  --mvo-border-strong: rgb(124 189 216 / 48%);
+
+  /* Stable track identity, reused for markers, regions, and related details. */
+  --mvo-track-rhythm: var(--mvo-color-amber);
+  --mvo-track-low: var(--mvo-color-glacier);
+  --mvo-track-harmony: var(--mvo-color-violet);
+  --mvo-track-voice: var(--mvo-color-ion-teal);
+  --mvo-track-texture: var(--mvo-color-rose);
+  --mvo-track-neutral: var(--mvo-color-slate);
+  --mvo-meter-safe: var(--mvo-color-meter-green);
+  --mvo-meter-caution: var(--mvo-color-amber);
+  --mvo-meter-peak: var(--mvo-color-record-red);
 
   --mvo-font-ui: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
     "Segoe UI", sans-serif;
@@ -55,7 +124,17 @@
   --mvo-radius-control: 0.5rem;
   --mvo-radius-panel: 0.875rem;
   --mvo-radius-console: 1.125rem;
-  --mvo-shadow-console: 0 26px 72px rgb(0 0 0 / 42%);
-  --mvo-shadow-raised: 0 10px 30px rgb(0 0 0 / 28%);
-  --mvo-motion-fast: 130ms;
+  --mvo-shadow-console:
+    0 26px 72px var(--mvo-shadow-ink-strong),
+    0 0 34px -22px var(--mvo-light-spill-cool);
+  --mvo-shadow-raised:
+    0 10px 30px var(--mvo-shadow-ink-soft),
+    0 0 26px -18px var(--mvo-light-spill-warm);
+
+  --mvo-motion-fast: 140ms;
+  --mvo-motion-surface: 360ms;
+  --mvo-motion-panel: 420ms;
+  --mvo-motion-environment-near: 116s;
+  --mvo-motion-environment-mid: 158s;
+  --mvo-motion-environment-far: 212s;
 }

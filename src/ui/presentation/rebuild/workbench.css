@@ -1,7 +1,8 @@
 /* Presentation primitives for the lead-owned semantic shell.
- * Expected structure: .workspace-root > .environment + header[data-surface=header]
- * + [data-surface=body](main[data-surface=workspace] + aside[data-surface=inspector])
- * + footer[data-surface=transport]. This file owns no product state or events.
+ * Expected shape: .workspace-root > .environment + header[data-surface=header]
+ * + [data-surface=body](main[data-surface=workspace] + aside[data-surface=inspector]).
+ * A real transport group may live inside the single-file editor. This file owns
+ * no product state, event bindings, or rendering lifecycle.
  */
 html,
 body {
@@ -37,9 +38,10 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* Keep all functional surfaces above the independent environmental veils. */
 .workspace-root > :not(.environment) {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   min-width: 0;
 }
 
@@ -56,18 +58,19 @@ body {
   min-height: 2.25rem;
   border: 1px solid var(--mvo-border-default);
   border-radius: var(--mvo-radius-control);
-  background: linear-gradient(180deg, rgb(20 35 45 / 94%), rgb(10 19 26 / 97%));
+  background: linear-gradient(180deg, var(--mvo-control-surface-top), var(--mvo-control-surface-bottom));
   color: var(--mvo-text-primary);
   cursor: pointer;
   transition:
     border-color var(--mvo-motion-fast) ease,
     background-color var(--mvo-motion-fast) ease,
-    color var(--mvo-motion-fast) ease;
+    color var(--mvo-motion-fast) ease,
+    box-shadow var(--mvo-motion-fast) ease;
 }
 
 .workspace-root button:hover:not(:disabled):not([aria-disabled="true"]) {
   border-color: var(--mvo-border-strong);
-  background-color: var(--mvo-surface-2);
+  background: var(--mvo-control-surface-hover);
 }
 
 .workspace-root button:active:not(:disabled):not([aria-disabled="true"]) {
@@ -109,7 +112,7 @@ body {
   font-variant-numeric: var(--mvo-numeric);
 }
 
-/* Clear but quiet top rail: identity stays secondary to the source/workspace. */
+/* Quiet top rail: identity stays secondary to the source/workspace. */
 .workspace-root > [data-surface="header"] {
   display: flex;
   align-items: center;
@@ -117,8 +120,8 @@ body {
   gap: var(--mvo-space-4x);
   min-height: 2.875rem;
   padding: 0 0.375rem 0.625rem;
-  border-bottom: 1px solid rgb(195 221 224 / 18%);
-  background: linear-gradient(180deg, rgb(4 9 13 / 34%), transparent);
+  border-bottom: 1px solid var(--mvo-border-subtle);
+  background: linear-gradient(180deg, var(--mvo-header-wash), transparent);
 }
 
 .workspace-root [data-brand] {
@@ -137,8 +140,8 @@ body {
   text-transform: uppercase;
 }
 
-/* The work surface and inspector sit on one stable console plane. Their
-   backgrounds are nearly opaque so waveforms, values and controls remain crisp. */
+/* Editor and inspector share a console plane. High opacity keeps numerical
+   detail stable; diffuse shadows and a faint top wash dissolve only the edges. */
 .workspace-root > [data-surface="body"] {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(15rem, 19rem);
@@ -149,21 +152,28 @@ body {
 
 .workspace-root [data-surface="workspace"],
 .workspace-root [data-surface="inspector"] {
+  position: relative;
+  isolation: isolate;
   min-width: 0;
   min-height: 0;
   overflow: auto;
   border: 1px solid var(--mvo-border-default);
   border-radius: var(--mvo-radius-console);
-  box-shadow: var(--mvo-shadow-console), inset 0 1px rgb(219 237 239 / 5%);
-  scrollbar-color: rgb(140 172 182 / 38%) transparent;
+  box-shadow: var(--mvo-shadow-console), inset 0 1px var(--mvo-edge-highlight);
+  scrollbar-color: var(--mvo-scrollbar-thumb) transparent;
   scrollbar-width: thin;
+  transition:
+    border-color var(--mvo-motion-surface) ease,
+    box-shadow var(--mvo-motion-surface) ease,
+    opacity var(--mvo-motion-panel) ease,
+    transform var(--mvo-motion-panel) cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
 .workspace-root [data-surface="workspace"] {
-  position: relative;
   padding: clamp(1rem, 1.65vw, 1.625rem);
   background:
-    linear-gradient(148deg, rgb(8 18 26 / 94%), rgb(5 12 18 / 96%) 66%),
+    radial-gradient(ellipse 76% 35% at 12% 0%, var(--mvo-workspace-light-wash) 0%, transparent 78%),
+    linear-gradient(148deg, var(--mvo-panel-workspace-top), var(--mvo-panel-workspace-bottom) 68%),
     var(--mvo-surface-0);
 }
 
@@ -173,14 +183,17 @@ body {
   right: 1rem;
   left: 1rem;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgb(153 203 211 / 32%), transparent);
+  background: linear-gradient(90deg, transparent, var(--mvo-light-spill-cool), transparent);
   content: "";
   pointer-events: none;
 }
 
 .workspace-root [data-surface="inspector"] {
   padding: clamp(0.875rem, 1.25vw, 1.25rem);
-  background: linear-gradient(165deg, rgb(12 24 32 / 96%), rgb(7 15 21 / 97%));
+  background:
+    radial-gradient(ellipse 66% 36% at 100% 0%, var(--mvo-inspector-light-wash) 0%, transparent 78%),
+    linear-gradient(165deg, var(--mvo-panel-inspector-top), var(--mvo-panel-inspector-bottom) 72%),
+    var(--mvo-surface-1);
 }
 
 .workspace-root [data-surface="inspector"] > :where(section, div) + :where(section, div) {
@@ -198,8 +211,15 @@ body {
   padding: 0.375rem clamp(0.75rem, 1.2vw, 1.125rem);
   border: 1px solid var(--mvo-border-default);
   border-radius: var(--mvo-radius-panel);
-  background: linear-gradient(180deg, rgb(12 23 31 / 97%), rgb(6 13 18 / 98%));
-  box-shadow: var(--mvo-shadow-raised), inset 0 1px rgb(219 237 239 / 5%);
+  background:
+    radial-gradient(ellipse 52% 86% at 50% 0%, var(--mvo-transport-light-wash) 0%, transparent 82%),
+    linear-gradient(180deg, var(--mvo-panel-transport-top), var(--mvo-panel-transport-bottom));
+  box-shadow: var(--mvo-shadow-raised), inset 0 1px var(--mvo-edge-highlight);
+  transition:
+    border-color var(--mvo-motion-surface) ease,
+    box-shadow var(--mvo-motion-surface) ease,
+    opacity var(--mvo-motion-panel) ease,
+    transform var(--mvo-motion-panel) cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
 .workspace-root [data-surface="transport"] [data-role="time"] {
@@ -210,15 +230,34 @@ body {
   text-align: center;
 }
 
-/* Usable selection and waveform styling hooks. The renderer must supply the
-   real PCM-derived waveform; this stylesheet never fabricates audio data. */
+/* Optional visual hooks for a host that already changes views. They only style
+   an explicitly marked real surface; they do not create or trigger a view. */
+.workspace-root :is([data-surface="workspace"], [data-surface="inspector"], [data-surface="transport"])[data-view-phase="enter"] {
+  animation: mvo-panel-settle-in var(--mvo-motion-panel) cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.workspace-root :is([data-surface="workspace"], [data-surface="inspector"], [data-surface="transport"])[data-view-phase="exit"] {
+  animation: mvo-panel-settle-out var(--mvo-motion-panel) cubic-bezier(0.4, 0, 0.6, 1) both;
+}
+
+@keyframes mvo-panel-settle-in {
+  from { opacity: 0; transform: translate3d(0, 0.35rem, 0) scale(0.997); }
+  to { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+}
+
+@keyframes mvo-panel-settle-out {
+  from { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+  to { opacity: 0; transform: translate3d(0, -0.2rem, 0) scale(0.998); }
+}
+
+/* Truthful rendering hooks: the stylesheet never fabricates waveform data. */
 .workspace-root [data-role="waveform"] {
   display: block;
   width: 100%;
   min-height: 7rem;
   border: 1px solid var(--mvo-border-subtle);
   border-radius: var(--mvo-radius-control);
-  background: linear-gradient(180deg, rgb(3 10 15 / 82%), rgb(7 15 20 / 90%));
+  background: linear-gradient(180deg, var(--mvo-panel-waveform-top), var(--mvo-panel-waveform-bottom));
 }
 
 .workspace-root [data-role="waveform"] :is(path, polyline, line) {
@@ -243,7 +282,7 @@ body {
   font-variant-numeric: var(--mvo-numeric);
 }
 
-/* Reuse one semantic color for the same track/region wherever it appears. */
+/* Reuse one semantic colour for the same track/region wherever it appears. */
 .workspace-root [data-track-color="voice"] { --mvo-current-track: var(--mvo-track-voice); }
 .workspace-root [data-track-color="rhythm"] { --mvo-current-track: var(--mvo-track-rhythm); }
 .workspace-root [data-track-color="low"] { --mvo-current-track: var(--mvo-track-low); }
@@ -327,9 +366,21 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .workspace-root *,
   .workspace-root *::before,
-  .workspace-root *::after {
+  .workspace-root *::after,
+  .workspace-root::before {
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
+    animation: none !important;
+  }
+
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .workspace-root [data-surface="workspace"],
+  .workspace-root [data-surface="inspector"],
+  .workspace-root [data-surface="transport"] {
+    background: var(--mvo-surface-solid);
+    box-shadow: var(--mvo-shadow-console);
   }
 }
 

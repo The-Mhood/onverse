@@ -1,0 +1,590 @@
+{
+  "method": "ImageMagick convert: -resize 240x135! -colors 10 -depth 8 -format %c histogram:info:-; approximate quantized sRGB, not pixel-exact or contrast certification",
+  "images": [
+    {
+      "file": "01-cosmic-moodboard.png",
+      "palette": [
+        {
+          "pixels": 12659,
+          "hex": "#17151F"
+        },
+        {
+          "pixels": 3841,
+          "hex": "#53343D"
+        },
+        {
+          "pixels": 3511,
+          "hex": "#2A314E"
+        },
+        {
+          "pixels": 2717,
+          "hex": "#264867"
+        },
+        {
+          "pixels": 2482,
+          "hex": "#5B5263"
+        },
+        {
+          "pixels": 2176,
+          "hex": "#426193"
+        },
+        {
+          "pixels": 1496,
+          "hex": "#5499B8"
+        },
+        {
+          "pixels": 1395,
+          "hex": "#906156"
+        },
+        {
+          "pixels": 1112,
+          "hex": "#B2BECB"
+        },
+        {
+          "pixels": 1011,
+          "hex": "#98748C"
+        }
+      ]
+    },
+    {
+      "file": "02-universe-opening.png",
+      "palette": [
+        {
+          "pixels": 27302,
+          "hex": "#090E17"
+        },
+        {
+          "pixels": 2819,
+          "hex": "#22314B"
+        },
+        {
+          "pixels": 1112,
+          "hex": "#483937"
+        },
+        {
+          "pixels": 355,
+          "hex": "#2C4965"
+        },
+        {
+          "pixels": 164,
+          "hex": "#5A525C"
+        },
+        {
+          "pixels": 161,
+          "hex": "#4E3F43"
+        },
+        {
+          "pixels": 148,
+          "hex": "#BCAAA8"
+        },
+        {
+          "pixels": 139,
+          "hex": "#566B8A"
+        },
+        {
+          "pixels": 122,
+          "hex": "#8F6E62"
+        },
+        {
+          "pixels": 78,
+          "hex": "#A98C7B"
+        }
+      ]
+    },
+    {
+      "file": "03-studio-arrival.png",
+      "palette": [
+        {
+          "pixels": 23527,
+          "hex": "#161728"
+        },
+        {
+          "pixels": 3755,
+          "hex": "#2E3147"
+        },
+        {
+          "pixels": 2032,
+          "hex": "#44363C"
+        },
+        {
+          "pixels": 911,
+          "hex": "#59505B"
+        },
+        {
+          "pixels": 817,
+          "hex": "#39445A"
+        },
+        {
+          "pixels": 437,
+          "hex": "#8D7173"
+        },
+        {
+          "pixels": 369,
+          "hex": "#453B46"
+        },
+        {
+          "pixels": 226,
+          "hex": "#C5A79F"
+        },
+        {
+          "pixels": 180,
+          "hex": "#656B89"
+        },
+        {
+          "pixels": 146,
+          "hex": "#997C81"
+        }
+      ]
+    },
+    {
+      "file": "04-immersive-studio.png",
+      "palette": [
+        {
+          "pixels": 23983,
+          "hex": "#141A1E"
+        },
+        {
+          "pixels": 1902,
+          "hex": "#4C3520"
+        },
+        {
+          "pixels": 1816,
+          "hex": "#29304A"
+        },
+        {
+          "pixels": 1349,
+          "hex": "#204A52"
+        },
+        {
+          "pixels": 963,
+          "hex": "#56585A"
+        },
+        {
+          "pixels": 697,
+          "hex": "#394347"
+        },
+        {
+          "pixels": 512,
+          "hex": "#A36832"
+        },
+        {
+          "pixels": 412,
+          "hex": "#684C2A"
+        },
+        {
+          "pixels": 392,
+          "hex": "#688D85"
+        },
+        {
+          "pixels": 374,
+          "hex": "#D38E46"
+        }
+      ]
+    },
+    {
+      "file": "05-arrangement-reference.png",
+      "palette": [
+        {
+          "pixels": 15848,
+          "hex": "#222324"
+        },
+        {
+          "pixels": 3737,
+          "hex": "#332A47"
+        },
+        {
+          "pixels": 3339,
+          "hex": "#3D464C"
+        },
+        {
+          "pixels": 3206,
+          "hex": "#3C423E"
+        },
+        {
+          "pixels": 2544,
+          "hex": "#4D4E51"
+        },
+        {
+          "pixels": 1704,
+          "hex": "#66533C"
+        },
+        {
+          "pixels": 891,
+          "hex": "#493C4D"
+        },
+        {
+          "pixels": 628,
+          "hex": "#453339"
+        },
+        {
+          "pixels": 273,
+          "hex": "#989888"
+        },
+        {
+          "pixels": 230,
+          "hex": "#8D6354"
+        }
+      ]
+    },
+    {
+      "file": "06-mixer-reference.png",
+      "palette": [
+        {
+          "pixels": 24951,
+          "hex": "#26292E"
+        },
+        {
+          "pixels": 3165,
+          "hex": "#323247"
+        },
+        {
+          "pixels": 1032,
+          "hex": "#53595B"
+        },
+        {
+          "pixels": 978,
+          "hex": "#3A4C48"
+        },
+        {
+          "pixels": 977,
+          "hex": "#4D4535"
+        },
+        {
+          "pixels": 678,
+          "hex": "#589A5B"
+        },
+        {
+          "pixels": 194,
+          "hex": "#AAA9AF"
+        },
+        {
+          "pixels": 180,
+          "hex": "#AC4E41"
+        },
+        {
+          "pixels": 134,
+          "hex": "#A88F69"
+        },
+        {
+          "pixels": 111,
+          "hex": "#75C76C"
+        }
+      ]
+    },
+    {
+      "file": "07-plugin-reference.png",
+      "palette": [
+        {
+          "pixels": 23735,
+          "hex": "#141E2D"
+        },
+        {
+          "pixels": 4765,
+          "hex": "#1F2E50"
+        },
+        {
+          "pixels": 1121,
+          "hex": "#354240"
+        },
+        {
+          "pixels": 821,
+          "hex": "#3B4F8D"
+        },
+        {
+          "pixels": 679,
+          "hex": "#26515E"
+        },
+        {
+          "pixels": 527,
+          "hex": "#524C30"
+        },
+        {
+          "pixels": 369,
+          "hex": "#4E5765"
+        },
+        {
+          "pixels": 154,
+          "hex": "#46995F"
+        },
+        {
+          "pixels": 115,
+          "hex": "#3796A3"
+        },
+        {
+          "pixels": 114,
+          "hex": "#98846B"
+        }
+      ]
+    },
+    {
+      "file": "08-sylune.png",
+      "palette": [
+        {
+          "pixels": 19669,
+          "hex": "#151E27"
+        },
+        {
+          "pixels": 3523,
+          "hex": "#2B4F67"
+        },
+        {
+          "pixels": 3404,
+          "hex": "#2C3759"
+        },
+        {
+          "pixels": 1775,
+          "hex": "#593B4E"
+        },
+        {
+          "pixels": 1106,
+          "hex": "#34618D"
+        },
+        {
+          "pixels": 922,
+          "hex": "#438C96"
+        },
+        {
+          "pixels": 676,
+          "hex": "#4C5B8F"
+        },
+        {
+          "pixels": 616,
+          "hex": "#A17A8F"
+        },
+        {
+          "pixels": 596,
+          "hex": "#5C5065"
+        },
+        {
+          "pixels": 113,
+          "hex": "#4A7CC0"
+        }
+      ]
+    },
+    {
+      "file": "09-detailed-editing.png",
+      "palette": [
+        {
+          "pixels": 19861,
+          "hex": "#222427"
+        },
+        {
+          "pixels": 4353,
+          "hex": "#383645"
+        },
+        {
+          "pixels": 2942,
+          "hex": "#2F5A5C"
+        },
+        {
+          "pixels": 1109,
+          "hex": "#505159"
+        },
+        {
+          "pixels": 1066,
+          "hex": "#439390"
+        },
+        {
+          "pixels": 864,
+          "hex": "#588651"
+        },
+        {
+          "pixels": 841,
+          "hex": "#473D58"
+        },
+        {
+          "pixels": 608,
+          "hex": "#9073B5"
+        },
+        {
+          "pixels": 475,
+          "hex": "#676290"
+        },
+        {
+          "pixels": 281,
+          "hex": "#CAC7D1"
+        }
+      ]
+    },
+    {
+      "file": "10-sound-library.png",
+      "palette": [
+        {
+          "pixels": 21171,
+          "hex": "#21272A"
+        },
+        {
+          "pixels": 2893,
+          "hex": "#2F3943"
+        },
+        {
+          "pixels": 2489,
+          "hex": "#4B4137"
+        },
+        {
+          "pixels": 1862,
+          "hex": "#595B5E"
+        },
+        {
+          "pixels": 1257,
+          "hex": "#38454C"
+        },
+        {
+          "pixels": 929,
+          "hex": "#6E8993"
+        },
+        {
+          "pixels": 563,
+          "hex": "#946B5E"
+        },
+        {
+          "pixels": 529,
+          "hex": "#9E8C75"
+        },
+        {
+          "pixels": 387,
+          "hex": "#9A9593"
+        },
+        {
+          "pixels": 320,
+          "hex": "#C8BCAF"
+        }
+      ]
+    },
+    {
+      "file": "11-alternative-studio.png",
+      "palette": [
+        {
+          "pixels": 17210,
+          "hex": "#202629"
+        },
+        {
+          "pixels": 3315,
+          "hex": "#253947"
+        },
+        {
+          "pixels": 3074,
+          "hex": "#514327"
+        },
+        {
+          "pixels": 2894,
+          "hex": "#27535A"
+        },
+        {
+          "pixels": 2635,
+          "hex": "#4F565A"
+        },
+        {
+          "pixels": 1129,
+          "hex": "#337488"
+        },
+        {
+          "pixels": 834,
+          "hex": "#4D929A"
+        },
+        {
+          "pixels": 498,
+          "hex": "#9DACB2"
+        },
+        {
+          "pixels": 429,
+          "hex": "#C79642"
+        },
+        {
+          "pixels": 382,
+          "hex": "#8D673A"
+        }
+      ]
+    },
+    {
+      "file": "12-numbered-overview.png",
+      "palette": [
+        {
+          "pixels": 22708,
+          "hex": "#141821"
+        },
+        {
+          "pixels": 3004,
+          "hex": "#2B334A"
+        },
+        {
+          "pixels": 1876,
+          "hex": "#2E4F5A"
+        },
+        {
+          "pixels": 1560,
+          "hex": "#4C332A"
+        },
+        {
+          "pixels": 1361,
+          "hex": "#4F463C"
+        },
+        {
+          "pixels": 550,
+          "hex": "#535259"
+        },
+        {
+          "pixels": 454,
+          "hex": "#4E668B"
+        },
+        {
+          "pixels": 323,
+          "hex": "#976D6A"
+        },
+        {
+          "pixels": 293,
+          "hex": "#9C9FA6"
+        },
+        {
+          "pixels": 271,
+          "hex": "#5D8E9F"
+        }
+      ]
+    },
+    {
+      "file": "13-design-language-board.png",
+      "palette": [
+        {
+          "pixels": 26549,
+          "hex": "#101621"
+        },
+        {
+          "pixels": 2462,
+          "hex": "#2D3648"
+        },
+        {
+          "pixels": 743,
+          "hex": "#2C505A"
+        },
+        {
+          "pixels": 679,
+          "hex": "#513939"
+        },
+        {
+          "pixels": 431,
+          "hex": "#565563"
+        },
+        {
+          "pixels": 337,
+          "hex": "#A97B70"
+        },
+        {
+          "pixels": 333,
+          "hex": "#686D8F"
+        },
+        {
+          "pixels": 319,
+          "hex": "#5DA4AF"
+        },
+        {
+          "pixels": 280,
+          "hex": "#9F9FB1"
+        },
+        {
+          "pixels": 267,
+          "hex": "#2B5A8C"
+        }
+      ]
+    }
+  ]
+}
