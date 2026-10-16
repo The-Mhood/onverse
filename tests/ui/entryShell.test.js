@@ -6,9 +6,9 @@ const html = readFileSync(new URL("../../index.html", import.meta.url), "utf8")
 const main = readFileSync(new URL("../../src/main.js", import.meta.url), "utf8")
 const pkg = JSON.parse(readFileSync(new URL("../../package.json", import.meta.url), "utf8"))
 
-describe("neutral entry shell contract", () => {
-  it("provides a semantic mount and accessible pending-reference status", () => {
-    assert.match(html, /<main id="app">[\s\S]*?<p role="status">The interface is pending new design references\.<\/p>[\s\S]*?<\/main>/)
+describe("rebuilt entry shell contract", () => {
+  it("provides a semantic mount and accessible loading status", () => {
+    assert.match(html, /<main id="app">[\s\S]*?<p role="status">Loading audio workspace…<\/p>[\s\S]*?<\/main>/)
     assert.match(html, /src="\/src\/main\.js"/)
   })
 
@@ -23,7 +23,7 @@ describe("neutral entry shell contract", () => {
     assert.doesNotMatch(main, /app\.innerHTML\s*=/)
     assert.doesNotMatch(main, /from "\.\/scene\.js"/)
     assert.doesNotMatch(main, /from "\.\/ui\/draw\.js"/)
-    assert.doesNotMatch(main, /from "\.\/style\.css"/)
+    assert.doesNotMatch(main, /import "\.\/style\.css"/)
   })
 
   it("retires custom app-icon references without changing packaging identity or targets", () => {
@@ -55,8 +55,34 @@ describe("neutral entry shell contract", () => {
       assert.equal(existsSync(new URL(path, import.meta.url)), false, `${path} should be absent`)
     }
   })
+  it("mounts the real workspace before binding one controller, with no stale visual dependencies", () => {
+    assert.match(main, /const view = mountWorkspace/)
+    assert.match(main, /const controller = createWorkbenchController/)
+    assert.match(main, /view\.bind\(controller\)/)
+    assert.ok(main.indexOf("mountWorkspace(document") < main.indexOf("view.bind(controller)"))
+    assert.doesNotMatch(main, /btnIdleUpload|stage\?\.|stage\.set|drawRadar|drawWaveform|ICONS|boot\.onclick/)
+    assert.match(main, /movUpdate\?\.onStatus/)
+    assert.match(main, /unsubscribe\?\.\(\)/)
+    assert.match(main, /controller\.dispose\(\)/)
+  })
+
+  it("uses new semantic controls, real peak data and text-only report/metadata insertion", () => {
+    const view = readFileSync(new URL("../../src/ui/workbench/workspace.js", import.meta.url), "utf8")
+    assert.match(view, /peaksFor\(selected,/)
+    assert.match(view, /Reference source/)
+    assert.match(view, /textContent = s\.fileName/)
+    assert.match(view, /detail\.textContent = issue\.detail/)
+    assert.doesNotMatch(view, /id="(?:btnIdleUpload|boot|stage|panelFile|panelIdle)"/)
+    assert.match(view, /SYLUNE execution are not implemented/)
+  })
+
+  it("keeps reduced-motion support and new asset-independent responsive styling", () => {
+    const css = readFileSync(new URL("../../src/ui/workbench/workspace.css", import.meta.url), "utf8")
+    assert.match(css, /prefers-reduced-motion:reduce/)
+    assert.match(css, /max-width:1199px/)
+    assert.doesNotMatch(css, /fonts\.googleapis|gstatic|favicon|@font-face|url\(/)
+  })
+
 })
 
-// These checks validate the entry markup/import boundary, not runtime module boot.
-// main.js still has old null-node bindings and undeclared view symbols; full boot
-// coverage must accompany the lead-coordinated controller/view split.
+// Static checks complement, never replace, run-workbench-browser.mjs.
