@@ -1,0 +1,61 @@
+/* MusicOnVerse rebuild presentation tokens.
+ * Values define a restrained, legible direction; they do not claim WCAG
+ * conformance until measured against the rendered controls and text.
+ */
+:root {
+  color-scheme: dark;
+
+  --mvo-space-0: #04080d;
+  --mvo-space-1: #071018;
+  --mvo-surface-0: #09131c;
+  --mvo-surface-1: #0d1a24;
+  --mvo-surface-2: #12222d;
+  --mvo-surface-recessed: #050c12;
+
+  --mvo-text-primary: #edf3f4;
+  --mvo-text-secondary: #c1cdd1;
+  --mvo-text-muted: #91a2a9;
+  --mvo-text-inverse: #071014;
+
+  --mvo-brand-celestial: #a7c7d5;
+  --mvo-accent-functional: #8bd8c9;
+  --mvo-accent-selected: #82b5d2;
+  --mvo-focus: #c4f3df;
+  --mvo-success: #8ed3b4;
+  --mvo-warning: #edbd78;
+  --mvo-danger: #e89595;
+  --mvo-info: #9bc5df;
+
+  --mvo-border-subtle: rgb(161 190 200 / 13%);
+  --mvo-border-default: rgb(161 190 200 / 23%);
+  --mvo-border-strong: rgb(168 205 212 / 43%);
+  --mvo-selection-wash: rgb(107 167 190 / 19%);
+
+  /* A stable semantic palette. Bind identities to these tokens once, then
+     reuse the same mapping for a track header, region, inspector, and meter. */
+  --mvo-track-voice: #c7a9df;
+  --mvo-track-rhythm: #e3b778;
+  --mvo-track-low: #80b5d0;
+  --mvo-track-harmony: #80c9bd;
+  --mvo-track-texture: #d3939e;
+  --mvo-track-neutral: #a7b8bf;
+
+  --mvo-font-ui: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+  --mvo-font-mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --mvo-numeric: tabular-nums lining-nums;
+
+  --mvo-space-1x: 0.25rem;
+  --mvo-space-2x: 0.5rem;
+  --mvo-space-3x: 0.75rem;
+  --mvo-space-4x: 1rem;
+  --mvo-space-5x: 1.25rem;
+  --mvo-space-6x: 1.5rem;
+
+  --mvo-radius-control: 0.5rem;
+  --mvo-radius-panel: 0.875rem;
+  --mvo-radius-console: 1.125rem;
+  --mvo-shadow-console: 0 26px 72px rgb(0 0 0 / 42%);
+  --mvo-shadow-raised: 0 10px 30px rgb(0 0 0 / 28%);
+  --mvo-motion-fast: 130ms;
+}
