@@ -9,6 +9,7 @@ import { execFileSync } from "node:child_process"
 import { join, dirname } from "node:path"
 import { fileURLToPath } from "node:url"
 import { createErrorRegion } from "../../src/ui/presentation/errorRegion.js"
+import { readAppSource } from "../ui/shellSource.js"
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..", "..")
 const read = (rel) => readFileSync(join(root, rel), "utf8")
@@ -78,7 +79,7 @@ test("a visible focus indicator is defined for keyboard users", () => {
 })
 
 test("boot splash is skipped when the OS requests reduced motion", () => {
-  const main = read("src/main.js")
+  const main = readAppSource()
   assert.match(main, /matchMedia\("\(prefers-reduced-motion: reduce\)"\)\.matches\)\s*dismissBoot\(\)/)
   assert.match(main, /else setTimeout\(dismissBoot, 2400\)/)
 })
@@ -86,7 +87,7 @@ test("boot splash is skipped when the OS requests reduced motion", () => {
 // ---- Copy: no unverified or removed claims ----
 
 test("removed claims do not reappear in visible copy", () => {
-  const sources = [read("index.html"), read("src/main.js")]
+  const sources = [read("index.html"), readAppSource()]
   const banned = [
     /top tracks/i,
     /Spotify's top/i,
@@ -105,7 +106,7 @@ test("removed claims do not reappear in visible copy", () => {
 })
 
 test("reference descriptions use the approved disclosure wording", () => {
-  const main = read("src/main.js")
+  const main = readAppSource()
   assert.match(main, /Built-in genre profile: an illustrative target/)
   assert.match(main, /Measured uploaded reference:/)
   assert.match(main, /Metadata-selected built-in profile, or a measured Apple Music preview \(30 s only\)/)
@@ -114,14 +115,14 @@ test("reference descriptions use the approved disclosure wording", () => {
 // ---- Semantics: names, pressed state, live error region ----
 
 test("every icon-only button in the template has an accessible name", () => {
-  const main = read("src/main.js")
+  const main = readAppSource()
   const buttons = main.match(/<button\b[^>]*\bbtn-square\b[^>]*>/g) || []
   assert.ok(buttons.length >= 10, `expected icon buttons, found ${buttons.length}`)
   for (const b of buttons) assert.match(b, /aria-label="[^"]+"/, `missing aria-label: ${b.slice(0, 80)}`)
 })
 
 test("mode and A/B toggles expose pressed state, not an unpaired tab pattern", () => {
-  const main = read("src/main.js")
+  const main = readAppSource()
   assert.doesNotMatch(main, /role="tab"/)
   assert.doesNotMatch(main, /role="tablist"/)
   const modeBtns = main.match(/class="tab[^"]*mode-btn"[^>]*>/g) || []
@@ -135,14 +136,14 @@ test("mode and A/B toggles expose pressed state, not an unpaired tab pattern", (
 })
 
 test("the error region is a persistent alert, and the licence entry point exists", () => {
-  const main = read("src/main.js")
+  const main = readAppSource()
   assert.match(main, /<div id="errorRegion" class="error-region" role="alert"><\/div>/)
   assert.match(main, /id="btnLicences"[^>]*aria-haspopup="dialog"/)
   assert.match(main, /const errorRegion = createErrorRegion\(\$\("#errorRegion"\)\)/)
 })
 
 test("play button label tracks playback state", () => {
-  const main = read("src/main.js")
+  const main = readAppSource()
   assert.match(main, /play\.setAttribute\("aria-label", state\.playing \? "Pause" : "Play"\)/)
 })
 
@@ -207,21 +208,21 @@ test("Slice A does not modify denied paths", () => {
 // ---- Error routing: one path through toast, no test-harness changes ----
 
 test("analysis failures are routed through toast with the error flag, not a new global", () => {
-  const main = read("src/main.js")
+  const main = readAppSource()
   assert.match(main, /toast\(`Analysis failed: \$\{err\?\.message \|\| String\(err\)\}`, 3200, \{ error: true \}\)/)
   assert.match(main, /function toast\(msg, ms = 3200, options = \{\}\) \{/)
   assert.match(main, /if \(options\.error\) errorRegion\.show\(msg\)\s*\n\s*else errorRegion\.clear\(\)/)
 })
 
 test("the mode label no longer claims a conversational feature", () => {
-  const main = read("src/main.js")
+  const main = readAppSource()
   assert.doesNotMatch(main, /CONVERSE/)
   assert.match(main, /◈ SCAN<\/button>/)
 })
 
 // UI-005 Orbit HUD wiring (agent-b): keys and chips reach the stage only in Orbit Mode.
 test("main.js routes landmark keys and chips to the stage only when ORBIT_SPIKE is on", () => {
-  const main = read("src/main.js")
+  const main = readAppSource()
   assert.match(main, /import \{ landmarkForKey, ORBIT_LANDMARKS \} from "\.\/orbit\/orbitKeys\.js"/)
   assert.match(main, /if \(ORBIT_SPIKE\) \{\s*const landmark = landmarkForKey\(e\)/)
   assert.match(main, /new CustomEvent\("orbit:focus", \{ detail: \{ index \} \}\)/)
@@ -232,7 +233,7 @@ test("main.js routes landmark keys and chips to the stage only when ORBIT_SPIKE 
 test("the Orbit HUD makes no false save claim and adds no fake mode toggle", () => {
   // Owner decision (2026-10-15): Reference 2 copy and controls. The save status must match real state:
   // no project persistence exists yet, so it reads "Not saved · session only", never "Project saved locally".
-  const main = read("src/main.js")
+  const main = readAppSource()
   assert.doesNotMatch(main, /Project saved locally/)
   assert.match(main, /Not saved · session only/)
   assert.doesNotMatch(main, /data-orbit-mode/)

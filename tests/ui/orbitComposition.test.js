@@ -4,18 +4,19 @@ import assert from "node:assert/strict"
 import { readFileSync } from "node:fs"
 import { dirname, join } from "node:path"
 import { fileURLToPath } from "node:url"
+import { readAppSource } from "../ui/shellSource.js"
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..", "..")
 const read = (f) => readFileSync(join(root, f), "utf8")
 
 test("Orbit chrome is on only for ?orbit=1 in the Scan/Orbit view, and off in the DAW", () => {
-  const main = read("src/main.js")
+  const main = readAppSource()
   assert.match(main, /document\.body\.classList\.toggle\("orbit-mode", ORBIT_SPIKE && mode === "converse"\)/)
   assert.match(main, /document\.body\.classList\.toggle\("orbit-mode", ORBIT_SPIKE && state\.mode === "converse"\)/)
 })
 
 test("Orbit controls keep their bindings: Enter studio (DAW), Reset view (orbit:reset)", () => {
-  const main = read("src/main.js")
+  const main = readAppSource()
   assert.match(main, /\$\("#btnOrbitStudio"\)\.onclick = \(\) => setMode\("daw"\)/)
   assert.match(main, /new CustomEvent\("orbit:reset"\)/)
   assert.match(read("src/orbit/orbitStage.js"), /canvas\.addEventListener\("orbit:reset", onReset\)/)
@@ -30,7 +31,7 @@ test("the idle landing card is restyled as a left overlay only inside body.orbit
 })
 
 test("the AI Fix report rail is shrunk, not removed, and keeps its toggle and fix bindings", () => {
-  const main = read("src/main.js")
+  const main = readAppSource()
   const css = read("src/style.css")
   assert.match(main, /id="reportRail"/)
   assert.match(main, /\$\("#btnFix"\)\.onclick = runFix/)
