@@ -10,6 +10,7 @@ import { auditTools } from './run-offline-render-probe.mjs';
 import { probeAudioStabilization } from './audio-stabilization-probe.mjs';
 
 const tools = process.argv[2];
+const localBuildUrl = new URL('../../dist/index.html', import.meta.url).href;
 const flags = process.argv.slice(3);
 assert.ok(new Set(flags).size === flags.length && flags.every(f => ['--motion-only', '--cpu-renderer'].includes(f)), 'Usage: <private tools directory> [--motion-only] [--cpu-renderer]');
 const motionOnly = flags.includes('--motion-only'), cpuRenderer = flags.includes('--cpu-renderer');
@@ -164,7 +165,7 @@ try {
   await page.setRequestInterception(true);
   page.on('request', request => {
     const url = request.url(); report.requests.push({ phase, url: url.slice(0, 300) });
-    if (url.startsWith('http://127.0.0.1:4173/') || url.startsWith('blob:http://127.0.0.1:4173/') || url.startsWith('data:')) request.continue().catch(e => report.errors.push({ phase, error: e.message }));
+    if (url === localBuildUrl || url.startsWith('blob:null/') || url.startsWith('http://127.0.0.1:4173/') || url.startsWith('blob:http://127.0.0.1:4173/') || url.startsWith('data:')) request.continue().catch(e => report.errors.push({ phase, error: e.message }));
     else { report.blockedRequests.push({ phase, url }); request.abort().catch(e => report.errors.push({ phase, error: e.message })); }
   });
   await page.evaluateOnNewDocument(() => {
@@ -348,6 +349,18 @@ try {
     report.audioStabilization = await probeAudioStabilization(page);
     report.finalAudioAudit = await page.evaluate(() => window.__audioAudit);
     assert.equal(report.finalAudioAudit.contexts, report.finalAudioAudit.closes);
+    phase = 'self-contained-file-origin';
+    await page.goto(localBuildUrl, { waitUntil: 'networkidle0' });
+    assert.equal(await page.$eval('.source-name', e => e.textContent), 'No audio loaded');
+    await (await page.$('.mix-picker')).uploadFile(path.join(runtime, 'signal-study.wav'));
+    await page.waitForFunction(() => document.querySelector('.source-name').textContent === 'signal-study.wav'); await waitReady();
+    assert.ok(Number.isFinite(Number(await page.$eval('.overall-score', e => e.textContent))));
+    const fileDownload = await download('convert');
+    assert.equal(fileDownload.sha256, report.downloads[0].sha256);
+    await page.evaluate(() => window.dispatchEvent(new PageTransitionEvent('pagehide')));
+    report.fileOrigin = { url: localBuildUrl, sourceWavSha256: fileDownload.sha256, audioAudit: await page.evaluate(() => window.__audioAudit) };
+    assert.equal(report.fileOrigin.audioAudit.contexts, report.fileOrigin.audioAudit.closes);
+    report.checks.push('Actual self-contained production file:// entry boots, imports and analyzes the synthetic WAV, exports byte-identical A and releases its decoder context. Chromium file-origin proof, NOT Electron/macOS packaging or security acceptance.');
     report.checks.push('Twelve native actual-module mono/in-phase/anti-phase renders at 44.1/48 kHz: actual post-render trim meets achievable targets at unchanged 1e-6 tolerance; PCM immutable, finite, polarity preserved and geometry unchanged. Invalid PCM rejects. Not listening/standards certification.');
   }
   report.performanceMetrics = await page.metrics();
