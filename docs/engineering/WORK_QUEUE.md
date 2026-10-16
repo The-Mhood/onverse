@@ -1,3 +1,16 @@
+## CURRENT FINAL STABILIZATION — 2026-10-16
+
+Implementation `f92fe04`; file-origin proof `5a1e10d`; fixed branch/PR4 unchanged.
+Three LUFS TODOs are genuinely fixed (unchanged assertions), not waived. Clean
+published **365 PASS**, preserved held tree **555 PASS**; zero fail/skip/TODO.
+Final real production replay **22 groups / 13 downloads / 32 PNGs**; 12 native
+post-render trim cases, invalid-evidence rejection and resource/error guards pass.
+Bundle 607,630 → 243,228 JS bytes with byte-parity-tested same-package encoder.
+No presentation/main/index/native/dependency/reference-pack changes or held-core
+publication. Native/security/listening/meter-conformance release gates remain.
+See [authoritative stabilization and actual evidence](STABILIZATION_20261016.md).
+Previous delivery/TODO counts below describe historical work, not current results.
+
 # MusicOnVerse engineering work queue
 
 ## CURRENT DELIVERY — 2026-10-16: app recovered, published and verified

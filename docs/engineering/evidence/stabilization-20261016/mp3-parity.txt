@@ -1,0 +1,46 @@
+TAP version 13
+# Subtest: lamejs min distribution is byte-identical for 1 channels / 128 kbps
+ok 1 - lamejs min distribution is byte-identical for 1 channels / 128 kbps
+  ---
+  duration_ms: 540.413242
+  type: 'test'
+  ...
+# Subtest: lamejs min distribution is byte-identical for 1 channels / 192 kbps
+ok 2 - lamejs min distribution is byte-identical for 1 channels / 192 kbps
+  ---
+  duration_ms: 412.579036
+  type: 'test'
+  ...
+# Subtest: lamejs min distribution is byte-identical for 1 channels / 320 kbps
+ok 3 - lamejs min distribution is byte-identical for 1 channels / 320 kbps
+  ---
+  duration_ms: 388.327899
+  type: 'test'
+  ...
+# Subtest: lamejs min distribution is byte-identical for 2 channels / 128 kbps
+ok 4 - lamejs min distribution is byte-identical for 2 channels / 128 kbps
+  ---
+  duration_ms: 604.095082
+  type: 'test'
+  ...
+# Subtest: lamejs min distribution is byte-identical for 2 channels / 192 kbps
+ok 5 - lamejs min distribution is byte-identical for 2 channels / 192 kbps
+  ---
+  duration_ms: 436.713921
+  type: 'test'
+  ...
+# Subtest: lamejs min distribution is byte-identical for 2 channels / 320 kbps
+ok 6 - lamejs min distribution is byte-identical for 2 channels / 320 kbps
+  ---
+  duration_ms: 537.043379
+  type: 'test'
+  ...
+1..6
+# tests 6
+# suites 0
+# pass 6
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 3011.122463

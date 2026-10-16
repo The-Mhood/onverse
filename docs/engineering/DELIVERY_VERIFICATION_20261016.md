@@ -1,5 +1,8 @@
 # MusicOnVerse — recovered, integrated, built and browser-verified
 
+> Historical delivery record. [Final stabilization](STABILIZATION_20261016.md)
+> supersedes the TODO counts, bundle warning and unchanged-processor status below.
+
 2026-10-16 · Actual application delivery, **not native/release/product acceptance**.
 This report supersedes the earlier unpublished/held UI startup status. Unrelated
 held core work is still preserved and unpublished.

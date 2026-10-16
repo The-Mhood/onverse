@@ -1,3 +1,21 @@
+## CURRENT FINAL STABILIZATION — 2026-10-16
+
+Owner requested stabilization, not another UI reconstruction. Implementation
+`f92fe04` fixes the three valid channel-energy LUFS regressions, unavailable-evidence
+normalization, recorder ownership and late-disposal/B-crop publication defects;
+`5a1e10d` adds production file-origin proof. Original assertions/tolerances retained.
+Clean published suite **365/365 PASS**; broader held tree **555/555 PASS**; zero
+fail/skip/TODO. Final browser **22 groups / 13 downloads / 32 genuine PNGs**, both
+sizes/all key states; source/build hashes and release gates are in
+[final stabilization](docs/engineering/STABILIZATION_20261016.md).
+
+Presentation/reference pack/native shell/dependencies/models/storage/undo/IPC are
+unchanged; no broader core or UI reopening is authorized. Unrelated held work stays
+unpublished. Meter remains ungated/approximate, not standards-grade; native Mac,
+security remediation and listening remain gates. Older delivery counts/status below
+are historical, not the final stabilization result. Git/PR4 is publication authority;
+publication does not imply P receipt/start or native/product acceptance.
+
 # MusicOnVerse agent collaboration rules
 
 ## CURRENT DELIVERY AUTHORITY — 2026-10-16
