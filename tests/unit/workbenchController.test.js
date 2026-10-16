@@ -117,3 +117,47 @@ it("cropping B holds the view busy until remeasurement settles and releases on f
   assert.ok(f.calls.some(c => c[0] === "toast" && c[1].includes("remeasure failed")))
   assert.equal(f.state.buffer, buffer)
 })
+
+function deferred() { let resolve, entered; const started=new Promise(r=>{entered=r}); const promise=new Promise(r=>{resolve=r}); return {resolve,started,wait(){entered();return promise}} }
+it('dispose during render cannot promote B or recreate a playback context',async()=>{
+  const f=setup();await f.controller.openFile(file);const prior=createToneBuffer({amplitude:.2});f.state.fixed=prior;
+  const d=deferred();f.ports.audio.masterFix=()=>d.wait();const job=f.controller.runFix();await d.started;
+  await f.controller.dispose();d.resolve(createToneBuffer({amplitude:.3}));await job;
+  assert.equal(f.state.fixed,prior);assert.equal(f.state.playing,false);assert.equal(f.calls.filter(c=>c[0]==='context').length,0);
+});
+it('dispose during fast remeasurement prevents late B promotion',async()=>{
+  const f=setup();await f.controller.openFile(file);const prior=createToneBuffer({amplitude:.2});f.state.fixed=prior;
+  const d=deferred();f.ports.analysis.analyzeFast=()=>d.wait();const job=f.controller.runFix();await d.started;
+  await f.controller.dispose();d.resolve(measured);await job;assert.equal(f.state.fixed,prior);assert.equal(f.state.playing,false);
+});
+it('dispose during full analysis preserves the last valid analysis and suppresses late effects',async()=>{
+  const f=setup();await f.controller.openFile(file);const d=deferred();f.ports.analysis.analyze=()=>d.wait();
+  const job=f.controller.runAnalysis();await d.started;await f.controller.dispose();const count=f.calls.length;
+  d.resolve({...measured,lufs:-18});await job;assert.equal(f.state.analysis,measured);assert.equal(f.calls.length,count);
+});
+it('dispose during decode cannot replace the source or restart analysis',async()=>{
+  const f=setup();await f.controller.openFile(file);const d=deferred();f.ports.audio.decodeFile=()=>d.wait();
+  const job=f.controller.openFile({name:'late.wav',size:42});await d.started;await f.controller.dispose();
+  d.resolve(createToneBuffer({amplitude:.2}));await job;assert.equal(f.state.fileName,'input.wav');assert.equal(f.state.buffer,buffer);
+});
+it('dispose during conversion cannot publish/download a late output',async()=>{
+  const f=setup();await f.controller.openFile(file);await f.controller.runConvert({format:'wav'});const prior=f.state.converted;
+  const d=deferred();f.ports.audio.convert=()=>d.wait();const job=f.controller.runConvert({format:'mp3'});await d.started;
+  await f.controller.dispose();const saves=f.calls.filter(c=>c[0]==='save').length;
+  d.resolve({blob:new Blob(['late']),ext:'mp3',label:'late'});await job;
+  assert.equal(f.state.converted,prior);assert.equal(f.calls.filter(c=>c[0]==='save').length,saves);
+});
+it('failed B-crop remeasurement preserves the last valid B and its analysis',async t=>{
+  t.mock.method(console,'error',()=>{});const f=setup();await f.controller.openFile(file);await f.controller.runFix();f.controller.stopPlayback();
+  const prior=f.state.fixed,fast=f.state.fixedFast;f.ports.analysis.analyzeFast=async()=>{throw Error('crop analysis failed')};
+  f.controller.toggleCrop();f.controller.setCrop('out',.3);await f.controller.applyCrop();
+  assert.equal(f.state.fixed,prior);assert.equal(f.state.fixedFast,fast);assert.equal(f.state.busy,false);
+});
+it('dispose during reference lookup cannot publish success or failure afterward',async()=>{
+  for(const rejected of [false,true]){
+    const f=setup();let resolve,reject;f.ports.reference.resolveStreamUrl=()=>new Promise((r,j)=>{resolve=r;reject=j});
+    const job=f.controller.resolveReferenceUrl('https://example.invalid');await f.controller.dispose();const prior=f.state.ref.url,count=f.calls.length;
+    if(rejected)reject(Error('late failure'));else resolve({title:'late',identityKnown:true});
+    await job;assert.equal(f.state.ref.url,prior);assert.equal(f.calls.length,count);
+  }
+});

@@ -11,7 +11,8 @@ import { fetchPreviewBuffer as defaultFetchPreviewBuffer, profileForResolved } f
  * Only explicit method calls may invoke the unchanged engine/reference services.
  *
  * Callbacks are trusted in-process collaborators, not renderer/provider commands.
- * This does not add cancellation, asynchronous freshness, IPC authentication,
+ * The optional isActive port suppresses publication after host disposal; it does
+ * not abort computation or provide general asynchronous freshness, IPC authentication,
  * durable session persistence or a UI. Existing cleanup/error behavior is retained.
  * Original progress/report wording is retained for parity, not a new visual brief
  * or a certification of the underlying genre/profile/loudness measurements.
@@ -34,13 +35,15 @@ export function createAnalysisController(ports) {
   }
   if (typeof analysisService?.analyze !== "function" || typeof console?.error !== "function" ||
       [scoreAnalysis, buildIssues, buildFixPlan, fetchPreviewBuffer].some(fn => typeof fn !== "function") ||
-      [ports.ensureReferenceReady, ports.makeTarget].some(fn => fn !== undefined && typeof fn !== "function")) {
+      [ports.ensureReferenceReady, ports.makeTarget, ports.isActive].some(fn => fn !== undefined && typeof fn !== "function")) {
     throw new TypeError("Invalid analysis controller collaborator")
   }
+  const isActive = ports.isActive ?? (() => true)
   const ensureReferenceReady = ports.ensureReferenceReady ?? prepareReference
   const makeTarget = ports.makeTarget ?? resolveTarget
 
   async function prepareReference() {
+    if (!isActive()) return { ok: false }
     const r = state.ref
     if (r.src === "auto") return { ok: true, kind: "auto" }
     if (r.src === "file") {
@@ -49,12 +52,15 @@ export function createAnalysisController(ports) {
         showProgress(true, "Analyzing your reference track…")
         try {
           const feat = await analysisService.analyze(r.file.buf, (v) => {
+            if (!isActive()) return
             setProgress(v)
             if (v < 0.68) setProgressLabel("Analyzing your reference track…")
             else if (v < 0.96) setProgressLabel("Scanning reference spectrum…")
           })
+          if (!isActive()) return { ok: false }
           r.file.feat = feat
         } catch (err) {
+          if (!isActive()) return { ok: false }
           console.error(err)
           toast(`Couldn't analyze the reference track: ${err.message || err}`)
           showProgress(false)
@@ -74,11 +80,15 @@ export function createAnalysisController(ports) {
         showProgress(true, "Fetching Apple Music preview…")
         try {
           const ab = await fetchPreviewBuffer(u.meta.previewUrl)
+          if (!isActive()) return { ok: false }
           setProgress(0.35)
           setProgressLabel("Analyzing reference preview…")
           u.buf = ab
-          u.feat = await analysisService.analyze(ab, (v) => setProgress(0.35 + v * 0.65))
+          const feat = await analysisService.analyze(ab, (v) => { if (isActive()) setProgress(0.35 + v * 0.65) })
+          if (!isActive()) return { ok: false }
+          u.feat = feat
         } catch (err) {
+          if (!isActive()) return { ok: false }
           console.error(err)
           toast("Couldn't fetch the Apple preview audio — using the mastered profile for its genre instead.")
           u.prepared = true
@@ -144,7 +154,7 @@ export function createAnalysisController(ports) {
   }
 
   async function runAnalysis() {
-    if (!state.buffer || state.busy) return
+    if (!isActive() || !state.buffer || state.busy) return
     state.busy = true
     try {
       stopPlayback()
@@ -152,14 +162,16 @@ export function createAnalysisController(ports) {
       updateAbUI()
       renderRefAreas()
       const prep = await ensureReferenceReady()
-      if (!prep.ok) return
+      if (!isActive() || !prep.ok) return
       showProgress(true, "Analyzing…")
       const analysis = await analysisService.analyze(state.buffer, (v) => {
+        if (!isActive()) return
         setProgress(v)
         const labels = ["Reading waveform…", "Measuring loudness…", "Scanning spectrum…", "Checking pitch…", "Analyzing stereo…", "Finding tempo…", "Finalizing…"]
         const i = Math.min(labels.length - 1, Math.floor(v * labels.length))
         setProgressLabel(labels[i])
       })
+      if (!isActive()) return
       const target = makeTarget(prep.kind, analysis)
       const g = target.g
       const scores = scoreAnalysis(analysis, g)
@@ -183,12 +195,12 @@ export function createAnalysisController(ports) {
       const shown = (target.meta.title || g.name).length > 42 ? (target.meta.title || g.name).slice(0, 42) + "…" : target.meta.title || g.name
       toast(`Analysis complete — ${shown} · ${scores.overall}/100`)
     } catch (err) {
+      if (!isActive()) return
       console.error(err)
       toast(`Analysis failed: ${err?.message || String(err)}`)
     } finally {
       state.busy = false
-      showProgress(false)
-      renderRefAreas()
+      if (isActive()) { showProgress(false); renderRefAreas() }
     }
   }
 

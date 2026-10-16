@@ -4,12 +4,9 @@ import { analysisService } from "../../src/application/analysis/analysisService.
 import { quickLufs } from "../../src/audio/analyzer.js"
 import { createPcmBuffer, createToneBuffer } from "../fixtures/audioBuffers.js"
 
-// TODO assertions execute and expose known defects, rather than asserting that
-// today's incorrect values are desirable. Strict mode makes them ordinary
-// failures. Remove the TODO for each case when its separately reviewed fix lands.
-// These tests do not certify BS.1770 loudness, true peak, or perceptual quality.
-const strict = process.env.MUSICONVERSE_STRICT_AUDIO_REGRESSIONS === "1"
-const knownDefect = (reason) => strict ? {} : { todo: reason }
+// Polarity invariance is a channel-energy property, not a standards-accuracy
+// certification. All three former TODO assertions now run as ordinary tests;
+// their original 1e-6 dB tolerance and assertion bodies are unchanged.
 const toleranceDb = 1e-6
 const methods = ["analyze", "analyzeFast"]
 
@@ -210,9 +207,9 @@ for (const method of methods) {
     })
   })
 
-  describe(`real ${method}: known defects (not resolved)`, () => {
+  describe(`real ${method}: channel-energy loudness regression`, () => {
     it("keeps channel-energy loudness invariant under right-channel polarity inversion",
-      knownDefect("STEREO-LOUDNESS: mono fold-down erases opposite-polarity channel energy"), async () => {
+      async () => {
         const aligned = await analysisService[method](createToneBuffer())
         const inverted = await analysisService[method](createToneBuffer({ channelGains: [1, -1] }))
         // This is an invariance check, not an assertion of an absolute LUFS value.
@@ -277,7 +274,7 @@ describe("real quickLufs post-render measurement", () => {
   })
 
   it("keeps channel-energy loudness invariant under right-channel polarity inversion",
-    knownDefect("STEREO-QUICK-LUFS: post-render trim uses the same cancelling mono fold-down"), () => {
+    () => {
       near(quickLufs(createToneBuffer({ channelGains: [1, -1] })), quickLufs(createToneBuffer()))
     })
 })

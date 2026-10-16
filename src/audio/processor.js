@@ -3,17 +3,19 @@
  * one-click "Master Fix" that reverse-engineers every issue the analysis
  * found and renders a corrected copy of the file.
  */
-import lameAllSource from "lamejs/lame.all.js?raw"
+import lameSource from "lamejs/lame.min.js?raw"
+import lameNotices from "./vendor/lamejs-notices.js"
 import { resampleBuffer, retuneBuffer, widthProcess, ceilingProcess, clamp, dbToLin } from "./dsp.js"
 import { BAND_META } from "./genre.js"
 import { quickLufs } from "./analyzer.js"
 
 /* lamejs 1.2.1's CJS build is broken (missing requires); the self-contained
- * lame.all.js build defines everything in one scope, so we evaluate it once. */
+ * minified self-contained distribution defines everything in one scope. It is
+ * byte-parity tested against lame.all.js; keep it inline for file:// builds. */
 let _lame = null
 function getLame() {
   if (!_lame) {
-    const fn = new Function(lameAllSource + "\nreturn lamejs;")
+    const fn = new Function(lameNotices + "\n" + lameSource + "\nreturn lamejs;")
     _lame = fn()
   }
   return _lame
@@ -109,24 +111,54 @@ export async function encodeViaRecorder(buffer, fmt) {
   const rec = RECORDERS.find((r) => r.fmt === fmt)
   if (!rec) throw new Error(`Unsupported format: ${fmt}`)
   const ctx = new AudioContext({ sampleRate: Math.min(buffer.sampleRate, 48000) })
-  const src = ctx.createBufferSource()
-  src.buffer = buffer
-  const dest = ctx.createMediaStreamDestination()
-  src.connect(dest)
-  const recorder = new MediaRecorder(dest.stream, { mimeType: rec.mime, audioBitsPerSecond: 256000 })
+  let src, dest, recorder, timer, started = false, primaryError
   const chunks = []
-  recorder.ondataavailable = (e) => { if (e.data && e.data.size) chunks.push(e.data) }
-  const stopped = new Promise((r) => { recorder.onstop = r })
-  recorder.start()
-  src.start(0)
-  await new Promise((r) => setTimeout(r, buffer.duration * 1000 + 500))
-  recorder.stop()
-  await stopped
-  await ctx.close()
-  return new Blob(chunks, { type: recorder.mimeType || rec.mime })
+  try {
+    src = ctx.createBufferSource()
+    src.buffer = buffer
+    dest = ctx.createMediaStreamDestination()
+    src.connect(dest)
+    recorder = new MediaRecorder(dest.stream, { mimeType: rec.mime, audioBitsPerSecond: 256000 })
+    await new Promise((resolve, reject) => {
+      recorder.ondataavailable = e => { if (e.data?.size) chunks.push(e.data) }
+      recorder.onstop = resolve
+      recorder.onerror = e => reject(e.error || new Error("Audio recording failed"))
+      recorder.start()
+      src.start(0)
+      started = true
+      timer = setTimeout(() => {
+        try { recorder.stop() } catch (error) { reject(error) }
+      }, buffer.duration * 1000 + 500)
+    })
+    if (!chunks.length) throw new Error("Recorder produced no audio data")
+    return new Blob(chunks, { type: recorder.mimeType || rec.mime })
+  } catch (error) {
+    primaryError = error
+    throw error
+  } finally {
+    clearTimeout(timer)
+    if (recorder) recorder.ondataavailable = recorder.onstop = recorder.onerror = null
+    // Attempt every release, even if an earlier cleanup fails. Never turn a
+    // failed encode into success or obscure its error with a secondary failure.
+    const cleanupErrors = []
+    const releases = [
+      () => { if (recorder && recorder.state !== "inactive") recorder.stop() },
+      () => { if (started) src.stop() },
+      () => src?.disconnect(),
+      ...((dest?.stream.getTracks() || []).map(track => () => track.stop())),
+      () => ctx.close(),
+    ]
+    for (const release of releases) {
+      try { await release() } catch (error) { cleanupErrors.push(error) }
+    }
+    if (cleanupErrors.length) {
+      if (primaryError) throw new AggregateError([primaryError, ...cleanupErrors], `${primaryError.message}; recorder cleanup failed`, { cause: primaryError })
+      throw new AggregateError(cleanupErrors, "Recorder cleanup failed")
+    }
+  }
 }
 
-/* soft limiter: shaves peaks above `db` while preserving integrated loudness */
+/* Nonlinear sample-peak shaper: may change loudness; not reconstructed true peak. */
 function softLimit(buffer, db) {
   const T = dbToLin(db)
   const k = 6
@@ -164,7 +196,17 @@ export async function convert(buffer, { format, kbps = 320, floatWav = true }) {
 }
 
 /* ---------------- one-click Master Fix ---------------- */
+// The legacy estimator's display floor/absence of a complete 100 ms window is
+// not measurement evidence. Reject, rather than manufacture an enormous trim.
+// This is NOT a standards absolute gate or a product-approved maximum-gain policy.
+function requireTrimEvidence(buffer, level) {
+  if (!Number.isFinite(level) || buffer.length < Math.max(1, Math.floor(buffer.sampleRate * 0.1)) || level <= -120.691) {
+    throw new RangeError("Cannot normalize: audio needs a complete measurement window and signal above the meter floor")
+  }
+}
+
 export async function masterFix(buffer, plan, onStage) {
+  if (plan.targetLufs != null && !Number.isFinite(plan.targetLufs)) throw new RangeError("Master Fix requires a finite loudness target")
   let work = buffer
   if (plan.retune) {
     onStage?.("Retuning to A=440")
@@ -173,6 +215,7 @@ export async function masterFix(buffer, plan, onStage) {
   const sr = work.sampleRate
   const len = work.length
   const ch = work.numberOfChannels
+  if (plan.targetLufs) requireTrimEvidence(work, quickLufs(work))
   const ctx = new OfflineAudioContext(ch, len, sr)
   const src = ctx.createBufferSource()
   src.buffer = work
@@ -244,6 +287,7 @@ export async function masterFix(buffer, plan, onStage) {
   if (plan.targetLufs) {
     onStage?.("Trimming to reference loudness")
     const now = quickLufs(rendered)
+    requireTrimEvidence(rendered, now)
     const trim = dbToLin(plan.targetLufs - now)
     for (let c = 0; c < rendered.numberOfChannels; c++) {
       const d = rendered.getChannelData(c)

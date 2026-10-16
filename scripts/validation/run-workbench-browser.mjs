@@ -7,6 +7,7 @@ import { pathToFileURL, fileURLToPath } from 'node:url';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { auditTools } from './run-offline-render-probe.mjs';
+import { probeAudioStabilization } from './audio-stabilization-probe.mjs';
 
 const tools = process.argv[2];
 const flags = process.argv.slice(3);
@@ -252,6 +253,7 @@ try {
   await click('play'); await click('original'); await click('fixed');
   report.checks.push('Real OfflineAudioContext Master Fix + fast remeasurement publishes distinct B; original/fixed A–B selection works.');
 
+  await capture('fixed', 1120, 700); await capture('fixed', 1480, 920);
   phase = 'manual-adjustment'; await page.$eval('.adjustments', el => { el.open = true; });
   const prior = (await download('save-fixed')).sha256;
   const beforeManual = await page.evaluate(() => window.__audioAudit.offline);
@@ -259,6 +261,7 @@ try {
   await page.waitForFunction(before => window.__audioAudit.offline > before && !document.querySelector('[data-action="fix"]').disabled, { timeout: 30000 }, beforeManual); await waitReady();
   const adjusted = await download('save-fixed'); assert.notEqual(adjusted.sha256, prior);
   assert.ok(await page.evaluate(() => window.__audioAudit.offline >= 2));
+  await capture('manual-adjusted', 1120, 700); await capture('manual-adjusted', 1480, 920);
   const beforeReset = await page.evaluate(() => window.__audioAudit.offline);
   await click('reset-tweaks'); await page.waitForFunction(before => window.__audioAudit.offline > before && !document.querySelector('[data-action="fix"]').disabled, { timeout: 30000 }, beforeReset); await waitReady();
   report.checks.push('Manual output trim produces different real rendered WAV bytes; reset triggers another real render.');
@@ -305,6 +308,7 @@ try {
   phase = 'crop-fixed'; await click('fixed'); await click('crop'); await edit('.region-in', .25); await edit('.region-out', 1.25); await click('apply-crop');
   await page.waitForFunction(() => document.querySelector('.operation-status').textContent.includes('B cropped and re-measured'));
   await click('play'); const fixedCrop = await download('save-fixed'); assert.equal(fixedCrop.frames, Math.ceil(1.25 * fixedCrop.sampleRate) - Math.floor(.25 * fixedCrop.sampleRate));
+  await capture('fixed-cropped', 1120, 700); await capture('fixed-cropped', 1480, 920);
   await click('original'); const stillOriginal = await download('convert'); assert.equal(stillOriginal.sha256, original.sha256);
   report.checks.push('Cropping B preserves exact floor/ceil sample-boundary behavior at its rendered sample rate; A export remains byte-identical.');
 
@@ -319,6 +323,7 @@ try {
   assert.match(await page.$eval('.source-name', e => e.textContent), /_cropped/);
   report.checks.push('Invalid audio reports a genuine decoder failure and preserves the current buffer. Its console error is expected and recorded.');
 
+  await capture('decode-error-preserved', 1120, 700); await capture('decode-error-preserved', 1480, 920);
   phase = 'keyboard'; await page.click('h1'); await page.keyboard.press('Space');
   await page.waitForFunction(() => document.querySelector('[data-action="play"]').textContent === 'Pause'); await page.keyboard.press('Space');
   report.checks.push('Keyboard Space toggles real playback outside form controls.');
@@ -338,6 +343,13 @@ try {
     phase = 'motion-and-panels'; await verifyMotionAndPanels();
     await page.evaluate(() => window.dispatchEvent(new PageTransitionEvent('pagehide')));
   }
+  if (!motionOnly) {
+    phase = 'native-stereo-render-regression';
+    report.audioStabilization = await probeAudioStabilization(page);
+    report.finalAudioAudit = await page.evaluate(() => window.__audioAudit);
+    assert.equal(report.finalAudioAudit.contexts, report.finalAudioAudit.closes);
+    report.checks.push('Twelve native actual-module mono/in-phase/anti-phase renders at 44.1/48 kHz: actual post-render trim meets achievable targets at unchanged 1e-6 tolerance; PCM immutable, finite, polarity preserved and geometry unchanged. Invalid PCM rejects. Not listening/standards certification.');
+  }
   report.performanceMetrics = await page.metrics();
   assert.deepEqual(report.errors, []); assert.deepEqual(report.failedResponses, []); assert.deepEqual(report.blockedRequests, []);
   const unexpectedConsole = report.console.filter(e => e.type === 'error' && e.phase !== 'expected-decode-error');
@@ -356,7 +368,7 @@ try {
   if (closed) { await fs.rm(runtime, { recursive: true, force: true }); report.privateRuntimeRemoved = true; }
   else report.privateRuntimeRemoved = false;
   const code = {};
-  for (const relative of ['index.html', 'src/ui/presentation/rebuild/index.css', 'src/ui/presentation/rebuild/environment.css', 'src/ui/presentation/rebuild/workbench.css', 'src/ui/presentation/rebuild/tokens.css', 'src/ui/presentation/rebuild/assets/first-person-cosmic-horizon.jpg', 'src/application/workbench/demo.js', 'src/main.js', 'src/ui/workbench/workspace.js', 'src/ui/workbench/workspace.css', 'src/application/workbench/workbenchController.js', 'src/application/analysis/analysisController.js', 'dist/index.html', 'scripts/validation/run-workbench-browser.mjs']) code[relative] = sha(await fs.readFile(new URL('../../' + relative, import.meta.url)));
+  for (const relative of ['index.html', 'src/ui/presentation/rebuild/index.css', 'src/ui/presentation/rebuild/environment.css', 'src/ui/presentation/rebuild/workbench.css', 'src/ui/presentation/rebuild/tokens.css', 'src/ui/presentation/rebuild/assets/first-person-cosmic-horizon.jpg', 'src/application/workbench/demo.js', 'src/main.js', 'src/audio/analyzer.js', 'src/audio/processor.js', 'src/audio/dsp.js', 'src/audio/genre.js', 'src/audio/vendor/lamejs-notices.js', 'tests/fixtures/audioStabilizationBridge.js', 'scripts/validation/audio-stabilization-probe.mjs', 'src/ui/workbench/workspace.js', 'src/ui/workbench/workspace.css', 'src/application/workbench/workbenchController.js', 'src/application/analysis/analysisController.js', 'dist/index.html', 'scripts/validation/run-workbench-browser.mjs']) code[relative] = sha(await fs.readFile(new URL('../../' + relative, import.meta.url)));
   report.codeSha256 = code;
   await fs.writeFile(path.join(output, 'report.json'), JSON.stringify(report, null, 2) + '\n');
   console.log(JSON.stringify(report, null, 2));

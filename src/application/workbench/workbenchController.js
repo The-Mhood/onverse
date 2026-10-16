@@ -27,10 +27,12 @@ export function createWorkbenchController({ view, audio, reference, analysis = a
     tweaks: defaults(), tweakBusy: false, tweakEpoch: 0, hasCustomTweaks: false,
   }
   let actx = null, analyser = null, currentSource = null, startedAt = 0, startPos = 0, rafPlayer = 0, lastSeekRestart = 0
+  let disposed = false, disposal
   let tweakTimer = 0, tweakQueued = false
-  const render = () => view.render(state)
-  const toast = message => view.toast(message)
-  const fail = (label, error) => { console.error(error); toast(`${label}: ${error?.message || String(error)}`) }
+  const render = () => { if (!disposed) view.render(state) }
+  const toast = message => { if (!disposed) view.toast(message) }
+  const progress = (...args) => { if (!disposed) view.progress(...args) }
+  const fail = (label, error) => { if (disposed) return; console.error(error); toast(`${label}: ${error?.message || String(error)}`) }
   const activeBuffer = () => state.ab === "fixed" && state.fixed ? state.fixed : state.buffer
   const activeDuration = () => activeBuffer()?.duration || 0
 
@@ -55,6 +57,7 @@ export function createWorkbenchController({ view, audio, reference, analysis = a
     render()
   }
   function playBuffer(buf, tag, offset = 0) {
+    if (disposed) return
     ensureCtx(); stopPlayback()
     const dur = buf.duration, start = Math.max(0, Math.min(offset || 0, Math.max(0, dur - .02)))
     const src = actx.createBufferSource(); src.buffer = buf
@@ -80,6 +83,7 @@ export function createWorkbenchController({ view, audio, reference, analysis = a
     loop()
   }
   function seekTo(pos, { restart = true } = {}) {
+    if (disposed) return
     const b = activeBuffer(); if (!b) return
     let v = Math.max(0, Math.min(pos, Math.max(0, b.duration - .02)))
     if (state.crop) v = Math.max(state.crop.in, Math.min(v, Math.max(state.crop.in, state.crop.out - .05)))
@@ -91,6 +95,7 @@ export function createWorkbenchController({ view, audio, reference, analysis = a
     } else render()
   }
   function togglePlay() {
+    if (disposed) return
     const b = activeBuffer(); if (!b) return
     if (state.playing) { stopPlayback(); return }
     let start = state.pos
@@ -99,11 +104,13 @@ export function createWorkbenchController({ view, audio, reference, analysis = a
     playBuffer(b, state.ab === "fixed" && state.fixed ? "fixed" : "orig", start)
   }
   function cycleRate() {
+    if (disposed) return
     const rates = [1, 1.5, 2, .5]; state.rate = rates[(Math.max(0, rates.indexOf(state.rate)) + 1) % rates.length]
     if (state.playing) playBuffer(activeBuffer(), state.ab, state.pos)
     else render()
   }
   function selectSide(side) {
+    if (disposed) return
     if (side !== "orig" && side !== "fixed") return
     if (side === "fixed" && !state.fixed) return
     state.ab = side
@@ -111,15 +118,16 @@ export function createWorkbenchController({ view, audio, reference, analysis = a
     else render()
   }
   const analysisController = createAnalysisController({
-    state, analysisService: analysis, fetchPreviewBuffer: reference.fetchPreviewBuffer,
+    state, analysisService: analysis, fetchPreviewBuffer: reference.fetchPreviewBuffer, isActive: () => !disposed,
     stopPlayback, updateAbUI: render, renderRefAreas: render,
-    showProgress: (visible, label) => view.progress(visible, label),
-    setProgress: value => view.progress(true, undefined, value),
-    setProgressLabel: label => view.progress(true, label),
+    showProgress: (visible, label) => progress(visible, label),
+    setProgress: value => progress(true, undefined, value),
+    setProgressLabel: label => progress(true, label),
     renderAnalysis: render, renderReport: render, renderTweakPanel: render,
-    showPanel: name => view.showPanel(name), toast,
+    showPanel: name => { if (!disposed) view.showPanel(name) }, toast,
   })
   async function loadBuffer(buffer, name, size, isDemo = false) {
+    if (disposed) return
     stopPlayback()
     Object.assign(state, { buffer, fileName: name, fileSize: size, isDemo,
       analysis: null, scores: null, issues: null, fixPlan: null, autoPlan: null,
@@ -129,13 +137,16 @@ export function createWorkbenchController({ view, audio, reference, analysis = a
     if (state.mode === "converse" && buffer) return analysisController.runAnalysis()
   }
   async function openFile(file) {
+    if (disposed) return
     if (!file || state.busy || state.tweakBusy) return
     try {
       const buffer = await audio.decodeFile(file)
+      if (disposed) return
       await loadBuffer(buffer, file.name, file.size)
     } catch (error) { fail("Couldn't decode that file. Try WAV, MP3, M4A, OGG, FLAC or AIFF", error) }
   }
   async function demo() {
+    if (disposed) return
     if (state.busy || state.tweakBusy) return
     try {
       const buf = makeDemoBuffer()
@@ -143,16 +154,19 @@ export function createWorkbenchController({ view, audio, reference, analysis = a
     } catch (error) { fail("Demo failed", error) }
   }
   async function runFix() {
+    if (disposed) return
     if (!state.buffer || !state.analysis || !state.targetUsed || state.busy || state.tweakBusy) return
-    state.busy = true; stopPlayback(); view.progress(true, "Reading the analysis…")
+    state.busy = true; stopPlayback(); progress(true, "Reading the analysis…")
     try {
-      const fixed = await audio.masterFix(state.buffer, state.autoPlan || state.fixPlan, stage => view.progress(true, stage))
+      const fixed = await audio.masterFix(state.buffer, state.autoPlan || state.fixPlan, stage => progress(true, stage))
+      if (disposed) return
       const fixedFast = await analysis.analyzeFast(fixed, () => {})
+      if (disposed) return
       state.fixed = fixed; state.fixedFast = fixedFast; state.tweaks = defaults(); state.hasCustomTweaks = false
       state.ab = "fixed"; render(); playBuffer(fixed, "fixed")
       toast("Master Fix rendered a separate copy. Playing B · fixed; compare before saving.")
     } catch (error) { fail("Master Fix failed", error) }
-    finally { state.busy = false; view.progress(false); render() }
+    finally { state.busy = false; progress(false); render() }
   }
   function cropBuffer(buf, inSec, outSec) {
     const sr = buf.sampleRate, ch = buf.numberOfChannels
@@ -165,6 +179,7 @@ export function createWorkbenchController({ view, audio, reference, analysis = a
     return nb
   }
   function toggleCrop() {
+    if (disposed) return
     if (!activeBuffer()) return
     if (state.crop) state.crop = null
     else {
@@ -174,6 +189,7 @@ export function createWorkbenchController({ view, audio, reference, analysis = a
     render()
   }
   function setCrop(which, value) {
+    if (disposed) return
     if (!state.crop || !Number.isFinite(value)) return
     const v = Math.max(0, Math.min(value, activeDuration()))
     if (which === "in") state.crop.in = Math.max(0, Math.min(v, state.crop.out - .25))
@@ -182,6 +198,7 @@ export function createWorkbenchController({ view, audio, reference, analysis = a
   }
   const baseName = () => (state.fileName || "audio").replace(/\.[^.]+$/, "") || "audio"
   function exportCropRegion() {
+    if (disposed) return
     const b = activeBuffer(); if (!b || !state.crop) return
     const cin = Math.min(Math.max(state.crop.in, 0), b.duration), cout = Math.min(Math.max(state.crop.in, state.crop.out), b.duration)
     if (cout - cin < .05) return
@@ -189,6 +206,7 @@ export function createWorkbenchController({ view, audio, reference, analysis = a
     toast("Region exported as 32-bit WAV.")
   }
   async function applyCrop() {
+    if (disposed) return
     const b = activeBuffer(); if (!b || !state.crop || state.busy || state.tweakBusy) return
     const cin = Math.max(0, Math.min(state.crop.in, b.duration - .05)), cout = Math.min(state.crop.out, b.duration)
     if (cout - cin < .25) { toast("Crop too short — spread IN and OUT apart first."); return }
@@ -197,9 +215,10 @@ export function createWorkbenchController({ view, audio, reference, analysis = a
         // Replace the old crop-button disabled flag with the shared UI busy port.
         state.busy = true
         stopPlayback(); const trimmed = cropBuffer(state.fixed, cin, cout)
-        state.fixed = trimmed; state.pos = 0; state.crop = null; render()
         const fast = await analysis.analyzeFast(trimmed, () => {})
-        if (state.fixed === trimmed) { state.fixedFast = fast; render() }
+        if (disposed) return
+        // Publish only after successful measurement; failure retains last valid B.
+        state.fixed = trimmed; state.fixedFast = fast; state.pos = 0; state.crop = null; render()
         playBuffer(trimmed, "fixed"); toast("B cropped and re-measured. Original A is unchanged.")
       } else {
         stopPlayback(); const cropped = cropBuffer(b, cin, cout); state.crop = null
@@ -209,21 +228,25 @@ export function createWorkbenchController({ view, audio, reference, analysis = a
     finally { state.busy = false; render() }
   }
   async function runConvert({ format, kbps = 320, floatWav = true }) {
+    if (disposed) return
     if (!state.buffer || state.busy || state.tweakBusy) return
-    state.busy = true; view.progress(true, "Converting…"); render()
+    state.busy = true; progress(true, "Converting…"); render()
     try {
       const out = await audio.convert(state.buffer, { format, kbps, floatWav })
+      if (disposed) return
       state.converted = out; audio.saveBlob(out.blob, `${baseName()}.${out.ext}`)
       toast(`Converted to ${format === "m4a" ? "M4A (browser-selected codec)" : out.label} — download started.`)
     } catch (error) { fail("Conversion failed", error) }
-    finally { state.busy = false; view.progress(false); render() }
+    finally { state.busy = false; progress(false); render() }
   }
   function downloadFixed() {
+    if (disposed) return
     if (!state.fixed) return
     audio.saveBlob(audio.encodeWav(state.fixed, { float: true }), `${baseName()}_masterfixed.wav`)
     toast("Saved fixed copy (32-bit WAV).")
   }
   function downloadReport() {
+    if (disposed) return
     if (!state.analysis) return
     const target = state.targetUsed
     const lines = ["MusicOnVerse — analysis report", state.fileName,
@@ -235,26 +258,31 @@ export function createWorkbenchController({ view, audio, reference, analysis = a
     audio.saveText(lines.join("\n\n"), `${baseName()}_analysis.txt`)
   }
   async function pickReferenceFile(file) {
+    if (disposed) return
     if (!file || state.busy || state.tweakBusy) return
     try {
       const buf = await audio.decodeFile(file)
+      if (disposed) return
       state.ref.src = "file"; state.ref.file = { name: file.name, buf }; render()
       if (state.buffer) await analysisController.runAnalysis()
     } catch (error) { fail("Couldn't decode the reference file", error) }
   }
   async function resolveReferenceUrl(raw) {
+    if (disposed) return
     if (state.busy || state.tweakBusy) return
     const u = state.ref.url || {}; u.resolving = true; u.error = null; u.prepared = false; u.feat = null
     state.ref.src = "url"; state.ref.url = u; render()
     try {
       const meta = await reference.resolveStreamUrl(raw)
+      if (disposed) return
       state.ref.url = { inputUrl: raw, meta: meta.error ? null : meta, error: meta.error || null, prepared: false, resolving: false, buf: null, feat: null }
       render()
       if (meta.error) { toast(meta.error); return }
       if (state.buffer) await analysisController.runAnalysis()
-    } catch (error) { state.ref.url = { inputUrl: raw, error: error?.message || String(error), resolving: false }; fail("Reference resolution failed", error); render() }
+    } catch (error) { if (disposed) return; state.ref.url = { inputUrl: raw, error: error?.message || String(error), resolving: false }; fail("Reference resolution failed", error); render() }
   }
   function setReference({ src, cat, sub }) {
+    if (disposed) return
     if (state.busy || state.tweakBusy) return
     if (["auto", "file", "url"].includes(src)) state.ref.src = src
     if (cat !== undefined) { state.ref.cat = cat || null; state.ref.sub = null }
@@ -263,25 +291,27 @@ export function createWorkbenchController({ view, audio, reference, analysis = a
   }
   function tweakIsCustom() { return state.tweaks.trimDb !== 0 || state.tweaks.gluePct !== 100 || state.tweaks.width !== 0 || Object.values(state.tweaks.band).some(v => v !== 0) }
   async function rerenderFixed() {
+    if (disposed) return
     if (state.tweakBusy) { tweakQueued = true; return }
     if (!state.fixed || !state.buffer || !state.autoPlan || state.busy) return
     const plan = buildProcessingPlan(state.autoPlan || state.fixPlan, state.tweaks, BAND_KEYS); if (!plan) return
-    state.tweakBusy = true; view.progress(true, "Rebalancing fixed copy…"); render()
+    state.tweakBusy = true; progress(true, "Rebalancing fixed copy…"); render()
     const epoch = ++state.tweakEpoch, wasPlaying = state.playing && state.ab === "fixed", resumeAt = wasPlaying ? state.pos : 0
     stopPlayback()
     try {
-      const fixed = await audio.masterFix(state.buffer, plan, stage => view.progress(true, stage))
+      const fixed = await audio.masterFix(state.buffer, plan, stage => progress(true, stage))
       if (epoch !== state.tweakEpoch) return
       const fast = await analysis.analyzeFast(fixed, () => {})
       if (epoch !== state.tweakEpoch) return
       state.fixed = fixed; state.fixedFast = fast; state.hasCustomTweaks = tweakIsCustom(); render()
       if (wasPlaying && state.fixed) playBuffer(state.fixed, "fixed", resumeAt)
     } catch (error) { fail("Rebalance failed", error) }
-    finally { if (epoch === state.tweakEpoch) { state.tweakBusy = false; view.progress(false); render() } }
+    finally { if (epoch === state.tweakEpoch) { state.tweakBusy = false; progress(false); render() } }
     if (tweakQueued && epoch === state.tweakEpoch) { tweakQueued = false; scheduleTweak() }
   }
   function scheduleTweak() { platform.clearTimeout(tweakTimer); tweakTimer = platform.setTimeout(rerenderFixed, 400) }
   function setTweak(key, value) {
+    if (disposed) return
     if (!state.fixed || state.busy || !Number.isFinite(value)) return
     const ranges = { trimDb: [-6, 6], gluePct: [0, 200], width: [-6, 6] }
     if (key.startsWith("band:") && BAND_KEYS.includes(key.slice(5))) state.tweaks.band[key.slice(5)] = Math.max(-9, Math.min(9, value))
@@ -289,8 +319,12 @@ export function createWorkbenchController({ view, audio, reference, analysis = a
     else return
     scheduleTweak()
   }
-  function resetTweaks() { if (!state.fixed || state.busy) return; state.tweaks = defaults(); state.hasCustomTweaks = false; render(); scheduleTweak() }
+  function resetTweaks() {
+    if (disposed || !state.fixed || state.busy) return
+    state.tweaks = defaults(); state.hasCustomTweaks = false; render(); scheduleTweak()
+  }
   function reset() {
+    if (disposed) return
     if (state.busy || state.tweakBusy) return
     stopPlayback(); platform.clearTimeout(tweakTimer)
     Object.assign(state, { buffer: null, fixed: null, fixedFast: null, scores: null, issues: null, converted: null, analysis: null,
@@ -298,9 +332,17 @@ export function createWorkbenchController({ view, audio, reference, analysis = a
       tweaks: defaults(), hasCustomTweaks: false, ab: "orig", pos: 0, rate: 1, crop: null, fileName: "", fileSize: 0, isDemo: false })
     render()
   }
-  async function dispose() {
+  function dispose() {
+    if (disposal) return disposal
+    // Invalidate publication BEFORE awaiting close. This is lifecycle suppression,
+    // not cancellation of in-flight analysis/offline computation or a new UI API.
+    disposed = true
+    ++state.tweakEpoch; tweakQueued = false
+    state.busy = false; state.tweakBusy = false
     platform.clearTimeout(tweakTimer); stopPlayback()
-    if (actx) { await actx.close(); actx = null; analyser = null }
+    const closing = actx; actx = null; analyser = null
+    disposal = Promise.resolve().then(() => closing?.close())
+    return disposal
   }
   return Object.freeze({ state, openFile, demo, runAnalysis: analysisController.runAnalysis, runFix, runConvert, downloadFixed, downloadReport,
     stopPlayback, togglePlay, cycleRate, selectSide, seekTo, seekBy: delta => seekTo(state.pos + delta),
