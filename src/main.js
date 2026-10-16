@@ -1,11 +1,8 @@
-import "./style.css"
-import { createStage } from "./scene.js"
 import { scoreAnalysis, buildIssues, buildFixPlan, targetFromFeatures } from "./audio/analyzer.js"
 import { analysisService } from "./application/analysis/analysisService.js"
 import { matchGenre, GENRES, CATEGORIES, categoryById, categoryProfile, BAND_KEYS, BAND_META } from "./audio/genre.js"
 import { decodeFile, convert, masterFix, saveBlob, saveText, supportedRecorders, encodeWav } from "./audio/processor.js"
 import { resolveStreamUrl, fetchPreviewBuffer, profileForResolved } from "./audio/reference.js"
-import { drawRadar, drawWaveform } from "./ui/draw.js"
 import { buildProcessingPlan } from "./domain/processors/buildProcessingPlan.js"
 
 /* ================= state ================= */
@@ -96,9 +93,9 @@ function stopPlayback() {
     currentSource = null
   }
   state.playing = false
-  stage.setSpectrum(new Float32Array(56))
-  stage.setEnergy(0)
-  stage.setPlaying(false)
+  stage?.setSpectrum(new Float32Array(56))
+  stage?.setEnergy(0)
+  stage?.setPlaying(false)
   updateTransportUI()
   updateAbUI()
 }
@@ -125,14 +122,14 @@ function playBuffer(buf, tag, offset = 0) {
       state.pos = state.crop && state.crop.out < dur - 0.05 ? state.crop.in : 0
       cancelAnimationFrame(rafPlayer)
       rafPlayer = 0
-      stage.setPlaying(false)
+      stage?.setPlaying(false)
       paintPlayhead(state.pos)
       updateTransportUI()
       updateAbUI()
     }
   }
   src.start(0, start)
-  stage.setPlaying(true)
+  stage?.setPlaying(true)
   updateTransportUI()
   updateAbUI()
   const data = new Uint8Array(analyser.frequencyBinCount)
@@ -143,8 +140,8 @@ function playBuffer(buf, tag, offset = 0) {
     const arr = new Float32Array(data.length)
     let e = 0
     for (let i = 0; i < data.length; i++) { arr[i] = data[i] / 255; if (i < 12) e += data[i] }
-    stage.setSpectrum(arr)
-    stage.setEnergy(e / (12 * 255))
+    stage?.setSpectrum(arr)
+    stage?.setEnergy(e / (12 * 255))
     const pos = startPos + (actx.currentTime - startedAt) * state.rate
     // loop inside the crop region
     if (state.crop && state.crop.out < dur - 0.05 && pos >= state.crop.out - 0.02) {
@@ -230,7 +227,7 @@ function renderWaveform(progress) {
     const cout = Math.min(Math.max(state.crop.in, state.crop.out), dur)
     region = { in: cin / dur, out: cout / dur }
   }
-  drawWaveform(waveformEl, primary, { progress, overlay, region })
+  if (waveformEl) drawWaveform?.(waveformEl, primary, { progress, overlay, region })
   paintRegionOverlay()
 }
 
@@ -454,217 +451,9 @@ const ICONS = {
   doc: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/><path d="M9 12h6M9 16h6"/></svg>`,
 }
 
-app.innerHTML = `
-<div id="boot">
-  <div class="boot-core">
-    <div class="boot-ring"></div>
-    <div class="boot-eq"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-    <div class="boot-logo">Music<span>OnVerse</span></div>
-    <div class="boot-sub">AUDIO INTELLIGENCE STUDIO</div>
-  </div>
-</div>
-<canvas id="stage" aria-hidden="true"></canvas>
-<header class="topbar">
-  <div class="brand">
-    <div class="brand-mark" aria-hidden="true"><span></span></div>
-    <div class="brand-text">
-      <div class="brand-name">Music<span>OnVerse</span></div>
-      <div class="brand-tag">AUDIO INTELLIGENCE</div>
-    </div>
-  </div>
-  <div class="mode-switch tabs tabs-box" id="modeSwitch" role="tablist">
-    <button class="tab tab-active mode-btn" data-mode="converse" role="tab" type="button">◈ CONVERSE</button>
-    <button class="tab mode-btn" data-mode="convert" role="tab" type="button">⇄ CONVERT</button>
-  </div>
-  <div class="top-actions">
-    <div class="tooltip tooltip-bottom" data-tip="Open audio from your local storage">
-      <button id="btnUpload" class="btn btn-square btn-ghost btn-glow" type="button" aria-label="Open audio file">${ICONS.folder}</button>
-    </div>
-    <div class="tooltip tooltip-bottom" data-tip="Download output">
-      <button id="btnDownload" class="btn btn-square btn-ghost btn-glow" type="button" aria-label="Download output">${ICONS.download}</button>
-    </div>
-  </div>
-</header>
-<main class="deck">
-  <nav class="rail" aria-label="Studio tools">
-    <div class="tooltip tooltip-right" data-tip="Upload audio"><button class="btn btn-square btn-ghost" data-action="upload" type="button">${ICONS.folder}</button></div>
-    <div class="tooltip tooltip-right" data-tip="Generate demo track"><button class="btn btn-square btn-ghost" data-action="demo" type="button">${ICONS.music}</button></div>
-    <div class="tooltip tooltip-right" data-tip="Run analysis"><button class="btn btn-square btn-ghost" data-action="analyze" type="button">${ICONS.wave}</button></div>
-    <div class="tooltip tooltip-right" data-tip="One-click master fix"><button class="btn btn-square btn-ghost" data-action="fix" type="button">${ICONS.spark}</button></div>
-    <div class="tooltip tooltip-right" data-tip="Download output"><button class="btn btn-square btn-ghost" data-action="download" type="button">${ICONS.download}</button></div>
-    <div class="tooltip tooltip-right" data-tip="Reset session"><button class="btn btn-square btn-ghost" data-action="reset" type="button">${ICONS.reset}</button></div>
-  </nav>
-
-  <section class="stage-col">
-    <div id="panelIdle" class="panel panel-center card card-border bg-base-200/70 p-8">
-      <div class="idle-glyph" aria-hidden="true">${ICONS.wave}</div>
-      <h1 class="glow-text">FORGE YOUR SOUND</h1>
-      <p class="idle-sub">Analyze your mix against the sonic fingerprint of Spotify's top tracks — then fix everything wrong with it in one click.</p>
-      <div class="idle-actions">
-        <button class="btn btn-primary btn-glow" id="btnIdleUpload" type="button">OPEN AUDIO FILE</button>
-        <button class="btn btn-ghost" id="btnIdleDemo" type="button">GENERATE DEMO TRACK</button>
-      </div>
-      <div class="idle-hint">or drop a file anywhere · wav · mp3 · m4a · ogg · flac · aiff</div>
-    </div>
-
-    <div id="panelFile" class="panel panel-file card card-border bg-base-200/70 p-6 hidden">
-      <div class="file-head">
-        <div class="file-icon" aria-hidden="true">${ICONS.music}</div>
-        <div class="file-id">
-          <div class="file-name" id="fileName">—</div>
-          <div class="file-meta" id="fileMeta">—</div>
-        </div>
-        <div class="file-badges" id="fileBadges"></div>
-      </div>
-      <div class="file-actions">
-        <button id="btnAnalyze" class="btn btn-primary btn-glow" type="button">◈ ANALYZE MIX</button>
-        <button id="btnConvertGo" class="btn btn-ghost" type="button">⇄ CONVERT FORMAT</button>
-      </div>
-      <div id="progressWrap" class="progress-wrap hidden">
-        <progress id="progressBar" class="progress progress-cine progress-accent" value="0" max="100"></progress>
-        <div class="progress-label" id="progressLabel">Analyzing…</div>
-      </div>
-      <div id="refAreaFile" class="ref-zone"></div>
-      <div id="player" class="player-wrap hidden">
-        <div class="player-head">
-          <span class="badge badge-ghost badge-xs font-mono" id="playSide">A · ORIGINAL</span>
-          <span class="player-name" id="playName">—</span>
-          <button id="btnCrop" class="btn btn-ghost btn-xs crop-btn" type="button" title="Crop a region of the song — playback loops inside it">✂ CROP</button>
-        </div>
-        <div class="wave-shell">
-          <canvas id="waveform" class="waveform"></canvas>
-          <div class="seek-strip">
-            <div class="seek-region" id="seekRegion"></div>
-            <div class="seek-fill" id="seekFill"></div>
-            <span class="seek-cursor" id="seekCursor"></span>
-            <span class="seek-mark" id="seekMarkIn"></span>
-            <span class="seek-mark" id="seekMarkOut"></span>
-            <input type="range" id="seekBar" class="seek-bar" min="0" max="0" step="0.05" value="0" aria-label="Slide to any second of the song" />
-          </div>
-        </div>
-        <div class="transport">
-          <div class="transport-cluster">
-            <button id="btnBack10" class="btn btn-square btn-ghost btn-sm" type="button" title="Back 10 seconds">«</button>
-            <button id="btnPlay" class="btn btn-square btn-ghost btn-glow size-13" type="button" title="Play / pause (space)">${ICONS.play}</button>
-            <button id="btnFwd10" class="btn btn-square btn-ghost btn-sm" type="button" title="Forward 10 seconds">»</button>
-            <button id="btnFwd30" class="btn btn-square btn-ghost btn-sm" type="button" title="Fast-forward 30 seconds">»»</button>
-            <button id="btnRate" class="btn btn-ghost btn-sm rate-btn" type="button" title="Cycle playback speed">1.0×</button>
-          </div>
-          <div class="time" id="timeNow">0:00.0</div>
-          <div class="time total" id="timeTotal">0:00.0</div>
-          <div class="transport-cluster">
-            <button id="btnTransportReset" class="btn btn-square btn-ghost btn-glow btn-sm" type="button" title="Back to start">${ICONS.reset}</button>
-          </div>
-        </div>
-        <div id="cropPanel" class="crop-panel hidden">
-          <div class="crop-grid">
-            <div class="crop-row">
-              <span class="crop-lab">IN</span>
-              <div class="crop-ctl">
-                <div class="crop-fill" id="cropFillIn"></div>
-                <input type="range" id="cropIn" class="crop-range" min="0" max="0" step="0.05" value="0" aria-label="Crop start (IN)" />
-              </div>
-              <span class="crop-time" id="cropInTime">0:00.0</span>
-            </div>
-            <div class="crop-row">
-              <span class="crop-lab">OUT</span>
-              <div class="crop-ctl">
-                <div class="crop-fill" id="cropFillOut"></div>
-                <input type="range" id="cropOut" class="crop-range" min="0" max="0" step="0.05" value="0" aria-label="Crop end (OUT)" />
-              </div>
-              <span class="crop-time" id="cropOutTime">0:00.0</span>
-            </div>
-          </div>
-          <div class="crop-actions">
-            <span class="crop-hint">slide to any second · playback loops inside the crop</span>
-            <button id="btnPlayRegion" class="btn btn-primary btn-sm" type="button">▶ PLAY REGION</button>
-            <button id="btnApplyCrop" class="btn btn-accent btn-sm" type="button">✂ APPLY CROP</button>
-            <button id="btnSaveCrop" class="btn btn-ghost btn-sm" type="button">⭳ EXPORT REGION</button>
-            <button id="btnCancelCrop" class="btn btn-ghost btn-sm" type="button">CANCEL</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div id="panelAnalysis" class="panel panel-analysis card card-border bg-base-200/70 p-6 hidden">
-      <div class="analysis-grid">
-        <div class="score-cell">
-          <div class="radial-progress score-ring text-primary" id="scoreRing" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" style="--value:0; --size:10rem; --thickness:0.375rem;">—</div>
-          <div class="score-cap">MIX SCORE</div>
-          <div class="verdict" id="verdict"></div>
-        </div>
-        <div class="radar-cell"><canvas id="radar"></canvas></div>
-        <div class="meters-cell" id="meters"></div>
-      </div>
-      <div class="match-row" id="matchRow"></div>
-      <div id="refAreaAnalysis" class="ref-zone"></div>
-      <div class="fix-row">
-        <button id="btnFix" class="btn btn-accent btn-fix" type="button">⚡ ONE-CLICK MASTER FIX</button>
-        <div class="ab-toggle tabs tabs-box" id="abToggle" role="tablist">
-          <button class="tab tab-active ab-btn" data-ab="orig" role="tab" type="button">A · ORIGINAL</button>
-          <button class="tab ab-btn" data-ab="fixed" role="tab" type="button">B · FIXED</button>
-        </div>
-        <button id="btnDownloadFixed" class="btn btn-ghost" type="button">⭳ SAVE FIXED</button>
-      </div>
-      <div id="fixWrap" class="fix-wrap hidden">
-        <span class="loading loading-ring loading-lg text-accent"></span>
-        <div class="progress-label" id="fixLabel">Rendering master fix…</div>
-      </div>
-      <div id="fixTweakPanel" class="tweak-panel hidden">
-        <div class="tweak-head">
-          <span class="tweak-title">FINE-TUNE THE FIX</span>
-          <span class="tweak-note">drag the pins to adjust the corrections baked into B · FIXED — it re-balances and re-renders automatically</span>
-          <span id="tweakStatus" class="tweak-status"></span>
-          <button id="btnTweakReset" class="btn btn-xs btn-ghost text-accent" type="button">⟲ RESET TO AUTO</button>
-        </div>
-        <div id="tweakSliders" class="tweak-sliders"></div>
-      </div>
-    </div>
-
-    <div id="panelConvert" class="panel panel-convert card card-border bg-base-200/70 p-6 hidden">
-      <div class="conv-head">
-        <h2>FORMAT FORGE</h2>
-        <p>Convert to any major audio extension — lossless, high-quality compressed, or web-ready.</p>
-      </div>
-      <div class="conv-from" id="convFrom"></div>
-      <div class="conv-grid" id="convGrid"></div>
-      <div class="conv-options">
-        <label class="opt"><span>MP3 bitrate</span><select id="convKbps" class="select select-sm select-ghost">
-          <option value="320">320 kbps · best</option>
-          <option value="256">256 kbps</option>
-          <option value="192" selected>192 kbps · balanced</option>
-          <option value="128">128 kbps · compact</option>
-        </select></label>
-        <label class="opt"><span>WAV depth</span><select id="convWav" class="select select-sm select-ghost">
-          <option value="float" selected>32-bit float · studio</option>
-          <option value="pcm16">16-bit PCM · CD</option>
-        </select></label>
-      </div>
-      <button id="btnConvert" class="btn btn-primary btn-wide btn-glow" type="button">⇄ CONVERT</button>
-      <div id="convProgress" class="progress-wrap hidden">
-        <span class="loading loading-ring loading-lg text-accent"></span>
-        <div class="progress-label" id="convLabel">Converting…</div>
-      </div>
-    </div>
-  </section>
-
-  <aside class="report-rail hidden" id="reportRail">
-    <div class="report-head">
-      <span>MASTER'S REPORT</span>
-      <button id="btnDownloadReport" class="btn btn-xs btn-ghost text-accent" type="button">⭳ .md</button>
-    </div>
-    <div class="report-body" id="reportBody"></div>
-  </aside>
-</main>
-<input type="file" id="fileInput" accept="audio/*,.wav,.mp3,.m4a,.aac,.ogg,.oga,.opus,.flac,.webm,.aiff,.aif,.wma" hidden />
-<div id="toast" class="toast toast-center toast-bottom">
-  <div class="alert alert-soft alert-info" id="toastInner" role="status"></div>
-</div>
-<button id="btnReportToggle" class="btn btn-sm btn-ghost btn-glow" type="button" title="Toggle master's report">${ICONS.doc} REPORT</button>
-`
+/* Old UI template removed during UI reset. Minimal non-designed shell only. */
 
 /* ================= stage ================= */
-const stage = createStage($("#stage"))
 
 /* ================= refs ================= */
 const fileInput = $("#fileInput")
@@ -711,7 +500,7 @@ function showPanel(name) {
   placePlayer()
   if (name === "Analysis") {
     requestAnimationFrame(() => {
-      drawRadar(radarEl, state.scores || {})
+      if (radarEl) drawRadar?.(radarEl, state.scores || {})
       renderWaveform(0)
       updateTime(state.pos)
       syncSeekUI()
@@ -1016,12 +805,12 @@ function renderAnalysis() {
   const a = state.analysis
   const g = t.g
   scoreRing.textContent = s.overall
-  scoreRing.style.setProperty("--value", s.overall)
+  if (scoreRing) scoreRing.style.setProperty("--value", s.overall)
   scoreRing.setAttribute("aria-valuenow", s.overall)
   const grade = s.overall >= 85 ? "MASTERPIECE" : s.overall >= 70 ? "BROADCAST-READY" : s.overall >= 50 ? "NEEDS WORK" : "RESTORE FROM STEMS"
   verdictEl.innerHTML = `<span class="grade">${grade}</span><span class="vs">vs ${esc(shortName(g.name, 34))} reference</span>`
 
-  drawRadar(radarEl, s)
+  if (radarEl) drawRadar?.(radarEl, s)
   renderMeters()
 
   const fixedBtn = document.querySelector('.ab-btn[data-ab="fixed"]')
@@ -1067,7 +856,7 @@ function matchRowHtml(t) {
         <div class="match-label">${t.gm && t.gm.manual ? "REFERENCE · PLATFORM CATEGORY" : "DETECTED GENRE"}${m.fallback ? " · auto-fallback" : ""}</div>
         <div class="match-genre">${cat ? esc(cat.name) : esc(g.name)}${showSub ? `<span class="match-sub">${esc(m.subName)}</span>` : ""}${conf}</div>
         ${platformChips(cat)}
-        <div class="match-ref">${t.gm && t.gm.manual ? "manual lock — fingerprint of the top sub-genres under this platform category" : "matching fingerprints of top tracks in this sub-genre across Spotify, Apple Music & YouTube Music"}</div>
+        <div class="match-ref">${t.gm && t.gm.manual ? "manual lock — metadata-selected built-in profile (full streamed track was not analyzed)" : "built-in genre profile — illustrative comparison target; not a verified measured chart-track fingerprint"}</div>
       </div>
       ${cands}`
   }
@@ -1837,7 +1626,7 @@ window.addEventListener("resize", () => {
   clearTimeout(resizeTimer)
   resizeTimer = setTimeout(() => {
     renderWaveform(0)
-    if (state.scores) drawRadar(radarEl, state.scores)
+    if (state.scores && radarEl) drawRadar?.(radarEl, state.scores)
   }, 120)
 })
 
@@ -1847,13 +1636,8 @@ function dismissBoot() {
   boot.classList.add("done")
   setTimeout(() => boot.remove(), 900)
 }
-setTimeout(dismissBoot, 2400)
-$("#boot").onclick = dismissBoot
 
 /* keep the CSS var on the score ring in sync on load */
-scoreRing.style.setProperty("--value", 0)
-
-renderPanels()
 
 /* ---- desktop auto-update banner (electron-updater via preload) ---- */
 if (window.movUpdate) {
