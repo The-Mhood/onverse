@@ -28,6 +28,7 @@ export function createWorkbenchController({ view, audio, reference, analysis = a
   }
   let actx = null, analyser = null, currentSource = null, startedAt = 0, startPos = 0, rafPlayer = 0, lastSeekRestart = 0
   let tweakTimer = 0, tweakQueued = false
+  let disposed = false, conversionEpoch = 0, conversionInFlight = false
   const render = () => view.render(state)
   const toast = message => view.toast(message)
   const fail = (label, error) => { console.error(error); toast(`${label}: ${error?.message || String(error)}`) }
@@ -209,14 +210,22 @@ export function createWorkbenchController({ view, audio, reference, analysis = a
     finally { state.busy = false; render() }
   }
   async function runConvert({ format, kbps = 320, floatWav = true }) {
-    if (!state.buffer || state.busy || state.tweakBusy) return
+    if (disposed || !state.buffer || state.busy || state.tweakBusy) return
+    const epoch = ++conversionEpoch
+    conversionInFlight = true
     state.busy = true; view.progress(true, "Converting…"); render()
     try {
       const out = await audio.convert(state.buffer, { format, kbps, floatWav })
+      if (disposed || epoch !== conversionEpoch) return
       state.converted = out; audio.saveBlob(out.blob, `${baseName()}.${out.ext}`)
       toast(`Converted to ${format === "m4a" ? "M4A (browser-selected codec)" : out.label} — download started.`)
-    } catch (error) { fail("Conversion failed", error) }
-    finally { state.busy = false; view.progress(false); render() }
+    } catch (error) {
+      if (!disposed && epoch === conversionEpoch) fail("Conversion failed", error)
+    } finally {
+      if (!disposed && epoch === conversionEpoch) {
+        conversionInFlight = false; state.busy = false; view.progress(false); render()
+      }
+    }
   }
   function downloadFixed() {
     if (!state.fixed) return
@@ -263,6 +272,7 @@ export function createWorkbenchController({ view, audio, reference, analysis = a
   }
   function tweakIsCustom() { return state.tweaks.trimDb !== 0 || state.tweaks.gluePct !== 100 || state.tweaks.width !== 0 || Object.values(state.tweaks.band).some(v => v !== 0) }
   async function rerenderFixed() {
+    if (disposed) return
     if (state.tweakBusy) { tweakQueued = true; return }
     if (!state.fixed || !state.buffer || !state.autoPlan || state.busy) return
     const plan = buildProcessingPlan(state.autoPlan || state.fixPlan, state.tweaks, BAND_KEYS); if (!plan) return
@@ -270,28 +280,36 @@ export function createWorkbenchController({ view, audio, reference, analysis = a
     const epoch = ++state.tweakEpoch, wasPlaying = state.playing && state.ab === "fixed", resumeAt = wasPlaying ? state.pos : 0
     stopPlayback()
     try {
-      const fixed = await audio.masterFix(state.buffer, plan, stage => view.progress(true, stage))
-      if (epoch !== state.tweakEpoch) return
+      const fixed = await audio.masterFix(state.buffer, plan, stage => {
+        if (!disposed && epoch === state.tweakEpoch) view.progress(true, stage)
+      })
+      if (disposed || epoch !== state.tweakEpoch) return
       const fast = await analysis.analyzeFast(fixed, () => {})
-      if (epoch !== state.tweakEpoch) return
+      if (disposed || epoch !== state.tweakEpoch) return
       state.fixed = fixed; state.fixedFast = fast; state.hasCustomTweaks = tweakIsCustom(); render()
       if (wasPlaying && state.fixed) playBuffer(state.fixed, "fixed", resumeAt)
-    } catch (error) { fail("Rebalance failed", error) }
-    finally { if (epoch === state.tweakEpoch) { state.tweakBusy = false; view.progress(false); render() } }
-    if (tweakQueued && epoch === state.tweakEpoch) { tweakQueued = false; scheduleTweak() }
+    } catch (error) {
+      if (!disposed && epoch === state.tweakEpoch) fail("Rebalance failed", error)
+    } finally {
+      if (!disposed && epoch === state.tweakEpoch) { state.tweakBusy = false; view.progress(false); render() }
+    }
+    if (!disposed && tweakQueued && epoch === state.tweakEpoch) { tweakQueued = false; scheduleTweak() }
   }
-  function scheduleTweak() { platform.clearTimeout(tweakTimer); tweakTimer = platform.setTimeout(rerenderFixed, 400) }
+  function scheduleTweak() {
+    if (disposed) return
+    platform.clearTimeout(tweakTimer); tweakTimer = platform.setTimeout(rerenderFixed, 400)
+  }
   function setTweak(key, value) {
-    if (!state.fixed || state.busy || !Number.isFinite(value)) return
+    if (disposed || !state.fixed || state.busy || !Number.isFinite(value)) return
     const ranges = { trimDb: [-6, 6], gluePct: [0, 200], width: [-6, 6] }
     if (key.startsWith("band:") && BAND_KEYS.includes(key.slice(5))) state.tweaks.band[key.slice(5)] = Math.max(-9, Math.min(9, value))
     else if (ranges[key]) state.tweaks[key] = Math.max(ranges[key][0], Math.min(ranges[key][1], value))
     else return
     scheduleTweak()
   }
-  function resetTweaks() { if (!state.fixed || state.busy) return; state.tweaks = defaults(); state.hasCustomTweaks = false; render(); scheduleTweak() }
+  function resetTweaks() { if (disposed || !state.fixed || state.busy) return; state.tweaks = defaults(); state.hasCustomTweaks = false; render(); scheduleTweak() }
   function reset() {
-    if (state.busy || state.tweakBusy) return
+    if (disposed || state.busy || state.tweakBusy) return
     stopPlayback(); platform.clearTimeout(tweakTimer)
     Object.assign(state, { buffer: null, fixed: null, fixedFast: null, scores: null, issues: null, converted: null, analysis: null,
       targetUsed: null, fixPlan: null, autoPlan: null, ref: { src: "auto", cat: null, sub: null, file: null, url: null },
@@ -299,7 +317,18 @@ export function createWorkbenchController({ view, audio, reference, analysis = a
     render()
   }
   async function dispose() {
-    platform.clearTimeout(tweakTimer); stopPlayback()
+    if (disposed) return
+    const dismissProgress = state.tweakBusy || conversionInFlight
+    disposed = true
+    state.tweakEpoch++ // stale tweak results/progress may not publish after disposal
+    tweakQueued = false; state.tweakBusy = false
+    platform.clearTimeout(tweakTimer); tweakTimer = 0
+    if (conversionInFlight) {
+      conversionEpoch++ // discard a late result; audio.convert itself has no abort contract
+      conversionInFlight = false; state.busy = false
+    }
+    if (dismissProgress) view.progress(false)
+    stopPlayback()
     if (actx) { await actx.close(); actx = null; analyser = null }
   }
   return Object.freeze({ state, openFile, demo, runAnalysis: analysisController.runAnalysis, runFix, runConvert, downloadFixed, downloadReport,

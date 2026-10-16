@@ -3,20 +3,27 @@
  * one-click "Master Fix" that reverse-engineers every issue the analysis
  * found and renders a corrected copy of the file.
  */
-import lameAllSource from "lamejs/lame.all.js?raw"
 import { resampleBuffer, retuneBuffer, widthProcess, ceilingProcess, clamp, dbToLin } from "./dsp.js"
 import { BAND_META } from "./genre.js"
 import { quickLufs } from "./analyzer.js"
 
 /* lamejs 1.2.1's CJS build is broken (missing requires); the self-contained
- * lame.all.js build defines everything in one scope, so we evaluate it once. */
+ * raw bundle is loaded only when MP3 export is requested, then evaluated once. */
 let _lame = null
-function getLame() {
-  if (!_lame) {
-    const fn = new Function(lameAllSource + "\nreturn lamejs;")
-    _lame = fn()
+let _lamePromise = null
+async function getLame() {
+  if (_lame) return _lame
+  if (!_lamePromise) {
+    _lamePromise = import("lamejs/lame.all.js?raw").then(({ default: source }) => {
+      const fn = new Function(source + "\nreturn lamejs;")
+      _lame = fn()
+      return _lame
+    }).catch((error) => {
+      _lamePromise = null
+      throw error
+    })
   }
-  return _lame
+  return _lamePromise
 }
 
 /* ---------------- decode ---------------- */
@@ -69,12 +76,13 @@ export function encodeWav(buffer, { float = true } = {}) {
 }
 
 /* ---------------- MP3 encode (lamejs) ---------------- */
-export function encodeMp3(buffer, kbps = 320) {
+export async function encodeMp3(buffer, kbps = 320) {
   const b = resampleBuffer(buffer, 44100)
   const ch = b.numberOfChannels >= 2 ? 2 : 1
   const L = b.getChannelData(0)
   const R = ch === 2 ? b.getChannelData(1) : null
-  const enc = new (getLame().Mp3Encoder)(ch, 44100, kbps)
+  const lame = await getLame()
+  const enc = new lame.Mp3Encoder(ch, 44100, kbps)
   const toInt16 = (arr) => {
     const out = new Int16Array(arr.length)
     for (let i = 0; i < arr.length; i++) out[i] = Math.round(clamp(arr[i], -1, 1) * 32767)
@@ -150,7 +158,7 @@ export async function convert(buffer, { format, kbps = 320, floatWav = true }) {
     case "wav":
       return { blob: encodeWav(buffer, { float: floatWav }), ext: "wav", mime: "audio/wav", label: "WAV · PCM" }
     case "mp3":
-      return { blob: encodeMp3(buffer, kbps), ext: "mp3", mime: "audio/mpeg", label: `MP3 · ${kbps}k` }
+      return { blob: await encodeMp3(buffer, kbps), ext: "mp3", mime: "audio/mpeg", label: `MP3 · ${kbps}k` }
     case "m4a":
     case "ogg":
     case "webm": {

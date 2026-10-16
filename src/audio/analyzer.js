@@ -1,8 +1,8 @@
 /* MusicOnVerse — analysis engine.
  * Extracts a full mix fingerprint from a decoded AudioBuffer:
- * loudness (LUFS), true peak, dynamics, spectral balance (7 EQ bands),
- * spectral centroid & flatness, pitch stability & tuning, stereo image,
- * tempo, clipping, DC offset and noise floor.
+ * legacy K-weighted loudness estimate (exposed as lufs), true peak, dynamics,
+ * spectral balance (7 EQ bands), spectral centroid & flatness, pitch stability
+ * & tuning, stereo image, tempo, clipping, DC offset and noise floor.
  */
 import { biquad, filterData, makeFFT, clamp, dbToLin, linToDb } from "./dsp.js"
 import { BAND_KEYS, BAND_META, matchGenre } from "./genre.js"
@@ -76,18 +76,28 @@ function timeDomain(mono, chData) {
   return { peakDb, peakIdx, dcOffset, rmsDb, truePeakDb: linToDb(tp), clipCount: clip, crestDb, dynamicRangeDb, noiseFloorDb }
 }
 
-/* ---------------- loudness (ITU-R BS.1770 K-weighted) ---------------- */
-function measureLoudness(mono, sr) {
+/* ---------------- legacy K-weighted loudness estimate ----------------
+ * This preserves the existing generic filters, non-overlapping 100 ms windows
+ * and numeric floor; it is not a standards-conformance implementation. Filter
+ * channels independently and sum their energies so stereo polarity cannot
+ * cancel before measurement. No surround/LFE layout is available here, so every
+ * supplied channel uses the same unit weight; this is not a multichannel
+ * BS.1770 mapping.
+ */
+function measureLoudness(channelData, sr) {
   const hp = biquad("hp", 38, sr)
   const hs = biquad("hs", 1681.97, sr, 0.707, 1.0047)
-  const x = filterData(filterData(mono.slice(), hp), hs)
   const block = Math.max(1, Math.floor(sr * 0.1))
-  const blocks = Math.floor(x.length / block)
+  const frames = channelData[0]?.length ?? 0
+  const blocks = Math.floor(frames / block)
   const energies = new Float64Array(blocks)
-  for (let b = 0; b < blocks; b++) {
-    let e = 0
-    for (let i = b * block; i < (b + 1) * block; i++) e += x[i] * x[i]
-    energies[b] = e / block
+  for (const channel of channelData) {
+    const x = filterData(filterData(channel.slice(), hp), hs)
+    for (let b = 0; b < blocks; b++) {
+      let e = 0
+      for (let i = b * block; i < (b + 1) * block; i++) e += x[i] * x[i]
+      energies[b] += e / block
+    }
   }
   const meanE = mean(energies)
   const lufs = -0.691 + 10 * Math.log10(Math.max(meanE, 1e-12))
@@ -293,7 +303,7 @@ export async function analyze(buffer, onProgress) {
   onProgress?.(0.14)
   await nextFrame()
 
-  const { lufs, blocks: lufsBlocks } = measureLoudness(mono, sr)
+  const { lufs, blocks: lufsBlocks } = measureLoudness(chData, sr)
   onProgress?.(0.2)
   await nextFrame()
 
@@ -597,15 +607,8 @@ export function buildFixPlan(f, g) {
 
 /* integrated loudness of a decoded AudioBuffer (for post-fix trim) */
 export function quickLufs(buffer) {
-  const ch = buffer.numberOfChannels
-  const len = buffer.length
-  const mono = new Float32Array(len)
-  for (let i = 0; i < len; i++) {
-    let s = 0
-    for (let c = 0; c < ch; c++) s += buffer.getChannelData(c)[i]
-    mono[i] = s / ch
-  }
-  return measureLoudness(mono, buffer.sampleRate).lufs
+  const channels = Array.from({ length: buffer.numberOfChannels }, (_, c) => buffer.getChannelData(c))
+  return measureLoudness(channels, buffer.sampleRate).lufs
 }
 
 /* Build a genre-profile-shaped target from a measured reference feature set,
@@ -640,7 +643,7 @@ export async function analyzeFast(buffer, onProgress) {
   const td = timeDomain(mono, chData)
   onProgress?.(0.3)
   await nextFrame()
-  const { lufs } = measureLoudness(mono, sr)
+  const { lufs } = measureLoudness(chData, sr)
   onProgress?.(0.6)
   await nextFrame()
   const sp = await spectral(mono, sr, (p) => onProgress?.(0.6 + p * 0.4))

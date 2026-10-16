@@ -37,6 +37,7 @@
     ],
     "afterSign": "electron/notarize.cjs",
     "directories": {
+      "buildResources": "packaging-resources",
       "output": "release"
     },
     "publish": [

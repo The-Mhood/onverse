@@ -119,7 +119,7 @@ async function click(action) { await page.click(`[data-action="${action}"]`); }
 async function edit(selector, value) {
   await page.$eval(selector, (el, value) => { el.value = value; el.dispatchEvent(new Event('change', { bubbles: true })); }, String(value));
 }
-async function download(action) {
+async function download(action, target = page) {
   let listener, timeout;
   const completed = new Promise((resolve, reject) => {
     timeout = setTimeout(() => reject(new Error(`Download timed out: ${action}`)), 45000);
@@ -127,7 +127,7 @@ async function download(action) {
     cdp.on('Browser.downloadProgress', listener);
   });
   try {
-    await click(action); const event = await completed;
+    await target.click(`[data-action="${action}"]`); const event = await completed;
     const file = path.join(runtime, 'downloads', event.guid), bytes = await fs.readFile(file);
     const suggestedFilename = downloadNames.get(event.guid); assert.ok(suggestedFilename);
     const name = report.downloads.length + '-' + action + path.extname(suggestedFilename);
@@ -170,7 +170,7 @@ try {
     // Instrument real constructors/close, not fake audio implementations.
     window.__audioAudit = { contexts: 0, offline: 0, closes: 0, sampleRates: [], decoded: [] };
     const Native = window.AudioContext, Offline = window.OfflineAudioContext;
-    window.AudioContext = class extends Native { constructor(...args) { super(...args); window.__audioAudit.contexts++; window.__audioAudit.sampleRates.push(this.sampleRate); } async decodeAudioData(...args) { const b = await super.decodeAudioData(...args); window.__audioAudit.decoded.push({ frames: b.length, sampleRate: b.sampleRate, channels: b.numberOfChannels }); return b; } close() { window.__audioAudit.closes++; return super.close(); } };
+    window.AudioContext = class extends Native { constructor(...args) { super(...args); window.__audioAudit.contexts++; window.__audioAudit.sampleRates.push(this.sampleRate); } async decodeAudioData(...args) { const b = await super.decodeAudioData(...args); const sampleFrame = Math.min(12, b.length - 1); const samples = Array.from({ length: b.numberOfChannels }, (_, c) => b.getChannelData(c)[sampleFrame]); window.__audioAudit.decoded.push({ frames: b.length, sampleRate: b.sampleRate, channels: b.numberOfChannels, sampleFrame, samples }); return b; } close() { window.__audioAudit.closes++; return super.close(); } };
     window.OfflineAudioContext = class extends Offline { constructor(...args) { super(...args); window.__audioAudit.offline++; } };
   });
   cdp = await browser.target().createCDPSession();
@@ -181,6 +181,7 @@ try {
   await page.waitForSelector('.workspace-root');
   assert.equal(await page.$eval('.mix-picker', e => e.type), 'file');
   assert.deepEqual(await page.evaluate(() => window.__audioAudit), { contexts: 0, offline: 0, closes: 0, sampleRates: [], decoded: [] });
+  assert.ok(!report.requests.some(request => request.url.includes('lame.all-')), 'MP3 encoder chunk must not load during startup');
   assert.equal(await page.$eval('[data-action="fix"]', e => e.disabled), true);
   report.checks.push('Actual production HTML executes ESM, mounts and binds; zero startup audio contexts, no legacy selector/stage dependency.');
   await capture('empty', 1120, 700); await capture('empty', 1480, 920);
@@ -270,6 +271,9 @@ try {
     const ctx = new AudioContext(); try { const buf = await ctx.decodeAudioData(Uint8Array.from(bytes).buffer); return { duration: buf.duration, channels: buf.numberOfChannels }; } finally { await ctx.close(); }
   }, [...await fs.readFile(path.join(output, mp3.file))]);
   assert.ok(Math.abs(decodedMp3.duration - 2) < .2); assert.equal(decodedMp3.channels, 2); report.mp3Decode = decodedMp3;
+  const mp3ChunkRequest = report.requests.find(request => request.url.includes('lame.all-'));
+  assert.ok(mp3ChunkRequest && mp3ChunkRequest.phase === 'conversion', 'lazy MP3 encoder chunk must load only when MP3 conversion is requested');
+  report.mp3ChunkRequest = mp3ChunkRequest;
   await download('report');
   report.recorderCapabilities = await page.$$eval('.output-format option', options => options.map(o => ({ format: o.value, disabled: o.disabled })));
   for (const option of report.recorderCapabilities.filter(o => ['m4a', 'ogg', 'webm'].includes(o.format) && !o.disabled)) {
@@ -278,7 +282,7 @@ try {
     const geometry = await page.evaluate(async data => { const ctx = new AudioContext(); try { const b = await ctx.decodeAudioData(Uint8Array.from(data).buffer); return { duration: b.duration, channels: b.numberOfChannels }; } finally { await ctx.close(); } }, [...bytes]);
     assert.ok(geometry.duration >= 1.8 && geometry.duration <= 2.7); assert.equal(geometry.channels, 2); encoded.decodedGeometry = geometry;
   }
-  report.checks.push('WAV A bytes remain exactly equal before/after Master Fix and adjustments. WAV and MP3 conversion download real files; MP3 decodes back to stereo of expected duration; text report downloads.');
+  report.checks.push('WAV A bytes remain exactly equal before/after Master Fix and adjustments. WAV and MP3 conversion download real files; MP3 decodes back to stereo; the 530 kB MP3 module is requested only on MP3 conversion; text report downloads.');
 
   phase = 'screenshots-loaded'; await click('original'); await edit('.position', 0); await page.select('.output-format', 'wav');
   await capture('loaded', 1120, 700); await capture('loaded', 1480, 920);
@@ -313,15 +317,76 @@ try {
   const cropped = await download('convert'); assert.equal(cropped.frames, decodedSampleRate);
   report.checks.push('Applying crop to A re-analyzes the 1-second working buffer; original filesystem fixture remains unchanged.');
 
+  phase = 'keyboard'; await page.click('h1'); await page.keyboard.press('Space');
+  await page.waitForFunction(() => document.querySelector('[data-action="play"]').textContent === 'Pause'); await page.keyboard.press('Space');
+  report.checks.push('Keyboard Space toggles real playback outside form controls on the decoded stereo fixture.');
+
   phase = 'expected-decode-error'; const invalid = path.join(runtime, 'invalid.wav'); await fs.writeFile(invalid, 'not an audio file');
   await (await page.$('.mix-picker')).uploadFile(invalid);
   await page.waitForFunction(() => document.querySelector('.operation-status').textContent.includes("Couldn't decode"));
   assert.match(await page.$eval('.source-name', e => e.textContent), /_cropped/);
   report.checks.push('Invalid audio reports a genuine decoder failure and preserves the current buffer. Its console error is expected and recorded.');
 
-  phase = 'keyboard'; await page.click('h1'); await page.keyboard.press('Space');
-  await page.waitForFunction(() => document.querySelector('[data-action="play"]').textContent === 'Pause'); await page.keyboard.press('Space');
-  report.checks.push('Keyboard Space toggles real playback outside form controls.');
+  phase = 'multichannel';
+  const triFrames = 48000, triRate = 48000, triChannels = 3
+  const triWav = Buffer.alloc(44 + triFrames * triChannels * 2)
+  triWav.write('RIFF'); triWav.writeUInt32LE(triWav.length - 8, 4); triWav.write('WAVEfmt ', 8)
+  triWav.writeUInt32LE(16, 16); triWav.writeUInt16LE(1, 20); triWav.writeUInt16LE(triChannels, 22)
+  triWav.writeUInt32LE(triRate, 24); triWav.writeUInt32LE(triRate * triChannels * 2, 28)
+  triWav.writeUInt16LE(triChannels * 2, 32); triWav.writeUInt16LE(16, 34)
+  triWav.write('data', 36); triWav.writeUInt32LE(triFrames * triChannels * 2, 40)
+  for (let i = 0; i < triFrames; i++) {
+    const tone = Math.sin(2 * Math.PI * 1000 * i / triRate)
+    const samples = [.25 * tone, -.25 * tone, .125 * tone]
+    samples.forEach((sample, c) => triWav.writeInt16LE(Math.round(sample * 32767), 44 + (i * triChannels + c) * 2))
+  }
+  const triFixture = path.join(runtime, 'polarity-three-channel.wav'); await fs.writeFile(triFixture, triWav)
+  await (await page.$('.mix-picker')).uploadFile(triFixture)
+  await page.waitForFunction(() => document.querySelector('.source-name').textContent === 'polarity-three-channel.wav'); await waitReady()
+  const triDecoded = await page.evaluate(() => window.__audioAudit.decoded.at(-1))
+  assert.equal(triDecoded.channels, triChannels)
+  assert.equal(triDecoded.sampleRate, decodedSampleRate)
+  assert.ok(Math.abs(triDecoded.frames - triFrames * triDecoded.sampleRate / triRate) <= 1,
+    'AudioContext may resample, but decoded duration must remain within one frame')
+  assert.equal(triDecoded.sampleFrame, 12)
+  const assertTriChannelRelations = samples => {
+    assert.ok(samples[0] > .24 && samples[0] < .26)
+    assert.ok(Math.abs(samples[0] + samples[1]) < 1e-4, 'opposite-polarity L/R channels must remain opposite')
+    assert.ok(Math.abs(samples[2] - samples[0] / 2) < 1e-4, 'third channel must remain independent and correctly scaled')
+  }
+  assertTriChannelRelations(triDecoded.samples)
+  assert.ok(Number.isFinite(Number.parseFloat(await page.$eval('.measurement-lufs', e => e.textContent))))
+
+  await page.select('.output-format', 'wav')
+  const triConverted = await download('convert')
+  assert.equal(triConverted.frames, triDecoded.frames); assert.equal(triConverted.channels, triChannels); assert.equal(triConverted.sampleRate, triDecoded.sampleRate)
+  const triBytes = await fs.readFile(path.join(output, triConverted.file))
+  const triRoundTrip = await page.evaluate(async data => {
+    const ctx = new AudioContext()
+    try {
+      const b = await ctx.decodeAudioData(Uint8Array.from(data).buffer), sampleFrame = 12
+      return { frames: b.length, sampleRate: b.sampleRate, channels: b.numberOfChannels,
+        samples: Array.from({ length: b.numberOfChannels }, (_, c) => b.getChannelData(c)[sampleFrame]) }
+    } finally { await ctx.close() }
+  }, [...triBytes])
+  assert.deepEqual({ frames: triRoundTrip.frames, sampleRate: triRoundTrip.sampleRate, channels: triRoundTrip.channels },
+    { frames: triDecoded.frames, sampleRate: triDecoded.sampleRate, channels: triChannels })
+  assertTriChannelRelations(triRoundTrip.samples)
+  triRoundTrip.samples.forEach((sample, c) => assert.ok(Math.abs(sample - triDecoded.samples[c]) < 1e-4))
+
+  await click('crop'); await edit('.region-in', .1); await edit('.region-out', .6)
+  const triRegion = await download('export-region')
+  assert.equal(triRegion.channels, triChannels); assert.equal(triRegion.sampleRate, triDecoded.sampleRate)
+  assert.equal(triRegion.frames, Math.ceil(.6 * triDecoded.sampleRate) - Math.floor(.1 * triDecoded.sampleRate))
+  await click('crop')
+  await click('fix'); await waitReady()
+  assert.equal(await page.$eval('[data-action="fixed"]', e => e.getAttribute('aria-pressed')), 'true')
+  const triFixed = await download('save-fixed')
+  assert.equal(triFixed.channels, triChannels)
+  assert.ok(Math.abs(triFixed.frames / triFixed.sampleRate - triDecoded.frames / triDecoded.sampleRate) < .05)
+  report.multichannel = { imported: triDecoded, wavExport: triConverted, wavRoundTrip: triRoundTrip, region: triRegion, fixed: triFixed }
+  report.checks.push('Three-channel PCM WAV decodes at the browser AudioContext rate without losing duration, L/R polarity or the third channel; channel-aware loudness is finite; WAV round-trip, crop-region export and rendered B retain all three channels. This does not claim a surround/LFE loudness layout.')
+
   phase = 'expected-url-validation'; await page.select('.reference-source', 'url'); await edit('.reference-url', 'https://example.invalid/not-a-track');
   await page.$eval('.url-reference', el => el.requestSubmit());
   await page.waitForFunction(() => document.querySelector('.reference-note').textContent.includes('supported') || document.querySelector('.reference-note').textContent.includes('Spotify'));
@@ -334,6 +399,37 @@ try {
   await page.waitForFunction(() => window.__audioAudit.closes === window.__audioAudit.contexts);
   report.closedAudioAudit = await page.evaluate(() => window.__audioAudit);
   report.checks.push('Registered pagehide cleanup closes the real playback context; event/listener disposal executed. Not a native Electron quit test.');
+
+  phase = 'offline-file-url';
+  const offlineFixture = path.join(runtime, 'offline-url-input.wav'); await fs.writeFile(offlineFixture, wav)
+  const fileEntry = pathToFileURL(path.resolve('dist/index.html')).href
+  const distBase = pathToFileURL(path.resolve('dist') + path.sep).href
+  const fileAudit = { requests: [], errors: [], failedResponses: [], blockedRequests: [] }
+  const filePage = await browser.newPage(); await filePage.setViewport({ width: 1120, height: 700, deviceScaleFactor: 1 })
+  filePage.on('pageerror', error => fileAudit.errors.push(error.message))
+  filePage.on('console', message => { if (message.type() === 'error') fileAudit.errors.push(message.text()) })
+  filePage.on('response', response => { if (response.status() >= 400) fileAudit.failedResponses.push({ status: response.status(), url: response.url() }) })
+  await filePage.setRequestInterception(true)
+  filePage.on('request', request => {
+    const url = request.url()
+    fileAudit.requests.push(url.startsWith(distBase) ? url.slice(distBase.length) : url.startsWith('data:') ? `data:${url.slice(5, url.indexOf(';') < 0 ? 80 : url.indexOf(';'))}` : url.slice(0, 300))
+    if (url.startsWith(distBase) || url.startsWith('data:') || url.startsWith('blob:file://')) request.continue().catch(error => fileAudit.errors.push(error.message))
+    else { fileAudit.blockedRequests.push(url.slice(0, 300)); request.abort().catch(error => fileAudit.errors.push(error.message)) }
+  })
+  await filePage.setOfflineMode(true)
+  await filePage.goto(fileEntry, { waitUntil: 'networkidle0' })
+  await filePage.waitForSelector('.workspace-root')
+  await (await filePage.$('.mix-picker')).uploadFile(offlineFixture)
+  await filePage.waitForFunction(() => document.querySelector('.source-name').textContent === 'offline-url-input.wav' &&
+    !document.querySelector('[data-action="analyze"]').disabled, { timeout: 60000 })
+  await filePage.select('.output-format', 'mp3')
+  const fileUrlMp3 = await download('convert', filePage)
+  assert.ok(fileUrlMp3.bytes > 1000)
+  assert.ok(fileAudit.requests.some(url => url.startsWith('assets/') && url.includes('lame.all-')), 'file:// MP3 conversion must load its bundled lazy chunk')
+  assert.deepEqual(fileAudit.errors, []); assert.deepEqual(fileAudit.failedResponses, []); assert.deepEqual(fileAudit.blockedRequests, [])
+  report.fileUrlOffline = { entry: fileEntry, requests: fileAudit.requests, mp3: fileUrlMp3 }
+  report.checks.push('Offline Chromium file:// entry loads a local WAV, dynamically loads the bundled MP3 chunk from dist/assets and completes MP3 export with no non-file network requests. This validates the browser file-URL path, not Electron packaging.');
+  await filePage.close()
   } else {
     phase = 'motion-and-panels'; await verifyMotionAndPanels();
     await page.evaluate(() => window.dispatchEvent(new PageTransitionEvent('pagehide')));

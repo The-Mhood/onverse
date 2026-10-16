@@ -2,14 +2,11 @@ import assert from "node:assert/strict"
 import { describe, it } from "node:test"
 import { analysisService } from "../../src/application/analysis/analysisService.js"
 import { quickLufs } from "../../src/audio/analyzer.js"
+import { masterFix } from "../../src/audio/processor.js"
 import { createPcmBuffer, createToneBuffer } from "../fixtures/audioBuffers.js"
 
-// TODO assertions execute and expose known defects, rather than asserting that
-// today's incorrect values are desirable. Strict mode makes them ordinary
-// failures. Remove the TODO for each case when its separately reviewed fix lands.
-// These tests do not certify BS.1770 loudness, true peak, or perceptual quality.
-const strict = process.env.MUSICONVERSE_STRICT_AUDIO_REGRESSIONS === "1"
-const knownDefect = (reason) => strict ? {} : { todo: reason }
+// These regressions cover channel aggregation only. The retained legacy filters,
+// windows and numeric floor are not a BS.1770 conformance or listening claim.
 const toleranceDb = 1e-6
 const methods = ["analyze", "analyzeFast"]
 
@@ -210,15 +207,29 @@ for (const method of methods) {
     })
   })
 
-  describe(`real ${method}: known defects (not resolved)`, () => {
-    it("keeps channel-energy loudness invariant under right-channel polarity inversion",
-      knownDefect("STEREO-LOUDNESS: mono fold-down erases opposite-polarity channel energy"), async () => {
-        const aligned = await analysisService[method](createToneBuffer())
-        const inverted = await analysisService[method](createToneBuffer({ channelGains: [1, -1] }))
-        // This is an invariance check, not an assertion of an absolute LUFS value.
-        near(inverted.lufs, aligned.lufs)
-      })
+  describe(`real ${method}: channel-aware loudness semantics`, () => {
+    it("sums per-channel energy: polarity does not cancel, dual-mono adds 3.0103 LU", async () => {
+      const mono = await analysisService[method](createToneBuffer({ length: 48000, channelGains: [1] }))
+      const stereo = await analysisService[method](createToneBuffer({ length: 48000, channelGains: [1, 1] }))
+      const inverted = await analysisService[method](createToneBuffer({ length: 48000, channelGains: [1, -1] }))
+      const leftOnly = await analysisService[method](createToneBuffer({ length: 48000, channelGains: [1, 0] }))
+      const rightOnly = await analysisService[method](createToneBuffer({ length: 48000, channelGains: [0, 1] }))
 
+      // The proposal's L/R policy is the sum of independent channel energies:
+      // no cross-channel products, and no implicit dual-mono correction.
+      near(stereo.lufs - mono.lufs, 10 * Math.log10(2), 1e-5)
+      near(inverted.lufs, stereo.lufs)
+      near(leftOnly.lufs, mono.lufs)
+      near(rightOnly.lufs, mono.lufs)
+    })
+
+    it("does not discard additional AudioBuffer channels under the legacy unit-weight policy", async () => {
+      const mono = await analysisService[method](createToneBuffer({ length: 48000, channelGains: [1] }))
+      const multichannel = await analysisService[method](createToneBuffer({ length: 48000, channelGains: [1, -1, 0.5] }))
+      const reversed = await analysisService[method](createToneBuffer({ length: 48000, channelGains: [0.5, -1, 1] }))
+      near(multichannel.lufs - mono.lufs, 10 * Math.log10(2.25), 1e-5)
+      near(reversed.lufs, multichannel.lufs)
+    })
   })
 }
 
@@ -276,8 +287,60 @@ describe("real quickLufs post-render measurement", () => {
     assert.ok(Number.isFinite(quickLufs(createToneBuffer())))
   })
 
-  it("keeps channel-energy loudness invariant under right-channel polarity inversion",
-    knownDefect("STEREO-QUICK-LUFS: post-render trim uses the same cancelling mono fold-down"), () => {
-      near(quickLufs(createToneBuffer({ channelGains: [1, -1] })), quickLufs(createToneBuffer()))
-    })
+  it("uses the same per-channel sum semantics for trim as full and fast analysis", async () => {
+    const mono = quickLufs(createToneBuffer({ length: 48000, channelGains: [1] }))
+    const stereoBuffer = createToneBuffer({ length: 48000, channelGains: [1, 1] })
+    const stereo = quickLufs(stereoBuffer)
+    const inverted = quickLufs(createToneBuffer({ length: 48000, channelGains: [1, -1] }))
+    const oneSide = quickLufs(createToneBuffer({ length: 48000, channelGains: [0, 1] }))
+    const [full, fast] = await Promise.all([
+      analysisService.analyze(stereoBuffer),
+      analysisService.analyzeFast(stereoBuffer),
+    ])
+    near(stereo - mono, 10 * Math.log10(2), 1e-5)
+    near(inverted, stereo)
+    near(oneSide, mono)
+    near(stereo, full.lufs)
+    near(stereo, fast.lufs)
+  })
+
+  it("uses channel-aware quickLufs on the actual post-render Master Fix trim path", async () => {
+    const source = createToneBuffer({ length: 48000, channelGains: [1, -1] })
+    const originalLeft = source.getChannelData(0).slice()
+    const originalRight = source.getChannelData(1).slice()
+    const targetLufs = quickLufs(source) - 6
+    const priorOfflineContext = globalThis.OfflineAudioContext
+
+    // The processor's trim stage is real; isolate only the unavailable Node Web
+    // Audio renderer and return its unprocessed source as a fresh AudioBuffer.
+    globalThis.OfflineAudioContext = class {
+      constructor(numberOfChannels, length, sampleRate) {
+        Object.assign(this, { numberOfChannels, length, sampleRate, destination: {} })
+      }
+      createBufferSource() {
+        const sourceNode = { buffer: null, connect() {}, start() {} }
+        this.sourceNode = sourceNode
+        return sourceNode
+      }
+      async startRendering() {
+        return createPcmBuffer(
+          Array.from({ length: this.numberOfChannels }, (_, channel) => this.sourceNode.buffer.getChannelData(channel).slice()),
+          this.sampleRate,
+        )
+      }
+    }
+
+    try {
+      const stages = []
+      const rendered = await masterFix(source, { targetLufs, ceiling: -1.5 }, stage => stages.push(stage))
+      near(quickLufs(rendered), targetLufs, 1e-4)
+      assert.ok(stages.includes("Trimming to reference loudness"))
+      assert.deepEqual(rendered.getChannelData(1), Float32Array.from(rendered.getChannelData(0), sample => -sample))
+      assert.deepEqual(source.getChannelData(0), originalLeft)
+      assert.deepEqual(source.getChannelData(1), originalRight)
+    } finally {
+      if (priorOfflineContext === undefined) delete globalThis.OfflineAudioContext
+      else globalThis.OfflineAudioContext = priorOfflineContext
+    }
+  })
 })

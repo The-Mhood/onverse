@@ -32,17 +32,16 @@ describe("rebuilt entry shell contract", () => {
     assert.equal(pkg.build.appId, "com.mov.musiconverse")
     assert.equal(pkg.scripts.icon, undefined)
     assert.equal(pkg.build.mac.icon, undefined)
+    assert.equal(pkg.build.directories.buildResources, "packaging-resources",
+      "do not let electron-builder auto-discover the preserved legacy build/icon.icns")
+    assert.deepEqual(pkg.build.files, ["dist/**/*", "electron/**/*"])
     assert.deepEqual(pkg.build.mac.target.map(({ target }) => target), ["dmg", "zip"])
     assert.equal(pkg.scripts.dist, "npm run build && electron-builder --mac dmg")
+    // build/icon.* are preserved generated legacy outputs. Assert builder
+    // isolation, not physical absence of those files.
     const retiredAssets = [
       "../../scripts/make-icon.mjs",
       "../../public/favicon.svg",
-      "../../build/icon.icns",
-      "../../build/icon_1024.png",
-      ...[16, 32, 128, 256, 512].flatMap((size) => [
-        `../../build/icon.iconset/icon_${size}x${size}.png`,
-        `../../build/icon.iconset/icon_${size}x${size}@2x.png`,
-      ]),
       "../../src/assets/fonts/orbitron-latin-wght-normal.woff2",
       ...[400, 500, 600, 700].flatMap((weight) => [
         `../../src/assets/fonts/rajdhani-latin-${weight}-normal.woff2`,
