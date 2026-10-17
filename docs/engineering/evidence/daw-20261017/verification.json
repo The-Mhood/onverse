@@ -1,0 +1,60 @@
+{
+  "implementationCommit": "6b679ba1993b0279df0cd37a5069d2fc62932849",
+  "cleanupCommit": "d52bad50eae1db55b1b6503c2fce1ca8bbc57d11",
+  "tests": {
+    "total": 600,
+    "pass": 600,
+    "fail": 0,
+    "skipped": 0,
+    "todo": 0,
+    "newDawCases": 28
+  },
+  "dawBrowser": {
+    "result": "PASS",
+    "groups": 10,
+    "downloads": 4,
+    "nativeCases": 6,
+    "nativeMaxError": 1.862645149230957e-08
+  },
+  "workbenchBrowser": {
+    "result": "PASS",
+    "groups": 26,
+    "downloads": 13,
+    "pngs": 36
+  },
+  "protectedSha256": {
+    "src/audio/analyzer.js": "fc6e6386e80de369b358915c0608b864f00b640cebc50ce49bce6515cc57b707",
+    "src/audio/processor.js": "209c0c4c50b74a4fe7f9b8c60dc9a670c326348243c0f81e7e9ade46c86cc635",
+    "src/audio/dsp.js": "cb2de9e3c5876bdcc3f34930549b385ee1e99d4ae5a53d8a0697f9321f88eddf",
+    "src/audio/genre.js": "92387a31edae1854ad61efb70a60a1ff547c9790489be97c9df35d9961ef700f",
+    "src/audio/reference.js": "8bb028eb4003092e0afad6a2288458721c5765c8dd567785db6f857fdf6835b9",
+    "src/application/workbench/workbenchController.js": "5e3cb3d19509a25594be323d90b80a19839f23ce818e37631185c8da1e76a906",
+    "src/application/analysis/analysisController.js": "824be6622d59a3fdbcc096c78050189d080575cbcb065ed3464754f1103cf012",
+    "src/ui/presentation/rebuild/environment.css": "3a51d082633c5f06125344894117295fdad0dce146e09f74c34eede8a2d8b1c8",
+    "src/ui/presentation/rebuild/environmentMotion.js": "a8dc5af9cd0e6722b0737f7c79222ab53e256f3b990d9359117fe504bbedb6a2",
+    "package.json": "f4e78274d110fdae27e7ba2031625dd64eac1898f79c212bb9a24fef66b96dda",
+    "package-lock.json": "3153221046345c42588926722a2da278a7c364f96938e17d4e24602ad4877d04",
+    "electron/main.cjs": "46d6d66b879cd8d884fb5a917d1bd2e0ac060da3c06be1a1773d7cfb9d574c63",
+    "electron/preload.cjs": "10e9bf6a5ef5762a7bdf1d706d2d17a52ca03b0f7c71ee1a488a9546eb9619d9"
+  },
+  "build": {
+    "bytes": 497217,
+    "sha256": "aec3e3b29dc42cb19d801a68e5eb331097cfac30a0f83327a8bb00ce548d7919"
+  },
+  "motion": [
+    {
+      "averageFps": 46.64723961969343,
+      "p95Ms": 33.400000000001455,
+      "maxMs": 249.8739999999998,
+      "width": 1120,
+      "height": 700
+    },
+    {
+      "averageFps": 52.22868989713737,
+      "p95Ms": 33.39999999999418,
+      "maxMs": 66.70000000000437,
+      "width": 1480,
+      "height": 920
+    }
+  ]
+}

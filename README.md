@@ -20,6 +20,20 @@ download. Built-in reference profiles are heuristics, not measured chart tracks.
 New multitrack capabilities and their actual evidence are recorded in the
 [work queue](docs/engineering/WORK_QUEUE.md), not inferred from UI illustrations.
 
+## Implemented multitrack increment
+
+The default **Arrangement** destination now imports multiple audio files into real
+tracks, schedules synchronized playback, edits/moves/trims/splits/duplicates regions,
+controls track gain/pan/mute/solo, supports undo/redo, exports a native stereo float
+WAV mix, and downloads/reopens a self-contained project file. **Audio shaping**
+retains the existing single-file tools; an explicit mix bridge sends rendered
+arrangement audio into its analysis/mastering path. These destination labels are
+provisional, not final approved cosmic names.
+
+This is a bounded working slice, not the completed Logic-like DAW or cinematic
+experience. See [actual changes/tests/limits](docs/engineering/DAW_IMPLEMENTATION_20261017.md)
+and the [full owner deliverables](docs/design/COSMIC_EXPERIENCE_DELIVERABLES_20261017.md).
+
 ## Develop and verify
 
 Use a compatible Node22+ runtime and the committed lockfile. For web work without

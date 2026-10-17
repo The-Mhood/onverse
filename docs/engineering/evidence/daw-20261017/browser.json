@@ -1,0 +1,162 @@
+{
+  "kind": "actual-production-multitrack-and-native-source-graph-proof",
+  "tools": {
+    "packages": 43,
+    "lockSha256": "a7f6b2cbede15b047060d8f4cc059fc18b1a8b6aee33ab3a0d412faabb8b50e6",
+    "pins": {
+      "@sparticuz/chromium": {
+        "version": "153.0.0",
+        "integrity": "sha512-jiGWqSvPMdu4+P9TilYqAR7yEGPEHINx+lCvE/NqNO/EHYzF/x1hUiI5T6ioVIt7dEy7n88byyT0vk+dnsgQwA=="
+      },
+      "puppeteer-core": {
+        "version": "25.14.0",
+        "integrity": "sha512-LQitnes3tBeVbdZ7V/4iwJPLZGgkl9uBVK0W7YYMh68j/3Y9eNuvj4yl+Fdo7zN0SuajOMrhd7aPj3DifK8k6A=="
+      }
+    }
+  },
+  "checks": [
+    "Production entry defaults to actual DAW adapter; zero startup AudioContexts; generated3-track PCM session with real waveform regions.",
+    "Real native live playback schedules3sources on same audio-clock time; playhead advances; destination switch pauses transport and preserves session.",
+    "Actual CDP pointer drag moves a real clip by timeline distance; undo restores original position.",
+    "Timeline grid remains ruler-aligned while zooming; inspector round-trip retains a single-sample source offset without precision drift.",
+    "Actual selected-region split/atomic move+trim/duplicate/undo/redo, track gain/pan/mute/solo and rename reflected in downloaded real project state.",
+    "Native offline stereo mixdown exported actual finite non-silent48000Hz Float32 WAV of exact8second arrangement duration.",
+    "Actual mono+stereo native decoder import adds2tracks; failed batch is atomic; corrupt-project checksum rejects without losing active5track session; downloaded project reopens and reserializes byte-identical metadata/PCM.",
+    "Real mix-to-workbench bridge imports native rendered audio through preserved analysis pipeline; MasterFix becomes available; reduced-motion navigation and live resize preserve project.",
+    "Self-contained production file:// entry opens and exports byte-identical project; all realtime decoder/playback AudioContexts close on pagehide.",
+    "Six independent arithmetic-vs-nativeOfflineAudioContext cases: overlap/sum, gain, stereo hard-pan, mute, solo, source-offset+trim/placement; max sample error≤1e-6. Project reopen reproduces native mix sample-identically."
+  ],
+  "errors": [],
+  "blocked": [],
+  "downloads": [
+    {
+      "action": "save",
+      "name": "Proof_session.movproject.json",
+      "bytes": 12290180,
+      "sha256": "7dda8b59e93e2083854d734644e71ccb92f85605499593f30a06d65db8cd1442"
+    },
+    {
+      "action": "export",
+      "name": "Proof_session-mix.wav",
+      "bytes": 3072044,
+      "sha256": "c025244774a215e691ae8f30417c92d938d524568ebc18005fdc10d8a3171e1c"
+    },
+    {
+      "action": "save",
+      "name": "Proof_session.movproject.json",
+      "bytes": 12290180,
+      "sha256": "7dda8b59e93e2083854d734644e71ccb92f85605499593f30a06d65db8cd1442"
+    },
+    {
+      "action": "save",
+      "name": "Proof_session.movproject.json",
+      "bytes": 12290180,
+      "sha256": "7dda8b59e93e2083854d734644e71ccb92f85605499593f30a06d65db8cd1442"
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "empty-1480x920.png",
+      "headingFits": true,
+      "width": 1480,
+      "scrollWidth": 1480,
+      "clipped": []
+    },
+    {
+      "file": "loaded-1480x920.png",
+      "headingFits": true,
+      "width": 1480,
+      "scrollWidth": 1480,
+      "clipped": []
+    },
+    {
+      "file": "loaded-1120x700.png",
+      "headingFits": true,
+      "width": 1120,
+      "scrollWidth": 1120,
+      "clipped": []
+    },
+    {
+      "file": "editing-1480x920.png",
+      "headingFits": true,
+      "width": 1480,
+      "scrollWidth": 1480,
+      "clipped": []
+    }
+  ],
+  "limitations": [
+    "Generated PCM only, no user audio or provider.",
+    "Disabled-sandbox headless Linux CPU raster, not Mac/Electron/security qualification.",
+    "Native source graph checked on isolated Vite4174; integrated UI checked on production4173 and file origin.",
+    "Not listening, metering certification, full DAW or owner cinematic acceptance.",
+    "Project downloads are not verified filesystem save receipts or autosave."
+  ],
+  "browser": "HeadlessChrome/153.0.8010.0",
+  "lifecycle": {
+    "contexts": 6,
+    "closes": 6,
+    "offline": 5,
+    "starts": [
+      [
+        0.025,
+        0,
+        8
+      ],
+      [
+        0.025,
+        0,
+        8
+      ],
+      [
+        0.025,
+        0,
+        8
+      ]
+    ]
+  },
+  "native": {
+    "cases": [
+      {
+        "index": 0,
+        "frames": 6000,
+        "maxError": 1.4901161193847656e-8,
+        "tolerance": 0.000001
+      },
+      {
+        "index": 1,
+        "frames": 6000,
+        "maxError": 7.450580596923828e-9,
+        "tolerance": 0.000001
+      },
+      {
+        "index": 2,
+        "frames": 6000,
+        "maxError": 1.862645149230957e-8,
+        "tolerance": 0.000001
+      },
+      {
+        "index": 3,
+        "frames": 6000,
+        "maxError": 0,
+        "tolerance": 0.000001
+      },
+      {
+        "index": 4,
+        "frames": 6000,
+        "maxError": 0,
+        "tolerance": 0.000001
+      },
+      {
+        "index": 5,
+        "frames": 6000,
+        "maxError": 1.4901161193847656e-8,
+        "tolerance": 0.000001
+      }
+    ],
+    "reopenedMixSampleIdentical": true,
+    "sampleRate": 48000,
+    "productionReady": false
+  },
+  "status": "PASS",
+  "buildSha256": "aec3e3b29dc42cb19d801a68e5eb331097cfac30a0f83327a8bb00ce548d7919"
+}

@@ -13,10 +13,10 @@ No disconnected demo, mock controls, unnecessary routine approvals or owner rela
 | Task | Owner | Actual state / acceptance |
 | --- | --- | --- |
 | Existing audio stabilization | Lead | Published fixes and prior evidence retained; unchanged assertions must continue passing. |
-| Held8docs+72files cleanup | Lead | Per-file classification and exact20-original archive; source/test/probe work retained inactive; canonical docs reconciled. Verify ledger and final status at publication. |
-| DAW-001 model/audio/project operations | Lead | Active implementation; only dated source/tests report establishes completed behavior. |
-| DAW-002 integrated arrangement | Lead | Active implementation against the real controller, preserving workbench workflows. |
-| DAW-003 cosmic/DAW presentation | P | Direct PR8 task sent; current visual result owner-rejected. No acknowledgment/start/new head inferred. |
+| Held8docs+72files cleanup | Lead | Completed in d52bad5; all80 paths resolved, exact20-original archive and recovery verified; no held dirty group remains. Final publication status is in the DAW report. |
+| DAW-001 model/audio/project operations | Lead | First real slice published6b679ba;600testsPASS, native graph and project roundtrip proof. Full professional-production capability remains active scope. |
+| DAW-002 integrated arrangement | Lead | Integrated6b679ba: real arrangement controls plus preserved workbench and mix bridge; production browser proof passes. |
+| DAW-003 cosmic/DAW presentation | P | P acknowledged requirements and reported unavailable unpushed22f source; published P head still295. Lead supplied actual6b contract/evidence directly. Cinematic result still owner-rejected. |
 | Native/release qualification | Lead | Open gates below; no release claim. |
 
 Direct DAW task: [PR8 comment6231636222](https://github.com/The-Mhood/onverse/pull/8#issuecomment-6231636222).
@@ -36,3 +36,13 @@ recovery/update/signing/notarization/Gatekeeper remain unqualified. Previous aud
 reported13 advisories(4high9moderate; production0); remediation or explicit risk
 acceptance remains required. Do not hide failures, weaken assertions or claim native
 qualification from Linux/browser checks.
+
+## Current delivered evidence
+
+[DAW implementation and tests](DAW_IMPLEMENTATION_20261017.md), full
+[owner experience/deliverables](../design/COSMIC_EXPERIENCE_DELIVERABLES_20261017.md),
+and [implemented-contract handoff to P](https://github.com/The-Mhood/onverse/pull/8#issuecomment-6234471803).
+Next core slice is the real multi-session registry and reviewed Linked Sessions
+adapter: stable project/source dependency closure, native selected/full renders,
+target-owned processing preservation, stale-review rejection and controlled chains.
+It is not currently implemented and must not be represented by fake link controls.

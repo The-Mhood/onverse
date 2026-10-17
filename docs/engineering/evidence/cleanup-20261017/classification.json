@@ -40,7 +40,7 @@
       "safeRemoval": "No removal; authored work retained",
       "pPublishedPathExists": true,
       "pPublishedBytesEqual": false,
-      "publishedSha256": "2b147d67ad0004856dcc2951d2f1827b8edaf2c8847f112217135cc98bd4a361"
+      "publishedSha256": "b3491d97795f17e54b57f293ef80aca2ed0ab038aa5b6958407b7d91ef481743"
     },
     {
       "path": "build/icon.icns",
@@ -252,7 +252,7 @@
       "safeRemoval": "No removal; authored work retained",
       "pPublishedPathExists": true,
       "pPublishedBytesEqual": false,
-      "publishedSha256": "1dbea2de2993b1eeb8ddc70dc1c5c6bb76329acc82ff9cb0d322ea738d6d1cc9"
+      "publishedSha256": "d530a6f03e9ab8ade9e198d6b27d0cf99a13be25cc4bf3f521a9b1ca73d6d85b"
     },
     {
       "path": "docs/engineering/AGENT_B_MASTER_PROMPT.md",
@@ -586,7 +586,7 @@
       "safeRemoval": "No removal; authored work retained",
       "pPublishedPathExists": true,
       "pPublishedBytesEqual": false,
-      "publishedSha256": "f4044d52875a64e270103fa30052993229136ded2dad821c4956b4a534ef50f7"
+      "publishedSha256": "2fcb9aef87909aac61661a8fbd5248a5a31f160708e7b041873858fc753d0af3"
     },
     {
       "path": "docs/engineering/ui-reset/BASELINE_RESULTS.md",

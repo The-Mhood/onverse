@@ -43,3 +43,13 @@ inspection/recording. Compare against originals and preserve failures/limits.
 Functional tests and moving-layer counts are necessary checks, not visual acceptance.
 Owner acceptance remains outstanding; full DAW/cinematic/native completion is not
 claimed. Exact prior brief is preserved in the [cleanup archive](../engineering/CLEANUP_20261017.md).
+
+## Latest complete owner brief and deliverables
+
+[Full experience and interface requirements](COSMIC_EXPERIENCE_DELIVERABLES_20261017.md)
+control the distinct launch→decisive arrival→continuous ever-drift sequence, both
+working destinations, one persistent Sylune, coherent provisional naming, shared
+spatial surfaces and real Linked Sessions. These are current product deliverables,
+not optional future features. The implemented DAW increment supplies real operations
+for P; it does not establish completion of opening, cinematic integration, Sylune
+or Linked Sessions. Earlier flat-workplane visual criteria do not override this brief.
