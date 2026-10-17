@@ -1,0 +1,4146 @@
+{
+  "profile": "musiconverse-ui-reset-predelete-v1",
+  "observedUtc": "2026-10-16T14:42:12Z",
+  "github": {
+    "repo": "The-Mhood/onverse",
+    "refs": {
+      "main": "2faa3939b9e109e5a9ed2e0d53130dc51c5abc9e",
+      "core_pr4": "8051fe0c495c8c18a696007891935e69966e2c9f",
+      "retired_B_pr5": "b17f2aa4004192ef95c60c34ad67bd7ccf4a6e6c",
+      "merged_core_branch": "1924ef117027943c64e50d06ee03207bef426e4b",
+      "architecture_branch": "eedc24cb38c21d1a4be6186593c7ae7fcb8c6f85"
+    },
+    "pr3": "merged into main",
+    "pr4": "open; seven proof files committed; later held service code is NOT in its commit tree",
+    "pr5": "closed-not-merged;15commits beyond main; branch not listed; head remains retrievable"
+  },
+  "local": {
+    "branch": "arena/14df8ffa-onverse",
+    "head": "2faa3939b9e109e5a9ed2e0d53130dc51c5abc9e",
+    "beforeFileCount": 131,
+    "ignoredFiles": []
+  },
+  "counts": {
+    "PROTECTED_REPOSITORY": 1,
+    "RECORD_SUPERSEDE_NOT_DESIGN": 30,
+    "ASSET_CONFIG_GATE": 13,
+    "PROTECTED_INTEGRATION": 8,
+    "P_REPLACE_ENTRY": 1,
+    "P_REMOVE_ASSET": 21,
+    "PROTECTED_CORE": 59,
+    "SHARED_SPLIT": 1,
+    "P_REMOVE_PRESENTATION": 22,
+    "CONTRACT_REVIEW": 2,
+    "P_RETIRE_VISUAL_TEST": 9,
+    "PROTECTED_SEAM_TEST": 1
+  },
+  "records": [
+    {
+      "path": ".gitignore",
+      "category": "PROTECTED_REPOSITORY",
+      "owner": "Lead",
+      "decision": "Preserve unrelated repository/configuration; investigate before any deletion.",
+      "githubSnapshots": {
+        "main": {
+          "blob": "a547bf36d8d11a4f89c59c144f24795749086dd1",
+          "bytes": 253,
+          "mode": "100644"
+        },
+        "core_pr4": {
+          "blob": "a547bf36d8d11a4f89c59c144f24795749086dd1",
+          "bytes": 253,
+          "mode": "100644"
+        },
+        "retired_B_pr5": {
+          "blob": "a547bf36d8d11a4f89c59c144f24795749086dd1",
+          "bytes": 253,
+          "mode": "100644"
+        },
+        "merged_core_branch": {
+          "blob": "a547bf36d8d11a4f89c59c144f24795749086dd1",
+          "bytes": 253,
+          "mode": "100644"
+        },
+        "architecture_branch": {
+          "blob": "a547bf36d8d11a4f89c59c144f24795749086dd1",
+          "bytes": 253,
+          "mode": "100644"
+        }
+      },
+      "localBefore": {
+        "sha256": "fe718e7babb14f3cbad2d97f08889b9ce5215ed3fe0e43b2b8cfbfb3b9b844e8",
+        "bytes": 253
+      },
+      "inActiveMain": true,
+      "retiredBOnly": false
+    },
+    {
+      "path": "AGENTS.md",
+      "category": "RECORD_SUPERSEDE_NOT_DESIGN",
+      "owner": "Lead records; P proposes factual cleanup",
+      "decision": "Historical docs are not active UI fallback. Reset supersedes B grants/layout/boards; retain engineering/legal/history, clearly mark stale visual guidance. No old refs as new design foundation.",
+      "githubSnapshots": {
+        "main": {
+          "blob": "573e050e224238f4e42e90a7aa992a3df32b0386",
+          "bytes": 17199,
+          "mode": "100644"
+        },
+        "core_pr4": {
+          "blob": "573e050e224238f4e42e90a7aa992a3df32b0386",
+          "bytes": 17199,
+          "mode": "100644"
+        },
+        "retired_B_pr5": {
+          "blob": "573e050e224238f4e42e90a7aa992a3df32b0386",
+          "bytes": 17199,
+          "mode": "100644"
+        },
+        "merged_core_branch": {
+          "blob": "573e050e224238f4e42e90a7aa992a3df32b0386",
+          "bytes": 17199,
+          "mode": "100644"
+        }
+      },
+      "localBefore": {
+        "sha256": "68b6362b9a7f409d5844ba530eb38f71a8e512ff79ef86a8d8912509551c0412",
+        "bytes": 28685
+      },
+      "inActiveMain": true,
+      "retiredBOnly": false
+    },
+    {
+      "path": "README-BUILD.txt",
+      "category": "RECORD_SUPERSEDE_NOT_DESIGN",
+      "owner": "Lead records; P proposes factual cleanup",
+      "decision": "Historical docs are not active UI fallback. Reset supersedes B grants/layout/boards; retain engineering/legal/history, clearly mark stale visual guidance. No old refs as new design foundation.",
+      "githubSnapshots": {
+        "main": {
+          "blob": "8f0b9e74fa9a3b10c76277c43766d89bfdc4eb7b",
+          "bytes": 1742,
+          "mode": "100644"
+        },
+        "core_pr4": {
+          "blob": "8f0b9e74fa9a3b10c76277c43766d89bfdc4eb7b",
+          "bytes": 1742,
+          "mode": "100644"
+        },
+        "retired_B_pr5": {
+          "blob": "8f0b9e74fa9a3b10c76277c43766d89bfdc4eb7b",
+          "bytes": 1742,
+          "mode": "100644"
+        },
+        "merged_core_branch": {
+          "blob": "8f0b9e74fa9a3b10c76277c43766d89bfdc4eb7b",
+          "bytes": 1742,
+          "mode": "100644"
+        },
+        "architecture_branch": {
+          "blob": "8f0b9e74fa9a3b10c76277c43766d89bfdc4eb7b",
+          "bytes": 1742,
+          "mode": "100644"
+        }
+      },
+      "localBefore": {
+        "sha256": "0d35e8062c5bae344b253e4daee34af33a1fae4194e5c256e6118341b2af9f28",
+        "bytes": 1742
+      },
+      "inActiveMain": true,
+      "retiredBOnly": false
+    },
+    {
+      "path": "README.md",
+      "category": "RECORD_SUPERSEDE_NOT_DESIGN",
+      "owner": "Lead records; P proposes factual cleanup",
+      "decision": "Historical docs are not active UI fallback. Reset supersedes B grants/layout/boards; retain engineering/legal/history, clearly mark stale visual guidance. No old refs as new design foundation.",
+      "githubSnapshots": {
+        "main": {
+          "blob": "45813d10674cb557b58a999567cbf0eeaa098fd5",
+          "bytes": 5747,
+          "mode": "100644"
+        },
+        "core_pr4": {
+          "blob": "45813d10674cb557b58a999567cbf0eeaa098fd5",
+          "bytes": 5747,
+          "mode": "100644"
+        },
+        "retired_B_pr5": {
+          "blob": "45813d10674cb557b58a999567cbf0eeaa098fd5",
+          "bytes": 5747,
+          "mode": "100644"
+        },
+        "merged_core_branch": {
+          "blob": "45813d10674cb557b58a999567cbf0eeaa098fd5",
+          "bytes": 5747,
+          "mode": "100644"
+        },
+        "architecture_branch": {
+          "blob": "8f1ceea032c69f443db7e6d5c426d3f31f060c51",
+          "bytes": 2998,
+          "mode": "100644"
+        }
+      },
+      "localBefore": {
+        "sha256": "76bd2f58c253985bca37631a922ba818820e05ee03af2a0c6a7af0c15438aeae",
+        "bytes": 5747
+      },
+      "inActiveMain": true,
+      "retiredBOnly": false
+    },
+    {
+      "path": "build/icon.icns",
+      "category": "ASSET_CONFIG_GATE",
+      "owner": "P asset list + Lead integration",
+      "decision": "Old visual icon/generator must leave active tree; blocked on safe removal/replacement of package icon references. Do not delete before build-reference review.",
+      "githubSnapshots": {
+        "main": {
+          "blob": "7f2d0431eadc5d402b13d7e0922b959db2166cd3",
+          "bytes": 575931,
+          "mode": "100644"
+        },
+        "core_pr4": {
+          "blob": "7f2d0431eadc5d402b13d7e0922b959db2166cd3",
+          "bytes": 575931,
+          "mode": "100644"
+        },
+        "retired_B_pr5": {
+          "blob": "7f2d0431eadc5d402b13d7e0922b959db2166cd3",
+          "bytes": 575931,
+          "mode": "100644"
+        },
+        "merged_core_branch": {
+          "blob": "7f2d0431eadc5d402b13d7e0922b959db2166cd3",
+          "bytes": 575931,
+          "mode": "100644"
+        },
+        "architecture_branch": {
+          "blob": "7f2d0431eadc5d402b13d7e0922b959db2166cd3",
+          "bytes": 575931,
+          "mode": "100644"
+        }
+      },
+      "localBefore": {
+        "sha256": "e0dca462a1a7b3a3a3ca49a8f62fbb6e988b470c0b19b303adfc126cc9779ca0",
+        "bytes": 575931
+      },
+      "inActiveMain": true,
+      "retiredBOnly": false
+    },
+    {
+      "path": "build/icon.iconset/icon_128x128.png",
+      "category": "ASSET_CONFIG_GATE",
+      "owner": "P asset list + Lead integration",
+      "decision": "Old visual icon/generator must leave active tree; blocked on safe removal/replacement of package icon references. Do not delete before build-reference review.",
+      "githubSnapshots": {
+        "main": {
+          "blob": "19358884672972b2c7f3c763c14b8d386098c96c",
+          "bytes": 15717,
+          "mode": "100644"
+        },
+        "core_pr4": {
+          "blob": "19358884672972b2c7f3c763c14b8d386098c96c",
+          "bytes": 15717,
+          "mode": "100644"
+        },
+        "retired_B_pr5": {
+          "blob": "19358884672972b2c7f3c763c14b8d386098c96c",
+          "bytes": 15717,
+          "mode": "100644"
+        },
+        "merged_core_branch": {
+          "blob": "19358884672972b2c7f3c763c14b8d386098c96c",
+          "bytes": 15717,
+          "mode": "100644"
+        },
+        "architecture_branch": {
+          "blob": "19358884672972b2c7f3c763c14b8d386098c96c",
+          "bytes": 15717,
+          "mode": "100644"
+        }
+      },
+      "localBefore": {
+        "sha256": "fa61a2116a21e8e6d5648fd7a471b5ed5205158b762e6a08f9f7b262d6748b68",
+        "bytes": 15717
+      },
+      "inActiveMain": true,
+      "retiredBOnly": false
+    },
+    {
+      "path": "build/icon.iconset/icon_128x128@2x.png",
+      "category": "ASSET_CONFIG_GATE",
+      "owner": "P asset list + Lead integration",
+      "decision": "Old visual icon/generator must leave active tree; blocked on safe removal/replacement of package icon references. Do not delete before build-reference review.",
+      "githubSnapshots": {
+        "main": {
+          "blob": "bca21e935abf6018cdc7f71dd413bd45072f69a3",
+          "bytes": 42054,
+          "mode": "100644"
+        },
+        "core_pr4": {
+          "blob": "bca21e935abf6018cdc7f71dd413bd45072f69a3",
+          "bytes": 42054,
+          "mode": "100644"
+        },
+        "retired_B_pr5": {
+          "blob": "bca21e935abf6018cdc7f71dd413bd45072f69a3",
+          "bytes": 42054,
+          "mode": "100644"
+        },
+        "merged_core_branch": {
+          "blob": "bca21e935abf6018cdc7f71dd413bd45072f69a3",
+          "bytes": 42054,
+          "mode": "100644"
+        },
+        "architecture_branch": {
+          "blob": "bca21e935abf6018cdc7f71dd413bd45072f69a3",
+          "bytes": 42054,
+          "mode": "100644"
+        }
+      },
+      "localBefore": {
+        "sha256": "567d0fc463fea69dc5916cc0061c57c964031ce51d6b6723ca9839326dfb264d",
+        "bytes": 42054
+      },
+      "inActiveMain": true,
+      "retiredBOnly": false
+    },
+    {
+      "path": "build/icon.iconset/icon_16x16.png",
+      "category": "ASSET_CONFIG_GATE",
+      "owner": "P asset list + Lead integration",
+      "decision": "Old visual icon/generator must leave active tree; blocked on safe removal/replacement of package icon references. Do not delete before build-reference review.",
+      "githubSnapshots": {
+        "main": {
+          "blob": "732782cb8e68fa5c8b0ed585d31be325cf72f496",
+          "bytes": 844,
+          "mode": "100644"
+        },
+        "core_pr4": {
+          "blob": "732782cb8e68fa5c8b0ed585d31be325cf72f496",
+          "bytes": 844,
+          "mode": "100644"
+        },
+        "retired_B_pr5": {
+          "blob": "732782cb8e68fa5c8b0ed585d31be325cf72f496",
+          "bytes": 844,
+          "mode": "100644"
+        },
+        "merged_core_branch": {
+          "blob": "732782cb8e68fa5c8b0ed585d31be325cf72f496",
+          "bytes": 844,
+          "mode": "100644"
+        },
+        "architecture_branch": {
+          "blob": "732782cb8e68fa5c8b0ed585d31be325cf72f496",
+          "bytes": 844,
+          "mode": "100644"
+        }
+      },
+      "localBefore": {
+        "sha256": "6eb07db7793b8081935cdfbd2b6e8c7c5deab98bec34d74624615ba69bbb7743",
+        "bytes": 844
+      },
+      "inActiveMain": true,
+      "retiredBOnly": false
+    },
+    {
+      "path": "build/icon.iconset/icon_16x16@2x.png",
+      "category": "ASSET_CONFIG_GATE",
+      "owner": "P asset list + Lead integration",
+      "decision": "Old visual icon/generator must leave active tree; blocked on safe removal/replacement of package icon references. Do not delete before build-reference review.",
+      "githubSnapshots": {
+        "main": {
+          "blob": "15b28daca95217026a06d50758476b97fdb3b2b4",
+          "bytes": 2149,
+          "mode": "100644"
+        },
+        "core_pr4": {
+          "blob": "15b28daca95217026a06d50758476b97fdb3b2b4",
+          "bytes": 2149,
+          "mode": "100644"
+        },
+        "retired_B_pr5": {
+          "blob": "15b28daca95217026a06d50758476b97fdb3b2b4",
+          "bytes": 2149,
+          "mode": "100644"
+        },
+        "merged_core_branch": {
+          "blob": "15b28daca95217026a06d50758476b97fdb3b2b4",
+          "bytes": 2149,
+          "mode": "100644"
+        },
+        "architecture_branch": {
+          "blob": "15b28daca95217026a06d50758476b97fdb3b2b4",
+          "bytes": 2149,
+          "mode": "100644"
+        }
+      },
+      "localBefore": {
+        "sha256": "be248f1947200e09141acacd038aa2eb0498df0922fa7208814ee881aba85082",
+        "bytes": 2149
+      },
+      "inActiveMain": true,
+      "retiredBOnly": false
+    },
+    {
+      "path": "build/icon.iconset/icon_256x256.png",
+      "category": "ASSET_CONFIG_GATE",
+      "owner": "P asset list + Lead integration",
+      "decision": "Old visual icon/generator must leave active tree; blocked on safe removal/replacement of package icon references. Do not delete before build-reference review.",
+      "githubSnapshots": {
+        "main": {
+          "blob": "bca21e935abf6018cdc7f71dd413bd45072f69a3",
+          "bytes": 42054,
+          "mode": "100644"
+        },
+        "core_pr4": {
+          "blob": "bca21e935abf6018cdc7f71dd413bd45072f69a3",
+          "bytes": 42054,
+          "mode": "100644"
+        },
+        "retired_B_pr5": {
+          "blob": "bca21e935abf6018cdc7f71dd413bd45072f69a3",
+          "bytes": 42054,
+          "mode": "100644"
+        },
+        "merged_core_branch": {
+          "blob": "bca21e935abf6018cdc7f71dd413bd45072f69a3",
+          "bytes": 42054,
+          "mode": "100644"
+        },
+        "architecture_branch": {
+          "blob": "bca21e935abf6018cdc7f71dd413bd45072f69a3",
+          "bytes": 42054,
+          "mode": "100644"
+        }
+      },
+      "localBefore": {
+        "sha256": "567d0fc463fea69dc5916cc0061c57c964031ce51d6b6723ca9839326dfb264d",
+        "bytes": 42054
+      },
+      "inActiveMain": true,
+      "retiredBOnly": false
+    },
+    {
+      "path": "build/icon.iconset/icon_256x256@2x.png",
+      "category": "ASSET_CONFIG_GATE",
+      "owner": "P asset list + Lead integration",
+      "decision": "Old visual icon/generator must leave active tree; blocked on safe removal/replacement of package icon references. Do not delete before build-reference review.",
+      "githubSnapshots": {
+        "main": {
+          "blob": "0be9d00230f797e07125848fa2a25dbe027d6f18",
+          "bytes": 106793,
+          "mode": "100644"
+        },
+        "core_pr4": {
+          "blob": "0be9d00230f797e07125848fa2a25dbe027d6f18",
+          "bytes": 106793,
+          "mode": "100644"
+        },
+        "retired_B_pr5": {
+          "blob": "0be9d00230f797e07125848fa2a25dbe027d6f18",
+          "bytes": 106793,
+          "mode": "100644"
+        },
+        "merged_core_branch": {
+          "blob": "0be9d00230f797e07125848fa2a25dbe027d6f18",
+          "bytes": 106793,
+          "mode": "100644"
+        },
+        "architecture_branch": {
+          "blob": "0be9d00230f797e07125848fa2a25dbe027d6f18",
+          "bytes": 106793,
+          "mode": "100644"
+        }
+      },
+      "localBefore": {
+        "sha256": "4002641ef08adc315a884b69ffde4994011201c66115f45175bc5bd488cf5f83",
+        "bytes": 106793
+      },
+      "inActiveMain": true,
+      "retiredBOnly": false
+    },
+    {
+      "path": "build/icon.iconset/icon_32x32.png",
+      "category": "ASSET_CONFIG_GATE",
+      "owner": "P asset list + Lead integration",
+      "decision": "Old visual icon/generator must leave active tree; blocked on safe removal/replacement of package icon references. Do not delete before build-reference review.",
+      "githubSnapshots": {
+        "main": {
+          "blob": "15b28daca95217026a06d50758476b97fdb3b2b4",
+          "bytes": 2149,
+          "mode": "100644"
+        },
+        "core_pr4": {
+          "blob": "15b28daca95217026a06d50758476b97fdb3b2b4",
+          "bytes": 2149,
+          "mode": "100644"
+        },
+        "retired_B_pr5": {
+          "blob": "15b28daca95217026a06d50758476b97fdb3b2b4",
+          "bytes": 2149,
+          "mode": "100644"
+        },
+        "merged_core_branch": {
+          "blob": "15b28daca95217026a06d50758476b97fdb3b2b4",
+          "bytes": 2149,
+          "mode": "100644"
+        },
+        "architecture_branch": {
+          "blob": "15b28daca95217026a06d50758476b97fdb3b2b4",
+          "bytes": 2149,
+          "mode": "100644"
+        }
+      },
+      "localBefore": {
+        "sha256": "be248f1947200e09141acacd038aa2eb0498df0922fa7208814ee881aba85082",
+        "bytes": 2149
+      },
+      "inActiveMain": true,
+      "retiredBOnly": false
+    },
+    {
+      "path": "build/icon.iconset/icon_32x32@2x.png",
+      "category": "ASSET_CONFIG_GATE",
+      "owner": "P asset list + Lead integration",
+      "decision": "Old visual icon/generator must leave active tree; blocked on safe removal/replacement of package icon references. Do not delete before build-reference review.",
+      "githubSnapshots": {
+        "main": {
+          "blob": "0888ed442058c34da0a2d1d44e8969cba2e8af81",
+          "bytes": 5884,
+          "mode": "100644"
+        },
+        "core_pr4": {
+          "blob": "0888ed442058c34da0a2d1d44e8969cba2e8af81",
+          "bytes": 5884,
+          "mode": "100644"
+        },
+        "retired_B_pr5": {
+          "blob": "0888ed442058c34da0a2d1d44e8969cba2e8af81",
+          "bytes": 5884,
+          "mode": "100644"
+        },
+        "merged_core_branch": {
+          "blob": "0888ed442058c34da0a2d1d44e8969cba2e8af81",
+          "bytes": 5884,
+          "mode": "100644"
+        },
+        "architecture_branch": {
+          "blob": "0888ed442058c34da0a2d1d44e8969cba2e8af81",
+          "bytes": 5884,
+          "mode": "100644"
+        }
+      },
+      "localBefore": {
+        "sha256": "37c3a5458bd2deaa519ad0a12740889cc29a5cf5bdf94eff21a79af7a84d6350",
+        "bytes": 5884
+      },
+      "inActiveMain": true,
+      "retiredBOnly": false
+    },
+    {
+      "path": "build/icon.iconset/icon_512x512.png",
+      "category": "ASSET_CONFIG_GATE",
+      "owner": "P asset list + Lead integration",
+      "decision": "Old visual icon/generator must leave active tree; blocked on safe removal/replacement of package icon references. Do not delete before build-reference review.",
+      "githubSnapshots": {
+        "main": {
+          "blob": "0be9d00230f797e07125848fa2a25dbe027d6f18",
+          "bytes": 106793,
+          "mode": "100644"
+        },
+        "core_pr4": {
+          "blob": "0be9d00230f797e07125848fa2a25dbe027d6f18",
+          "bytes": 106793,
+          "mode": "100644"
+        },
+        "retired_B_pr5": {
+          "blob": "0be9d00230f797e07125848fa2a25dbe027d6f18",
+          "bytes": 106793,
+          "mode": "100644"
+        },
+        "merged_core_branch": {
+          "blob": "0be9d00230f797e07125848fa2a25dbe027d6f18",
+          "bytes": 106793,
+          "mode": "100644"
+        },
+        "architecture_branch": {
+          "blob": "0be9d00230f797e07125848fa2a25dbe027d6f18",
+          "bytes": 106793,
+          "mode": "100644"
+        }
+      },
+      "localBefore": {
+        "sha256": "4002641ef08adc315a884b69ffde4994011201c66115f45175bc5bd488cf5f83",
+        "bytes": 106793
+      },
+      "inActiveMain": true,
+      "retiredBOnly": false
+    },
+    {
+      "path": "build/icon.iconset/icon_512x512@2x.png",
+      "category": "ASSET_CONFIG_GATE",
+      "owner": "P asset list + Lead integration",
+      "decision": "Old visual icon/generator must leave active tree; blocked on safe removal/replacement of package icon references. Do not delete before build-reference review.",
+      "githubSnapshots": {
+        "main": {
+          "blob": "84f2273e05c3ab75edb8199e6896a7fc25d7285e",
+          "bytes": 136942,
+          "mode": "100644"
+        },
+        "core_pr4": {
+          "blob": "84f2273e05c3ab75edb8199e6896a7fc25d7285e",
+          "bytes": 136942,
+          "mode": "100644"
+        },
+        "retired_B_pr5": {
+          "blob": "84f2273e05c3ab75edb8199e6896a7fc25d7285e",
+          "bytes": 136942,
+          "mode": "100644"
+        },
+        "merged_core_branch": {
+          "blob": "84f2273e05c3ab75edb8199e6896a7fc25d7285e",
+          "bytes": 136942,
+          "mode": "100644"
+        },
+        "architecture_branch": {
+          "blob": "84f2273e05c3ab75edb8199e6896a7fc25d7285e",
+          "bytes": 136942,
+          "mode": "100644"
+        }
+      },
+      "localBefore": {
+        "sha256": "f1097eccac0e8754651c6abe160e8b43bfe5a135357510b1ad19236145cc9fb8",
+        "bytes": 136942
+      },
+      "inActiveMain": true,
+      "retiredBOnly": false
+    },
+    {
+      "path": "build/icon_1024.png",
+      "category": "ASSET_CONFIG_GATE",
+      "owner": "P asset list + Lead integration",
+      "decision": "Old visual icon/generator must leave active tree; blocked on safe removal/replacement of package icon references. Do not delete before build-reference review.",
+      "githubSnapshots": {
+        "main": {
+          "blob": "84f2273e05c3ab75edb8199e6896a7fc25d7285e",
+          "bytes": 136942,
+          "mode": "100644"
+        },
+        "core_pr4": {
+          "blob": "84f2273e05c3ab75edb8199e6896a7fc25d7285e",
+          "bytes": 136942,
+          "mode": "100644"
+        },
+        "retired_B_pr5": {
+          "blob": "84f2273e05c3ab75edb8199e6896a7fc25d7285e",
+          "bytes": 136942,
+          "mode": "100644"
+        },
+        "merged_core_branch": {
+          "blob": "84f2273e05c3ab75edb8199e6896a7fc25d7285e",
+          "bytes": 136942,
+          "mode": "100644"
+        },
+        "architecture_branch": {
+          "blob": "84f2273e05c3ab75edb8199e6896a7fc25d7285e",
+          "bytes": 136942,
+          "mode": "100644"
+        }
+      },
+      "localBefore": {
+        "sha256": "f1097eccac0e8754651c6abe160e8b43bfe5a135357510b1ad19236145cc9fb8",
+        "bytes": 136942
+      },
+      "inActiveMain": true,
+      "retiredBOnly": false
+    },
+    {
+      "path": "docs/ARCHITECTURE.md",
+      "category": "RECORD_SUPERSEDE_NOT_DESIGN",
+      "owner": "Lead records; P proposes factual cleanup",
+      "decision": "Historical docs are not active UI fallback. Reset supersedes B grants/layout/boards; retain engineering/legal/history, clearly mark stale visual guidance. No old refs as new design foundation.",
+      "githubSnapshots": {
+        "main": {
+          "blob": "407899a226e4711a3b83dae02ab217bb9181acde",
+          "bytes": 42292,
+          "mode": "100644"
+        },
+        "core_pr4": {
+          "blob": "407899a226e4711a3b83dae02ab217bb9181acde",
+          "bytes": 42292,
+          "mode": "100644"
+        },
+        "retired_B_pr5": {
+          "blob": "407899a226e4711a3b83dae02ab217bb9181acde",
+          "bytes": 42292,
+          "mode": "100644"
+        },
+        "merged_core_branch": {
+          "blob": "407899a226e4711a3b83dae02ab217bb9181acde",
+          "bytes": 42292,
+          "mode": "100644"
+        },
+        "architecture_branch": {
+          "blob": "65ddabd6b72c3e96a4c616006010dcbe76ad9756",
+          "bytes": 14396,
+          "mode": "100644"
+        }
+      },
+      "localBefore": {
+        "sha256": "8bf596541ddee33d09564c496d6239c7f50e6b2c05186888ee9e5984ed678bee",
+        "bytes": 64087
+      },
+      "inActiveMain": true,
+      "retiredBOnly": false
+    },
+    {
+      "path": "docs/ENGINEERING_STANDARDS.md",
+      "category": "RECORD_SUPERSEDE_NOT_DESIGN",
+      "owner": "Lead records; P proposes factual cleanup",
+      "decision": "Historical docs are not active UI fallback. Reset supersedes B grants/layout/boards; retain engineering/legal/history, clearly mark stale visual guidance. No old refs as new design foundation.",
+      "githubSnapshots": {
+        "architecture_branch": {
+          "blob": "6c04bbc3b0003c757bc252f0c97a255744ba1c44",
+          "bytes": 3456,
+          "mode": "100644"
+        }
+      },
+      "localBefore": null,
+      "inActiveMain": false,
+      "retiredBOnly": false
+    },
+    {
+      "path": "docs/PRODUCT_VISION.md",
+      "category": "RECORD_SUPERSEDE_NOT_DESIGN",
+      "owner": "Lead records; P proposes factual cleanup",
+      "decision": "Historical docs are not active UI fallback. Reset supersedes B grants/layout/boards; retain engineering/legal/history, clearly mark stale visual guidance. No old refs as new design foundation.",
+      "githubSnapshots": {
+        "main": {
+          "blob": "d8a8878e1b14d972591040aee9e353be568ba9c3",
+          "bytes": 15767,
+          "mode": "100644"
+        },
+        "core_pr4": {
+          "blob": "d8a8878e1b14d972591040aee9e353be568ba9c3",
+          "bytes": 15767,
+          "mode": "100644"
+        },
+        "retired_B_pr5": {
+          "blob": "d8a8878e1b14d972591040aee9e353be568ba9c3",
+          "bytes": 15767,
+          "mode": "100644"
+        },
+        "merged_core_branch": {
+          "blob": "d8a8878e1b14d972591040aee9e353be568ba9c3",
+          "bytes": 15767,
+          "mode": "100644"
+        },
+        "architecture_branch": {
+          "blob": "eb95ab5b21c6c180af845255b7ee4abbf5496f51",
+          "bytes": 11357,
+          "mode": "100644"
+        }
+      },
+      "localBefore": {
+        "sha256": "8bf06b0602c53269de917bebfcc4660eb7a536e79809b5d8fcdd7126880d40cf",
+        "bytes": 15767
+      },
+      "inActiveMain": true,
+      "retiredBOnly": false
+    },
+    {
+      "path": "docs/ROADMAP.md",
+      "category": "RECORD_SUPERSEDE_NOT_DESIGN",
+      "owner": "Lead records; P proposes factual cleanup",
+      "decision": "Historical docs are not active UI fallback. Reset supersedes B grants/layout/boards; retain engineering/legal/history, clearly mark stale visual guidance. No old refs as new design foundation.",
+      "githubSnapshots": {
+        "main": {
+          "blob": "4934ad82658a953a56d760d23b5a3ae2192aaa12",
+          "bytes": 18696,
+          "mode": "100644"
+        },
+        "core_pr4": {
+          "blob": "4934ad82658a953a56d760d23b5a3ae2192aaa12",
+          "bytes": 18696,
+          "mode": "100644"
+        },
+        "retired_B_pr5": {
+          "blob": "4934ad82658a953a56d760d23b5a3ae2192aaa12",
+          "bytes": 18696,
+          "mode": "100644"
+        },
+        "merged_core_branch": {
+          "blob": "4934ad82658a953a56d760d23b5a3ae2192aaa12",
+          "bytes": 18696,
+          "mode": "100644"
+        },
+        "architecture_branch": {
+          "blob": "da547034731e0dbad7f1e2e3adecdd912980c120",
+          "bytes": 8210,
+          "mode": "100644"
+        }
+      },
+      "localBefore": {
+        "sha256": "571ce5d5e85ccd9a4acb6eb39afc83b90147b34daa71db28008ca3caedfb53b1",
+        "bytes": 18696
+      },
+      "inActiveMain": true,
+      "retiredBOnly": false
+    },
+    {
+      "path": "docs/design/DESIGN_BRIEF.md",
+      "category": "RECORD_SUPERSEDE_NOT_DESIGN",
+      "owner": "Lead records; P proposes factual cleanup",
+      "decision": "Historical docs are not active UI fallback. Reset supersedes B grants/layout/boards; retain engineering/legal/history, clearly mark stale visual guidance. No old refs as new design foundation.",
+      "githubSnapshots": {
+        "main": {
+          "blob": "41188256f44227ffa016da5df89de21349e81866",
+          "bytes": 9801,
+          "mode": "100644"
+        },
+        "core_pr4": {
+          "blob": "41188256f44227ffa016da5df89de21349e81866",
+          "bytes": 9801,
+          "mode": "100644"
+        },
+        "retired_B_pr5": {
+          "blob": "41188256f44227ffa016da5df89de21349e81866",
+          "bytes": 9801,
+          "mode": "100644"
+        },
+        "merged_core_branch": {
+          "blob": "41188256f44227ffa016da5df89de21349e81866",
+          "bytes": 9801,
+          "mode": "100644"
+        }
+      },
+      "localBefore": {
+        "sha256": "b1349af98810ff7fb0961e4e0c2f02b8c8d2b6344db59429441dc6438f653db5",
+        "bytes": 13907
+      },
+      "inActiveMain": true,
+      "retiredBOnly": false
+    },
+    {
+      "path": "docs/design/proposals/agent-b-daw-sylune-proposal.md",
+      "category": "RECORD_SUPERSEDE_NOT_DESIGN",
+      "owner": "Lead records; P proposes factual cleanup",
+      "decision": "Historical docs are not active UI fallback. Reset supersedes B grants/layout/boards; retain engineering/legal/history, clearly mark stale visual guidance. No old refs as new design foundation.",
+      "githubSnapshots": {
+        "retired_B_pr5": {
+          "blob": "60b179d2049fa232b6c28371e957a1bad50d9944",
+          "bytes": 9114,
+          "mode": "100644"
+        }
+      },
+      "localBefore": null,
+      "inActiveMain": false,
+      "retiredBOnly": true
+    },
+    {
+      "path": "docs/engineering/AGENT_B_MASTER_PROMPT.md",
+      "category": "RECORD_SUPERSEDE_NOT_DESIGN",
+      "owner": "Lead records; P proposes factual cleanup",
+      "decision": "Historical docs are not active UI fallback. Reset supersedes B grants/layout/boards; retain engineering/legal/history, clearly mark stale visual guidance. No old refs as new design foundation.",
+      "githubSnapshots": {
+        "main": {
+          "blob": "0095f113ea0a5ffce3c2d06726dae1354e47988c",
+          "bytes": 13217,
+          "mode": "100644"
+        },
+        "core_pr4": {
+          "blob": "0095f113ea0a5ffce3c2d06726dae1354e47988c",
+          "bytes": 13217,
+          "mode": "100644"
+        },
+        "retired_B_pr5": {
+          "blob": "0095f113ea0a5ffce3c2d06726dae1354e47988c",
+          "bytes": 13217,
+          "mode": "100644"
+        },
+        "merged_core_branch": {
+          "blob": "0095f113ea0a5ffce3c2d06726dae1354e47988c",
+          "bytes": 13217,
+          "mode": "100644"
+        }
+      },
+      "localBefore": {
+        "sha256": "ff0bc0425a00641be70e68c56b5073458eca4921b8654d06c6db8343fc905306",
+        "bytes": 13217
+      },
+      "inActiveMain": true,
+      "retiredBOnly": false
+    },
+    {
+      "path": "docs/engineering/AUDIO_METERING_CONTRACT.md",
+      "category": "RECORD_SUPERSEDE_NOT_DESIGN",
+      "owner": "Lead records; P proposes factual cleanup",
+      "decision": "Historical docs are not active UI fallback. Reset supersedes B grants/layout/boards; retain engineering/legal/history, clearly mark stale visual guidance. No old refs as new design foundation.",
+      "githubSnapshots": {
+        "main": {
+          "blob": "d8a0fa8e8f1f75b9cdd027f7d22ea81303c7f5a5",
+          "bytes": 58536,
+          "mode": "100644"
+        },
+        "core_pr4": {
+          "blob": "d8a0fa8e8f1f75b9cdd027f7d22ea81303c7f5a5",
+          "bytes": 58536,
+          "mode": "100644"
+        },
+        "retired_B_pr5": {
+          "blob": "d8a0fa8e8f1f75b9cdd027f7d22ea81303c7f5a5",
+          "bytes": 58536,
+          "mode": "100644"
+        },
+        "merged_core_branch": {
+          "blob": "d8a0fa8e8f1f75b9cdd027f7d22ea81303c7f5a5",
+          "bytes": 58536,
+          "mode": "100644"
+        }
+      },
+      "localBefore": {
+        "sha256": "d0012bf264c236d797505ef600e389e8fa55616016c33ffb1846fa3e2263be0f",
+        "bytes": 58536
+      },
+      "inActiveMain": true,
+      "retiredBOnly": false
+    },
+    {
+      "path": "docs/engineering/CORE_INTEGRATION_REVIEW.md",
+      "category": "RECORD_SUPERSEDE_NOT_DESIGN",
+      "owner": "Lead records; P proposes factual cleanup",
+      "decision": "Historical docs are not active UI fallback. Reset supersedes B grants/layout/boards; retain engineering/legal/history, clearly mark stale visual guidance. No old refs as new design foundation.",
+      "githubSnapshots": {},
+      "localBefore": {
+        "sha256": "8c70254c0ad47a77bd87cd52f783d29f3370b3806cee709ca5e8d2c184c03b35",
+        "bytes": 8034
+      },
+      "inActiveMain": false,
+      "retiredBOnly": false
+    },
+    {
+      "path": "docs/engineering/LINKED_MEDIA_RECOVERY_PROBE.md",
+      "category": "RECORD_SUPERSEDE_NOT_DESIGN",
+      "owner": "Lead records; P proposes factual cleanup",
+      "decision": "Historical docs are not active UI fallback. Reset supersedes B grants/layout/boards; retain engineering/legal/history, clearly mark stale visual guidance. No old refs as new design foundation.",
+      "githubSnapshots": {
+        "core_pr4": {
+          "blob": "4c3424a690d6673cc4d0dd3d9b229997111139ce",
+          "bytes": 7466,
+          "mode": "100644"
+        }
+      },
+      "localBefore": {
+        "sha256": "4a2d309bea1ee4501a89793a03e2e3004dbf3f26a89fc474d64ef7d46976501e",
+        "bytes": 7466
+      },
+      "inActiveMain": false,
+      "retiredBOnly": false
+    },
+    {
+      "path": "docs/engineering/LINKED_UPDATE_SERVICE.md",
+      "category": "RECORD_SUPERSEDE_NOT_DESIGN",
+      "owner": "Lead records; P proposes factual cleanup",
+      "decision": "Historical docs are not active UI fallback. Reset supersedes B grants/layout/boards; retain engineering/legal/history, clearly mark stale visual guidance. No old refs as new design foundation.",
+      "githubSnapshots": {},
+      "localBefore": {
+        "sha256": "bc6ef33ef2ebad3c1634f1cdd036f3688a55c4b20cb160b55cab6c6007b30b65",
+        "bytes": 15893
+      },
+      "inActiveMain": false,
+      "retiredBOnly": false
+    },
+    {
+      "path": "docs/engineering/LINKED_WRITER_RECOVERY.md",
+      "category": "RECORD_SUPERSEDE_NOT_DESIGN",
+      "owner": "Lead records; P proposes factual cleanup",
+      "decision": "Historical docs are not active UI fallback. Reset supersedes B grants/layout/boards; retain engineering/legal/history, clearly mark stale visual guidance. No old refs as new design foundation.",
+      "githubSnapshots": {},
+      "localBefore": {
+        "sha256": "14c610f11f7f79ab02b5f69bb2bc619ade3f732114a871aa7cc31cfc4df8cc5e",
+        "bytes": 9701
+      },
+      "inActiveMain": false,
+      "retiredBOnly": false
+    },
+    {
+      "path": "docs/engineering/OFFLINE_RENDER_PROBE.md",
+      "category": "RECORD_SUPERSEDE_NOT_DESIGN",
+      "owner": "Lead records; P proposes factual cleanup",
+      "decision": "Historical docs are not active UI fallback. Reset supersedes B grants/layout/boards; retain engineering/legal/history, clearly mark stale visual guidance. No old refs as new design foundation.",
+      "githubSnapshots": {
+        "core_pr4": {
+          "blob": "0ae7d17dec9db803ee354f08028bb3f7ab3d94e0",
+          "bytes": 15420,
+          "mode": "100644"
+        }
+      },
+      "localBefore": {
+        "sha256": "dbf787c596a7ccf71ad88573af92e00c5e4e6f755ab9d3399a27740d00f1cef6",
+        "bytes": 15420
+      },
+      "inActiveMain": false,
+      "retiredBOnly": false
+    },
+    {
+      "path": "docs/engineering/PACKAGED_RUNTIME_ENTRY_REVIEW.md",
+      "category": "RECORD_SUPERSEDE_NOT_DESIGN",
+      "owner": "Lead records; P proposes factual cleanup",
+      "decision": "Historical docs are not active UI fallback. Reset supersedes B grants/layout/boards; retain engineering/legal/history, clearly mark stale visual guidance. No old refs as new design foundation.",
+      "githubSnapshots": {},
+      "localBefore": {
+        "sha256": "2b46c76519875bb717b1796ea376175a145e2a818a9ce8e70a89b7166519bf9a",
+        "bytes": 9720
+      },
+      "inActiveMain": false,
+      "retiredBOnly": false
+    },
+    {
+      "path": "docs/engineering/PRODUCTION_SESSION_STORAGE.md",
+      "category": "RECORD_SUPERSEDE_NOT_DESIGN",
+      "owner": "Lead records; P proposes factual cleanup",
+      "decision": "Historical docs are not active UI fallback. Reset supersedes B grants/layout/boards; retain engineering/legal/history, clearly mark stale visual guidance. No old refs as new design foundation.",
+      "githubSnapshots": {},
+      "localBefore": {
+        "sha256": "d340e78d0ba5daf9e5b6a1e0e53ab9d23b1cfe002c8448b22d65f1eb16f22c10",
+        "bytes": 9969
+      },
+      "inActiveMain": false,
+      "retiredBOnly": false
+    },
+    {
+      "path": "docs/engineering/PROJECT_GUIDE.md",
+      "category": "RECORD_SUPERSEDE_NOT_DESIGN",
+      "owner": "Lead records; P proposes factual cleanup",
+      "decision": "Historical docs are not active UI fallback. Reset supersedes B grants/layout/boards; retain engineering/legal/history, clearly mark stale visual guidance. No old refs as new design foundation.",
+      "githubSnapshots": {
+        "main": {
+          "blob": "0da14380ffc820e9f4f728049c4b5e451203d46f",
+          "bytes": 13300,
+          "mode": "100644"
+        },
+        "core_pr4": {
+          "blob": "0da14380ffc820e9f4f728049c4b5e451203d46f",
+          "bytes": 13300,
+          "mode": "100644"
+        },
+        "retired_B_pr5": {
+          "blob": "0da14380ffc820e9f4f728049c4b5e451203d46f",
+          "bytes": 13300,
+          "mode": "100644"
+        },
+        "merged_core_branch": {
+          "blob": "0da14380ffc820e9f4f728049c4b5e451203d46f",
+          "bytes": 13300,
+          "mode": "100644"
+        }
+      },
+      "localBefore": {
+        "sha256": "8c55e39fb029ae590388e8edcf928b96cdd5ba9918e70f1306633e0d6bc60910",
+        "bytes": 13300
+      },
+      "inActiveMain": true,
+      "retiredBOnly": false
+    },
+    {
+      "path": "docs/engineering/SESSION_APPLICATION_IPC.md",
+      "category": "RECORD_SUPERSEDE_NOT_DESIGN",
+      "owner": "Lead records; P proposes factual cleanup",
+      "decision": "Historical docs are not active UI fallback. Reset supersedes B grants/layout/boards; retain engineering/legal/history, clearly mark stale visual guidance. No old refs as new design foundation.",
+      "githubSnapshots": {},
+      "localBefore": {
+        "sha256": "89d78be962fa4daeff8089b4831ec0395e30d8fcc27eab8798337108d09ba8e0",
+        "bytes": 13133
+      },
+      "inActiveMain": false,
+      "retiredBOnly": false
+    },
+    {
+      "path": "docs/engineering/SESSION_HOST_FOUNDATION.md",
+      "category": "RECORD_SUPERSEDE_NOT_DESIGN",
+      "owner": "Lead records; P proposes factual cleanup",
+      "decision": "Historical docs are not active UI fallback. Reset supersedes B grants/layout/boards; retain engineering/legal/history, clearly mark stale visual guidance. No old refs as new design foundation.",
+      "githubSnapshots": {},
+      "localBefore": {
+        "sha256": "e4d950272b9a0167091ed0551fd89ddaee8d20c14c62909077a55a4b4aacecad",
+        "bytes": 9537
+      },
+      "inActiveMain": false,
+      "retiredBOnly": false
+    },
+    {
+      "path": "docs/engineering/SESSION_RENDERED_REVIEW.md",
+      "category": "RECORD_SUPERSEDE_NOT_DESIGN",
+      "owner": "Lead records; P proposes factual cleanup",
+      "decision": "Historical docs are not active UI fallback. Reset supersedes B grants/layout/boards; retain engineering/legal/history, clearly mark stale visual guidance. No old refs as new design foundation.",
+      "githubSnapshots": {},
+      "localBefore": {
+        "sha256": "1ef63f1c2388a23e2546316ab93b2169511f52970ec0e640c9d4edbb937b08f3",
+        "bytes": 14129
+      },
+      "inActiveMain": false,
+      "retiredBOnly": false
+    },
+    {
+      "path": "docs/engineering/SESSION_RUNTIME_QUALIFICATION.md",
+      "category": "RECORD_SUPERSEDE_NOT_DESIGN",
+      "owner": "Lead records; P proposes factual cleanup",
+      "decision": "Historical docs are not active UI fallback. Reset supersedes B grants/layout/boards; retain engineering/legal/history, clearly mark stale visual guidance. No old refs as new design foundation.",
+      "githubSnapshots": {},
+      "localBefore": {
+        "sha256": "e21ae6e8a77a8eb27996a016dff3f46f8ac9ea3f7a739eae23e2091a58a31c84",
+        "bytes": 12931
+      },
+      "inActiveMain": false,
+      "retiredBOnly": false
+    },
+    {
+      "path": "docs/engineering/SORA_ASSET_REVIEW.json",
+      "category": "RECORD_SUPERSEDE_NOT_DESIGN",
+      "owner": "Lead records; P proposes factual cleanup",
+      "decision": "Historical docs are not active UI fallback. Reset supersedes B grants/layout/boards; retain engineering/legal/history, clearly mark stale visual guidance. No old refs as new design foundation.",
+      "githubSnapshots": {},
+      "localBefore": {
+        "sha256": "613dc63265274d14d9e97b4f383ab78b31caa4cb84a4ee7dcae8c62f9e71d683",
+        "bytes": 2314
+      },
+      "inActiveMain": false,
+      "retiredBOnly": false
+    },
+    {
+      "path": "docs/engineering/SYLUNE_PRESENTATION_CONTRACT.md",
+      "category": "RECORD_SUPERSEDE_NOT_DESIGN",
+      "owner": "Lead records; P proposes factual cleanup",
+      "decision": "Historical docs are not active UI fallback. Reset supersedes B grants/layout/boards; retain engineering/legal/history, clearly mark stale visual guidance. No old refs as new design foundation.",
+      "githubSnapshots": {},
+      "localBefore": {
+        "sha256": "0b987b074a33418a7202d08f98d21a9b9e2a12a9b6ccf90f9b27b37ade1934dd",
+        "bytes": 14882
+      },
+      "inActiveMain": false,
+      "retiredBOnly": false
+    },
+    {
+      "path": "docs/engineering/UI_BASELINE_DECISION.md",
+      "category": "RECORD_SUPERSEDE_NOT_DESIGN",
+      "owner": "Lead records; P proposes factual cleanup",
+      "decision": "Historical docs are not active UI fallback. Reset supersedes B grants/layout/boards; retain engineering/legal/history, clearly mark stale visual guidance. No old refs as new design foundation.",
+      "githubSnapshots": {
+        "main": {
+          "blob": "6d3087ea91ad92f9abac476cb714e0fa6d7f02d9",
+          "bytes": 13059,
+          "mode": "100644"
+        },
+        "core_pr4": {
+          "blob": "6d3087ea91ad92f9abac476cb714e0fa6d7f02d9",
+          "bytes": 13059,
+          "mode": "100644"
+        },
+        "retired_B_pr5": {
+          "blob": "6d3087ea91ad92f9abac476cb714e0fa6d7f02d9",
+          "bytes": 13059,
+          "mode": "100644"
+        },
+        "merged_core_branch": {
+          "blob": "6d3087ea91ad92f9abac476cb714e0fa6d7f02d9",
+          "bytes": 13059,
+          "mode": "100644"
+        }
+      },
+      "localBefore": {
+        "sha256": "a9989ec69e5c4e905610fe4c8883e12ad5588567b1779a00d80b566db79011a1",
+        "bytes": 13059
+      },
+      "inActiveMain": true,
+      "retiredBOnly": false
+    },
+    {
+      "path": "docs/engineering/UI_IMPLEMENTATION_HANDOFF.md",
+      "category": "RECORD_SUPERSEDE_NOT_DESIGN",
+      "owner": "Lead records; P proposes factual cleanup",
+      "decision": "Historical docs are not active UI fallback. Reset supersedes B grants/layout/boards; retain engineering/legal/history, clearly mark stale visual guidance. No old refs as new design foundation.",
+      "githubSnapshots": {
+        "main": {
+          "blob": "696c27376947dc168fc2f3125d186a9e583010c9",
+          "bytes": 19923,
+          "mode": "100644"
+        },
+        "core_pr4": {
+          "blob": "696c27376947dc168fc2f3125d186a9e583010c9",
+          "bytes": 19923,
+          "mode": "100644"
+        },
+        "retired_B_pr5": {
+          "blob": "696c27376947dc168fc2f3125d186a9e583010c9",
+          "bytes": 19923,
+          "mode": "100644"
+        },
+        "merged_core_branch": {
+          "blob": "696c27376947dc168fc2f3125d186a9e583010c9",
+          "bytes": 19923,
+          "mode": "100644"
+        }
+      },
+      "localBefore": {
+        "sha256": "ddc40a8b393f069f5f50ab16f0f93174683d8860aaf15742fe822ff8b50dc41e",
+        "bytes": 52946
+      },
+      "inActiveMain": true,
+      "retiredBOnly": false
+    },
+    {
+      "path": "docs/engineering/UNIVERSE_VISUAL_HANDOFF.md",
+      "category": "RECORD_SUPERSEDE_NOT_DESIGN",
+      "owner": "Lead records; P proposes factual cleanup",
+      "decision": "Historical docs are not active UI fallback. Reset supersedes B grants/layout/boards; retain engineering/legal/history, clearly mark stale visual guidance. No old refs as new design foundation.",
+      "githubSnapshots": {},
+      "localBefore": {
+        "sha256": "29968037b988587171518f471596a4254ba986cfe71471bb1dcb618661afa88f",
+        "bytes": 11362
+      },
+      "inActiveMain": false,
+      "retiredBOnly": false
+    },
+    {
+      "path": "docs/engineering/USEFUL_RANGE_PROFILE.md",
+      "category": "RECORD_SUPERSEDE_NOT_DESIGN",
+      "owner": "Lead records; P proposes factual cleanup",
+      "decision": "Historical docs are not active UI fallback. Reset supersedes B grants/layout/boards; retain engineering/legal/history, clearly mark stale visual guidance. No old refs as new design foundation.",
+      "githubSnapshots": {},
+      "localBefore": {
+        "sha256": "588932f366d43290c0f3c8665a0c67afefa76879db1f8d889bcf2502bbc263c2",
+        "bytes": 13835
+      },
+      "inActiveMain": false,
+      "retiredBOnly": false
+    },
+    {
+      "path": "docs/engineering/WORK_QUEUE.md",
+      "category": "RECORD_SUPERSEDE_NOT_DESIGN",
+      "owner": "Lead records; P proposes factual cleanup",
+      "decision": "Historical docs are not active UI fallback. Reset supersedes B grants/layout/boards; retain engineering/legal/history, clearly mark stale visual guidance. No old refs as new design foundation.",
+      "githubSnapshots": {
+        "main": {
+          "blob": "eaf1394cb924ff47bdace71f3b622968afd7d449",
+          "bytes": 126290,
+          "mode": "100644"
+        },
+        "core_pr4": {
+          "blob": "eaf1394cb924ff47bdace71f3b622968afd7d449",
+          "bytes": 126290,
+          "mode": "100644"
+        },
+        "retired_B_pr5": {
+          "blob": "eaf1394cb924ff47bdace71f3b622968afd7d449",
+          "bytes": 126290,
+          "mode": "100644"
+        },
+        "merged_core_branch": {
+          "blob": "eaf1394cb924ff47bdace71f3b622968afd7d449",
+          "bytes": 126290,
+          "mode": "100644"
+        }
+      },
+      "localBefore": {
+        "sha256": "d525f84869b4f01e5429f58be02cf15b2c3aa9e367b023c7e8dccbc63f9a8f90",
+        "bytes": 171197
+      },
+      "inActiveMain": true,
+      "retiredBOnly": false
+    },
+    {
+      "path": "electron-builder.legacy.cjs",
+      "category": "PROTECTED_INTEGRATION",
+      "owner": "Lead",
+      "decision": "Preserve lifecycle/security/IPC/deps/build. Icon-only package field change needs exact reviewed lead diff; no P directory-wide grant.",
+      "githubSnapshots": {
+        "main": {
+          "blob": "9cad60e39898f8b3d6c2b7955c8cc182ea3fa371",
+          "bytes": 839,
+          "mode": "100644"
+        },
+        "core_pr4": {
+          "blob": "9cad60e39898f8b3d6c2b7955c8cc182ea3fa371",
+          "bytes": 839,
+          "mode": "100644"
+        },
+        "retired_B_pr5": {
+          "blob": "9cad60e39898f8b3d6c2b7955c8cc182ea3fa371",
+          "bytes": 839,
+          "mode": "100644"
+        },
+        "merged_core_branch": {
+          "blob": "9cad60e39898f8b3d6c2b7955c8cc182ea3fa371",
+          "bytes": 839,
+          "mode": "100644"
+        },
+        "architecture_branch": {
+          "blob": "9cad60e39898f8b3d6c2b7955c8cc182ea3fa371",
+          "bytes": 839,
+          "mode": "100644"
+        }
+      },
+      "localBefore": {
+        "sha256": "68c8ddd721c983147cac7599360686d889423efcbf32c9cde1eefcd492076701",
+        "bytes": 839
+      },
+      "inActiveMain": true,
+      "retiredBOnly": false
+    },
+    {
+      "path": "electron/main.cjs",
+      "category": "PROTECTED_INTEGRATION",
+      "owner": "Lead",
+      "decision": "Preserve lifecycle/security/IPC/deps/build. Icon-only package field change needs exact reviewed lead diff; no P directory-wide grant.",
+      "githubSnapshots": {
+        "main": {
+          "blob": "87afad78fa96917a98b050754650d0523f57d806",
+          "bytes": 4761,
+          "mode": "100644"
+        },
+        "core_pr4": {
+          "blob": "87afad78fa96917a98b050754650d0523f57d806",
+          "bytes": 4761,
+          "mode": "100644"
+        },
+        "retired_B_pr5": {
+          "blob": "87afad78fa96917a98b050754650d0523f57d806",
+          "bytes": 4761,
+          "mode": "100644"
+        },
+        "merged_core_branch": {
+          "blob": "87afad78fa96917a98b050754650d0523f57d806",
+          "bytes": 4761,
+          "mode": "100644"
+        },
+        "architecture_branch": {
+          "blob": "87afad78fa96917a98b050754650d0523f57d806",
+          "bytes": 4761,
+          "mode": "100644"
+        }
+      },
+      "localBefore": {
+        "sha256": "46d6d66b879cd8d884fb5a917d1bd2e0ac060da3c06be1a1773d7cfb9d574c63",
+        "bytes": 4761
+      },
+      "inActiveMain": true,
+      "retiredBOnly": false
+    },
+    {
+      "path": "electron/notarize.cjs",
+      "category": "PROTECTED_INTEGRATION",
+      "owner": "Lead",
+      "decision": "Preserve lifecycle/security/IPC/deps/build. Icon-only package field change needs exact reviewed lead diff; no P directory-wide grant.",
+      "githubSnapshots": {
+        "main": {
+          "blob": "8149ada3072d9b2e5a5c0cebcc1c9c9134c32111",
+          "bytes": 1983,
+          "mode": "100644"
+        },
+        "core_pr4": {
+          "blob": "8149ada3072d9b2e5a5c0cebcc1c9c9134c32111",
+          "bytes": 1983,
+          "mode": "100644"
+        },
+        "retired_B_pr5": {
+          "blob": "8149ada3072d9b2e5a5c0cebcc1c9c9134c32111",
+          "bytes": 1983,
+          "mode": "100644"
+        },
+        "merged_core_branch": {
+          "blob": "8149ada3072d9b2e5a5c0cebcc1c9c9134c32111",
+          "bytes": 1983,
+          "mode": "100644"
+        },
+        "architecture_branch": {
+          "blob": "8149ada3072d9b2e5a5c0cebcc1c9c9134c32111",
+          "bytes": 1983,
+          "mode": "100644"
+        }
+      },
+      "localBefore": {
+        "sha256": "1245ee8e7de737011259a220ea29d463ad9584956410a88eca25e80ef1312aab",
+        "bytes": 1983
+      },
+      "inActiveMain": true,
+      "retiredBOnly": false
+    },
+    {
+      "path": "electron/preload.cjs",
+      "category": "PROTECTED_INTEGRATION",
+      "owner": "Lead",
+      "decision": "Preserve lifecycle/security/IPC/deps/build. Icon-only package field change needs exact reviewed lead diff; no P directory-wide grant.",
+      "githubSnapshots": {
+        "main": {
+          "blob": "d902d4e5aa57e05c7687a920dcc3bccecb0355ac",
+          "bytes": 642,
+          "mode": "100644"
+        },
+        "core_pr4": {
+          "blob": "d902d4e5aa57e05c7687a920dcc3bccecb0355ac",
+          "bytes": 642,
+          "mode": "100644"
+        },
+        "retired_B_pr5": {
+          "blob": "d902d4e5aa57e05c7687a920dcc3bccecb0355ac",
+          "bytes": 642,
+          "mode": "100644"
+        },
+        "merged_core_branch": {
+          "blob": "d902d4e5aa57e05c7687a920dcc3bccecb0355ac",
+          "bytes": 642,
+          "mode": "100644"
+        },
+        "architecture_branch": {
+          "blob": "d902d4e5aa57e05c7687a920dcc3bccecb0355ac",
+          "bytes": 642,
+          "mode": "100644"
+        }
+      },
+      "localBefore": {
+        "sha256": "10e9bf6a5ef5762a7bdf1d706d2d17a52ca03b0f7c71ee1a488a9546eb9619d9",
+        "bytes": 642
+      },
+      "inActiveMain": true,
+      "retiredBOnly": false
+    },
+    {
+      "path": "index.html",
+      "category": "P_REPLACE_ENTRY",
+      "owner": "P",
+      "decision": "Remove old theme/font/visual metadata; preserve valid minimal app boot and product name. No new design until references.",
+      "githubSnapshots": {
+        "main": {
+          "blob": "41bca4549cf751f24c873752421c8619d4929d1a",
+          "bytes": 1031,
+          "mode": "100644"
+        },
+        "core_pr4": {
+          "blob": "41bca4549cf751f24c873752421c8619d4929d1a",
+          "bytes": 1031,
+          "mode": "100644"
+        },
+        "retired_B_pr5": {
+          "blob": "0dd9f238a05f09b8724ff8b7365106a2ddd79be7",
+          "bytes": 590,
+          "mode": "100644"
+        },
+        "merged_core_branch": {
+          "blob": "41bca4549cf751f24c873752421c8619d4929d1a",
+          "bytes": 1031,
+          "mode": "100644"
+        },
+        "architecture_branch": {
+          "blob": "41bca4549cf751f24c873752421c8619d4929d1a",
+          "bytes": 1031,
+          "mode": "100644"
+        }
+      },
+      "localBefore": {
+        "sha256": "7d137a5ed4f2b9927c00551fdf66a7d098eea686c1601ac3796c8c736bff5c36",
+        "bytes": 1031
+      },
+      "inActiveMain": true,
+      "retiredBOnly": false
+    },
+    {
+      "path": "package-lock.json",
+      "category": "PROTECTED_INTEGRATION",
+      "owner": "Lead",
+      "decision": "Preserve lifecycle/security/IPC/deps/build. Icon-only package field change needs exact reviewed lead diff; no P directory-wide grant.",
+      "githubSnapshots": {
+        "main": {
+          "blob": "8a68ec6abfc689e481f593daaa0a123e3982c88b",
+          "bytes": 177683,
+          "mode": "100644"
+        },
+        "core_pr4": {
+          "blob": "8a68ec6abfc689e481f593daaa0a123e3982c88b",
+          "bytes": 177683,
+          "mode": "100644"
+        },
+        "retired_B_pr5": {
+          "blob": "8a68ec6abfc689e481f593daaa0a123e3982c88b",
+          "bytes": 177683,
+          "mode": "100644"
+        },
+        "merged_core_branch": {
+          "blob": "8a68ec6abfc689e481f593daaa0a123e3982c88b",
+          "bytes": 177683,
+          "mode": "100644"
+        },
+        "architecture_branch": {
+          "blob": "8a68ec6abfc689e481f593daaa0a123e3982c88b",
+          "bytes": 177683,
+          "mode": "100644"
+        }
+      },
+      "localBefore": {
+        "sha256": "3153221046345c42588926722a2da278a7c364f96938e17d4e24602ad4877d04",
+        "bytes": 177683
+      },
+      "inActiveMain": true,
+      "retiredBOnly": false
+    },
+    {
+      "path": "package.json",
+      "category": "PROTECTED_INTEGRATION",
+      "owner": "Lead",
+      "decision": "Preserve lifecycle/security/IPC/deps/build. Icon-only package field change needs exact reviewed lead diff; no P directory-wide grant.",
+      "githubSnapshots": {
+        "main": {
+          "blob": "fd9c54d1f9223c84275bf15a1ad47eb14838c762",
+          "bytes": 2279,
+          "mode": "100644"
+        },
+        "core_pr4": {
+          "blob": "fd9c54d1f9223c84275bf15a1ad47eb14838c762",
+          "bytes": 2279,
+          "mode": "100644"
+        },
+        "retired_B_pr5": {
+          "blob": "fd9c54d1f9223c84275bf15a1ad47eb14838c762",
+          "bytes": 2279,
+          "mode": "100644"
+        },
+        "merged_core_branch": {
+          "blob": "fd9c54d1f9223c84275bf15a1ad47eb14838c762",
+          "bytes": 2279,
+          "mode": "100644"
+        },
+        "architecture_branch": {
+          "blob": "fd9c54d1f9223c84275bf15a1ad47eb14838c762",
+          "bytes": 2279,
+          "mode": "100644"
+        }
+      },
+      "localBefore": {
+        "sha256": "c800164ee6719b2eee5967a9f0f12682795d468ff3927b7f03815870e2f999a0",
+        "bytes": 2279
+      },
+      "inActiveMain": true,
+      "retiredBOnly": false
+    },
+    {
+      "path": "public/favicon.svg",
+      "category": "P_REMOVE_ASSET",
+      "owner": "P",
+      "decision": "Remove old binaries/style/manifest/notices and favicon with all active references; remove a license only with all corresponding shipped font bytes; never reuse as new-design foundation.",
+      "githubSnapshots": {
+        "main": {
+          "blob": "f5ffb20eefc9f7aba32a09f31e9759a5855030f2",
+          "bytes": 446,
+          "mode": "100644"
+        },
+        "core_pr4": {
+          "blob": "f5ffb20eefc9f7aba32a09f31e9759a5855030f2",
+          "bytes": 446,
+          "mode": "100644"
+        },
+        "retired_B_pr5": {
+          "blob": "f5ffb20eefc9f7aba32a09f31e9759a5855030f2",
+          "bytes": 446,
+          "mode": "100644"
+        },
+        "merged_core_branch": {
+          "blob": "f5ffb20eefc9f7aba32a09f31e9759a5855030f2",
+          "bytes": 446,
+          "mode": "100644"
+        },
+        "architecture_branch": {
+          "blob": "f5ffb20eefc9f7aba32a09f31e9759a5855030f2",
+          "bytes": 446,
+          "mode": "100644"
+        }
+      },
+      "localBefore": {
+        "sha256": "156fb002db53c9e5c8411b74650221c59c64cf45d52a99b891f5efd3d010021d",
+        "bytes": 446
+      },
+      "inActiveMain": true,
+      "retiredBOnly": false
+    },
+    {
+      "path": "scripts/inline-dist.mjs",
+      "category": "PROTECTED_INTEGRATION",
+      "owner": "Lead",
+      "decision": "Preserve lifecycle/security/IPC/deps/build. Icon-only package field change needs exact reviewed lead diff; no P directory-wide grant.",
+      "githubSnapshots": {
+        "main": {
+          "blob": "16e031b6b01b84a19018b7eb7e4969ab38ce2440",
+          "bytes": 1002,
+          "mode": "100644"
+        },
+        "core_pr4": {
+          "blob": "16e031b6b01b84a19018b7eb7e4969ab38ce2440",
+          "bytes": 1002,
+          "mode": "100644"
+        },
+        "retired_B_pr5": {
+          "blob": "16e031b6b01b84a19018b7eb7e4969ab38ce2440",
+          "bytes": 1002,
+          "mode": "100644"
+        },
+        "merged_core_branch": {
+          "blob": "16e031b6b01b84a19018b7eb7e4969ab38ce2440",
+          "bytes": 1002,
+          "mode": "100644"
+        },
+        "architecture_branch": {
+          "blob": "16e031b6b01b84a19018b7eb7e4969ab38ce2440",
+          "bytes": 1002,
+          "mode": "100644"
+        }
+      },
+      "localBefore": {
+        "sha256": "cfbff317e48cdfc4c749888f77cf5d5a9261eb40d2464b41f72057c0c6b09637",
+        "bytes": 1002
+      },
+      "inActiveMain": true,
+      "retiredBOnly": false
+    },
+    {
+      "path": "scripts/make-icon.mjs",
+      "category": "ASSET_CONFIG_GATE",
+      "owner": "P asset list + Lead integration",
+      "decision": "Old visual icon/generator must leave active tree; blocked on safe removal/replacement of package icon references. Do not delete before build-reference review.",
+      "githubSnapshots": {
+        "main": {
+          "blob": "fd97f8daae0050e4bd4a020e412fc9dc5ad5e1c6",
+          "bytes": 6184,
+          "mode": "100644"
+        },
+        "core_pr4": {
+          "blob": "fd97f8daae0050e4bd4a020e412fc9dc5ad5e1c6",
+          "bytes": 6184,
+          "mode": "100644"
+        },
+        "retired_B_pr5": {
+          "blob": "fd97f8daae0050e4bd4a020e412fc9dc5ad5e1c6",
+          "bytes": 6184,
+          "mode": "100644"
+        },
+        "merged_core_branch": {
+          "blob": "fd97f8daae0050e4bd4a020e412fc9dc5ad5e1c6",
+          "bytes": 6184,
+          "mode": "100644"
+        },
+        "architecture_branch": {
+          "blob": "fd97f8daae0050e4bd4a020e412fc9dc5ad5e1c6",
+          "bytes": 6184,
+          "mode": "100644"
+        }
+      },
+      "localBefore": {
+        "sha256": "4edf471ce78785a4407e3ed0e0840c91617ad16f67d76b973d31cef53293355b",
+        "bytes": 6184
+      },
+      "inActiveMain": true,
+      "retiredBOnly": false
+    },
+    {
+      "path": "scripts/test-analyze.mjs",
+      "category": "PROTECTED_CORE",
+      "owner": "Lead",
+      "decision": "Keep actual DSP/analysis/mastering/conversion/reference/session/Linked/recovery/history/host/validators/proofs/tests, including held local files. No deletion/silent contract changes.",
+      "githubSnapshots": {
+        "main": {
+          "blob": "cbf8a9fc888d3a4596aa01189fa54e2f832fbf8a",
+          "bytes": 4147,
+          "mode": "100644"
+        },
+        "core_pr4": {
+          "blob": "cbf8a9fc888d3a4596aa01189fa54e2f832fbf8a",
+          "bytes": 4147,
+          "mode": "100644"
+        },
+        "retired_B_pr5": {
+          "blob": "cbf8a9fc888d3a4596aa01189fa54e2f832fbf8a",
+          "bytes": 4147,
+          "mode": "100644"
+        },
+        "merged_core_branch": {
+          "blob": "cbf8a9fc888d3a4596aa01189fa54e2f832fbf8a",
+          "bytes": 4147,
+          "mode": "100644"
+        },
+        "architecture_branch": {
+          "blob": "cbf8a9fc888d3a4596aa01189fa54e2f832fbf8a",
+          "bytes": 4147,
+          "mode": "100644"
+        }
+      },
+      "localBefore": {
+        "sha256": "9e580b47fe4be51c4931d717ff0f3538e8248d27dec1d8b07f6bd4c5c04e30cd",
+        "bytes": 4147
+      },
+      "inActiveMain": true,
+      "retiredBOnly": false
+    },
+    {
+      "path": "scripts/validation/compare-loudness-candidate.mjs",
+      "category": "PROTECTED_CORE",
+      "owner": "Lead",
+      "decision": "Keep actual DSP/analysis/mastering/conversion/reference/session/Linked/recovery/history/host/validators/proofs/tests, including held local files. No deletion/silent contract changes.",
+      "githubSnapshots": {
+        "main": {
+          "blob": "7ce23f5f64c5314bb29a3187f52bef2eb9a3ac6a",
+          "bytes": 8583,
+          "mode": "100644"
+        },
+        "core_pr4": {
+          "blob": "7ce23f5f64c5314bb29a3187f52bef2eb9a3ac6a",
+          "bytes": 8583,
+          "mode": "100644"
+        },
+        "retired_B_pr5": {
+          "blob": "7ce23f5f64c5314bb29a3187f52bef2eb9a3ac6a",
+          "bytes": 8583,
+          "mode": "100644"
+        },
+        "merged_core_branch": {
+          "blob": "7ce23f5f64c5314bb29a3187f52bef2eb9a3ac6a",
+          "bytes": 8583,
+          "mode": "100644"
+        }
+      },
+      "localBefore": {
+        "sha256": "3c1638d7c1e2ea41b9d804b7c6f5f3bc53270113a6bf4dabb4c03cdb831456c2",
+        "bytes": 8583
+      },
+      "inActiveMain": true,
+      "retiredBOnly": false
+    },
+    {
+      "path": "scripts/validation/integrated-loudness-candidate.mjs",
+      "category": "PROTECTED_CORE",
+      "owner": "Lead",
+      "decision": "Keep actual DSP/analysis/mastering/conversion/reference/session/Linked/recovery/history/host/validators/proofs/tests, including held local files. No deletion/silent contract changes.",
+      "githubSnapshots": {
+        "main": {
+          "blob": "3f5e0122109359d4bf9fa89c48fad5c710edefe2",
+          "bytes": 6991,
+          "mode": "100644"
+        },
+        "core_pr4": {
+          "blob": "3f5e0122109359d4bf9fa89c48fad5c710edefe2",
+          "bytes": 6991,
+          "mode": "100644"
+        },
+        "retired_B_pr5": {
+          "blob": "3f5e0122109359d4bf9fa89c48fad5c710edefe2",
+          "bytes": 6991,
+          "mode": "100644"
+        },
+        "merged_core_branch": {
+          "blob": "3f5e0122109359d4bf9fa89c48fad5c710edefe2",
+          "bytes": 6991,
+          "mode": "100644"
+        }
+      },
+      "localBefore": {
+        "sha256": "9990cc5da2f18c7c5d6def10f3a1b135f258872e5aceb73d669526cf06a46dc4",
+        "bytes": 6991
+      },
+      "inActiveMain": true,
+      "retiredBOnly": false
+    },
+    {
+      "path": "scripts/validation/libebur128-reference.c",
+      "category": "PROTECTED_CORE",
+      "owner": "Lead",
+      "decision": "Keep actual DSP/analysis/mastering/conversion/reference/session/Linked/recovery/history/host/validators/proofs/tests, including held local files. No deletion/silent contract changes.",
+      "githubSnapshots": {
+        "main": {
+          "blob": "537245ff740707ae551913882f4bfdd2f00ecd7b",
+          "bytes": 5805,
+          "mode": "100644"
+        },
+        "core_pr4": {
+          "blob": "537245ff740707ae551913882f4bfdd2f00ecd7b",
+          "bytes": 5805,
+          "mode": "100644"
+        },
+        "retired_B_pr5": {
+          "blob": "537245ff740707ae551913882f4bfdd2f00ecd7b",
+          "bytes": 5805,
+          "mode": "100644"
+        },
+        "merged_core_branch": {
+          "blob": "537245ff740707ae551913882f4bfdd2f00ecd7b",
+          "bytes": 5805,
+          "mode": "100644"
+        }
+      },
+      "localBefore": {
+        "sha256": "46664ece59534b8122b5b5793a0e3b7bb2b109b3e30559626b352d3f41a175b5",
+        "bytes": 5805
+      },
+      "inActiveMain": true,
+      "retiredBOnly": false
+    },
+    {
+      "path": "scripts/validation/linked-media-recovery-probe.mjs",
+      "category": "PROTECTED_CORE",
+      "owner": "Lead",
+      "decision": "Keep actual DSP/analysis/mastering/conversion/reference/session/Linked/recovery/history/host/validators/proofs/tests, including held local files. No deletion/silent contract changes.",
+      "githubSnapshots": {
+        "core_pr4": {
+          "blob": "97208293aeeaa650199fbdddc57e4a64ae4b0282",
+          "bytes": 12547,
+          "mode": "100644"
+        }
+      },
+      "localBefore": {
+        "sha256": "8f5bf2c96e995a9f8d00c5405d833a4d489d214ffc909c20232a93062823891a",
+        "bytes": 12547
+      },
+      "inActiveMain": false,
+      "retiredBOnly": false
+    },
+    {
+      "path": "scripts/validation/offline-render-fixtures.mjs",
+      "category": "PROTECTED_CORE",
+      "owner": "Lead",
+      "decision": "Keep actual DSP/analysis/mastering/conversion/reference/session/Linked/recovery/history/host/validators/proofs/tests, including held local files. No deletion/silent contract changes.",
+      "githubSnapshots": {
+        "core_pr4": {
+          "blob": "21dbda61dc987511cea6fac7c3e47e47ba566723",
+          "bytes": 10285,
+          "mode": "100644"
+        }
+      },
+      "localBefore": {
+        "sha256": "96cfdd2ead3f543786cbd1782f7458229a6fc0c7f01f118edfabaa6124b9aaa8",
+        "bytes": 10285
+      },
+      "inActiveMain": false,
+      "retiredBOnly": false
+    },
+    {
+      "path": "scripts/validation/packaged-runtime-candidate/sessionRuntimeProbe.cjs",
+      "category": "PROTECTED_CORE",
+      "owner": "Lead",
+      "decision": "Keep actual DSP/analysis/mastering/conversion/reference/session/Linked/recovery/history/host/validators/proofs/tests, including held local files. No deletion/silent contract changes.",
+      "githubSnapshots": {},
+      "localBefore": {
+        "sha256": "37c699a4ef5a41c261ea25235e2ead91303e01d762bcafbbf2799eff02cf2a3d",
+        "bytes": 8896
+      },
+      "inActiveMain": false,
+      "retiredBOnly": false
+    },
+    {
+      "path": "scripts/validation/prepare-packaged-runtime-probe.mjs",
+      "category": "PROTECTED_CORE",
+      "owner": "Lead",
+      "decision": "Keep actual DSP/analysis/mastering/conversion/reference/session/Linked/recovery/history/host/validators/proofs/tests, including held local files. No deletion/silent contract changes.",
+      "githubSnapshots": {},
+      "localBefore": {
+        "sha256": "998217bf999166cbb326f33e384eb36aad79c3a8384e015ebab53c7b2cbe6d4c",
+        "bytes": 3053
+      },
+      "inActiveMain": false,
+      "retiredBOnly": false
+    },
+    {
+      "path": "scripts/validation/probe-sqlite-ownership.mjs",
+      "category": "PROTECTED_CORE",
+      "owner": "Lead",
+      "decision": "Keep actual DSP/analysis/mastering/conversion/reference/session/Linked/recovery/history/host/validators/proofs/tests, including held local files. No deletion/silent contract changes.",
+      "githubSnapshots": {},
+      "localBefore": {
+        "sha256": "c409dab07e1a5773c978e7ec7bc7337cd615ca39fb4ca6035df4d47dce2eff64",
+        "bytes": 6740
+      },
+      "inActiveMain": false,
+      "retiredBOnly": false
+    },
+    {
+      "path": "scripts/validation/run-linked-render-probe.mjs",
+      "category": "PROTECTED_CORE",
+      "owner": "Lead",
+      "decision": "Keep actual DSP/analysis/mastering/conversion/reference/session/Linked/recovery/history/host/validators/proofs/tests, including held local files. No deletion/silent contract changes.",
+      "githubSnapshots": {},
+      "localBefore": {
+        "sha256": "bb8388a8c6b9f3779e3670b3c37a25877a493445285b625154625b1307256287",
+        "bytes": 15069
+      },
+      "inActiveMain": false,
+      "retiredBOnly": false
+    },
+    {
+      "path": "scripts/validation/run-linked-session-integration.mjs",
+      "category": "PROTECTED_CORE",
+      "owner": "Lead",
+      "decision": "Keep actual DSP/analysis/mastering/conversion/reference/session/Linked/recovery/history/host/validators/proofs/tests, including held local files. No deletion/silent contract changes.",
+      "githubSnapshots": {},
+      "localBefore": {
+        "sha256": "ae7762c399be0e2d1cac90dc2fbf06eef1d596e11eee2f408f595229a7073efd",
+        "bytes": 14149
+      },
+      "inActiveMain": false,
+      "retiredBOnly": false
+    },
+    {
+      "path": "scripts/validation/run-metering-reference.mjs",
+      "category": "PROTECTED_CORE",
+      "owner": "Lead",
+      "decision": "Keep actual DSP/analysis/mastering/conversion/reference/session/Linked/recovery/history/host/validators/proofs/tests, including held local files. No deletion/silent contract changes.",
+      "githubSnapshots": {
+        "main": {
+          "blob": "af8f11d630a60e97cc4e990ca04f81ef3475c251",
+          "bytes": 14152,
+          "mode": "100644"
+        },
+        "core_pr4": {
+          "blob": "af8f11d630a60e97cc4e990ca04f81ef3475c251",
+          "bytes": 14152,
+          "mode": "100644"
+        },
+        "retired_B_pr5": {
+          "blob": "af8f11d630a60e97cc4e990ca04f81ef3475c251",
+          "bytes": 14152,
+          "mode": "100644"
+        },
+        "merged_core_branch": {
+          "blob": "af8f11d630a60e97cc4e990ca04f81ef3475c251",
+          "bytes": 14152,
+          "mode": "100644"
+        }
+      },
+      "localBefore": {
+        "sha256": "cde29646ac0d5c34cd9fff085e937ea32cf561e022bd2168cec451ea876e94df",
+        "bytes": 14152
+      },
+      "inActiveMain": true,
+      "retiredBOnly": false
+    },
+    {
+      "path": "scripts/validation/run-offline-render-probe.mjs",
+      "category": "PROTECTED_CORE",
+      "owner": "Lead",
+      "decision": "Keep actual DSP/analysis/mastering/conversion/reference/session/Linked/recovery/history/host/validators/proofs/tests, including held local files. No deletion/silent contract changes.",
+      "githubSnapshots": {
+        "core_pr4": {
+          "blob": "61b10bba8863148a717808088cfbc424804bcc7a",
+          "bytes": 9833,
+          "mode": "100644"
+        }
+      },
+      "localBefore": {
+        "sha256": "15332c9ad3df6a543ebb3515147c3380a36ad17db43f39f67ffab4bcb0840f77",
+        "bytes": 9833
+      },
+      "inActiveMain": false,
+      "retiredBOnly": false
+    },
+    {
+      "path": "scripts/validation/run-session-application-integration.mjs",
+      "category": "PROTECTED_CORE",
+      "owner": "Lead",
+      "decision": "Keep actual DSP/analysis/mastering/conversion/reference/session/Linked/recovery/history/host/validators/proofs/tests, including held local files. No deletion/silent contract changes.",
+      "githubSnapshots": {},
+      "localBefore": {
+        "sha256": "bd7f748dde3119615826c07b61c8428ae790501e44c7b66447831e51cc3ef899",
+        "bytes": 12025
+      },
+      "inActiveMain": false,
+      "retiredBOnly": false
+    },
+    {
+      "path": "scripts/validation/run-session-range-integration.mjs",
+      "category": "PROTECTED_CORE",
+      "owner": "Lead",
+      "decision": "Keep actual DSP/analysis/mastering/conversion/reference/session/Linked/recovery/history/host/validators/proofs/tests, including held local files. No deletion/silent contract changes.",
+      "githubSnapshots": {},
+      "localBefore": {
+        "sha256": "26a3b31545227299bab2be444f3b74613388296d9da6f8644c2df421ac2cad4e",
+        "bytes": 13732
+      },
+      "inActiveMain": false,
+      "retiredBOnly": false
+    },
+    {
+      "path": "scripts/validation/run-session-runtime-qualification.mjs",
+      "category": "PROTECTED_CORE",
+      "owner": "Lead",
+      "decision": "Keep actual DSP/analysis/mastering/conversion/reference/session/Linked/recovery/history/host/validators/proofs/tests, including held local files. No deletion/silent contract changes.",
+      "githubSnapshots": {},
+      "localBefore": {
+        "sha256": "ac6b32ebb4ff52fc44b6a0930ace8ae16bf5acabf09d854190959795fa2910b3",
+        "bytes": 22063
+      },
+      "inActiveMain": false,
+      "retiredBOnly": false
+    },
+    {
+      "path": "scripts/validation/session-runtime-contract.mjs",
+      "category": "PROTECTED_CORE",
+      "owner": "Lead",
+      "decision": "Keep actual DSP/analysis/mastering/conversion/reference/session/Linked/recovery/history/host/validators/proofs/tests, including held local files. No deletion/silent contract changes.",
+      "githubSnapshots": {},
+      "localBefore": {
+        "sha256": "9e986a833b053c80f43c9eae2e7735b026135022c3c7df431d74a2f873e01ae4",
+        "bytes": 7566
+      },
+      "inActiveMain": false,
+      "retiredBOnly": false
+    },
+    {
+      "path": "src/application/analysis/analysisService.js",
+      "category": "PROTECTED_CORE",
+      "owner": "Lead",
+      "decision": "Keep actual DSP/analysis/mastering/conversion/reference/session/Linked/recovery/history/host/validators/proofs/tests, including held local files. No deletion/silent contract changes.",
+      "githubSnapshots": {
+        "main": {
+          "blob": "cb5c6cd190b2d93260231ed411be57d7e40afcf3",
+          "bytes": 1693,
+          "mode": "100644"
+        },
+        "core_pr4": {
+          "blob": "cb5c6cd190b2d93260231ed411be57d7e40afcf3",
+          "bytes": 1693,
+          "mode": "100644"
+        },
+        "retired_B_pr5": {
+          "blob": "cb5c6cd190b2d93260231ed411be57d7e40afcf3",
+          "bytes": 1693,
+          "mode": "100644"
+        },
+        "merged_core_branch": {
+          "blob": "cb5c6cd190b2d93260231ed411be57d7e40afcf3",
+          "bytes": 1693,
+          "mode": "100644"
+        }
+      },
+      "localBefore": {
+        "sha256": "f551cfe6cfc5f905c3416f1bbdb308a49c28b73a930d34ae2dfaa86516ab7a58",
+        "bytes": 1693
+      },
+      "inActiveMain": true,
+      "retiredBOnly": false
+    },
+    {
+      "path": "src/application/linkedSessions/linkedUpdateService.js",
+      "category": "PROTECTED_CORE",
+      "owner": "Lead",
+      "decision": "Keep actual DSP/analysis/mastering/conversion/reference/session/Linked/recovery/history/host/validators/proofs/tests, including held local files. No deletion/silent contract changes.",
+      "githubSnapshots": {},
+      "localBefore": {
+        "sha256": "b5dd973c42665d2af57f9fe7d017af9558aa96404893eb009a8c2d273de461aa",
+        "bytes": 16080
+      },
+      "inActiveMain": false,
+      "retiredBOnly": false
+    },
+    {
+      "path": "src/application/sessions/sessionApplication.js",
+      "category": "PROTECTED_CORE",
+      "owner": "Lead",
+      "decision": "Keep actual DSP/analysis/mastering/conversion/reference/session/Linked/recovery/history/host/validators/proofs/tests, including held local files. No deletion/silent contract changes.",
+      "githubSnapshots": {},
+      "localBefore": {
+        "sha256": "8203301168cf44ec9650be0662bc8120661071b1eba1c6789ccd5cf5771341e7",
+        "bytes": 20575
+      },
+      "inActiveMain": false,
+      "retiredBOnly": false
+    },
+    {
+      "path": "src/application/sessions/sessionWireContract.js",
+      "category": "PROTECTED_CORE",
+      "owner": "Lead",
+      "decision": "Keep actual DSP/analysis/mastering/conversion/reference/session/Linked/recovery/history/host/validators/proofs/tests, including held local files. No deletion/silent contract changes.",
+      "githubSnapshots": {},
+      "localBefore": {
+        "sha256": "e97c65142f3734d02a0e64ed058fbba22c450dcd15a9a3c6cc233ab6432b0168",
+        "bytes": 6452
+      },
+      "inActiveMain": false,
+      "retiredBOnly": false
+    },
+    {
+      "path": "src/assets/fonts/README.md",
+      "category": "P_REMOVE_ASSET",
+      "owner": "P",
+      "decision": "Remove old binaries/style/manifest/notices and favicon with all active references; remove a license only with all corresponding shipped font bytes; never reuse as new-design foundation.",
+      "githubSnapshots": {
+        "main": {
+          "blob": "67653357b093a3b1027cb559c742eed72628d99c",
+          "bytes": 4742,
+          "mode": "100644"
+        },
+        "core_pr4": {
+          "blob": "67653357b093a3b1027cb559c742eed72628d99c",
+          "bytes": 4742,
+          "mode": "100644"
+        },
+        "retired_B_pr5": {
+          "blob": "06d8cad16daf3bb42a0729e933e3148009b298ad",
+          "bytes": 5530,
+          "mode": "100644"
+        },
+        "merged_core_branch": {
+          "blob": "67653357b093a3b1027cb559c742eed72628d99c",
+          "bytes": 4742,
+          "mode": "100644"
+        }
+      },
+      "localBefore": {
+        "sha256": "bbef1208a6ff3a55d1aee73059bf174f650b998a49f0bb6d5de7203fdb6ece76",
+        "bytes": 4742
+      },
+      "inActiveMain": true,
+      "retiredBOnly": false
+    },
+    {
+      "path": "src/assets/fonts/fonts.css",
+      "category": "P_REMOVE_ASSET",
+      "owner": "P",
+      "decision": "Remove old binaries/style/manifest/notices and favicon with all active references; remove a license only with all corresponding shipped font bytes; never reuse as new-design foundation.",
+      "githubSnapshots": {
+        "retired_B_pr5": {
+          "blob": "bdc23e02a9bae9b4ae20a3fe3ce0e990b6748e8d",
+          "bytes": 4934,
+          "mode": "100644"
+        }
+      },
+      "localBefore": null,
+      "inActiveMain": false,
+      "retiredBOnly": true
+    },
+    {
+      "path": "src/assets/fonts/manifest.json",
+      "category": "P_REMOVE_ASSET",
+      "owner": "P",
+      "decision": "Remove old binaries/style/manifest/notices and favicon with all active references; remove a license only with all corresponding shipped font bytes; never reuse as new-design foundation.",
+      "githubSnapshots": {
+        "main": {
+          "blob": "5a7e16eef60c3b5bed3e5eae2dd59d4ae7c57b36",
+          "bytes": 4575,
+          "mode": "100644"
+        },
+        "core_pr4": {
+          "blob": "5a7e16eef60c3b5bed3e5eae2dd59d4ae7c57b36",
+          "bytes": 4575,
+          "mode": "100644"
+        },
+        "retired_B_pr5": {
+          "blob": "d1a35c9afcf54fe50cee69fb30442770c2bcad04",
+          "bytes": 5743,
+          "mode": "100644"
+        },
+        "merged_core_branch": {
+          "blob": "5a7e16eef60c3b5bed3e5eae2dd59d4ae7c57b36",
+          "bytes": 4575,
+          "mode": "100644"
+        }
+      },
+      "localBefore": {
+        "sha256": "93ad81b2ccdd594e1066ca9329c96af101cf2745abe5c395b3f8cfc0e724e8c5",
+        "bytes": 4575
+      },
+      "inActiveMain": true,
+      "retiredBOnly": false
+    },
+    {
+      "path": "src/assets/fonts/notices.js",
+      "category": "P_REMOVE_ASSET",
+      "owner": "P",
+      "decision": "Remove old binaries/style/manifest/notices and favicon with all active references; remove a license only with all corresponding shipped font bytes; never reuse as new-design foundation.",
+      "githubSnapshots": {
+        "retired_B_pr5": {
+          "blob": "6b1c849faf04c42893d354443c65653442d47fe9",
+          "bytes": 610,
+          "mode": "100644"
+        }
+      },
+      "localBefore": null,
+      "inActiveMain": false,
+      "retiredBOnly": true
+    },
+    {
+      "path": "src/assets/fonts/orbitron-OFL.txt",
+      "category": "P_REMOVE_ASSET",
+      "owner": "P",
+      "decision": "Remove old binaries/style/manifest/notices and favicon with all active references; remove a license only with all corresponding shipped font bytes; never reuse as new-design foundation.",
+      "githubSnapshots": {
+        "main": {
+          "blob": "2919e8f94d76ee21980551305ae53e0e2728854f",
+          "bytes": 4388,
+          "mode": "100644"
+        },
+        "core_pr4": {
+          "blob": "2919e8f94d76ee21980551305ae53e0e2728854f",
+          "bytes": 4388,
+          "mode": "100644"
+        },
+        "retired_B_pr5": {
+          "blob": "2919e8f94d76ee21980551305ae53e0e2728854f",
+          "bytes": 4388,
+          "mode": "100644"
+        },
+        "merged_core_branch": {
+          "blob": "2919e8f94d76ee21980551305ae53e0e2728854f",
+          "bytes": 4388,
+          "mode": "100644"
+        }
+      },
+      "localBefore": {
+        "sha256": "075b0137b7a19be521031442001478342ebafc1923f01092b8dc51afc4341041",
+        "bytes": 4388
+      },
+      "inActiveMain": true,
+      "retiredBOnly": false
+    },
+    {
+      "path": "src/assets/fonts/orbitron-latin-wght-normal.woff2",
+      "category": "P_REMOVE_ASSET",
+      "owner": "P",
+      "decision": "Remove old binaries/style/manifest/notices and favicon with all active references; remove a license only with all corresponding shipped font bytes; never reuse as new-design foundation.",
+      "githubSnapshots": {
+        "main": {
+          "blob": "39d9db55bdf48b839d360769987abb69ae44ccfb",
+          "bytes": 11800,
+          "mode": "100644"
+        },
+        "core_pr4": {
+          "blob": "39d9db55bdf48b839d360769987abb69ae44ccfb",
+          "bytes": 11800,
+          "mode": "100644"
+        },
+        "retired_B_pr5": {
+          "blob": "39d9db55bdf48b839d360769987abb69ae44ccfb",
+          "bytes": 11800,
+          "mode": "100644"
+        },
+        "merged_core_branch": {
+          "blob": "39d9db55bdf48b839d360769987abb69ae44ccfb",
+          "bytes": 11800,
+          "mode": "100644"
+        }
+      },
+      "localBefore": {
+        "sha256": "c25a9f9da5d9f3db1bf2a01474722dc9b377675b7bbab6d0dfda6902794fd1ed",
+        "bytes": 11800
+      },
+      "inActiveMain": true,
+      "retiredBOnly": false
+    },
+    {
+      "path": "src/assets/fonts/rajdhani-OFL.txt",
+      "category": "P_REMOVE_ASSET",
+      "owner": "P",
+      "decision": "Remove old binaries/style/manifest/notices and favicon with all active references; remove a license only with all corresponding shipped font bytes; never reuse as new-design foundation.",
+      "githubSnapshots": {
+        "main": {
+          "blob": "5ea4714c5effec6e13320cae02e3dd21565514e6",
+          "bytes": 4727,
+          "mode": "100644"
+        },
+        "core_pr4": {
+          "blob": "5ea4714c5effec6e13320cae02e3dd21565514e6",
+          "bytes": 4727,
+          "mode": "100644"
+        },
+        "retired_B_pr5": {
+          "blob": "5ea4714c5effec6e13320cae02e3dd21565514e6",
+          "bytes": 4727,
+          "mode": "100644"
+        },
+        "merged_core_branch": {
+          "blob": "5ea4714c5effec6e13320cae02e3dd21565514e6",
+          "bytes": 4727,
+          "mode": "100644"
+        }
+      },
+      "localBefore": {
+        "sha256": "078e327eb00525214cdce9780cfdf156141f137f1a095bec9798f470703d7d2d",
+        "bytes": 4727
+      },
+      "inActiveMain": true,
+      "retiredBOnly": false
+    },
+    {
+      "path": "src/assets/fonts/rajdhani-latin-400-normal.woff2",
+      "category": "P_REMOVE_ASSET",
+      "owner": "P",
+      "decision": "Remove old binaries/style/manifest/notices and favicon with all active references; remove a license only with all corresponding shipped font bytes; never reuse as new-design foundation.",
+      "githubSnapshots": {
+        "main": {
+          "blob": "7c24f390879166adca068e3364f9653b872e618e",
+          "bytes": 14976,
+          "mode": "100644"
+        },
+        "core_pr4": {
+          "blob": "7c24f390879166adca068e3364f9653b872e618e",
+          "bytes": 14976,
+          "mode": "100644"
+        },
+        "retired_B_pr5": {
+          "blob": "7c24f390879166adca068e3364f9653b872e618e",
+          "bytes": 14976,
+          "mode": "100644"
+        },
+        "merged_core_branch": {
+          "blob": "7c24f390879166adca068e3364f9653b872e618e",
+          "bytes": 14976,
+          "mode": "100644"
+        }
+      },
+      "localBefore": {
+        "sha256": "759a9000e47b028799d7a4ca602634a7ac7adf415775df070a335d18d9b66f38",
+        "bytes": 14976
+      },
+      "inActiveMain": true,
+      "retiredBOnly": false
+    },
+    {
+      "path": "src/assets/fonts/rajdhani-latin-500-normal.woff2",
+      "category": "P_REMOVE_ASSET",
+      "owner": "P",
+      "decision": "Remove old binaries/style/manifest/notices and favicon with all active references; remove a license only with all corresponding shipped font bytes; never reuse as new-design foundation.",
+      "githubSnapshots": {
+        "main": {
+          "blob": "50dd0c06f11cf24aa7fbedbc3287c08bc46acd6c",
+          "bytes": 15084,
+          "mode": "100644"
+        },
+        "core_pr4": {
+          "blob": "50dd0c06f11cf24aa7fbedbc3287c08bc46acd6c",
+          "bytes": 15084,
+          "mode": "100644"
+        },
+        "retired_B_pr5": {
+          "blob": "50dd0c06f11cf24aa7fbedbc3287c08bc46acd6c",
+          "bytes": 15084,
+          "mode": "100644"
+        },
+        "merged_core_branch": {
+          "blob": "50dd0c06f11cf24aa7fbedbc3287c08bc46acd6c",
+          "bytes": 15084,
+          "mode": "100644"
+        }
+      },
+      "localBefore": {
+        "sha256": "23afdb9b5b89b878fab04d80cc30bf41bb4f3f7e8be88e5f16a7cc7671cdb2dc",
+        "bytes": 15084
+      },
+      "inActiveMain": true,
+      "retiredBOnly": false
+    },
+    {
+      "path": "src/assets/fonts/rajdhani-latin-600-normal.woff2",
+      "category": "P_REMOVE_ASSET",
+      "owner": "P",
+      "decision": "Remove old binaries/style/manifest/notices and favicon with all active references; remove a license only with all corresponding shipped font bytes; never reuse as new-design foundation.",
+      "githubSnapshots": {
+        "main": {
+          "blob": "bc9a9464c8010fecc0781fad46e46b10d3e0b519",
+          "bytes": 15732,
+          "mode": "100644"
+        },
+        "core_pr4": {
+          "blob": "bc9a9464c8010fecc0781fad46e46b10d3e0b519",
+          "bytes": 15732,
+          "mode": "100644"
+        },
+        "retired_B_pr5": {
+          "blob": "bc9a9464c8010fecc0781fad46e46b10d3e0b519",
+          "bytes": 15732,
+          "mode": "100644"
+        },
+        "merged_core_branch": {
+          "blob": "bc9a9464c8010fecc0781fad46e46b10d3e0b519",
+          "bytes": 15732,
+          "mode": "100644"
+        }
+      },
+      "localBefore": {
+        "sha256": "433a7007e4747a02a790167a6efa2625855f013970ba49b9b739a5d3db8b2601",
+        "bytes": 15732
+      },
+      "inActiveMain": true,
+      "retiredBOnly": false
+    },
+    {
+      "path": "src/assets/fonts/rajdhani-latin-700-normal.woff2",
+      "category": "P_REMOVE_ASSET",
+      "owner": "P",
+      "decision": "Remove old binaries/style/manifest/notices and favicon with all active references; remove a license only with all corresponding shipped font bytes; never reuse as new-design foundation.",
+      "githubSnapshots": {
+        "main": {
+          "blob": "057c632a6a0fd9ffea8d8be5b7166b7e0886e81f",
+          "bytes": 15688,
+          "mode": "100644"
+        },
+        "core_pr4": {
+          "blob": "057c632a6a0fd9ffea8d8be5b7166b7e0886e81f",
+          "bytes": 15688,
+          "mode": "100644"
+        },
+        "retired_B_pr5": {
+          "blob": "057c632a6a0fd9ffea8d8be5b7166b7e0886e81f",
+          "bytes": 15688,
+          "mode": "100644"
+        },
+        "merged_core_branch": {
+          "blob": "057c632a6a0fd9ffea8d8be5b7166b7e0886e81f",
+          "bytes": 15688,
+          "mode": "100644"
+        }
+      },
+      "localBefore": {
+        "sha256": "5b7e4a6f97163c2636724d4de90304fc895653dcfe64c67a7a22f26331ca5c5f",
+        "bytes": 15688
+      },
+      "inActiveMain": true,
+      "retiredBOnly": false
+    },
+    {
+      "path": "src/assets/fonts/rajdhani-latin-ext-400-normal.woff2",
+      "category": "P_REMOVE_ASSET",
+      "owner": "P",
+      "decision": "Remove old binaries/style/manifest/notices and favicon with all active references; remove a license only with all corresponding shipped font bytes; never reuse as new-design foundation.",
+      "githubSnapshots": {
+        "main": {
+          "blob": "6241285bb009d282e10f8b39adf630655968f0d6",
+          "bytes": 12388,
+          "mode": "100644"
+        },
+        "core_pr4": {
+          "blob": "6241285bb009d282e10f8b39adf630655968f0d6",
+          "bytes": 12388,
+          "mode": "100644"
+        },
+        "retired_B_pr5": {
+          "blob": "6241285bb009d282e10f8b39adf630655968f0d6",
+          "bytes": 12388,
+          "mode": "100644"
+        },
+        "merged_core_branch": {
+          "blob": "6241285bb009d282e10f8b39adf630655968f0d6",
+          "bytes": 12388,
+          "mode": "100644"
+        }
+      },
+      "localBefore": {
+        "sha256": "90721cae01bf677b419b28fec9896e50923c9e956817b85f4b6ab1e5ad028a56",
+        "bytes": 12388
+      },
+      "inActiveMain": true,
+      "retiredBOnly": false
+    },
+    {
+      "path": "src/assets/fonts/rajdhani-latin-ext-500-normal.woff2",
+      "category": "P_REMOVE_ASSET",
+      "owner": "P",
+      "decision": "Remove old binaries/style/manifest/notices and favicon with all active references; remove a license only with all corresponding shipped font bytes; never reuse as new-design foundation.",
+      "githubSnapshots": {
+        "main": {
+          "blob": "434644822df17944f3f21e47acd0f1c2f9777cd8",
+          "bytes": 12380,
+          "mode": "100644"
+        },
+        "core_pr4": {
+          "blob": "434644822df17944f3f21e47acd0f1c2f9777cd8",
+          "bytes": 12380,
+          "mode": "100644"
+        },
+        "retired_B_pr5": {
+          "blob": "434644822df17944f3f21e47acd0f1c2f9777cd8",
+          "bytes": 12380,
+          "mode": "100644"
+        },
+        "merged_core_branch": {
+          "blob": "434644822df17944f3f21e47acd0f1c2f9777cd8",
+          "bytes": 12380,
+          "mode": "100644"
+        }
+      },
+      "localBefore": {
+        "sha256": "16fd373954f7569ad294444531caa2e7e5ffd1a6798c6df3f56b9faf691190c2",
+        "bytes": 12380
+      },
+      "inActiveMain": true,
+      "retiredBOnly": false
+    },
+    {
+      "path": "src/assets/fonts/rajdhani-latin-ext-600-normal.woff2",
+      "category": "P_REMOVE_ASSET",
+      "owner": "P",
+      "decision": "Remove old binaries/style/manifest/notices and favicon with all active references; remove a license only with all corresponding shipped font bytes; never reuse as new-design foundation.",
+      "githubSnapshots": {
+        "main": {
+          "blob": "0fe9e926e9a2230c374fe77a72f7aa56c7063402",
+          "bytes": 13124,
+          "mode": "100644"
+        },
+        "core_pr4": {
+          "blob": "0fe9e926e9a2230c374fe77a72f7aa56c7063402",
+          "bytes": 13124,
+          "mode": "100644"
+        },
+        "retired_B_pr5": {
+          "blob": "0fe9e926e9a2230c374fe77a72f7aa56c7063402",
+          "bytes": 13124,
+          "mode": "100644"
+        },
+        "merged_core_branch": {
+          "blob": "0fe9e926e9a2230c374fe77a72f7aa56c7063402",
+          "bytes": 13124,
+          "mode": "100644"
+        }
+      },
+      "localBefore": {
+        "sha256": "f57c2b379ba92460d25730ef1f7b8745afb4eadb401d652900f2059f8ee2f2b6",
+        "bytes": 13124
+      },
+      "inActiveMain": true,
+      "retiredBOnly": false
+    },
+    {
+      "path": "src/assets/fonts/rajdhani-latin-ext-700-normal.woff2",
+      "category": "P_REMOVE_ASSET",
+      "owner": "P",
+      "decision": "Remove old binaries/style/manifest/notices and favicon with all active references; remove a license only with all corresponding shipped font bytes; never reuse as new-design foundation.",
+      "githubSnapshots": {
+        "main": {
+          "blob": "a39de8e83c686ac1ec7cfd2335c352936b70762d",
+          "bytes": 12964,
+          "mode": "100644"
+        },
+        "core_pr4": {
+          "blob": "a39de8e83c686ac1ec7cfd2335c352936b70762d",
+          "bytes": 12964,
+          "mode": "100644"
+        },
+        "retired_B_pr5": {
+          "blob": "a39de8e83c686ac1ec7cfd2335c352936b70762d",
+          "bytes": 12964,
+          "mode": "100644"
+        },
+        "merged_core_branch": {
+          "blob": "a39de8e83c686ac1ec7cfd2335c352936b70762d",
+          "bytes": 12964,
+          "mode": "100644"
+        }
+      },
+      "localBefore": {
+        "sha256": "c6b9df58743ccca1236e9521720b135138309bc4149d5d027a9bd10183cc8ed5",
+        "bytes": 12964
+      },
+      "inActiveMain": true,
+      "retiredBOnly": false
+    },
+    {
+      "path": "src/assets/fonts/share-tech-mono-OFL.txt",
+      "category": "P_REMOVE_ASSET",
+      "owner": "P",
+      "decision": "Remove old binaries/style/manifest/notices and favicon with all active references; remove a license only with all corresponding shipped font bytes; never reuse as new-design foundation.",
+      "githubSnapshots": {
+        "main": {
+          "blob": "f10226355d76e55748ca5cf35cec45be3f7eed61",
+          "bytes": 4428,
+          "mode": "100644"
+        },
+        "core_pr4": {
+          "blob": "f10226355d76e55748ca5cf35cec45be3f7eed61",
+          "bytes": 4428,
+          "mode": "100644"
+        },
+        "retired_B_pr5": {
+          "blob": "f10226355d76e55748ca5cf35cec45be3f7eed61",
+          "bytes": 4428,
+          "mode": "100644"
+        },
+        "merged_core_branch": {
+          "blob": "f10226355d76e55748ca5cf35cec45be3f7eed61",
+          "bytes": 4428,
+          "mode": "100644"
+        }
+      },
+      "localBefore": {
+        "sha256": "9909bc951ab73dcf212a1675aab327ffafa853c2b8e8d11a066b1bcc57afeefb",
+        "bytes": 4428
+      },
+      "inActiveMain": true,
+      "retiredBOnly": false
+    },
+    {
+      "path": "src/assets/fonts/share-tech-mono-latin-400-normal.woff2",
+      "category": "P_REMOVE_ASSET",
+      "owner": "P",
+      "decision": "Remove old binaries/style/manifest/notices and favicon with all active references; remove a license only with all corresponding shipped font bytes; never reuse as new-design foundation.",
+      "githubSnapshots": {
+        "main": {
+          "blob": "f48075fe6b22df770490533f3d338f5cc959d65d",
+          "bytes": 13500,
+          "mode": "100644"
+        },
+        "core_pr4": {
+          "blob": "f48075fe6b22df770490533f3d338f5cc959d65d",
+          "bytes": 13500,
+          "mode": "100644"
+        },
+        "retired_B_pr5": {
+          "blob": "f48075fe6b22df770490533f3d338f5cc959d65d",
+          "bytes": 13500,
+          "mode": "100644"
+        },
+        "merged_core_branch": {
+          "blob": "f48075fe6b22df770490533f3d338f5cc959d65d",
+          "bytes": 13500,
+          "mode": "100644"
+        }
+      },
+      "localBefore": {
+        "sha256": "41e6b9f297f7d9a2df2aaa274092f76d2f72711a15ca455f7f4f4f92caf16b72",
+        "bytes": 13500
+      },
+      "inActiveMain": true,
+      "retiredBOnly": false
+    },
+    {
+      "path": "src/assets/fonts/sora-OFL.txt",
+      "category": "P_REMOVE_ASSET",
+      "owner": "P",
+      "decision": "Remove old binaries/style/manifest/notices and favicon with all active references; remove a license only with all corresponding shipped font bytes; never reuse as new-design foundation.",
+      "githubSnapshots": {
+        "retired_B_pr5": {
+          "blob": "915fb7706ae07366748cd32c4de64551efb970bb",
+          "bytes": 4382,
+          "mode": "100644"
+        }
+      },
+      "localBefore": null,
+      "inActiveMain": false,
+      "retiredBOnly": true
+    },
+    {
+      "path": "src/assets/fonts/sora-latin-ext-wght-normal.woff2",
+      "category": "P_REMOVE_ASSET",
+      "owner": "P",
+      "decision": "Remove old binaries/style/manifest/notices and favicon with all active references; remove a license only with all corresponding shipped font bytes; never reuse as new-design foundation.",
+      "githubSnapshots": {
+        "retired_B_pr5": {
+          "blob": "28516fd342a982db01f81cb9812e25a9f4c9a2e1",
+          "bytes": 15548,
+          "mode": "100644"
+        }
+      },
+      "localBefore": null,
+      "inActiveMain": false,
+      "retiredBOnly": true
+    },
+    {
+      "path": "src/assets/fonts/sora-latin-wght-normal.woff2",
+      "category": "P_REMOVE_ASSET",
+      "owner": "P",
+      "decision": "Remove old binaries/style/manifest/notices and favicon with all active references; remove a license only with all corresponding shipped font bytes; never reuse as new-design foundation.",
+      "githubSnapshots": {
+        "retired_B_pr5": {
+          "blob": "3dbf56eb49eadd3ab4c09b71b9158b042d812584",
+          "bytes": 33652,
+          "mode": "100644"
+        }
+      },
+      "localBefore": null,
+      "inActiveMain": false,
+      "retiredBOnly": true
+    },
+    {
+      "path": "src/audio/analyzer.js",
+      "category": "PROTECTED_CORE",
+      "owner": "Lead",
+      "decision": "Keep actual DSP/analysis/mastering/conversion/reference/session/Linked/recovery/history/host/validators/proofs/tests, including held local files. No deletion/silent contract changes.",
+      "githubSnapshots": {
+        "main": {
+          "blob": "8ff81d4fff836c40e25dbc407a1170fd5ef52d39",
+          "bytes": 25594,
+          "mode": "100644"
+        },
+        "core_pr4": {
+          "blob": "8ff81d4fff836c40e25dbc407a1170fd5ef52d39",
+          "bytes": 25594,
+          "mode": "100644"
+        },
+        "retired_B_pr5": {
+          "blob": "8ff81d4fff836c40e25dbc407a1170fd5ef52d39",
+          "bytes": 25594,
+          "mode": "100644"
+        },
+        "merged_core_branch": {
+          "blob": "8ff81d4fff836c40e25dbc407a1170fd5ef52d39",
+          "bytes": 25594,
+          "mode": "100644"
+        },
+        "architecture_branch": {
+          "blob": "f40dc2d252c853bfe0326f7457cf4e83c8e07de4",
+          "bytes": 25045,
+          "mode": "100644"
+        }
+      },
+      "localBefore": {
+        "sha256": "acf41874d2ee7369c505d9f05f74d95e65097da425eb1b9ac5ee91dd911ed852",
+        "bytes": 25594
+      },
+      "inActiveMain": true,
+      "retiredBOnly": false
+    },
+    {
+      "path": "src/audio/dsp.js",
+      "category": "PROTECTED_CORE",
+      "owner": "Lead",
+      "decision": "Keep actual DSP/analysis/mastering/conversion/reference/session/Linked/recovery/history/host/validators/proofs/tests, including held local files. No deletion/silent contract changes.",
+      "githubSnapshots": {
+        "main": {
+          "blob": "16d90f935651ba75f503fee5f94acd2a8977ad37",
+          "bytes": 5853,
+          "mode": "100644"
+        },
+        "core_pr4": {
+          "blob": "16d90f935651ba75f503fee5f94acd2a8977ad37",
+          "bytes": 5853,
+          "mode": "100644"
+        },
+        "retired_B_pr5": {
+          "blob": "16d90f935651ba75f503fee5f94acd2a8977ad37",
+          "bytes": 5853,
+          "mode": "100644"
+        },
+        "merged_core_branch": {
+          "blob": "16d90f935651ba75f503fee5f94acd2a8977ad37",
+          "bytes": 5853,
+          "mode": "100644"
+        },
+        "architecture_branch": {
+          "blob": "16d90f935651ba75f503fee5f94acd2a8977ad37",
+          "bytes": 5853,
+          "mode": "100644"
+        }
+      },
+      "localBefore": {
+        "sha256": "cb2de9e3c5876bdcc3f34930549b385ee1e99d4ae5a53d8a0697f9321f88eddf",
+        "bytes": 5853
+      },
+      "inActiveMain": true,
+      "retiredBOnly": false
+    },
+    {
+      "path": "src/audio/genre.js",
+      "category": "PROTECTED_CORE",
+      "owner": "Lead",
+      "decision": "Keep actual DSP/analysis/mastering/conversion/reference/session/Linked/recovery/history/host/validators/proofs/tests, including held local files. No deletion/silent contract changes.",
+      "githubSnapshots": {
+        "main": {
+          "blob": "a065be37b77fce7be445df4aff98491dae131859",
+          "bytes": 14505,
+          "mode": "100644"
+        },
+        "core_pr4": {
+          "blob": "a065be37b77fce7be445df4aff98491dae131859",
+          "bytes": 14505,
+          "mode": "100644"
+        },
+        "retired_B_pr5": {
+          "blob": "a065be37b77fce7be445df4aff98491dae131859",
+          "bytes": 14505,
+          "mode": "100644"
+        },
+        "merged_core_branch": {
+          "blob": "a065be37b77fce7be445df4aff98491dae131859",
+          "bytes": 14505,
+          "mode": "100644"
+        },
+        "architecture_branch": {
+          "blob": "a065be37b77fce7be445df4aff98491dae131859",
+          "bytes": 14505,
+          "mode": "100644"
+        }
+      },
+      "localBefore": {
+        "sha256": "9843d80d40a8d7e69c7a3af328f380032fae260d0cecca64d436207283b8c8fb",
+        "bytes": 14505
+      },
+      "inActiveMain": true,
+      "retiredBOnly": false
+    },
+    {
+      "path": "src/audio/linkedSessions/pcm.js",
+      "category": "PROTECTED_CORE",
+      "owner": "Lead",
+      "decision": "Keep actual DSP/analysis/mastering/conversion/reference/session/Linked/recovery/history/host/validators/proofs/tests, including held local files. No deletion/silent contract changes.",
+      "githubSnapshots": {},
+      "localBefore": {
+        "sha256": "dfcc590572128778ebf2beec9d0392f5ef24028218f672783df80f41c28afa9b",
+        "bytes": 2136
+      },
+      "inActiveMain": false,
+      "retiredBOnly": false
+    },
+    {
+      "path": "src/audio/linkedSessions/renderLinkedDestination.js",
+      "category": "PROTECTED_CORE",
+      "owner": "Lead",
+      "decision": "Keep actual DSP/analysis/mastering/conversion/reference/session/Linked/recovery/history/host/validators/proofs/tests, including held local files. No deletion/silent contract changes.",
+      "githubSnapshots": {},
+      "localBefore": {
+        "sha256": "207359dbd1352bbc72badc07c7f8b1ba2716bb1b2e00fe7aed070bd541946ddc",
+        "bytes": 3804
+      },
+      "inActiveMain": false,
+      "retiredBOnly": false
+    },
+    {
+      "path": "src/audio/linkedSessions/renderSelection.js",
+      "category": "PROTECTED_CORE",
+      "owner": "Lead",
+      "decision": "Keep actual DSP/analysis/mastering/conversion/reference/session/Linked/recovery/history/host/validators/proofs/tests, including held local files. No deletion/silent contract changes.",
+      "githubSnapshots": {},
+      "localBefore": {
+        "sha256": "388978a3d255b1050d0db51164b241e27c2d0e1083ce97790782e651ed358cc0",
+        "bytes": 3446
+      },
+      "inActiveMain": false,
+      "retiredBOnly": false
+    },
+    {
+      "path": "src/audio/processor.js",
+      "category": "PROTECTED_CORE",
+      "owner": "Lead",
+      "decision": "Keep actual DSP/analysis/mastering/conversion/reference/session/Linked/recovery/history/host/validators/proofs/tests, including held local files. No deletion/silent contract changes.",
+      "githubSnapshots": {
+        "main": {
+          "blob": "c476c4684979a9cd60f9484cb4d11b4daaf41121",
+          "bytes": 9108,
+          "mode": "100644"
+        },
+        "core_pr4": {
+          "blob": "c476c4684979a9cd60f9484cb4d11b4daaf41121",
+          "bytes": 9108,
+          "mode": "100644"
+        },
+        "retired_B_pr5": {
+          "blob": "c476c4684979a9cd60f9484cb4d11b4daaf41121",
+          "bytes": 9108,
+          "mode": "100644"
+        },
+        "merged_core_branch": {
+          "blob": "c476c4684979a9cd60f9484cb4d11b4daaf41121",
+          "bytes": 9108,
+          "mode": "100644"
+        },
+        "architecture_branch": {
+          "blob": "c476c4684979a9cd60f9484cb4d11b4daaf41121",
+          "bytes": 9108,
+          "mode": "100644"
+        }
+      },
+      "localBefore": {
+        "sha256": "9fd18913dc7961d954d4a886b279b40943fc6e273c12b1fbaebd65aeb76780ac",
+        "bytes": 9108
+      },
+      "inActiveMain": true,
+      "retiredBOnly": false
+    },
+    {
+      "path": "src/audio/reference.js",
+      "category": "PROTECTED_CORE",
+      "owner": "Lead",
+      "decision": "Keep actual DSP/analysis/mastering/conversion/reference/session/Linked/recovery/history/host/validators/proofs/tests, including held local files. No deletion/silent contract changes.",
+      "githubSnapshots": {
+        "main": {
+          "blob": "2385bf97f5a02461a251f37bfffcb17a12544394",
+          "bytes": 8386,
+          "mode": "100644"
+        },
+        "core_pr4": {
+          "blob": "2385bf97f5a02461a251f37bfffcb17a12544394",
+          "bytes": 8386,
+          "mode": "100644"
+        },
+        "retired_B_pr5": {
+          "blob": "2385bf97f5a02461a251f37bfffcb17a12544394",
+          "bytes": 8386,
+          "mode": "100644"
+        },
+        "merged_core_branch": {
+          "blob": "2385bf97f5a02461a251f37bfffcb17a12544394",
+          "bytes": 8386,
+          "mode": "100644"
+        },
+        "architecture_branch": {
+          "blob": "2385bf97f5a02461a251f37bfffcb17a12544394",
+          "bytes": 8386,
+          "mode": "100644"
+        }
+      },
+      "localBefore": {
+        "sha256": "ec19eff4a131df47fdc75389c30d2368d9cfc363a9fe1199c83347d9059f87d1",
+        "bytes": 8386
+      },
+      "inActiveMain": true,
+      "retiredBOnly": false
+    },
+    {
+      "path": "src/domain/linkedSessions/linkedSessionContract.js",
+      "category": "PROTECTED_CORE",
+      "owner": "Lead",
+      "decision": "Keep actual DSP/analysis/mastering/conversion/reference/session/Linked/recovery/history/host/validators/proofs/tests, including held local files. No deletion/silent contract changes.",
+      "githubSnapshots": {},
+      "localBefore": {
+        "sha256": "a74451b4795f6eba630536c438eb6b6af14583821b802704953ee266b964aa32",
+        "bytes": 6734
+      },
+      "inActiveMain": false,
+      "retiredBOnly": false
+    },
+    {
+      "path": "src/domain/linkedSessions/renderProfiles.js",
+      "category": "PROTECTED_CORE",
+      "owner": "Lead",
+      "decision": "Keep actual DSP/analysis/mastering/conversion/reference/session/Linked/recovery/history/host/validators/proofs/tests, including held local files. No deletion/silent contract changes.",
+      "githubSnapshots": {},
+      "localBefore": {
+        "sha256": "5c5691ef119e9f7fd44723c07597f9e5e767d00ad492f66f7f8b419eeb5cedac",
+        "bytes": 1680
+      },
+      "inActiveMain": false,
+      "retiredBOnly": false
+    },
+    {
+      "path": "src/domain/processors/buildProcessingPlan.js",
+      "category": "PROTECTED_CORE",
+      "owner": "Lead",
+      "decision": "Keep actual DSP/analysis/mastering/conversion/reference/session/Linked/recovery/history/host/validators/proofs/tests, including held local files. No deletion/silent contract changes.",
+      "githubSnapshots": {
+        "main": {
+          "blob": "8a61783abc76d623160921b4942afb4a6b7e36e0",
+          "bytes": 2557,
+          "mode": "100644"
+        },
+        "core_pr4": {
+          "blob": "8a61783abc76d623160921b4942afb4a6b7e36e0",
+          "bytes": 2557,
+          "mode": "100644"
+        },
+        "retired_B_pr5": {
+          "blob": "8a61783abc76d623160921b4942afb4a6b7e36e0",
+          "bytes": 2557,
+          "mode": "100644"
+        },
+        "merged_core_branch": {
+          "blob": "8a61783abc76d623160921b4942afb4a6b7e36e0",
+          "bytes": 2557,
+          "mode": "100644"
+        }
+      },
+      "localBefore": {
+        "sha256": "3f86340850eb80a8fa9f10b1ea136649f0db836745ee215e65c7a3aa310af856",
+        "bytes": 2557
+      },
+      "inActiveMain": true,
+      "retiredBOnly": false
+    },
+    {
+      "path": "src/infrastructure/linkedSessions/generationStore.js",
+      "category": "PROTECTED_CORE",
+      "owner": "Lead",
+      "decision": "Keep actual DSP/analysis/mastering/conversion/reference/session/Linked/recovery/history/host/validators/proofs/tests, including held local files. No deletion/silent contract changes.",
+      "githubSnapshots": {},
+      "localBefore": {
+        "sha256": "dfa25ad4af78e29143c5666c6c1537c59d998d39bf1c1f38d6195bd8760d729a",
+        "bytes": 28633
+      },
+      "inActiveMain": false,
+      "retiredBOnly": false
+    },
+    {
+      "path": "src/infrastructure/linkedSessions/linuxWriterLock.js",
+      "category": "PROTECTED_CORE",
+      "owner": "Lead",
+      "decision": "Keep actual DSP/analysis/mastering/conversion/reference/session/Linked/recovery/history/host/validators/proofs/tests, including held local files. No deletion/silent contract changes.",
+      "githubSnapshots": {},
+      "localBefore": {
+        "sha256": "3e9bbd8f3002df9b33639c345c371fdfaeb5d0136395e971b20ece9bb6c723d9",
+        "bytes": 2361
+      },
+      "inActiveMain": false,
+      "retiredBOnly": false
+    },
+    {
+      "path": "src/main.js",
+      "category": "SHARED_SPLIT",
+      "owner": "Lead + P",
+      "decision": "Do not delete wholesale: preserve/extract real controller state/audio/import/reference/crop/analysis/processing/export/reset/update subscription; P replaces presentation only after reviewed split.",
+      "githubSnapshots": {
+        "main": {
+          "blob": "9f1a2b382244da87cdd65e7c44411ceb102b9f12",
+          "bytes": 80599,
+          "mode": "100644"
+        },
+        "core_pr4": {
+          "blob": "9f1a2b382244da87cdd65e7c44411ceb102b9f12",
+          "bytes": 80599,
+          "mode": "100644"
+        },
+        "retired_B_pr5": {
+          "blob": "b3ae40e947e454f76e3d39481a11797e9fc5c7c0",
+          "bytes": 73176,
+          "mode": "100644"
+        },
+        "merged_core_branch": {
+          "blob": "9f1a2b382244da87cdd65e7c44411ceb102b9f12",
+          "bytes": 80599,
+          "mode": "100644"
+        },
+        "architecture_branch": {
+          "blob": "76345d30fe442062920c207bb4c66d01732dc5f7",
+          "bytes": 81160,
+          "mode": "100644"
+        }
+      },
+      "localBefore": {
+        "sha256": "cb73be9e95b024006bccd295e6bad6b08953c60491be08eeb68f644123dc1b6f",
+        "bytes": 80599
+      },
+      "inActiveMain": true,
+      "retiredBOnly": false
+    },
+    {
+      "path": "src/orbit/orbitKeys.js",
+      "category": "P_REMOVE_PRESENTATION",
+      "owner": "P",
+      "decision": "Replace/delete entire old visual implementation after owned caller detachment; no classic/cosmic/Orbit hidden fallback. No engine ownership by path.",
+      "githubSnapshots": {
+        "retired_B_pr5": {
+          "blob": "2d4636f454a08a4866eeca16ed26c7339aaa0d7d",
+          "bytes": 1294,
+          "mode": "100644"
+        }
+      },
+      "localBefore": null,
+      "inActiveMain": false,
+      "retiredBOnly": true
+    },
+    {
+      "path": "src/orbit/orbitStage.js",
+      "category": "P_REMOVE_PRESENTATION",
+      "owner": "P",
+      "decision": "Replace/delete entire old visual implementation after owned caller detachment; no classic/cosmic/Orbit hidden fallback. No engine ownership by path.",
+      "githubSnapshots": {
+        "retired_B_pr5": {
+          "blob": "977f495e9f9f20c372487397b384fbdf20227d51",
+          "bytes": 17028,
+          "mode": "100644"
+        }
+      },
+      "localBefore": null,
+      "inActiveMain": false,
+      "retiredBOnly": true
+    },
+    {
+      "path": "src/orbit/orbitTextures.js",
+      "category": "P_REMOVE_PRESENTATION",
+      "owner": "P",
+      "decision": "Replace/delete entire old visual implementation after owned caller detachment; no classic/cosmic/Orbit hidden fallback. No engine ownership by path.",
+      "githubSnapshots": {
+        "retired_B_pr5": {
+          "blob": "332e4307121e12fc838639de08057ccc7a52d368",
+          "bytes": 3852,
+          "mode": "100644"
+        }
+      },
+      "localBefore": null,
+      "inActiveMain": false,
+      "retiredBOnly": true
+    },
+    {
+      "path": "src/scene.js",
+      "category": "P_REMOVE_PRESENTATION",
+      "owner": "P",
+      "decision": "Replace/delete entire old visual implementation after owned caller detachment; no classic/cosmic/Orbit hidden fallback. No engine ownership by path.",
+      "githubSnapshots": {
+        "main": {
+          "blob": "cca5dcd1ac97d4ed2105ad86cac2809e15fd9a43",
+          "bytes": 7371,
+          "mode": "100644"
+        },
+        "core_pr4": {
+          "blob": "cca5dcd1ac97d4ed2105ad86cac2809e15fd9a43",
+          "bytes": 7371,
+          "mode": "100644"
+        },
+        "retired_B_pr5": {
+          "blob": "226301085b06dcfeec27de084535e8fb9e8b22e9",
+          "bytes": 7520,
+          "mode": "100644"
+        },
+        "merged_core_branch": {
+          "blob": "cca5dcd1ac97d4ed2105ad86cac2809e15fd9a43",
+          "bytes": 7371,
+          "mode": "100644"
+        },
+        "architecture_branch": {
+          "blob": "cca5dcd1ac97d4ed2105ad86cac2809e15fd9a43",
+          "bytes": 7371,
+          "mode": "100644"
+        }
+      },
+      "localBefore": {
+        "sha256": "fb2ed8f5c3e9eadcd2c1bd3ddc96154f545971a614ae15160f88881a55d75b40",
+        "bytes": 7371
+      },
+      "inActiveMain": true,
+      "retiredBOnly": false
+    },
+    {
+      "path": "src/style.css",
+      "category": "P_REMOVE_PRESENTATION",
+      "owner": "P",
+      "decision": "Replace/delete entire old visual implementation after owned caller detachment; no classic/cosmic/Orbit hidden fallback. No engine ownership by path.",
+      "githubSnapshots": {
+        "main": {
+          "blob": "b4662b4a5b5a76f1e258175904b7e9c7bd589091",
+          "bytes": 38986,
+          "mode": "100644"
+        },
+        "core_pr4": {
+          "blob": "b4662b4a5b5a76f1e258175904b7e9c7bd589091",
+          "bytes": 38986,
+          "mode": "100644"
+        },
+        "retired_B_pr5": {
+          "blob": "69953be1311ca6dc57c57c26a539835e74498d48",
+          "bytes": 47057,
+          "mode": "100644"
+        },
+        "merged_core_branch": {
+          "blob": "b4662b4a5b5a76f1e258175904b7e9c7bd589091",
+          "bytes": 38986,
+          "mode": "100644"
+        },
+        "architecture_branch": {
+          "blob": "b4662b4a5b5a76f1e258175904b7e9c7bd589091",
+          "bytes": 38986,
+          "mode": "100644"
+        }
+      },
+      "localBefore": {
+        "sha256": "d82a0f93752bb54a1954127694f4ff24b670ec60e0fc3b3db0d17186af73f908",
+        "bytes": 38986
+      },
+      "inActiveMain": true,
+      "retiredBOnly": false
+    },
+    {
+      "path": "src/ui/draw.js",
+      "category": "P_REMOVE_PRESENTATION",
+      "owner": "P",
+      "decision": "Replace/delete entire old visual implementation after owned caller detachment; no classic/cosmic/Orbit hidden fallback. No engine ownership by path.",
+      "githubSnapshots": {
+        "main": {
+          "blob": "b83c37e89558477d0f9e5d09335860f1cd3ecb59",
+          "bytes": 5335,
+          "mode": "100644"
+        },
+        "core_pr4": {
+          "blob": "b83c37e89558477d0f9e5d09335860f1cd3ecb59",
+          "bytes": 5335,
+          "mode": "100644"
+        },
+        "retired_B_pr5": {
+          "blob": "dd44822a26525b9fe911931300ebdfe985eecb70",
+          "bytes": 5339,
+          "mode": "100644"
+        },
+        "merged_core_branch": {
+          "blob": "b83c37e89558477d0f9e5d09335860f1cd3ecb59",
+          "bytes": 5335,
+          "mode": "100644"
+        },
+        "architecture_branch": {
+          "blob": "b83c37e89558477d0f9e5d09335860f1cd3ecb59",
+          "bytes": 5335,
+          "mode": "100644"
+        }
+      },
+      "localBefore": {
+        "sha256": "dd7693d325b3a96aac9bb7dbba60b5f28448f2e57d7869e58d452a99d21c06e5",
+        "bytes": 5335
+      },
+      "inActiveMain": true,
+      "retiredBOnly": false
+    },
+    {
+      "path": "src/ui/presentation/cosmicEnvironment.js",
+      "category": "P_REMOVE_PRESENTATION",
+      "owner": "P",
+      "decision": "Replace/delete entire old visual implementation after owned caller detachment; no classic/cosmic/Orbit hidden fallback. No engine ownership by path.",
+      "githubSnapshots": {
+        "retired_B_pr5": {
+          "blob": "2407bdf3bcff3a3ec13137b443ca1dabdb2b7246",
+          "bytes": 2203,
+          "mode": "100644"
+        }
+      },
+      "localBefore": null,
+      "inActiveMain": false,
+      "retiredBOnly": true
+    },
+    {
+      "path": "src/ui/presentation/errorRegion.js",
+      "category": "P_REMOVE_PRESENTATION",
+      "owner": "P",
+      "decision": "Replace/delete entire old visual implementation after owned caller detachment; no classic/cosmic/Orbit hidden fallback. No engine ownership by path.",
+      "githubSnapshots": {
+        "retired_B_pr5": {
+          "blob": "00ab1fe69da7a1235cee3172953faf279fd9b575",
+          "bytes": 592,
+          "mode": "100644"
+        }
+      },
+      "localBefore": null,
+      "inActiveMain": false,
+      "retiredBOnly": true
+    },
+    {
+      "path": "src/ui/presentation/licenceDialog.js",
+      "category": "P_REMOVE_PRESENTATION",
+      "owner": "P",
+      "decision": "Replace/delete entire old visual implementation after owned caller detachment; no classic/cosmic/Orbit hidden fallback. No engine ownership by path.",
+      "githubSnapshots": {
+        "retired_B_pr5": {
+          "blob": "f735ef139bef5dc661b17203de2808fabf1aaf0b",
+          "bytes": 1557,
+          "mode": "100644"
+        }
+      },
+      "localBefore": null,
+      "inActiveMain": false,
+      "retiredBOnly": true
+    },
+    {
+      "path": "src/ui/presentation/shell/daw.js",
+      "category": "P_REMOVE_PRESENTATION",
+      "owner": "P",
+      "decision": "Replace/delete entire old visual implementation after owned caller detachment; no classic/cosmic/Orbit hidden fallback. No engine ownership by path.",
+      "githubSnapshots": {
+        "retired_B_pr5": {
+          "blob": "94251591f79df8615c1ad4119f314a3030f3e6ce",
+          "bytes": 5899,
+          "mode": "100644"
+        }
+      },
+      "localBefore": null,
+      "inActiveMain": false,
+      "retiredBOnly": true
+    },
+    {
+      "path": "src/ui/presentation/shell/header.js",
+      "category": "P_REMOVE_PRESENTATION",
+      "owner": "P",
+      "decision": "Replace/delete entire old visual implementation after owned caller detachment; no classic/cosmic/Orbit hidden fallback. No engine ownership by path.",
+      "githubSnapshots": {
+        "retired_B_pr5": {
+          "blob": "a748002932242b415c690bfeb5c61a430afb4575",
+          "bytes": 1777,
+          "mode": "100644"
+        }
+      },
+      "localBefore": null,
+      "inActiveMain": false,
+      "retiredBOnly": true
+    },
+    {
+      "path": "src/ui/presentation/shell/icons.js",
+      "category": "P_REMOVE_PRESENTATION",
+      "owner": "P",
+      "decision": "Replace/delete entire old visual implementation after owned caller detachment; no classic/cosmic/Orbit hidden fallback. No engine ownership by path.",
+      "githubSnapshots": {
+        "retired_B_pr5": {
+          "blob": "2463c1c7f9de54dc4b44ff02328b3e87bdeced11",
+          "bytes": 1522,
+          "mode": "100644"
+        }
+      },
+      "localBefore": null,
+      "inActiveMain": false,
+      "retiredBOnly": true
+    },
+    {
+      "path": "src/ui/presentation/shell/opening.js",
+      "category": "P_REMOVE_PRESENTATION",
+      "owner": "P",
+      "decision": "Replace/delete entire old visual implementation after owned caller detachment; no classic/cosmic/Orbit hidden fallback. No engine ownership by path.",
+      "githubSnapshots": {
+        "retired_B_pr5": {
+          "blob": "84869b94d721761710c91537599f001a7f83ba5f",
+          "bytes": 1829,
+          "mode": "100644"
+        }
+      },
+      "localBefore": null,
+      "inActiveMain": false,
+      "retiredBOnly": true
+    },
+    {
+      "path": "src/ui/presentation/shell/shell.css",
+      "category": "P_REMOVE_PRESENTATION",
+      "owner": "P",
+      "decision": "Replace/delete entire old visual implementation after owned caller detachment; no classic/cosmic/Orbit hidden fallback. No engine ownership by path.",
+      "githubSnapshots": {
+        "retired_B_pr5": {
+          "blob": "7388362c097937d06f33488322cd2c6ad29a7cd0",
+          "bytes": 9147,
+          "mode": "100644"
+        }
+      },
+      "localBefore": null,
+      "inActiveMain": false,
+      "retiredBOnly": true
+    },
+    {
+      "path": "src/ui/presentation/shell/shell.js",
+      "category": "P_REMOVE_PRESENTATION",
+      "owner": "P",
+      "decision": "Replace/delete entire old visual implementation after owned caller detachment; no classic/cosmic/Orbit hidden fallback. No engine ownership by path.",
+      "githubSnapshots": {
+        "retired_B_pr5": {
+          "blob": "d2109b4c506d8473963b2871629837072be35d5d",
+          "bytes": 1413,
+          "mode": "100644"
+        }
+      },
+      "localBefore": null,
+      "inActiveMain": false,
+      "retiredBOnly": true
+    },
+    {
+      "path": "src/ui/presentation/shell/studio.js",
+      "category": "P_REMOVE_PRESENTATION",
+      "owner": "P",
+      "decision": "Replace/delete entire old visual implementation after owned caller detachment; no classic/cosmic/Orbit hidden fallback. No engine ownership by path.",
+      "githubSnapshots": {
+        "retired_B_pr5": {
+          "blob": "97d44d8d1d21c4c8a6ba85e6310937f22a348c81",
+          "bytes": 10696,
+          "mode": "100644"
+        }
+      },
+      "localBefore": null,
+      "inActiveMain": false,
+      "retiredBOnly": true
+    },
+    {
+      "path": "src/ui/presentation/sylune/contextActions.js",
+      "category": "CONTRACT_REVIEW",
+      "owner": "Lead + P",
+      "decision": "Separate presentation reducers/prototypes from published SYLUNE DTO/validation coverage; no public-contract removal or weakened safety tests without exact approval.",
+      "githubSnapshots": {
+        "retired_B_pr5": {
+          "blob": "e4aafa32167f63eff70574d66573f9a947f8b0af",
+          "bytes": 7321,
+          "mode": "100644"
+        }
+      },
+      "localBefore": null,
+      "inActiveMain": false,
+      "retiredBOnly": true
+    },
+    {
+      "path": "src/ui/presentation/sylune/panel.js",
+      "category": "P_REMOVE_PRESENTATION",
+      "owner": "P",
+      "decision": "Replace/delete entire old visual implementation after owned caller detachment; no classic/cosmic/Orbit hidden fallback. No engine ownership by path.",
+      "githubSnapshots": {
+        "retired_B_pr5": {
+          "blob": "f2322a2c1ee0d22eb431e28e7ad5335a80b62590",
+          "bytes": 16477,
+          "mode": "100644"
+        }
+      },
+      "localBefore": null,
+      "inActiveMain": false,
+      "retiredBOnly": true
+    },
+    {
+      "path": "src/ui/presentation/universe/assets/manifest.json",
+      "category": "P_REMOVE_PRESENTATION",
+      "owner": "P",
+      "decision": "Replace/delete entire old visual implementation after owned caller detachment; no classic/cosmic/Orbit hidden fallback. No engine ownership by path.",
+      "githubSnapshots": {
+        "retired_B_pr5": {
+          "blob": "75d0d1eb779ac35c7b6fccea7cd788bb0884bb64",
+          "bytes": 949,
+          "mode": "100644"
+        }
+      },
+      "localBefore": null,
+      "inActiveMain": false,
+      "retiredBOnly": true
+    },
+    {
+      "path": "src/ui/presentation/universe/shaders.js",
+      "category": "P_REMOVE_PRESENTATION",
+      "owner": "P",
+      "decision": "Replace/delete entire old visual implementation after owned caller detachment; no classic/cosmic/Orbit hidden fallback. No engine ownership by path.",
+      "githubSnapshots": {
+        "retired_B_pr5": {
+          "blob": "06a076257da43e3356258297cd6a21923f61c1e5",
+          "bytes": 4283,
+          "mode": "100644"
+        }
+      },
+      "localBefore": null,
+      "inActiveMain": false,
+      "retiredBOnly": true
+    },
+    {
+      "path": "src/ui/presentation/universe/stage.js",
+      "category": "P_REMOVE_PRESENTATION",
+      "owner": "P",
+      "decision": "Replace/delete entire old visual implementation after owned caller detachment; no classic/cosmic/Orbit hidden fallback. No engine ownership by path.",
+      "githubSnapshots": {
+        "retired_B_pr5": {
+          "blob": "83ecbebc0f05fbf859ba84607b430c1506c4136d",
+          "bytes": 12269,
+          "mode": "100644"
+        }
+      },
+      "localBefore": null,
+      "inActiveMain": false,
+      "retiredBOnly": true
+    },
+    {
+      "path": "src/ui/styles/cosmic.css",
+      "category": "P_REMOVE_PRESENTATION",
+      "owner": "P",
+      "decision": "Replace/delete entire old visual implementation after owned caller detachment; no classic/cosmic/Orbit hidden fallback. No engine ownership by path.",
+      "githubSnapshots": {
+        "retired_B_pr5": {
+          "blob": "2b62f4f98e6cc814a6832cb6e6539783d0faaf69",
+          "bytes": 2903,
+          "mode": "100644"
+        }
+      },
+      "localBefore": null,
+      "inActiveMain": false,
+      "retiredBOnly": true
+    },
+    {
+      "path": "src/ui/styles/sylune.css",
+      "category": "P_REMOVE_PRESENTATION",
+      "owner": "P",
+      "decision": "Replace/delete entire old visual implementation after owned caller detachment; no classic/cosmic/Orbit hidden fallback. No engine ownership by path.",
+      "githubSnapshots": {
+        "retired_B_pr5": {
+          "blob": "411bb4754a307602362112f6fffef3d3fbd40a57",
+          "bytes": 5131,
+          "mode": "100644"
+        }
+      },
+      "localBefore": null,
+      "inActiveMain": false,
+      "retiredBOnly": true
+    },
+    {
+      "path": "tests/audio/analyzerRegression.test.js",
+      "category": "PROTECTED_CORE",
+      "owner": "Lead",
+      "decision": "Keep actual DSP/analysis/mastering/conversion/reference/session/Linked/recovery/history/host/validators/proofs/tests, including held local files. No deletion/silent contract changes.",
+      "githubSnapshots": {
+        "main": {
+          "blob": "b280de516e9e0f47fc0ecb5aeaca0e6f0db813e4",
+          "bytes": 13045,
+          "mode": "100644"
+        },
+        "core_pr4": {
+          "blob": "b280de516e9e0f47fc0ecb5aeaca0e6f0db813e4",
+          "bytes": 13045,
+          "mode": "100644"
+        },
+        "retired_B_pr5": {
+          "blob": "b280de516e9e0f47fc0ecb5aeaca0e6f0db813e4",
+          "bytes": 13045,
+          "mode": "100644"
+        },
+        "merged_core_branch": {
+          "blob": "b280de516e9e0f47fc0ecb5aeaca0e6f0db813e4",
+          "bytes": 13045,
+          "mode": "100644"
+        }
+      },
+      "localBefore": {
+        "sha256": "b07d6f829784c42f36d92b91fde391e5dd4a056663c6bd225622792f38fae7cd",
+        "bytes": 13045
+      },
+      "inActiveMain": true,
+      "retiredBOnly": false
+    },
+    {
+      "path": "tests/audio/integratedLoudnessCandidate.test.js",
+      "category": "PROTECTED_CORE",
+      "owner": "Lead",
+      "decision": "Keep actual DSP/analysis/mastering/conversion/reference/session/Linked/recovery/history/host/validators/proofs/tests, including held local files. No deletion/silent contract changes.",
+      "githubSnapshots": {
+        "main": {
+          "blob": "c27ddf9c468fe55a3be6eecfdcb42a3b5a979d23",
+          "bytes": 9724,
+          "mode": "100644"
+        },
+        "core_pr4": {
+          "blob": "c27ddf9c468fe55a3be6eecfdcb42a3b5a979d23",
+          "bytes": 9724,
+          "mode": "100644"
+        },
+        "retired_B_pr5": {
+          "blob": "c27ddf9c468fe55a3be6eecfdcb42a3b5a979d23",
+          "bytes": 9724,
+          "mode": "100644"
+        },
+        "merged_core_branch": {
+          "blob": "c27ddf9c468fe55a3be6eecfdcb42a3b5a979d23",
+          "bytes": 9724,
+          "mode": "100644"
+        }
+      },
+      "localBefore": {
+        "sha256": "9e8dc95e7e926d47988ecd18b8e278f9ca1a6f287f4098930e1456764efbcc26",
+        "bytes": 9724
+      },
+      "inActiveMain": true,
+      "retiredBOnly": false
+    },
+    {
+      "path": "tests/audio/linkedDestinationRender.test.js",
+      "category": "PROTECTED_CORE",
+      "owner": "Lead",
+      "decision": "Keep actual DSP/analysis/mastering/conversion/reference/session/Linked/recovery/history/host/validators/proofs/tests, including held local files. No deletion/silent contract changes.",
+      "githubSnapshots": {},
+      "localBefore": {
+        "sha256": "d758eda7d33de0429b3b165c0cd5663016d94554bc82559cee6df730877e2413",
+        "bytes": 1325
+      },
+      "inActiveMain": false,
+      "retiredBOnly": false
+    },
+    {
+      "path": "tests/audio/linkedSelectionRender.test.js",
+      "category": "PROTECTED_CORE",
+      "owner": "Lead",
+      "decision": "Keep actual DSP/analysis/mastering/conversion/reference/session/Linked/recovery/history/host/validators/proofs/tests, including held local files. No deletion/silent contract changes.",
+      "githubSnapshots": {},
+      "localBefore": {
+        "sha256": "4e53e7ec32cbaff0b2379fb70043b07776409eaf888afe298fa2ef73a1f6b743",
+        "bytes": 6910
+      },
+      "inActiveMain": false,
+      "retiredBOnly": false
+    },
+    {
+      "path": "tests/audio/offlineRenderFixtures.test.js",
+      "category": "PROTECTED_CORE",
+      "owner": "Lead",
+      "decision": "Keep actual DSP/analysis/mastering/conversion/reference/session/Linked/recovery/history/host/validators/proofs/tests, including held local files. No deletion/silent contract changes.",
+      "githubSnapshots": {
+        "core_pr4": {
+          "blob": "d4d3ffbeac285beca8dd0277fc3b87c329805c5a",
+          "bytes": 11586,
+          "mode": "100644"
+        }
+      },
+      "localBefore": {
+        "sha256": "38a922656d0dd7926dae34af84818184d94e1434e75b001bfaab13d1be74ceae",
+        "bytes": 11586
+      },
+      "inActiveMain": false,
+      "retiredBOnly": false
+    },
+    {
+      "path": "tests/fixtures/audioBuffers.js",
+      "category": "PROTECTED_CORE",
+      "owner": "Lead",
+      "decision": "Keep actual DSP/analysis/mastering/conversion/reference/session/Linked/recovery/history/host/validators/proofs/tests, including held local files. No deletion/silent contract changes.",
+      "githubSnapshots": {
+        "main": {
+          "blob": "490a8c42d4b5b4376a1f86eeb293bc0393525a7a",
+          "bytes": 1684,
+          "mode": "100644"
+        },
+        "core_pr4": {
+          "blob": "490a8c42d4b5b4376a1f86eeb293bc0393525a7a",
+          "bytes": 1684,
+          "mode": "100644"
+        },
+        "retired_B_pr5": {
+          "blob": "490a8c42d4b5b4376a1f86eeb293bc0393525a7a",
+          "bytes": 1684,
+          "mode": "100644"
+        },
+        "merged_core_branch": {
+          "blob": "490a8c42d4b5b4376a1f86eeb293bc0393525a7a",
+          "bytes": 1684,
+          "mode": "100644"
+        }
+      },
+      "localBefore": {
+        "sha256": "7d5c0c680ab7ce6aad199863702d2c1ec9c4f24d8053c6b2f34269927008f918",
+        "bytes": 1684
+      },
+      "inActiveMain": true,
+      "retiredBOnly": false
+    },
+    {
+      "path": "tests/fixtures/linkedRangeFixture.js",
+      "category": "PROTECTED_CORE",
+      "owner": "Lead",
+      "decision": "Keep actual DSP/analysis/mastering/conversion/reference/session/Linked/recovery/history/host/validators/proofs/tests, including held local files. No deletion/silent contract changes.",
+      "githubSnapshots": {},
+      "localBefore": {
+        "sha256": "bff54c769afc9393c02a941acb9b217d3044b2a06062e418f6415424aac9e3b1",
+        "bytes": 3241
+      },
+      "inActiveMain": false,
+      "retiredBOnly": false
+    },
+    {
+      "path": "tests/fixtures/linkedSessionStoreFixture.js",
+      "category": "PROTECTED_CORE",
+      "owner": "Lead",
+      "decision": "Keep actual DSP/analysis/mastering/conversion/reference/session/Linked/recovery/history/host/validators/proofs/tests, including held local files. No deletion/silent contract changes.",
+      "githubSnapshots": {},
+      "localBefore": {
+        "sha256": "61024a86084e785a958de484adbb0191d26b64dc6f31edfae2409ad3f2315ca6",
+        "bytes": 1487
+      },
+      "inActiveMain": false,
+      "retiredBOnly": false
+    },
+    {
+      "path": "tests/fixtures/linkedWriterProcess.mjs",
+      "category": "PROTECTED_CORE",
+      "owner": "Lead",
+      "decision": "Keep actual DSP/analysis/mastering/conversion/reference/session/Linked/recovery/history/host/validators/proofs/tests, including held local files. No deletion/silent contract changes.",
+      "githubSnapshots": {},
+      "localBefore": {
+        "sha256": "066f9c35bdc69a12a30399505e4a3aa4abc8238a8bd8b3063499d9859391ac88",
+        "bytes": 1019
+      },
+      "inActiveMain": false,
+      "retiredBOnly": false
+    },
+    {
+      "path": "tests/fixtures/meteringReferenceCases.js",
+      "category": "PROTECTED_CORE",
+      "owner": "Lead",
+      "decision": "Keep actual DSP/analysis/mastering/conversion/reference/session/Linked/recovery/history/host/validators/proofs/tests, including held local files. No deletion/silent contract changes.",
+      "githubSnapshots": {
+        "main": {
+          "blob": "d5d0aa6f3f39492561f21ecaf36b39f16fb7835e",
+          "bytes": 2825,
+          "mode": "100644"
+        },
+        "core_pr4": {
+          "blob": "d5d0aa6f3f39492561f21ecaf36b39f16fb7835e",
+          "bytes": 2825,
+          "mode": "100644"
+        },
+        "retired_B_pr5": {
+          "blob": "d5d0aa6f3f39492561f21ecaf36b39f16fb7835e",
+          "bytes": 2825,
+          "mode": "100644"
+        },
+        "merged_core_branch": {
+          "blob": "d5d0aa6f3f39492561f21ecaf36b39f16fb7835e",
+          "bytes": 2825,
+          "mode": "100644"
+        }
+      },
+      "localBefore": {
+        "sha256": "18e7e0f40f8e9b40485cd2281260ede89631be2c8510cee46b0de4ded73d63f4",
+        "bytes": 2825
+      },
+      "inActiveMain": true,
+      "retiredBOnly": false
+    },
+    {
+      "path": "tests/orbit/orbitKeys.test.js",
+      "category": "P_RETIRE_VISUAL_TEST",
+      "owner": "P",
+      "decision": "May retire obsolete layout/palette/scene assertions with removed UI; preserve/port behavioral accessibility/error/legal/contract coverage, do not weaken core tests.",
+      "githubSnapshots": {
+        "retired_B_pr5": {
+          "blob": "0e89ce7270dbe9a1bbde17f466d8ab67239d4e3f",
+          "bytes": 2414,
+          "mode": "100644"
+        }
+      },
+      "localBefore": null,
+      "inActiveMain": false,
+      "retiredBOnly": true
+    },
+    {
+      "path": "tests/orbit/orbitStage.test.js",
+      "category": "P_RETIRE_VISUAL_TEST",
+      "owner": "P",
+      "decision": "May retire obsolete layout/palette/scene assertions with removed UI; preserve/port behavioral accessibility/error/legal/contract coverage, do not weaken core tests.",
+      "githubSnapshots": {
+        "retired_B_pr5": {
+          "blob": "bee5701cdb821849cfdd515a4579a6c4e63f2ab9",
+          "bytes": 4271,
+          "mode": "100644"
+        }
+      },
+      "localBefore": null,
+      "inActiveMain": false,
+      "retiredBOnly": true
+    },
+    {
+      "path": "tests/ui/cosmicEnvironment.test.js",
+      "category": "P_RETIRE_VISUAL_TEST",
+      "owner": "P",
+      "decision": "May retire obsolete layout/palette/scene assertions with removed UI; preserve/port behavioral accessibility/error/legal/contract coverage, do not weaken core tests.",
+      "githubSnapshots": {
+        "retired_B_pr5": {
+          "blob": "796bc4c845de3f4919d50d437b2d0067d871b9bf",
+          "bytes": 4485,
+          "mode": "100644"
+        }
+      },
+      "localBefore": null,
+      "inActiveMain": false,
+      "retiredBOnly": true
+    },
+    {
+      "path": "tests/ui/orbitComposition.test.js",
+      "category": "P_RETIRE_VISUAL_TEST",
+      "owner": "P",
+      "decision": "May retire obsolete layout/palette/scene assertions with removed UI; preserve/port behavioral accessibility/error/legal/contract coverage, do not weaken core tests.",
+      "githubSnapshots": {
+        "retired_B_pr5": {
+          "blob": "4eedb4bffa7f766ae37d7d9f0218ce371543e7e2",
+          "bytes": 3001,
+          "mode": "100644"
+        }
+      },
+      "localBefore": null,
+      "inActiveMain": false,
+      "retiredBOnly": true
+    },
+    {
+      "path": "tests/ui/paletteStatic.test.js",
+      "category": "P_RETIRE_VISUAL_TEST",
+      "owner": "P",
+      "decision": "May retire obsolete layout/palette/scene assertions with removed UI; preserve/port behavioral accessibility/error/legal/contract coverage, do not weaken core tests.",
+      "githubSnapshots": {
+        "retired_B_pr5": {
+          "blob": "382a8e252ca9b97b96301ed9e233064942d1cdad",
+          "bytes": 4226,
+          "mode": "100644"
+        }
+      },
+      "localBefore": null,
+      "inActiveMain": false,
+      "retiredBOnly": true
+    },
+    {
+      "path": "tests/ui/presentation.test.js",
+      "category": "P_RETIRE_VISUAL_TEST",
+      "owner": "P",
+      "decision": "May retire obsolete layout/palette/scene assertions with removed UI; preserve/port behavioral accessibility/error/legal/contract coverage, do not weaken core tests.",
+      "githubSnapshots": {
+        "retired_B_pr5": {
+          "blob": "c0d2edd862d388a68bee826c7178593698ee93d2",
+          "bytes": 11019,
+          "mode": "100644"
+        }
+      },
+      "localBefore": null,
+      "inActiveMain": false,
+      "retiredBOnly": true
+    },
+    {
+      "path": "tests/ui/shell.test.js",
+      "category": "P_RETIRE_VISUAL_TEST",
+      "owner": "P",
+      "decision": "May retire obsolete layout/palette/scene assertions with removed UI; preserve/port behavioral accessibility/error/legal/contract coverage, do not weaken core tests.",
+      "githubSnapshots": {
+        "retired_B_pr5": {
+          "blob": "9164937cc711798e7077bf40377744cfa24df479",
+          "bytes": 4259,
+          "mode": "100644"
+        }
+      },
+      "localBefore": null,
+      "inActiveMain": false,
+      "retiredBOnly": true
+    },
+    {
+      "path": "tests/ui/shellSource.js",
+      "category": "P_RETIRE_VISUAL_TEST",
+      "owner": "P",
+      "decision": "May retire obsolete layout/palette/scene assertions with removed UI; preserve/port behavioral accessibility/error/legal/contract coverage, do not weaken core tests.",
+      "githubSnapshots": {
+        "retired_B_pr5": {
+          "blob": "d16217fe96ac07277b7502717d5ed31e793b29d9",
+          "bytes": 715,
+          "mode": "100644"
+        }
+      },
+      "localBefore": null,
+      "inActiveMain": false,
+      "retiredBOnly": true
+    },
+    {
+      "path": "tests/ui/sylunePresentation.test.js",
+      "category": "CONTRACT_REVIEW",
+      "owner": "Lead + P",
+      "decision": "Separate presentation reducers/prototypes from published SYLUNE DTO/validation coverage; no public-contract removal or weakened safety tests without exact approval.",
+      "githubSnapshots": {
+        "retired_B_pr5": {
+          "blob": "b79e80a4f31c46400ac622540e98f58a10176c74",
+          "bytes": 6186,
+          "mode": "100644"
+        }
+      },
+      "localBefore": null,
+      "inActiveMain": false,
+      "retiredBOnly": true
+    },
+    {
+      "path": "tests/ui/universeStage.test.js",
+      "category": "P_RETIRE_VISUAL_TEST",
+      "owner": "P",
+      "decision": "May retire obsolete layout/palette/scene assertions with removed UI; preserve/port behavioral accessibility/error/legal/contract coverage, do not weaken core tests.",
+      "githubSnapshots": {
+        "retired_B_pr5": {
+          "blob": "8a41017d7e520fe3b48b884b32d0462eff00b886",
+          "bytes": 4467,
+          "mode": "100644"
+        }
+      },
+      "localBefore": null,
+      "inActiveMain": false,
+      "retiredBOnly": true
+    },
+    {
+      "path": "tests/unit/analysisErrorFlow.test.js",
+      "category": "PROTECTED_SEAM_TEST",
+      "owner": "Lead",
+      "decision": "Nine real controller-boundary cases parse main.js today; explicitly migrate seam with unchanged success/failure/cleanup assertions before dropping controller markup.",
+      "githubSnapshots": {
+        "main": {
+          "blob": "37bbeb50abf76c2a0d775bbaa1d7e1668286d05f",
+          "bytes": 5749,
+          "mode": "100644"
+        },
+        "core_pr4": {
+          "blob": "37bbeb50abf76c2a0d775bbaa1d7e1668286d05f",
+          "bytes": 5749,
+          "mode": "100644"
+        },
+        "retired_B_pr5": {
+          "blob": "37bbeb50abf76c2a0d775bbaa1d7e1668286d05f",
+          "bytes": 5749,
+          "mode": "100644"
+        },
+        "merged_core_branch": {
+          "blob": "37bbeb50abf76c2a0d775bbaa1d7e1668286d05f",
+          "bytes": 5749,
+          "mode": "100644"
+        }
+      },
+      "localBefore": {
+        "sha256": "836ddca17b109faf8ca4d36cba40bf985728c42a0a353a69b2421c4660e69462",
+        "bytes": 5749
+      },
+      "inActiveMain": true,
+      "retiredBOnly": false
+    },
+    {
+      "path": "tests/unit/analysisService.test.js",
+      "category": "PROTECTED_CORE",
+      "owner": "Lead",
+      "decision": "Keep actual DSP/analysis/mastering/conversion/reference/session/Linked/recovery/history/host/validators/proofs/tests, including held local files. No deletion/silent contract changes.",
+      "githubSnapshots": {
+        "main": {
+          "blob": "70acf8c11ff56ea8d6c8cf28066c6ff6dfe152a2",
+          "bytes": 7203,
+          "mode": "100644"
+        },
+        "core_pr4": {
+          "blob": "70acf8c11ff56ea8d6c8cf28066c6ff6dfe152a2",
+          "bytes": 7203,
+          "mode": "100644"
+        },
+        "retired_B_pr5": {
+          "blob": "70acf8c11ff56ea8d6c8cf28066c6ff6dfe152a2",
+          "bytes": 7203,
+          "mode": "100644"
+        },
+        "merged_core_branch": {
+          "blob": "70acf8c11ff56ea8d6c8cf28066c6ff6dfe152a2",
+          "bytes": 7203,
+          "mode": "100644"
+        }
+      },
+      "localBefore": {
+        "sha256": "9afeae45206d30911882f38beec788f66b26cd45bf80398c5f75a58c746d9ad9",
+        "bytes": 7203
+      },
+      "inActiveMain": true,
+      "retiredBOnly": false
+    },
+    {
+      "path": "tests/unit/buildProcessingPlan.test.js",
+      "category": "PROTECTED_CORE",
+      "owner": "Lead",
+      "decision": "Keep actual DSP/analysis/mastering/conversion/reference/session/Linked/recovery/history/host/validators/proofs/tests, including held local files. No deletion/silent contract changes.",
+      "githubSnapshots": {
+        "main": {
+          "blob": "248ed33ce2acf72106218d6bceda53fa69e67d38",
+          "bytes": 8690,
+          "mode": "100644"
+        },
+        "core_pr4": {
+          "blob": "248ed33ce2acf72106218d6bceda53fa69e67d38",
+          "bytes": 8690,
+          "mode": "100644"
+        },
+        "retired_B_pr5": {
+          "blob": "248ed33ce2acf72106218d6bceda53fa69e67d38",
+          "bytes": 8690,
+          "mode": "100644"
+        },
+        "merged_core_branch": {
+          "blob": "248ed33ce2acf72106218d6bceda53fa69e67d38",
+          "bytes": 8690,
+          "mode": "100644"
+        }
+      },
+      "localBefore": {
+        "sha256": "c4e73fe0e77e296d02ddb4524786c7b6eebb616d01428a422f017ea22162874f",
+        "bytes": 8690
+      },
+      "inActiveMain": true,
+      "retiredBOnly": false
+    },
+    {
+      "path": "tests/unit/linkedGenerationRecovery.test.js",
+      "category": "PROTECTED_CORE",
+      "owner": "Lead",
+      "decision": "Keep actual DSP/analysis/mastering/conversion/reference/session/Linked/recovery/history/host/validators/proofs/tests, including held local files. No deletion/silent contract changes.",
+      "githubSnapshots": {},
+      "localBefore": {
+        "sha256": "c07c8fc8a3d32ca9b9b845cc1f4a77606e4b91d4937964ac3f6d03e2e3db3da0",
+        "bytes": 1071
+      },
+      "inActiveMain": false,
+      "retiredBOnly": false
+    },
+    {
+      "path": "tests/unit/linkedGenerationStore.test.js",
+      "category": "PROTECTED_CORE",
+      "owner": "Lead",
+      "decision": "Keep actual DSP/analysis/mastering/conversion/reference/session/Linked/recovery/history/host/validators/proofs/tests, including held local files. No deletion/silent contract changes.",
+      "githubSnapshots": {},
+      "localBefore": {
+        "sha256": "81a2b921f81821faefb84a43c6f6bddaf633e73b6c1d2b4e6d276a020ab92eb7",
+        "bytes": 12667
+      },
+      "inActiveMain": false,
+      "retiredBOnly": false
+    },
+    {
+      "path": "tests/unit/linkedMediaRecoveryProbe.test.js",
+      "category": "PROTECTED_CORE",
+      "owner": "Lead",
+      "decision": "Keep actual DSP/analysis/mastering/conversion/reference/session/Linked/recovery/history/host/validators/proofs/tests, including held local files. No deletion/silent contract changes.",
+      "githubSnapshots": {
+        "core_pr4": {
+          "blob": "f16836e2c39b77c44616530ab1deb3bd0e7a678d",
+          "bytes": 9066,
+          "mode": "100644"
+        }
+      },
+      "localBefore": {
+        "sha256": "fa992989df558b611c8decb7aa15027de4ed752e47f6bf97ca2cf2b86c17c044",
+        "bytes": 9066
+      },
+      "inActiveMain": false,
+      "retiredBOnly": false
+    },
+    {
+      "path": "tests/unit/linkedRangeProfile.test.js",
+      "category": "PROTECTED_CORE",
+      "owner": "Lead",
+      "decision": "Keep actual DSP/analysis/mastering/conversion/reference/session/Linked/recovery/history/host/validators/proofs/tests, including held local files. No deletion/silent contract changes.",
+      "githubSnapshots": {},
+      "localBefore": {
+        "sha256": "e360853d488fd70146eaad32a6b24d7d8ef8d0c469140d8899d0a206a958a1e5",
+        "bytes": 18598
+      },
+      "inActiveMain": false,
+      "retiredBOnly": false
+    },
+    {
+      "path": "tests/unit/linkedRenderedReview.test.js",
+      "category": "PROTECTED_CORE",
+      "owner": "Lead",
+      "decision": "Keep actual DSP/analysis/mastering/conversion/reference/session/Linked/recovery/history/host/validators/proofs/tests, including held local files. No deletion/silent contract changes.",
+      "githubSnapshots": {},
+      "localBefore": {
+        "sha256": "192f3e79a16b3c5d5ac92b0854dc2f940bd44157f279cf19ee6c21d8165bb02f",
+        "bytes": 11473
+      },
+      "inActiveMain": false,
+      "retiredBOnly": false
+    },
+    {
+      "path": "tests/unit/linkedSessionContract.test.js",
+      "category": "PROTECTED_CORE",
+      "owner": "Lead",
+      "decision": "Keep actual DSP/analysis/mastering/conversion/reference/session/Linked/recovery/history/host/validators/proofs/tests, including held local files. No deletion/silent contract changes.",
+      "githubSnapshots": {},
+      "localBefore": {
+        "sha256": "401d9cfe587605bbe758011b75c7f3df8e79dec89645996bc0ce24464630839f",
+        "bytes": 6617
+      },
+      "inActiveMain": false,
+      "retiredBOnly": false
+    },
+    {
+      "path": "tests/unit/linkedUpdateService.test.js",
+      "category": "PROTECTED_CORE",
+      "owner": "Lead",
+      "decision": "Keep actual DSP/analysis/mastering/conversion/reference/session/Linked/recovery/history/host/validators/proofs/tests, including held local files. No deletion/silent contract changes.",
+      "githubSnapshots": {},
+      "localBefore": {
+        "sha256": "90ac52303207513ddb2867ed35a2e559c84c5db1f05ecfa212dc6efe5006df8f",
+        "bytes": 12829
+      },
+      "inActiveMain": false,
+      "retiredBOnly": false
+    },
+    {
+      "path": "tests/unit/linkedWriterRecovery.test.js",
+      "category": "PROTECTED_CORE",
+      "owner": "Lead",
+      "decision": "Keep actual DSP/analysis/mastering/conversion/reference/session/Linked/recovery/history/host/validators/proofs/tests, including held local files. No deletion/silent contract changes.",
+      "githubSnapshots": {},
+      "localBefore": {
+        "sha256": "60018bea41269c894c845e8b8b1c6734fefbbdd5db282dd5ad44ba3180188a9e",
+        "bytes": 14483
+      },
+      "inActiveMain": false,
+      "retiredBOnly": false
+    },
+    {
+      "path": "tests/unit/packagedRuntimeCandidate.test.js",
+      "category": "PROTECTED_CORE",
+      "owner": "Lead",
+      "decision": "Keep actual DSP/analysis/mastering/conversion/reference/session/Linked/recovery/history/host/validators/proofs/tests, including held local files. No deletion/silent contract changes.",
+      "githubSnapshots": {},
+      "localBefore": {
+        "sha256": "246391a7b95c0f7b68543ebbe1bf49571ea86d25ff63263a50cce306adc8cc7d",
+        "bytes": 13759
+      },
+      "inActiveMain": false,
+      "retiredBOnly": false
+    },
+    {
+      "path": "tests/unit/sessionApplication.test.js",
+      "category": "PROTECTED_CORE",
+      "owner": "Lead",
+      "decision": "Keep actual DSP/analysis/mastering/conversion/reference/session/Linked/recovery/history/host/validators/proofs/tests, including held local files. No deletion/silent contract changes.",
+      "githubSnapshots": {},
+      "localBefore": {
+        "sha256": "002d8964809b956132222770dc56d5d5eac3014411f68ae20c8f5e8c5dcd8234",
+        "bytes": 18320
+      },
+      "inActiveMain": false,
+      "retiredBOnly": false
+    },
+    {
+      "path": "tests/unit/sessionRenderedReview.test.js",
+      "category": "PROTECTED_CORE",
+      "owner": "Lead",
+      "decision": "Keep actual DSP/analysis/mastering/conversion/reference/session/Linked/recovery/history/host/validators/proofs/tests, including held local files. No deletion/silent contract changes.",
+      "githubSnapshots": {},
+      "localBefore": {
+        "sha256": "b1486ddc994b1e1f9b7259a84daeffa606aba339f996df2fa0ab839b5d94a8d6",
+        "bytes": 17392
+      },
+      "inActiveMain": false,
+      "retiredBOnly": false
+    },
+    {
+      "path": "tests/unit/sessionRuntimeQualification.test.js",
+      "category": "PROTECTED_CORE",
+      "owner": "Lead",
+      "decision": "Keep actual DSP/analysis/mastering/conversion/reference/session/Linked/recovery/history/host/validators/proofs/tests, including held local files. No deletion/silent contract changes.",
+      "githubSnapshots": {},
+      "localBefore": {
+        "sha256": "0a20dbf350587bd2ab717673c7259cf67ed040a520612434e2d3a8deb5bc9c5f",
+        "bytes": 12391
+      },
+      "inActiveMain": false,
+      "retiredBOnly": false
+    },
+    {
+      "path": "tests/unit/sessionWireContract.test.js",
+      "category": "PROTECTED_CORE",
+      "owner": "Lead",
+      "decision": "Keep actual DSP/analysis/mastering/conversion/reference/session/Linked/recovery/history/host/validators/proofs/tests, including held local files. No deletion/silent contract changes.",
+      "githubSnapshots": {},
+      "localBefore": {
+        "sha256": "2942144a93f4c7079940203cf303790309705c745afd5f77983cc5eb269a83aa",
+        "bytes": 3973
+      },
+      "inActiveMain": false,
+      "retiredBOnly": false
+    },
+    {
+      "path": "vite.config.ts",
+      "category": "PROTECTED_INTEGRATION",
+      "owner": "Lead",
+      "decision": "Preserve lifecycle/security/IPC/deps/build. Icon-only package field change needs exact reviewed lead diff; no P directory-wide grant.",
+      "githubSnapshots": {
+        "main": {
+          "blob": "d7b5b52a2a6445da2f9e508d183bb106922f8d30",
+          "bytes": 141,
+          "mode": "100644"
+        },
+        "core_pr4": {
+          "blob": "d7b5b52a2a6445da2f9e508d183bb106922f8d30",
+          "bytes": 141,
+          "mode": "100644"
+        },
+        "retired_B_pr5": {
+          "blob": "d7b5b52a2a6445da2f9e508d183bb106922f8d30",
+          "bytes": 141,
+          "mode": "100644"
+        },
+        "merged_core_branch": {
+          "blob": "d7b5b52a2a6445da2f9e508d183bb106922f8d30",
+          "bytes": 141,
+          "mode": "100644"
+        },
+        "architecture_branch": {
+          "blob": "d7b5b52a2a6445da2f9e508d183bb106922f8d30",
+          "bytes": 141,
+          "mode": "100644"
+        }
+      },
+      "localBefore": {
+        "sha256": "7714f0f722b8a290f5184e219586a38120747122123207de38613fde6504b752",
+        "bytes": 141
+      },
+      "inActiveMain": true,
+      "retiredBOnly": false
+    }
+  ]
+}

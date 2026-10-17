@@ -1,60 +1,54 @@
 # MusicOnVerse
 
-A local audio analysis, processing, and conversion prototype evolving toward a professional music-production environment. **This repository does not yet implement a multitrack DAW, persistent sessions, Linked Sessions, external plugin hosting, or an AI command executor.**
+A local music-production application combining a cinematic cosmic environment
+with real audio analysis, editing and production workflows. The owner's
+Logic Pro–like multitrack DAW is active implementation scope, not a future-only
+proposal. Do not confuse the existing single-file workbench or experimental
+session modules with a finished professional DAW.
 
-## Start here
+## Current application and collaboration
 
-| Read | Purpose |
-| --- | --- |
-| [AGENTS.md](AGENTS.md) | Collaboration authority, ownership, isolation, review, and safety rules |
-| [Project guide](docs/engineering/PROJECT_GUIDE.md) | Actual capabilities, source map, contracts, limitations, and validation |
-| [Work queue](docs/engineering/WORK_QUEUE.md) | Current coordination state and historical task/result evidence |
-| [Design brief](docs/design/DESIGN_BRIEF.md) | Canonical settled visual direction; scoped implementation is governed by the dated handoff |
-| [agent-b master prompt](docs/engineering/AGENT_B_MASTER_PROMPT.md) | Reusable onboarding context; deliberately assigns no feature/task |
-| [Metering contract and research](docs/engineering/AUDIO_METERING_CONTRACT.md) | Proposed interfaces, measured evidence, and unresolved audio-safety limits |
-| [Architecture working draft](docs/ARCHITECTURE.md) | Proposed session/Linked Sessions semantics, transaction/recovery rules and proof gate; not an installed API |
-| [Product vision](docs/PRODUCT_VISION.md) / [roadmap](docs/ROADMAP.md) | Reconciled intent and incremental proof/test plan; review drafts, not shipped features or task assignments |
+Delivery: `arena/14df8ffa-onverse` / [PR4](https://github.com/The-Mhood/onverse/pull/4).
+P owns the corresponding presentation on
+[PR8](https://github.com/The-Mhood/onverse/pull/8); B is retired. Earlier P UI is
+already integrated. The current cinematic result is **not owner-accepted**.
+No main merge or PR closure is authorized by publication.
 
-Read the rules, guide, current queue notice, and design brief before changing anything. The queue retains historical snapshots: read its latest notices/results, not just an older task entry.
+The preserved workbench supports local import/demo, analysis/reference comparison,
+playback/A–B, region crop/export, Master Fix/manual adjustments and conversion/
+download. Built-in reference profiles are heuristics, not measured chart tracks.
+New multitrack capabilities and their actual evidence are recorded in the
+[work queue](docs/engineering/WORK_QUEUE.md), not inferred from UI illustrations.
 
-## Repository state and collaboration
+## Develop and verify
 
-The lead works on fixed `arena/b25c318e-onverse`; engineering/onboarding is delivered through [PR #3](https://github.com/The-Mhood/onverse/pull/3) into `main`. The owner authorized its merge only after whole-PR review/fixes. The [2026-10-15 handoff](docs/engineering/UI_IMPLEMENTATION_HANDOFF.md) and COORD-006 result on that PR supply the actual merge M and conditional Slice A grant. Recheck live refs/PR result: pre-merge documents and branch names do not prove integration.
+Use a compatible Node22+ runtime and the committed lockfile. For web work without
+Electron binary downloads or dependency lifecycle execution:
 
-The separate [draft architecture PR #1](https://github.com/The-Mhood/onverse/pull/1) remains **unmerged**. CORE-007 explicitly reconciles its architecture, product vision and roadmap at the existing paths as working drafts for review, with attribution and later Linked Sessions constraints. These are not installed APIs, accepted POC defaults, executed tests or a PR merge. Its original README/engineering standards are not adopted; overlapping files require deliberate reconciliation, not a wholesale merge merely to onboard an agent.
-
-The lead owns architecture/audio/application/domain contracts and integration. **agent-b**, on its separate fixed UI branch, receives the exclusive dated Slice A presentation reservation in the handoff, activated after actual M and its own preservation/ancestry/ownership acknowledgment; no new owner approval is needed for the settled choices. Orbit Mode is a later separate feature-flagged spike with unchanged createStage API. Worker checkout/receipt/start remain unverified here; preserve all unknown/unpublished work. Codex is inactive. Architecture drafts do not grant implementation of future capabilities.
-
-## Local development
-
-First inspect the checkout and preserve all existing work. Use the committed lockfile and a compatible Node/npm version; Node 22.22.3 and npm 10.9.8 were used for the documented Linux checks. A clean dependency installation can run lifecycle scripts and download binaries: follow the applicable environment/owner authorization rather than installing during a read-only audit.
-
-```bash
-# When a locked dependency install is authorized:
-npm ci
-
-# Web development:
-npm run dev
-
-# Production web build; writes ignored dist/:
+```sh
+npm ci --ignore-scripts --no-audit --no-fund
 npm run build
+node --test tests/unit/*.test.js tests/audio/*.test.js tests/ui/*.test.js
+npm run preview -- --host 0.0.0.0 --port 4173 --strictPort
 ```
 
-For a proxied development preview, bind to `0.0.0.0` and allow the actual preview hostname using narrowly scoped Vite configuration/environment. Do not broadly disable host checks, and do not put sandbox localhost URLs into browser-facing service calls. The Electron shell loads `dist/index.html`, not the Vite dev URL.
+For Arena previews, scope Vite's additional allowed host to `.e2b.app` through
+`__VITE_ADDITIONAL_SERVER_ALLOWED_HOSTS`; do not disable all host checking or put
+sandbox localhost URLs into browser-facing service calls. The Electron shell loads
+the generated `dist/index.html`; Linux browser/build proof is not native packaging
+qualification. Existing signing/release commands and updater URL are not release
+acceptance. No dependency upgrades or release operations are part of cleanup.
 
-### Existing checks
+## Read first
 
-```bash
-node --test tests/unit/*.test.js tests/audio/*.test.js
-node scripts/test-analyze.mjs
-```
+- [Collaboration and safety](AGENTS.md)
+- [Architecture: actual runtime versus experimental mechanisms](docs/ARCHITECTURE.md)
+- [Canonical visual brief](docs/design/DESIGN_BRIEF.md)
+- [Implementation ownership/handoff](docs/engineering/UI_IMPLEMENTATION_HANDOFF.md)
+- [Experimental foundations](docs/engineering/EXPERIMENTAL_FOUNDATIONS.md)
+- [Cleanup, original-document/icon recovery and per-file ledger](docs/engineering/CLEANUP_20261017.md)
 
-At the 2026-10-15 COORD-006 review: **154 tests, 151 passes, 3 known legacy LUFS TODO cases, 0 unexpected failures** (includes nine actual-controller failure-boundary cases). This is not complete audio correctness or professional mastering certification. Strict diagnostics, limitations, and UI verification requirements are in the [project guide](docs/engineering/PROJECT_GUIDE.md).
-
-No npm test/lint/typecheck/UI-test scripts are currently configured. Report missing tooling as unconfigured, not passed. Do not add dependencies or run signing/release/update operations without separately approved scope.
-
-`README-BUILD.txt` contains older distribution instructions, including prebuilt/legacy/signing assumptions. It is historical packaging guidance, not proof that a prebuilt app is present or that macOS/legacy packaging works. The updater feed in `package.json` is a placeholder; signing, notarization, release feeds, and platform support require explicit validation before distribution.
-
-## Change discipline
-
-Keep units small, reversible, and honestly validated. Do not move source files, migrate frameworks, change dependencies, or implement future capabilities merely to make the repository look tidier. Use isolated worker branches/workspaces where the environment permits, exact path ownership, reviewed commits/PRs, and explicit integration decisions. See [AGENTS.md](AGENTS.md) for the full protocol.
+The original13-image reference pack remains available at its pinned project source;
+no duplicate33MB import is necessary. Full DAW, cinematic fidelity, persistent-native
+recovery, AI/plugin/MIDI support and audio/security release acceptance must be
+reported individually with evidence, never implied by a green build.
