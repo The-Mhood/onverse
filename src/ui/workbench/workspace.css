@@ -204,3 +204,72 @@
 .workspace-root .region-handle-in { left: 0; }
 .workspace-root .region-handle-out { right: 0; top: auto; bottom: 0; }
 .workspace-root .region-handle:focus-visible { outline-offset: -3px; }
+
+/* Visual acceptance correction: one matte precision workplane within open space.
+   Its outer material feathers; individual rails do not become glowing cards. */
+.workspace-root { padding-inline: 32px; }
+.workspace-root > .studio-header { height: 52px; min-height: 52px; padding: 0; border-color: var(--mvo-border-subtle); background: none; }
+.workspace-root .brand { font-size: 18px; font-weight: 600; }
+.workspace-root .brand-mark { width: 27px; height: 27px; }
+.workspace-root .header-caption { font-size: 11px; font-weight: 400; letter-spacing: .04em; text-transform: none; }
+.workspace-root > .environment-banner { height: 128px; margin: 0; padding: 34px 0 18px; background: none; border: 0; overflow: visible; }
+.workspace-root .intro { max-width: 520px; }
+.workspace-root .intro .eyebrow { font-size: 10px; letter-spacing: .12em; color: var(--mvo-text-muted); }
+.workspace-root .intro h1 { margin: 8px 0; font-size: 28px; font-weight: 450; letter-spacing: -.7px; }
+.workspace-root .intro > p:last-child { font-size: 12px; line-height: 1.6; }
+.workspace-root .environment-coordinate { right: 8px; bottom: 23px; color: var(--mvo-text-muted); font-size: 9px; letter-spacing: .14em; }
+.workspace-root[data-source-state="empty"] > .environment-banner { height: 212px; padding-top: 88px; }
+.workspace-root > .workspace-heading { height: 46px; padding: 0 16px; border-bottom: 1px solid var(--mvo-border-subtle); border-radius: 10px 10px 0 0; background: var(--mvo-workplane); }
+.workspace-root .workspace-heading .eyebrow { display: none; }
+.workspace-root .workspace-heading h2 { font-size: 13px; letter-spacing: 0; margin: 0; font-weight: 600; }
+.workspace-root .scope-label { font-size: 11px; font-weight: 400; text-transform: none; letter-spacing: 0; color: var(--mvo-text-secondary); }
+.workspace-root .scope-label span { margin: 0 8px; }
+.workspace-root > .studio-grid[data-surface="body"] { position: relative; isolation: isolate; will-change: transform; contain: layout style; grid-template-columns: 204px minmax(0,1fr) 278px; gap: 0; border-radius: 0 0 10px 10px; background: var(--mvo-workplane); }
+.workspace-root > .studio-grid::before { position: absolute; z-index: -1; inset: -8px; content: ""; pointer-events: none; border-radius: 16px; background: var(--mvo-workplane); mask-image: linear-gradient(90deg,transparent,black 10px,black calc(100% - 10px),transparent),linear-gradient(180deg,transparent,black 10px,black calc(100% - 10px),transparent); mask-composite: intersect; }
+.workspace-root .studio-grid > .surface { min-width: 0; padding: 20px; border: 0; border-radius: 0; background: none; box-shadow: none; }
+.workspace-root .studio-grid > .surface::before, .workspace-root .studio-grid > .surface::after { display: none; }
+.workspace-root .studio-grid > .source-panel, .workspace-root .studio-grid > .editor-panel { border-right: 1px solid var(--mvo-border-subtle); }
+.workspace-root .section-heading { margin-bottom: 14px; }
+.workspace-root .section-heading h3 { font-size: 13px; font-weight: 600; }
+.workspace-root .section-heading p { font-size: 11px; line-height: 1.5; }
+.workspace-root .section-index { font-size: 10px; color: var(--mvo-text-muted); letter-spacing: 0; font-weight: 400; }
+.workspace-root .source-name { font-size: 13px; font-weight: 600; overflow-wrap: anywhere; }
+.workspace-root .source-meta { font-size: 11px; line-height: 1.6; }
+.workspace-root .source-panel label, .workspace-root .conversion-controls label, .workspace-root .region-inputs label { font-size: 11px; }
+.workspace-root .source-panel select, .workspace-root .source-panel input[type=url], .workspace-root .conversion-controls select { font-size: 11px; min-height: 34px; padding: 7px; }
+.workspace-root :is(button,input:not([type=range]),select) { border-color: var(--mvo-border-control); border-radius: 5px; }
+.workspace-root button { font-weight: 450; background: var(--mvo-surface-1); }
+.workspace-root button.primary { background: var(--mvo-accent-functional); border-color: var(--mvo-accent-functional); }
+.workspace-root .text-button { background: none; }
+.workspace-root .separated { margin-top: 22px; padding-top: 18px; border-color: var(--mvo-border-subtle); }
+.workspace-root .small { font-size: 11px; line-height: 1.6; }
+.workspace-root .audio-side { font-size: 10px; letter-spacing: .05em; }
+.workspace-root .timeline-scale { font-size: 11px; padding: 12px 0 9px; }
+.workspace-root .waveform-well { height: 178px; border-color: var(--mvo-border-subtle); border-radius: 3px; }
+.workspace-root .seek-label { font-size: 11px; }
+.workspace-root .position-label { font-size: 11px; }
+.workspace-root .transport { min-height: 48px; padding: 7px 0; margin-top: 10px; border: 0; border-radius: 0; background: none; box-shadow: none; }
+.workspace-root .transport button { min-height: 32px; font-size: 11px; }
+.workspace-root .ab-switch button[aria-pressed=true] { background: var(--mvo-selection-wash); color: var(--mvo-text-primary); border-color: var(--mvo-accent-functional); border-bottom-width: 3px; }
+.workspace-root .edit-tools { margin-top: 6px; padding-top: 14px; }
+.workspace-root .edit-tools > span { font-size: 10px; }
+.workspace-root .score-line { margin: 12px 0; }
+.workspace-root .score-line > strong { font-size: 34px; font-weight: 450; letter-spacing: -1px; }
+.workspace-root .analysis-state { font-size: 10px; letter-spacing: .02em; }
+.workspace-root .measurements div { font-size: 11px; border-color: var(--mvo-border-subtle); }
+.workspace-root .measurements dd { font-size: 11px; }
+.workspace-root .finding { border-left-width: 1px; }
+.workspace-root .finding h4 { font-size: 11px; }
+.workspace-root .finding p { font-size: 11px; }
+.workspace-root .analysis-issues { max-height: 238px; }
+.workspace-root .operation-status { min-height: 36px; font-size: 11px; padding: 12px 4px; }
+.workspace-root .studio-footer { font-size: 10px; letter-spacing: .03em; padding: 12px 0 20px; }
+.workspace-root .studio-footer button { font-size: 11px; }
+.workspace-root > .capability-sheet { border-radius: 10px; border-color: var(--mvo-border-subtle); }
+.workspace-root > .capability-sheet::before { border-radius: 10px; background: var(--mvo-workplane); }
+@media(min-width:1400px) { .workspace-root { padding-inline: 44px; } .workspace-root > .studio-grid[data-surface="body"] { grid-template-columns: 214px minmax(0,1fr) 286px; } }
+@media(max-width:1199px) { .workspace-root { padding-inline: 24px; } .workspace-root > .environment-banner { height: 110px; padding-top: 24px; } .workspace-root[data-source-state="empty"] > .environment-banner { height: 166px; padding-top: 62px; } .workspace-root > .studio-grid[data-surface="body"] { grid-template-columns: 182px minmax(0,1fr) 242px; } .workspace-root .studio-grid > .surface { padding: 16px; } .workspace-root .waveform-well { height: 154px; } .workspace-root .analysis-issues { max-height: 180px; } }
+@media(max-width:950px) { .workspace-root > .studio-grid[data-surface="body"] { grid-template-columns: 180px minmax(0,1fr); } .workspace-root .studio-grid > .editor-panel { border-right: 0; } .workspace-root .studio-grid > .inspector { border-top: 1px solid var(--mvo-border-subtle); } .workspace-root .environment-coordinate { display: none; } }
+@media(max-width:620px) { .workspace-root { padding-inline: 12px; } .workspace-root > .studio-grid[data-surface="body"] { display: flex; flex-direction: column; } .workspace-root .studio-grid > .source-panel { border-right: 0; border-bottom: 1px solid var(--mvo-border-subtle); } .workspace-root .header-caption,.workspace-root .scope-label { display: none; } .workspace-root > .environment-banner { height: auto; min-height: 120px; } .workspace-root[data-source-state="empty"] > .environment-banner { height: 174px; } }
+@media(prefers-reduced-transparency:reduce) { .workspace-root > .studio-grid::before { mask-image: none; inset: 0; } }
+@media(forced-colors:active) { .workspace-root > .studio-grid { border: 1px solid CanvasText; } }

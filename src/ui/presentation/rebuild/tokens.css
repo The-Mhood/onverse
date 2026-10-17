@@ -96,6 +96,8 @@
   --mvo-warning-wash: rgb(217 166 109 / 16%);
   --mvo-danger-wash: rgb(172 78 65 / 17%);
 
+  --mvo-border-control: #71869b;
+  --mvo-workplane: #121a27;
   --mvo-border-subtle: rgb(159 159 177 / 14%);
   --mvo-border-default: rgb(124 189 216 / 25%);
   --mvo-border-strong: rgb(124 189 216 / 48%);

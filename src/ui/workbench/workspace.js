@@ -20,10 +20,10 @@ export function mountWorkspace(root, { recorders = [] } = {}) {
         <span class="header-caption">A SPACE TO LISTEN CLOSELY</span><span class="local-badge"><i aria-hidden="true"></i> Local audio</span>
       </header>
       <section class="environment-banner" aria-label="Workspace introduction">
-        <div class="intro"><p class="eyebrow">YOUR SIGNAL. YOUR SPACE.</p><h1>Make room for the details.</h1><p>Listen, compare and shape a single audio file. Nothing is uploaded on import.</p></div>
-        <span class="environment-coordinate" aria-hidden="true">STUDIO / 001<br>LISTENING POSITION</span>
+        <div class="intro"><p class="eyebrow">LISTEN · COMPARE · SHAPE</p><h1>Audio workbench</h1><p>Listen, compare and shape a single audio file. Nothing is uploaded on import.</p></div>
+        <span class="environment-coordinate" aria-hidden="true">OPEN SPACE<br>CLOSE LISTENING</span>
       </section>
-      <div class="workspace-heading"><div><span class="eyebrow">WORKSPACE</span><h2>Audio workbench</h2></div><span class="scope-label">SINGLE-FILE ENGINE <span aria-hidden="true">/</span> NO MULTITRACK SESSION</span></div>
+      <div class="workspace-heading"><div><span class="eyebrow">LOCAL WORKBENCH</span><h2>Signal workspace</h2></div><span class="scope-label">Single source <span aria-hidden="true">·</span> Original preserved</span></div>
       <div class="studio-grid" data-surface="body" id="workbench" tabindex="-1">
         <aside class="source-panel surface" aria-label="Source and comparison reference">
           <div class="section-heading"><h3>Source</h3><span class="section-index">01</span></div>
@@ -31,7 +31,7 @@ export function mountWorkspace(root, { recorders = [] } = {}) {
           <input class="mix-picker" type="file" accept="audio/*,.wav,.mp3,.m4a,.ogg,.flac,.aiff" hidden aria-label="Choose audio file">
           <div class="button-stack"><button type="button" data-action="import" class="primary">Import audio <span aria-hidden="true">↗</span></button><button type="button" data-action="demo">Generate demo</button></div>
           <p class="subtle small">Or drop a local audio file into this workspace.</p>
-          <div class="section-heading separated"><h3>Compare against</h3><span class="section-index">02</span></div>
+          <div class="section-heading separated"><h3>Reference</h3><span class="section-index">02</span></div>
           <label>Reference source<select class="reference-source"><option value="auto">Built-in genre profile</option><option value="file">Your reference file</option><option value="url">Stream link</option></select></label>
           <div class="profile-options"><label>Category<select class="category"><option value="">Auto-detect</option></select></label><label>Subgenre<select class="subgenre"><option value="">Category default</option></select></label></div>
           <div class="file-reference" hidden><input class="reference-picker" type="file" accept="audio/*" hidden aria-label="Choose reference file"><button type="button" data-action="reference">Choose reference audio</button></div>
@@ -132,6 +132,7 @@ export function mountWorkspace(root, { recorders = [] } = {}) {
   }
   function render(s) {
     state = s
+    root.querySelector(".workspace-root").dataset.sourceState = s.buffer ? "ready" : "empty"
     const b = s.ab === "fixed" && s.fixed ? s.fixed : s.buffer, duration = b?.duration || 0, busy = s.busy || s.tweakBusy
     elements["source-name"].textContent = s.fileName || "No audio loaded"
     elements["source-meta"].textContent = s.buffer ? `${time(s.buffer.duration)} · ${s.buffer.sampleRate / 1000} kHz · ${s.buffer.numberOfChannels} ch${s.isDemo ? ' · synthesized demo' : ''}` : "WAV, MP3 and browser-decodable audio"

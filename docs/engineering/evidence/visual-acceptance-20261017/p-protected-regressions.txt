@@ -1,0 +1,618 @@
+TAP version 13
+# Subtest: requires real operation/view/reference ports; no default fake successes
+ok 1 - requires real operation/view/reference ports; no default fake successes
+  ---
+  duration_ms: 2.182365
+  type: 'test'
+  ...
+# Subtest: construction has no backend calls, audio context, rendering or second authority
+ok 2 - construction has no backend calls, audio context, rendering or second authority
+  ---
+  duration_ms: 0.862171
+  type: 'test'
+  ...
+# Subtest: import publishes the exact decoded buffer and uses the shared analysis service path
+ok 3 - import publishes the exact decoded buffer and uses the shared analysis service path
+  ---
+  duration_ms: 3.744963
+  type: 'test'
+  ...
+# Subtest: decode failure preserves the last valid buffer and reports the actual error
+ok 4 - decode failure preserves the last valid buffer and reports the actual error
+  ---
+  duration_ms: 1.006002
+  type: 'test'
+  ...
+# Subtest: resolver-declined metadata stays an error, never a successful measured reference
+ok 5 - resolver-declined metadata stays an error, never a successful measured reference
+  ---
+  duration_ms: 0.463982
+  type: 'test'
+  ...
+# Subtest: a rejected reference lookup reports failure and releases the resolving state
+ok 6 - a rejected reference lookup reports failure and releases the resolving state
+  ---
+  duration_ms: 0.265067
+  type: 'test'
+  ...
+# Subtest: failed mastering preserves original and prior fixed copy, clears busy and exposes failure
+ok 7 - failed mastering preserves original and prior fixed copy, clears busy and exposes failure
+  ---
+  duration_ms: 4.812885
+  type: 'test'
+  ...
+# Subtest: successful mastering publishes separate B only after render/remeasure and uses real playback port
+ok 8 - successful mastering publishes separate B only after render/remeasure and uses real playback port
+  ---
+  duration_ms: 3.784869
+  type: 'test'
+  ...
+# Subtest: region export retains exact floor/ceil sample boundaries without mutating A
+ok 9 - region export retains exact floor/ceil sample boundaries without mutating A
+  ---
+  duration_ms: 11.188034
+  type: 'test'
+  ...
+# Subtest: conversion always receives A even with B selected; failed conversion cannot replace the last output
+ok 10 - conversion always receives A even with B selected; failed conversion cannot replace the last output
+  ---
+  duration_ms: 3.769235
+  type: 'test'
+  ...
+# Subtest: clear invalidates working outputs and creates fresh adjustment values, not aliased nested defaults
+ok 11 - clear invalidates working outputs and creates fresh adjustment values, not aliased nested defaults
+  ---
+  duration_ms: 0.615035
+  type: 'test'
+  ...
+# Subtest: dispose closes the playback context and clears pending frame/tweak work
+ok 12 - dispose closes the playback context and clears pending frame/tweak work
+  ---
+  duration_ms: 0.506277
+  type: 'test'
+  ...
+# Subtest: dispose cancels a queued manual re-render before processing starts
+ok 13 - dispose cancels a queued manual re-render before processing starts
+  ---
+  duration_ms: 3.494071
+  type: 'test'
+  ...
+# Subtest: dispose suppresses late tweak progress/results without interrupting active render work
+ok 14 - dispose suppresses late tweak progress/results without interrupting active render work
+  ---
+  duration_ms: 6.523971
+  type: 'test'
+  ...
+# Subtest: dispose suppresses a late conversion result but does not stop the conversion promise
+ok 15 - dispose suppresses a late conversion result but does not stop the conversion promise
+  ---
+  duration_ms: 0.731986
+  type: 'test'
+  ...
+# Subtest: cropping B holds the view busy until remeasurement settles and releases on failure
+ok 16 - cropping B holds the view busy until remeasurement settles and releases on failure
+  ---
+  duration_ms: 4.772427
+  type: 'test'
+  ...
+# Subtest: dispose during render cannot promote B or recreate a playback context
+not ok 17 - dispose during render cannot promote B or recreate a playback context
+  ---
+  duration_ms: 6.610315
+  type: 'test'
+  location: '/home/user/reviews/visual-acceptance-20261017/p-source/tests/unit/workbenchController.review.test.js:199:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Values have same structure but are not reference-equal:
+
+    {
+      duration: 0.5,
+      getChannelData: [Function: getChannelData],
+      length: 24000,
+      numberOfChannels: 2,
+      sampleRate: 48000
+    }
+
+  code: 'ERR_TEST_FAILURE'
+  ...
+# Subtest: dispose during fast remeasurement prevents late B promotion
+not ok 18 - dispose during fast remeasurement prevents late B promotion
+  ---
+  duration_ms: 6.126406
+  type: 'test'
+  location: '/home/user/reviews/visual-acceptance-20261017/p-source/tests/unit/workbenchController.review.test.js:205:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Values have same structure but are not reference-equal:
+
+    {
+      duration: 0.5,
+      getChannelData: [Function: getChannelData],
+      length: 24000,
+      numberOfChannels: 2,
+      sampleRate: 48000
+    }
+
+  code: 'ERR_TEST_FAILURE'
+  ...
+# Subtest: dispose during full analysis preserves the last valid analysis and suppresses late effects
+not ok 19 - dispose during full analysis preserves the last valid analysis and suppresses late effects
+  ---
+  duration_ms: 1.695062
+  type: 'test'
+  location: '/home/user/reviews/visual-acceptance-20261017/p-source/tests/unit/workbenchController.review.test.js:210:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected "actual" to be reference-equal to "expected":
+    + actual - expected
+    ... Skipped lines
+
+      {
+        bands: {
+          air: -51.91500721427349,
+          bass: -3.7385471110482627,
+          high: -8.533088704478146,
+    ...
+        flatness: 3.6667836756025107e-13,
+    +   lufs: -18,
+    -   lufs: -6.601051314972119,
+        noiseFloorDb: -9.030899952596497,
+        peakDb: -6.020599913279624,
+        pitch: {
+          frames: 2,
+          medianHz: 500,
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    duration: 0.5
+    sampleRate: 48000
+    channels: 2
+    peakDb: -6.020599913279624
+    truePeakDb: -6.039197002500254
+    rmsDb: -9.030899952596856
+    lufs: -6.601051314972119
+    crestDb: 3.010300039317232
+    dynamicRangeDb: 0
+    dynamicLufs: 0.0008446744417103247
+    noiseFloorDb: -9.030899952596497
+    dcOffset: -4.18554080283684e-17
+    clipCount: 0
+    centroid: 1000.0000000013337
+    flatness: 3.6667836756025107e-13
+    bands:
+      sub: -10.892595663652969
+      bass: -3.7385471110482627
+      low: 5.592344806117097
+      mid: 107.28878173490477
+      high: -8.533088704478146
+      presence: -37.801887847569034
+      air: -51.91500721427349
+    spectrum:
+      0: 9.551600898503035e-8
+      1: 9.636414680302767e-8
+      2: 9.77871820354426e-8
+      3: 9.979947298075094e-8
+      4: 1.0242143207435579e-7
+      5: 1.0567983719488929e-7
+      6: 1.0960825240335575e-7
+      7: 1.1424755515152909e-7
+      8: 1.1964659019409808e-7
+      9: 1.2586295698550263e-7
+      10: 1.3296395865987615e-7
+      11: 1.4102772439959797e-7
+      12: 1.5014454070207218e-7
+      13: 1.6041841877828416e-7
+      14: 1.719689399773818e-7
+      15: 1.849334248608614e-7
+      16: 1.9946948495253083e-7
+      17: 2.1575802256007832e-7
+      18: 2.3400676554228347e-7
+      19: 2.5445443337117137e-7
+      20: 2.773756595938749e-7
+      21: 3.030868155590109e-7
+      22: 3.319529173428142e-7
+      23: 3.643958358913285e-7
+      24: 4.009040785187152e-7
+      25: 4.4204447518254157e-7
+      26: 4.884761777479923e-7
+      27: 5.409674772656981e-7
+      28: 6.004160699258545e-7
+      29: 6.678735522300849e-7
+      30: 7.445751270246495e-7
+      31: 8.319757491587419e-7
+      32: 9.317942655858611e-7
+      33: 0.0000010460675083292704
+      34: 0.000001177216845815017
+      35: 0.0000013281303806943518
+      36: 0.000001502264893427112
+      37: 0.0000017037728134801256
+      38: 0.0000019376610810075143
+      39: 0.000002209990809804237
+      40: 0.000002528129487287545
+      41: 0.0000029010711048574877
+      42: 0.000003339844706084666
+      43: 0.000003858038644099977
+      44: 0.000004472477211072529
+      45: 0.00000520409925902748
+      46: 0.000006079106346079027
+      47: 0.000007130473167305148
+      48: 0.000008399948550370639
+      49: 0.000009940726012841323
+      50: 0.000011821035771135556
+      51: 0.000014129016056425315
+      52: 0.00001697937702372917
+      53: 0.000020522601279622156
+      54: 0.000024957771275042732
+      55: 0.00003055064004445397
+      56: 0.00003765937166527316
+      57: 0.00004677164209494388
+      58: 0.00005855879376211184
+      59: 0.00007395596032105925
+      60: 0.00009428235366190902
+      61: 0.00012142469994874643
+      62: 0.00015812176266627562
+      63: 0.0002084138550264471
+      64: 0.000278367385371987
+      65: 0.00037726856245128807
+      66: 0.0005196378794947905
+      67: 0.0007287210208200014
+      68: 0.0010427186015928111
+      69: 0.001526273722767751
+      70: 0.002292448284068169
+      71: 0.003546550245962247
+      72: 0.005677785366221857
+      73: 0.009461691590670666
+      74: 0.016536701257531723
+      75: 0.030613921219890896
+      76: 0.06083996048546041
+      77: 0.13224815027667403
+      78: 0.3231631002052365
+      79: 0.926346891536935
+      80: 3.347165501811318
+      81: 17.503561093635593
+      82: 185.06879796954513
+      83: 18542.542418202735
+      84: 226812.88966357528
+      85: 145193.12209111717
+      86: 2275.8935429472194
+      87: 75.27321473165583
+      88: 9.608852843424948
+      89: 2.1297165039460606
+      90: 0.6447947782635247
+      91: 0.2391104081080132
+      92: 0.10231209302518557
+      93: 0.04870442664310499
+      94: 0.025182649992865742
+      95: 0.01390877719313948
+      96: 0.008107635212606979
+      97: 0.004943133773208145
+      98: 0.0031304621266222844
+      99: 0.00204811668349911
+      100: 0.001378340627386786
+      101: 0.0009507880436795848
+      102: 0.0006703109146804051
+      103: 0.00048181971599820395
+      104: 0.00035239082336204814
+      105: 0.0002617851253440908
+      106: 0.0001972429880255503
+      107: 0.0001505351916163853
+      108: 0.00011624398194151056
+      109: 0.00009073511664374141
+      110: 0.00007152865557033414
+      111: 0.000056905552944976913
+      112: 0.00004565684798881444
+      113: 0.00003692087820166907
+      114: 0.000030075863240585587
+      115: 0.00002466793307641618
+      116: 0.000020362215001049915
+      117: 0.000016909149197486366
+      118: 0.0000141210035185168
+      119: 0.000011855309100253567
+      120: 0.000010003050085494755
+      121: 0.000008480156910716969
+      122: 0.000007221320096799339
+      123: 0.000006175450744519127
+      124: 0.000005302320836807346
+      125: 0.000004570056577512281
+      126: 0.000003953253805162913
+      127: 0.000003431550790919683
+    pitch:
+      medianHz: 500
+      stability: 1
+      tuningCents: 221.30948536491314
+      voicedRatio: 1
+      frames: 2
+      stdSemitones: 0
+      voicing: 1
+    stereo:
+      corr: 1
+      widthDb: -120
+      mono: false
+    tempo:
+      bpm: 107
+      confidence: 0.9999999999999339
+  actual:
+    duration: 0.5
+    sampleRate: 48000
+    channels: 2
+    peakDb: -6.020599913279624
+    truePeakDb: -6.039197002500254
+    rmsDb: -9.030899952596856
+    lufs: -18
+    crestDb: 3.010300039317232
+    dynamicRangeDb: 0
+    dynamicLufs: 0.0008446744417103247
+    noiseFloorDb: -9.030899952596497
+    dcOffset: -4.18554080283684e-17
+    clipCount: 0
+    centroid: 1000.0000000013337
+    flatness: 3.6667836756025107e-13
+    bands:
+      sub: -10.892595663652969
+      bass: -3.7385471110482627
+      low: 5.592344806117097
+      mid: 107.28878173490477
+      high: -8.533088704478146
+      presence: -37.801887847569034
+      air: -51.91500721427349
+    spectrum:
+      0: 9.551600898503035e-8
+      1: 9.636414680302767e-8
+      2: 9.77871820354426e-8
+      3: 9.979947298075094e-8
+      4: 1.0242143207435579e-7
+      5: 1.0567983719488929e-7
+      6: 1.0960825240335575e-7
+      7: 1.1424755515152909e-7
+      8: 1.1964659019409808e-7
+      9: 1.2586295698550263e-7
+      10: 1.3296395865987615e-7
+      11: 1.4102772439959797e-7
+      12: 1.5014454070207218e-7
+      13: 1.6041841877828416e-7
+      14: 1.719689399773818e-7
+      15: 1.849334248608614e-7
+      16: 1.9946948495253083e-7
+      17: 2.1575802256007832e-7
+      18: 2.3400676554228347e-7
+      19: 2.5445443337117137e-7
+      20: 2.773756595938749e-7
+      21: 3.030868155590109e-7
+      22: 3.319529173428142e-7
+      23: 3.643958358913285e-7
+      24: 4.009040785187152e-7
+      25: 4.4204447518254157e-7
+      26: 4.884761777479923e-7
+      27: 5.409674772656981e-7
+      28: 6.004160699258545e-7
+      29: 6.678735522300849e-7
+      30: 7.445751270246495e-7
+      31: 8.319757491587419e-7
+      32: 9.317942655858611e-7
+      33: 0.0000010460675083292704
+      34: 0.000001177216845815017
+      35: 0.0000013281303806943518
+      36: 0.000001502264893427112
+      37: 0.0000017037728134801256
+      38: 0.0000019376610810075143
+      39: 0.000002209990809804237
+      40: 0.000002528129487287545
+      41: 0.0000029010711048574877
+      42: 0.000003339844706084666
+      43: 0.000003858038644099977
+      44: 0.000004472477211072529
+      45: 0.00000520409925902748
+      46: 0.000006079106346079027
+      47: 0.000007130473167305148
+      48: 0.000008399948550370639
+      49: 0.000009940726012841323
+      50: 0.000011821035771135556
+      51: 0.000014129016056425315
+      52: 0.00001697937702372917
+      53: 0.000020522601279622156
+      54: 0.000024957771275042732
+      55: 0.00003055064004445397
+      56: 0.00003765937166527316
+      57: 0.00004677164209494388
+      58: 0.00005855879376211184
+      59: 0.00007395596032105925
+      60: 0.00009428235366190902
+      61: 0.00012142469994874643
+      62: 0.00015812176266627562
+      63: 0.0002084138550264471
+      64: 0.000278367385371987
+      65: 0.00037726856245128807
+      66: 0.0005196378794947905
+      67: 0.0007287210208200014
+      68: 0.0010427186015928111
+      69: 0.001526273722767751
+      70: 0.002292448284068169
+      71: 0.003546550245962247
+      72: 0.005677785366221857
+      73: 0.009461691590670666
+      74: 0.016536701257531723
+      75: 0.030613921219890896
+      76: 0.06083996048546041
+      77: 0.13224815027667403
+      78: 0.3231631002052365
+      79: 0.926346891536935
+      80: 3.347165501811318
+      81: 17.503561093635593
+      82: 185.06879796954513
+      83: 18542.542418202735
+      84: 226812.88966357528
+      85: 145193.12209111717
+      86: 2275.8935429472194
+      87: 75.27321473165583
+      88: 9.608852843424948
+      89: 2.1297165039460606
+      90: 0.6447947782635247
+      91: 0.2391104081080132
+      92: 0.10231209302518557
+      93: 0.04870442664310499
+      94: 0.025182649992865742
+      95: 0.01390877719313948
+      96: 0.008107635212606979
+      97: 0.004943133773208145
+      98: 0.0031304621266222844
+      99: 0.00204811668349911
+      100: 0.001378340627386786
+      101: 0.0009507880436795848
+      102: 0.0006703109146804051
+      103: 0.00048181971599820395
+      104: 0.00035239082336204814
+      105: 0.0002617851253440908
+      106: 0.0001972429880255503
+      107: 0.0001505351916163853
+      108: 0.00011624398194151056
+      109: 0.00009073511664374141
+      110: 0.00007152865557033414
+      111: 0.000056905552944976913
+      112: 0.00004565684798881444
+      113: 0.00003692087820166907
+      114: 0.000030075863240585587
+      115: 0.00002466793307641618
+      116: 0.000020362215001049915
+      117: 0.000016909149197486366
+      118: 0.0000141210035185168
+      119: 0.000011855309100253567
+      120: 0.000010003050085494755
+      121: 0.000008480156910716969
+      122: 0.000007221320096799339
+      123: 0.000006175450744519127
+      124: 0.000005302320836807346
+      125: 0.000004570056577512281
+      126: 0.000003953253805162913
+      127: 0.000003431550790919683
+    pitch:
+      medianHz: 500
+      stability: 1
+      tuningCents: 221.30948536491314
+      voicedRatio: 1
+      frames: 2
+      stdSemitones: 0
+      voicing: 1
+    stereo:
+      corr: 1
+      widthDb: -120
+      mono: false
+    tempo:
+      bpm: 107
+      confidence: 0.9999999999999339
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///home/user/reviews/visual-acceptance-20261017/p-source/tests/unit/workbenchController.review.test.js:213:54)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: dispose during decode cannot replace the source or restart analysis
+not ok 20 - dispose during decode cannot replace the source or restart analysis
+  ---
+  duration_ms: 3.469252
+  type: 'test'
+  location: '/home/user/reviews/visual-acceptance-20261017/p-source/tests/unit/workbenchController.review.test.js:215:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+
+    + 'late.wav'
+    - 'input.wav'
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'input.wav'
+  actual: 'late.wav'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///home/user/reviews/visual-acceptance-20261017/p-source/tests/unit/workbenchController.review.test.js:218:64)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: dispose during conversion cannot publish/download a late output
+ok 21 - dispose during conversion cannot publish/download a late output
+  ---
+  duration_ms: 0.481382
+  type: 'test'
+  ...
+# Subtest: failed B-crop remeasurement preserves the last valid B and its analysis
+not ok 22 - failed B-crop remeasurement preserves the last valid B and its analysis
+  ---
+  duration_ms: 3.982488
+  type: 'test'
+  location: '/home/user/reviews/visual-acceptance-20261017/p-source/tests/unit/workbenchController.review.test.js:227:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected "actual" to be reference-equal to "expected":
+    + actual - expected
+
+      {
+    +   duration: 0.3,
+    -   duration: 0.5,
+        getChannelData: [Function: getChannelData],
+    +   length: 14400,
+    -   length: 24000,
+        numberOfChannels: 2,
+        sampleRate: 48000
+      }
+
+  code: 'ERR_TEST_FAILURE'
+  ...
+# Subtest: dispose during reference lookup cannot publish success or failure afterward
+not ok 23 - dispose during reference lookup cannot publish success or failure afterward
+  ---
+  duration_ms: 0.424591
+  type: 'test'
+  location: '/home/user/reviews/visual-acceptance-20261017/p-source/tests/unit/workbenchController.review.test.js:233:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected "actual" to be reference-equal to "expected":
+    + actual - expected
+
+      {
+    +   buf: null,
+        error: null,
+        feat: null,
+    +   inputUrl: 'https://example.invalid',
+    +   meta: {
+    +     identityKnown: true,
+    +     title: 'late'
+    +   },
+        prepared: false,
+    +   resolving: false
+    -   resolving: true
+      }
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    resolving: true
+    error: ~
+    prepared: false
+    feat: ~
+  actual:
+    inputUrl: 'https://example.invalid'
+    meta:
+      title: 'late'
+      identityKnown: true
+    error: ~
+    prepared: false
+    resolving: false
+    buf: ~
+    feat: ~
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///home/user/reviews/visual-acceptance-20261017/p-source/tests/unit/workbenchController.review.test.js:238:22)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+1..23
+# tests 23
+# suites 0
+# pass 17
+# fail 6
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 204.503201

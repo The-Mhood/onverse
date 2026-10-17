@@ -98,3 +98,17 @@ test('region handles are wired to real crop operations and expose precise access
   assert.match(view, /aria-valuenow/);
   assert.match(view, /event\.stopPropagation\(\)/);
 });
+
+test('reference13 integration uses one opaque matte workplane, not three luminous cards', () => {
+  assert.match(host, /studio-grid\[data-surface="body"\][^}]*gap: 0;[^}]*background: var\(--mvo-workplane\)/);
+  assert.match(host, /studio-grid > \.surface::before,[^}]*display: none/);
+  assert.match(host, /border-color: var\(--mvo-border-control\)/);
+  assert.match(environment, /distant-nebula\.jpg\?inline/);
+  assert.match(tokens, /--mvo-workplane:\s*#[\da-f]{6}/);
+});
+
+test('arrival framing follows the existing authoritative buffer, with no independent scene product state', () => {
+  assert.match(view, /dataset\.sourceState = s\.buffer \? "ready" : "empty"/);
+  assert.match(host, /data-source-state="empty"/);
+  assert.doesNotMatch(view, /Make room for the details\.|STUDIO \/ 001/);
+});

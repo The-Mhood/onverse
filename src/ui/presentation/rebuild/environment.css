@@ -12,6 +12,7 @@
   pointer-events: none;
   background:
     radial-gradient(ellipse at 28% 30%, var(--mvo-atmosphere-indigo), transparent 62%),
+    url("./assets/distant-nebula.jpg?inline") center 32% / cover no-repeat,
     var(--mvo-space-0);
 }
 .environment .scene-plane {
@@ -38,7 +39,9 @@
 .environment .scene-celestial {
   z-index: 2;
   background-image: url("./assets/celestial-plane.webp?inline");
-  opacity: .84;
+  opacity: .62;
+  background-size: 100% auto;
+  background-position: center -60px;
   translate: calc(var(--mvo-scene-x) * -.24) calc(var(--mvo-scene-y) * -.24);
   animation: mvo-celestial-orbit 263s ease-in-out -89s infinite alternate;
 }
@@ -56,6 +59,7 @@
 }
 .environment .scene-foreground {
   z-index: 4;
+  opacity: .55;
   background-image: url("./assets/near-rocks-plane.webp?inline");
   translate: calc(var(--mvo-scene-x) * -1.15) calc(var(--mvo-scene-y) * -1.15);
   animation: mvo-ground-presence 137s ease-in-out -29s infinite alternate;

@@ -34,9 +34,36 @@ async function capture(name, width, height) {
     clippedControls: [...document.querySelectorAll('button,input,select')].filter(e => e.getClientRects().length && (e.getBoundingClientRect().left < 0 || e.getBoundingClientRect().right > innerWidth + 1)).map(e => e.outerHTML),
     missingImages: [...document.images].filter(i => !i.complete || !i.naturalWidth).map(i => i.src) }));
   assert.ok(layout.scrollWidth <= width, JSON.stringify(layout)); assert.deepEqual(layout.clippedControls, []); assert.deepEqual(layout.missingImages, []);
+  if (name === 'loaded') await verifyPrecisionPlane(width, height);
   const file = `${name}-${width}x${height}.png`; await page.screenshot({ path: path.join(output, file), fullPage: false });
   const fullPage = file.replace('.png', '-full.png'); await page.screenshot({ path: path.join(output, fullPage), fullPage: true });
   report.screenshots.push({ file, fullPage, ...layout });
+}
+// Measurable reference13 boundaries supplement, never replace, visual review.
+async function verifyPrecisionPlane(width, height) {
+  const result = await page.evaluate(() => {
+    const grid = document.querySelector('.studio-grid'), style = getComputedStyle(grid);
+    const rgba = css => { const n = css.match(/[\d.]+/g).map(Number); return [...n.slice(0,3), n[3] ?? 1] };
+    const composite = (fg,bg) => fg.slice(0,3).map((v,i)=>v*fg[3]+bg[i]*(1-fg[3]));
+    const lum = rgb => rgb.slice(0,3).map(v=>v/255).map(v=>v<=.04045?v/12.92:((v+.055)/1.055)**2.4).reduce((a,v,i)=>a+v*[.2126,.7152,.0722][i],0);
+    const contrast = (a,b) => { const x=lum(a),y=lum(b); return (Math.max(x,y)+.05)/(Math.min(x,y)+.05) };
+    const base = rgba(style.backgroundColor);
+    const controls = [...grid.querySelectorAll('button,input:not([type=range]),select')].filter(e=>!e.disabled && e.getClientRects().length).map(e=> {
+      const c=getComputedStyle(e),bg=composite(rgba(c.backgroundColor),base),fg=composite(rgba(c.color),bg),border=composite(rgba(c.borderTopColor),bg);
+      return {label:e.getAttribute('aria-label')||e.dataset.action||e.className,textContrast:contrast(fg,bg),boundaryContrast:Math.max(contrast(bg,base),contrast(border,base))};
+    });
+    return {gap:style.columnGap,background:style.backgroundColor,alpha:base[3],sourceState:document.querySelector('.workspace-root').dataset.sourceState,
+      surfaceBackgrounds:[...grid.querySelectorAll('.surface')].map(e=>getComputedStyle(e).backgroundColor),
+      surfaceGlows:[...grid.querySelectorAll('.surface')].map(e=>getComputedStyle(e,'::before').display), controls};
+  });
+  if (width >= 1480) {
+    result.outputBottom = await page.$eval('[data-action=report]', e=>e.getBoundingClientRect().bottom);
+    assert.ok(result.outputBottom <= height - 4, 'Loaded output actions must fit the large viewport without scrolling');
+  }
+  assert.equal(result.gap,'0px'); assert.equal(result.alpha,1); assert.equal(result.sourceState,'ready');
+  assert.ok(result.surfaceGlows.every(v=>v==='none'), 'No independent luminous card pseudo-materials');
+  for (const control of result.controls) { assert.ok(control.textContrast>=4.5, JSON.stringify(control)); assert.ok(control.boundaryContrast>=3,JSON.stringify(control)); }
+  (report.precisionPlane ??= []).push({width,height,...result});
 }
 // Predeclared measurement: five seconds of idle cinematic motion, two target
 // viewports. This is headless Linux throughput, not a target-device guarantee.
@@ -333,6 +360,7 @@ try {
 
   phase = 'screenshots-loaded'; await click('original'); await edit('.position', 0); await page.select('.output-format', 'wav');
   await capture('loaded', 1120, 700); await capture('loaded', 1480, 920);
+  report.checks.push('Both viewports: one opaque matte precision plane, no individual card halos; enabled controls meet measured 4.5:1 text and 3:1 boundary contrast. Large-viewport output actions fit without scrolling. Not a full WCAG certification.');
   phase = 'motion-and-panels'; await verifyMotionAndPanels();
   report.surfaceAnimations = await page.evaluate(() => window.__surfaceAudit);
   assert.ok(report.surfaceAnimations.some(e => e.surface === 'inspector'));
@@ -440,7 +468,7 @@ try {
   if (closed) { await fs.rm(runtime, { recursive: true, force: true }); report.privateRuntimeRemoved = true; }
   else report.privateRuntimeRemoved = false;
   const code = {};
-  for (const relative of ['index.html', 'src/ui/presentation/rebuild/index.css', 'src/ui/presentation/rebuild/environment.css', 'src/ui/presentation/rebuild/environmentMotion.js', 'src/ui/presentation/rebuild/assets/celestial-plane.webp', 'src/ui/presentation/rebuild/assets/near-rocks-plane.webp', 'scripts/validation/derive-environment-planes.py', 'src/ui/presentation/rebuild/workbench.css', 'src/ui/presentation/rebuild/tokens.css', 'src/ui/presentation/rebuild/assets/first-person-cosmic-horizon.jpg', 'src/application/workbench/demo.js', 'src/main.js', 'src/audio/analyzer.js', 'src/audio/processor.js', 'src/audio/dsp.js', 'src/audio/genre.js', 'src/audio/vendor/lamejs-notices.js', 'tests/fixtures/audioStabilizationBridge.js', 'scripts/validation/audio-stabilization-probe.mjs', 'src/ui/workbench/workspace.js', 'src/ui/workbench/workspace.css', 'src/application/workbench/workbenchController.js', 'src/application/analysis/analysisController.js', 'dist/index.html', 'scripts/validation/run-workbench-browser.mjs']) code[relative] = sha(await fs.readFile(new URL('../../' + relative, import.meta.url)));
+  for (const relative of ['index.html', 'src/ui/presentation/rebuild/index.css', 'src/ui/presentation/rebuild/environment.css', 'src/ui/presentation/rebuild/environmentMotion.js', 'src/ui/presentation/rebuild/assets/celestial-plane.webp', 'src/ui/presentation/rebuild/assets/distant-nebula.jpg', 'src/ui/presentation/rebuild/assets/near-rocks-plane.webp', 'scripts/validation/derive-environment-planes.py', 'src/ui/presentation/rebuild/workbench.css', 'src/ui/presentation/rebuild/tokens.css', 'src/ui/presentation/rebuild/assets/first-person-cosmic-horizon.jpg', 'src/application/workbench/demo.js', 'src/main.js', 'src/audio/analyzer.js', 'src/audio/processor.js', 'src/audio/dsp.js', 'src/audio/genre.js', 'src/audio/vendor/lamejs-notices.js', 'tests/fixtures/audioStabilizationBridge.js', 'scripts/validation/audio-stabilization-probe.mjs', 'src/ui/workbench/workspace.js', 'src/ui/workbench/workspace.css', 'src/application/workbench/workbenchController.js', 'src/application/analysis/analysisController.js', 'dist/index.html', 'scripts/validation/run-workbench-browser.mjs']) code[relative] = sha(await fs.readFile(new URL('../../' + relative, import.meta.url)));
   report.codeSha256 = code;
   await fs.writeFile(path.join(output, 'report.json'), JSON.stringify(report, null, 2) + '\n');
   console.log(JSON.stringify(report, null, 2));
