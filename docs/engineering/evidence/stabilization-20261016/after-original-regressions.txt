@@ -1,0 +1,369 @@
+TAP version 13
+# Subtest: deterministic PCM fixture controls
+    # Subtest: reproduces identical samples without sharing channel or fixture storage
+    ok 1 - reproduces identical samples without sharing channel or fixture storage
+      ---
+      duration_ms: 11.219742
+      type: 'test'
+      ...
+    # Subtest: copies input PCM and exposes the requested metadata
+    ok 2 - copies input PCM and exposes the requested metadata
+      ---
+      duration_ms: 0.178662
+      type: 'test'
+      ...
+    # Subtest: rejects malformed fixture geometry and invalid channel access
+    ok 3 - rejects malformed fixture geometry and invalid channel access
+      ---
+      duration_ms: 3.483236
+      type: 'test'
+      ...
+    1..3
+ok 1 - deterministic PCM fixture controls
+  ---
+  duration_ms: 15.770437
+  type: 'suite'
+  ...
+# Subtest: real analyze: control cases
+    # Subtest: measures the sample-aligned in-phase tone peak and finite spectrum
+    ok 1 - measures the sample-aligned in-phase tone peak and finite spectrum
+      ---
+      duration_ms: 58.271452
+      type: 'test'
+      ...
+    # Subtest: preserves every source channel during measurement
+    ok 2 - preserves every source channel during measurement
+      ---
+      duration_ms: 30.241271
+      type: 'test'
+      ...
+    # Subtest: returns finite spectral values for a full-length silent buffer
+    ok 3 - returns finite spectral values for a full-length silent buffer
+      ---
+      duration_ms: 25.547828
+      type: 'test'
+      ...
+    # Subtest: handles an input of 4096 frames at or above the FFT window
+    ok 4 - handles an input of 4096 frames at or above the FFT window
+      ---
+      duration_ms: 13.821773
+      type: 'test'
+      ...
+    # Subtest: handles an input of 4097 frames at or above the FFT window
+    ok 5 - handles an input of 4097 frames at or above the FFT window
+      ---
+      duration_ms: 11.493023
+      type: 'test'
+      ...
+    # Subtest: preserves the pre-fix complete-window spectral fingerprint at 4096 frames
+    ok 6 - preserves the pre-fix complete-window spectral fingerprint at 4096 frames
+      ---
+      duration_ms: 11.720354
+      type: 'test'
+      ...
+    # Subtest: preserves the pre-fix complete-window spectral fingerprint at 4097 frames
+    ok 7 - preserves the pre-fix complete-window spectral fingerprint at 4097 frames
+      ---
+      duration_ms: 9.103196
+      type: 'test'
+      ...
+    # Subtest: preserves the pre-fix complete-window spectral fingerprint at 8192 frames
+    ok 8 - preserves the pre-fix complete-window spectral fingerprint at 8192 frames
+      ---
+      duration_ms: 12.904972
+      type: 'test'
+      ...
+    1..8
+ok 2 - real analyze: control cases
+  ---
+  duration_ms: 174.077575
+  type: 'suite'
+  ...
+# Subtest: real analyze: short-input FFT regressions
+    # Subtest: zero-pads 1 frames without changing source samples or metadata
+    ok 1 - zero-pads 1 frames without changing source samples or metadata
+      ---
+      duration_ms: 22.587642
+      type: 'test'
+      ...
+    # Subtest: zero-pads 100 frames without changing source samples or metadata
+    ok 2 - zero-pads 100 frames without changing source samples or metadata
+      ---
+      duration_ms: 19.779068
+      type: 'test'
+      ...
+    # Subtest: zero-pads 4095 frames without changing source samples or metadata
+    ok 3 - zero-pads 4095 frames without changing source samples or metadata
+      ---
+      duration_ms: 18.409686
+      type: 'test'
+      ...
+    1..3
+ok 3 - real analyze: short-input FFT regressions
+  ---
+  duration_ms: 61.160968
+  type: 'suite'
+  ...
+# Subtest: real analyze: channel-aware sample measurements
+    # Subtest: keeps sample peak when only the right channel polarity is inverted
+    ok 1 - keeps sample peak when only the right channel polarity is inverted
+      ---
+      duration_ms: 16.20674
+      type: 'test'
+      ...
+    # Subtest: uses the strongest channel regardless of channel order
+    ok 2 - uses the strongest channel regardless of channel order
+      ---
+      duration_ms: 19.113651
+      type: 'test'
+      ...
+    # Subtest: keeps RMS and derived crest stable under channel polarity inversion
+    ok 3 - keeps RMS and derived crest stable under channel polarity inversion
+      ---
+      duration_ms: 33.699485
+      type: 'test'
+      ...
+    # Subtest: computes RMS from mean channel energy, not a mono channel average
+    ok 4 - computes RMS from mean channel energy, not a mono channel average
+      ---
+      duration_ms: 9.325345
+      type: 'test'
+      ...
+    # Subtest: examines all channels, not just the stereo pair
+    ok 5 - examines all channels, not just the stereo pair
+      ---
+      duration_ms: 8.426339
+      type: 'test'
+      ...
+    # Subtest: preserves sample peak and crest when a mono channel is duplicated
+    ok 6 - preserves sample peak and crest when a mono channel is duplicated
+      ---
+      duration_ms: 29.870219
+      type: 'test'
+      ...
+    1..6
+ok 4 - real analyze: channel-aware sample measurements
+  ---
+  duration_ms: 117.199528
+  type: 'suite'
+  ...
+# Subtest: real analyze: channel-energy loudness regression
+    # Subtest: keeps channel-energy loudness invariant under right-channel polarity inversion
+    ok 1 - keeps channel-energy loudness invariant under right-channel polarity inversion
+      ---
+      duration_ms: 29.615471
+      type: 'test'
+      ...
+    1..1
+ok 5 - real analyze: channel-energy loudness regression
+  ---
+  duration_ms: 29.832564
+  type: 'suite'
+  ...
+# Subtest: real analyzeFast: control cases
+    # Subtest: measures the sample-aligned in-phase tone peak and finite spectrum
+    ok 1 - measures the sample-aligned in-phase tone peak and finite spectrum
+      ---
+      duration_ms: 10.9606
+      type: 'test'
+      ...
+    # Subtest: preserves every source channel during measurement
+    ok 2 - preserves every source channel during measurement
+      ---
+      duration_ms: 14.102211
+      type: 'test'
+      ...
+    # Subtest: returns finite spectral values for a full-length silent buffer
+    ok 3 - returns finite spectral values for a full-length silent buffer
+      ---
+      duration_ms: 5.1725
+      type: 'test'
+      ...
+    # Subtest: handles an input of 4096 frames at or above the FFT window
+    ok 4 - handles an input of 4096 frames at or above the FFT window
+      ---
+      duration_ms: 2.822751
+      type: 'test'
+      ...
+    # Subtest: handles an input of 4097 frames at or above the FFT window
+    ok 5 - handles an input of 4097 frames at or above the FFT window
+      ---
+      duration_ms: 2.95521
+      type: 'test'
+      ...
+    # Subtest: preserves the pre-fix complete-window spectral fingerprint at 4096 frames
+    ok 6 - preserves the pre-fix complete-window spectral fingerprint at 4096 frames
+      ---
+      duration_ms: 2.629311
+      type: 'test'
+      ...
+    # Subtest: preserves the pre-fix complete-window spectral fingerprint at 4097 frames
+    ok 7 - preserves the pre-fix complete-window spectral fingerprint at 4097 frames
+      ---
+      duration_ms: 3.752992
+      type: 'test'
+      ...
+    # Subtest: preserves the pre-fix complete-window spectral fingerprint at 8192 frames
+    ok 8 - preserves the pre-fix complete-window spectral fingerprint at 8192 frames
+      ---
+      duration_ms: 3.501853
+      type: 'test'
+      ...
+    1..8
+ok 6 - real analyzeFast: control cases
+  ---
+  duration_ms: 46.464738
+  type: 'suite'
+  ...
+# Subtest: real analyzeFast: short-input FFT regressions
+    # Subtest: zero-pads 1 frames without changing source samples or metadata
+    ok 1 - zero-pads 1 frames without changing source samples or metadata
+      ---
+      duration_ms: 6.359609
+      type: 'test'
+      ...
+    # Subtest: zero-pads 100 frames without changing source samples or metadata
+    ok 2 - zero-pads 100 frames without changing source samples or metadata
+      ---
+      duration_ms: 5.532036
+      type: 'test'
+      ...
+    # Subtest: zero-pads 4095 frames without changing source samples or metadata
+    ok 3 - zero-pads 4095 frames without changing source samples or metadata
+      ---
+      duration_ms: 7.084028
+      type: 'test'
+      ...
+    1..3
+ok 7 - real analyzeFast: short-input FFT regressions
+  ---
+  duration_ms: 19.225369
+  type: 'suite'
+  ...
+# Subtest: real analyzeFast: channel-aware sample measurements
+    # Subtest: keeps sample peak when only the right channel polarity is inverted
+    ok 1 - keeps sample peak when only the right channel polarity is inverted
+      ---
+      duration_ms: 8.72896
+      type: 'test'
+      ...
+    # Subtest: uses the strongest channel regardless of channel order
+    ok 2 - uses the strongest channel regardless of channel order
+      ---
+      duration_ms: 5.522501
+      type: 'test'
+      ...
+    # Subtest: keeps RMS and derived crest stable under channel polarity inversion
+    ok 3 - keeps RMS and derived crest stable under channel polarity inversion
+      ---
+      duration_ms: 15.8974
+      type: 'test'
+      ...
+    # Subtest: computes RMS from mean channel energy, not a mono channel average
+    ok 4 - computes RMS from mean channel energy, not a mono channel average
+      ---
+      duration_ms: 1.995112
+      type: 'test'
+      ...
+    # Subtest: examines all channels, not just the stereo pair
+    ok 5 - examines all channels, not just the stereo pair
+      ---
+      duration_ms: 2.165924
+      type: 'test'
+      ...
+    # Subtest: preserves sample peak and crest when a mono channel is duplicated
+    ok 6 - preserves sample peak and crest when a mono channel is duplicated
+      ---
+      duration_ms: 15.870926
+      type: 'test'
+      ...
+    1..6
+ok 8 - real analyzeFast: channel-aware sample measurements
+  ---
+  duration_ms: 50.644421
+  type: 'suite'
+  ...
+# Subtest: real analyzeFast: channel-energy loudness regression
+    # Subtest: keeps channel-energy loudness invariant under right-channel polarity inversion
+    ok 1 - keeps channel-energy loudness invariant under right-channel polarity inversion
+      ---
+      duration_ms: 14.718779
+      type: 'test'
+      ...
+    1..1
+ok 9 - real analyzeFast: channel-energy loudness regression
+  ---
+  duration_ms: 14.893706
+  type: 'suite'
+  ...
+# Subtest: full analysis metadata and stereo controls
+    # Subtest: reports source geometry and detects opposite-polarity stereo correlation
+    ok 1 - reports source geometry and detects opposite-polarity stereo correlation
+      ---
+      duration_ms: 13.513167
+      type: 'test'
+      ...
+    # Subtest: detects clipping for an in-phase tone exceeding full scale
+    ok 2 - detects clipping for an in-phase tone exceeding full scale
+      ---
+      duration_ms: 18.798144
+      type: 'test'
+      ...
+    # Subtest: does not lose clipping when only right-channel polarity changes
+    ok 3 - does not lose clipping when only right-channel polarity changes
+      ---
+      duration_ms: 28.142997
+      type: 'test'
+      ...
+    # Subtest: counts a clipped frame once even when both channels clip
+    ok 4 - counts a clipped frame once even when both channels clip
+      ---
+      duration_ms: 8.779777
+      type: 'test'
+      ...
+    # Subtest: preserves the existing clipping threshold for positive and negative samples
+    ok 5 - preserves the existing clipping threshold for positive and negative samples
+      ---
+      duration_ms: 7.852118
+      type: 'test'
+      ...
+    # Subtest: detects negative clipping in a single active channel
+    ok 6 - detects negative clipping in a single active channel
+      ---
+      duration_ms: 9.232308
+      type: 'test'
+      ...
+    1..6
+ok 10 - full analysis metadata and stereo controls
+  ---
+  duration_ms: 86.888665
+  type: 'suite'
+  ...
+# Subtest: real quickLufs post-render measurement
+    # Subtest: returns a finite result for an in-phase tone
+    ok 1 - returns a finite result for an in-phase tone
+      ---
+      duration_ms: 4.375332
+      type: 'test'
+      ...
+    # Subtest: keeps channel-energy loudness invariant under right-channel polarity inversion
+    ok 2 - keeps channel-energy loudness invariant under right-channel polarity inversion
+      ---
+      duration_ms: 7.152303
+      type: 'test'
+      ...
+    1..2
+ok 11 - real quickLufs post-render measurement
+  ---
+  duration_ms: 11.648355
+  type: 'suite'
+  ...
+1..11
+# tests 47
+# suites 11
+# pass 47
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 695.980949

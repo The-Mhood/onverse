@@ -1,0 +1,15 @@
+
+> musiconverse@1.0.0 build
+> vite build && node scripts/inline-dist.mjs
+
+vite v8.2.2 building client environment for production...
+transforming...
+✓ 20 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.72 kB │ gzip:   0.44 kB
+dist/assets/index-DIm5b2R0.css  179.98 kB │ gzip: 116.36 kB
+dist/assets/index-81Zf3FcV.js   243.22 kB │ gzip:  85.31 kB
+
+✓ built in 212ms
+inlined dist -> single file, 414 kB

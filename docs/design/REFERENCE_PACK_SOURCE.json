@@ -1,0 +1,119 @@
+{
+  "repository": "The-Mhood/onverse",
+  "ref": "900f07330f463d26bde0cc1d4bd731945c4fffec",
+  "sourceBranch": "arena/e04204ac-onverse",
+  "files": [
+    {
+      "file": "01-cosmic-moodboard.png",
+      "sourcePath": "docs/design/musiconverse-visual-reference-pack/01-cosmic-moodboard.png",
+      "gitBlob": "56eb99af86529024ebb84366f91b61105acde6fb",
+      "sha256": "e8c8172d43e32f09b0f15f5ad91c08ebbf0136317a2213ba6373248667c53c9a",
+      "bytes": 2435782
+    },
+    {
+      "file": "02-universe-opening.png",
+      "sourcePath": "docs/design/musiconverse-visual-reference-pack/02-universe-opening.png",
+      "gitBlob": "039fde4bc6875d2be4d6504ba90e785b64dc2d7b",
+      "sha256": "eba71add12cc96fbd00535864d654dff7cb55521c3c945431ade395fb76da087",
+      "bytes": 3141915
+    },
+    {
+      "file": "03-studio-arrival.png",
+      "sourcePath": "docs/design/musiconverse-visual-reference-pack/03-studio-arrival.png",
+      "gitBlob": "597bd7083b3bb654f611500f0866c49886d9390a",
+      "sha256": "7fb4349986c35d4c3ec9fa65c82d8fdc71fdc26f8d09a228549dd55b870c2dd8",
+      "bytes": 2370381
+    },
+    {
+      "file": "04-immersive-studio.png",
+      "sourcePath": "docs/design/musiconverse-visual-reference-pack/04-immersive-studio.png",
+      "gitBlob": "69b7dd3206f76ad13d3f1921ac47b99734dff4fe",
+      "sha256": "72059e337846a5c0980ab929718cadda2870ccbf5daefc71023b1fa6477e8058",
+      "bytes": 1113236
+    },
+    {
+      "file": "05-arrangement-reference.png",
+      "sourcePath": "docs/design/musiconverse-visual-reference-pack/05-arrangement-reference.png",
+      "gitBlob": "effeffb8bdfcaac0e3af09e9679a70237fe91b6d",
+      "sha256": "d2920876670b7e9218220f9fafaa36b64951be2d293795f39ddb7b90bb8a9a73",
+      "bytes": 2453754
+    },
+    {
+      "file": "06-mixer-reference.png",
+      "sourcePath": "docs/design/musiconverse-visual-reference-pack/06-mixer-reference.png",
+      "gitBlob": "6e5cdb10cb4eb5e6f2e07ceb32867cf8ce0f9f0d",
+      "sha256": "b63fce6f9a01f754bca2b8b271cb747204628936e7db199095bfd76f89ea6b19",
+      "bytes": 2052153
+    },
+    {
+      "file": "07-plugin-reference.png",
+      "sourcePath": "docs/design/musiconverse-visual-reference-pack/07-plugin-reference.png",
+      "gitBlob": "7b798b0764b25df019524fcd723c8f670322d402",
+      "sha256": "58ceebd071df1ac9b0a23ed8c3ca7bf82fe9e2f8b41a604e592623bdeaf1e551",
+      "bytes": 1821881
+    },
+    {
+      "file": "08-sylune.png",
+      "sourcePath": "docs/design/musiconverse-visual-reference-pack/08-sylune.png",
+      "gitBlob": "7406c5f76e122ecf3c5fdc0d3215306700e442eb",
+      "sha256": "c50e9bf91b8e6c43c3d8e3f7691c81a33987757245c5ffe537f7410f1c05ef44",
+      "bytes": 2189699
+    },
+    {
+      "file": "09-detailed-editing.png",
+      "sourcePath": "docs/design/musiconverse-visual-reference-pack/09-detailed-editing.png",
+      "gitBlob": "1d9d0c712470cac422e34636a0a688f6d7e15603",
+      "sha256": "16f88647e12685bcb3095bf2b6d10f3a3b9ff4620a635eb064afc2f627d526e5",
+      "bytes": 1679779
+    },
+    {
+      "file": "10-sound-library.png",
+      "sourcePath": "docs/design/musiconverse-visual-reference-pack/10-sound-library.png",
+      "gitBlob": "ebb0be19819efda82c68d38fc8f471a1b09a2793",
+      "sha256": "9cb2844591984e2d44ff46b43c640df2c53a545ed0244a5ce7dbca5b4cfeb573",
+      "bytes": 1669595
+    },
+    {
+      "file": "11-alternative-studio.png",
+      "sourcePath": "docs/design/musiconverse-visual-reference-pack/11-alternative-studio.png",
+      "gitBlob": "accd03d9fcdf67558451e94884235d36bd34a975",
+      "sha256": "5bddf36f63efff9e97c23774aea865118a5c090c03fb4396079699cd351ab8f3",
+      "bytes": 1664800
+    },
+    {
+      "file": "12-numbered-overview.png",
+      "sourcePath": "docs/design/musiconverse-visual-reference-pack/12-numbered-overview.png",
+      "gitBlob": "152ea3238d90a9a49d7502185d74ac7dcb97b2fe",
+      "sha256": "c8f68a2418301193f81faa988fede1e1f2b135679fe745833a690e01e8433b7b",
+      "bytes": 4370132
+    },
+    {
+      "file": "13-design-language-board.png",
+      "sourcePath": "docs/design/musiconverse-visual-reference-pack/13-design-language-board.png",
+      "gitBlob": "78931b8715c008ca6496fc7b450373f54ae3210f",
+      "sha256": "57b2af73c31e380915a72ce03ed0dc53bceb9720913ec2e0443ea2562d46c8af",
+      "bytes": 1020800
+    },
+    {
+      "file": "IMPLEMENTATION-GUIDE.md",
+      "sourcePath": "docs/design/musiconverse-visual-reference-pack/IMPLEMENTATION-GUIDE.md",
+      "gitBlob": "01f05e13564b0992b18817711c3ce4593aa729f7",
+      "sha256": "991b5d03592913a16c17591d9fc76d7869b1a58aeaad922e02463254ed0434b8",
+      "bytes": 2387
+    },
+    {
+      "file": "MANIFEST.md",
+      "sourcePath": "docs/design/musiconverse-visual-reference-pack/MANIFEST.md",
+      "gitBlob": "d14d9914931e21d873143cb2c967392ac80449d5",
+      "sha256": "ada4a25df300939ca70e411f2985ac4a4af1274deb79e7f362c62590798c0e15",
+      "bytes": 3457
+    },
+    {
+      "file": "contact-sheet.png",
+      "sourcePath": "docs/design/musiconverse-visual-reference-pack/contact-sheet.png",
+      "gitBlob": "2bf314d2f56aeecd489e1a5f47be2d1886d0b4c3",
+      "sha256": "d4d2c475d12bbc3d190477c606bab11c2b80645ce2c8c413ec9c22278ea37c0b",
+      "bytes": 5452480
+    }
+  ]
+}

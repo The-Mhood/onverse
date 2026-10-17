@@ -1,24 +1,15 @@
 import assert from "node:assert/strict"
-import { readFileSync } from "node:fs"
-import vm from "node:vm"
+import { createAnalysisController } from "../../src/application/analysis/analysisController.js"
 import { describe, it } from "node:test"
 
-// Exercise the actual checked-in controller function without importing its DOM,
-// WebGL, decoder or playback boot sequence. Collaborators below are test seams,
-// not proof of browser rendering, real decoding, measurement quality or rollback.
-const source = readFileSync(new URL("../../src/main.js", import.meta.url), "utf8")
-const start = source.indexOf("async function runAnalysis() {")
-const end = source.indexOf("\nfunction setProgress(", start)
-assert.ok(start >= 0 && end > start, "controller seam must remain identifiable or be explicitly migrated")
-const controller = new vm.Script(`${source.slice(start, end)}; globalThis.run = runAnalysis`)
-
+// Integrated controller boundary; every original test assertion is retained.
 function setup(overrides = {}) {
   const calls = []
   const analysis = { measured: true }
   const prior = { existing: true }
   const state = { buffer: {}, busy: false, analysis: prior, fixed: {}, ref: {} }
   const record = name => (...args) => calls.push([name, ...args])
-  const context = vm.createContext({
+  const context = {
     state,
     stopPlayback: record("stop"), updateAbUI: record("ab"), renderRefAreas: record("refs"),
     ensureReferenceReady: async () => ({ ok: true, kind: "file" }),
@@ -34,9 +25,9 @@ function setup(overrides = {}) {
     renderTweakPanel: record("tweaks"), showPanel: record("panel"), toast: record("toast"),
     console: { error: record("error") },
     ...overrides,
-  })
-  controller.runInContext(context)
-  return { run: context.run, state: context.state, calls, analysis, prior }
+  }
+  const controller = createAnalysisController(context)
+  return { run: controller.runAnalysis, state: context.state, calls, analysis, prior }
 }
 
 function cleaned(test) {

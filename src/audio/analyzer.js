@@ -1,6 +1,6 @@
 /* MusicOnVerse — analysis engine.
  * Extracts a full mix fingerprint from a decoded AudioBuffer:
- * loudness (LUFS), true peak, dynamics, spectral balance (7 EQ bands),
+ * loudness (ungated K-weighted estimate), true peak, dynamics, spectral balance (7 EQ bands),
  * spectral centroid & flatness, pitch stability & tuning, stereo image,
  * tempo, clipping, DC offset and noise floor.
  */
@@ -76,20 +76,36 @@ function timeDomain(mono, chData) {
   return { peakDb, peakIdx, dcOffset, rmsDb, truePeakDb: linToDb(tp), clipCount: clip, crestDb, dynamicRangeDb, noiseFloorDb }
 }
 
-/* ---------------- loudness (ITU-R BS.1770 K-weighted) ---------------- */
-function measureLoudness(mono, sr) {
+/* ---------------- loudness estimate (not BS.1770 integrated LUFS) --------
+ * Retain the existing filters, 100 ms complete windows and numeric floor. This
+ * is ungated; do not promote the research integrated meter or claim conformance.
+ * Filter each channel BEFORE summing squared energy: signed mono averaging has
+ * cross terms that erase anti-phase stereo. L/R have unit energy weights, so
+ * duplicated mono adds 10*log10(2), while [x,-x] and [x,x] measure equally.
+ * Unknown multichannel layouts retain equal weights, NOT surround/LFE semantics.
+ */
+function measureLoudness(chData, sr) {
   const hp = biquad("hp", 38, sr)
   const hs = biquad("hs", 1681.97, sr, 0.707, 1.0047)
-  const x = filterData(filterData(mono.slice(), hp), hs)
   const block = Math.max(1, Math.floor(sr * 0.1))
-  const blocks = Math.floor(x.length / block)
+  const blocks = Math.floor(chData[0].length / block)
   const energies = new Float64Array(blocks)
-  for (let b = 0; b < blocks; b++) {
-    let e = 0
-    for (let i = b * block; i < (b + 1) * block; i++) e += x[i] * x[i]
-    energies[b] = e / block
+  // Reject invalid measurement evidence before it can drive automatic trim.
+  // Include incomplete tails too; preserving windowing does not legitimize NaNs.
+  for (const channel of chData) {
+    for (const sample of channel) if (!Number.isFinite(sample)) throw new RangeError("Non-finite PCM in loudness measurement")
+  }
+  for (const channel of chData) {
+    // filterData is in-place: copy before either stage to keep source PCM immutable.
+    const x = filterData(filterData(channel.slice(), hp), hs)
+    for (let b = 0; b < blocks; b++) {
+      let e = 0
+      for (let i = b * block; i < (b + 1) * block; i++) e += x[i] * x[i]
+      energies[b] += e / block
+    }
   }
   const meanE = mean(energies)
+  if (!Number.isFinite(meanE)) throw new RangeError("Non-finite weighted energy in loudness measurement")
   const lufs = -0.691 + 10 * Math.log10(Math.max(meanE, 1e-12))
   return { lufs, blocks: energies }
 }
@@ -293,7 +309,7 @@ export async function analyze(buffer, onProgress) {
   onProgress?.(0.14)
   await nextFrame()
 
-  const { lufs, blocks: lufsBlocks } = measureLoudness(mono, sr)
+  const { lufs, blocks: lufsBlocks } = measureLoudness(chData, sr)
   onProgress?.(0.2)
   await nextFrame()
 
@@ -374,8 +390,8 @@ export function buildIssues(f, g, s) {
   const issues = []
   const positives = []
   /* what this run is being matched against (platform profiles vs user reference) */
-  const platformPhrase = g.realm || "Spotify's top tracks in this genre"
-  const besidePhrase = g.realm || "Spotify's top tracks"
+  const platformPhrase = g.realm || "the built-in genre profile for this genre"
+  const besidePhrase = g.realm || "the built-in genre profile"
 
   // loudness
   const ld = f.lufs - g.lufs
@@ -482,7 +498,7 @@ export function buildIssues(f, g, s) {
         severity: "warning",
         feature: "Tuning Offset",
         title: `Track is ${f.pitch.tuningCents > 0 ? "sharp" : "flat"} by ${round(Math.abs(f.pitch.tuningCents), 0)} cents`,
-        detail: "The whole track sits off concert pitch. Compared to Spotify's top tracks (which are tuned to A=440 Hz) it will feel slightly off even when the performance is perfect.",
+        detail: "The whole track sits off concert pitch. Compared to the built-in genre profile (which assumes A=440 Hz) it will feel slightly off even when the performance is perfect.",
         fix: { type: "retune", cents: -f.pitch.tuningCents },
         fixLabel: `Retune by ${round(Math.abs(f.pitch.tuningCents), 0)} cents to A=440`,
       })
@@ -595,17 +611,11 @@ export function buildFixPlan(f, g) {
   return plan
 }
 
-/* integrated loudness of a decoded AudioBuffer (for post-fix trim) */
+/* Same channel-energy, ungated estimate as analyze/analyzeFast for post-fix
+ * trim. Cache channel views once; never fold stereo to signed mono here. */
 export function quickLufs(buffer) {
-  const ch = buffer.numberOfChannels
-  const len = buffer.length
-  const mono = new Float32Array(len)
-  for (let i = 0; i < len; i++) {
-    let s = 0
-    for (let c = 0; c < ch; c++) s += buffer.getChannelData(c)[i]
-    mono[i] = s / ch
-  }
-  return measureLoudness(mono, buffer.sampleRate).lufs
+  const chData = Array.from({ length: buffer.numberOfChannels }, (_, c) => buffer.getChannelData(c))
+  return measureLoudness(chData, buffer.sampleRate).lufs
 }
 
 /* Build a genre-profile-shaped target from a measured reference feature set,
@@ -640,7 +650,7 @@ export async function analyzeFast(buffer, onProgress) {
   const td = timeDomain(mono, chData)
   onProgress?.(0.3)
   await nextFrame()
-  const { lufs } = measureLoudness(mono, sr)
+  const { lufs } = measureLoudness(chData, sr)
   onProgress?.(0.6)
   await nextFrame()
   const sp = await spectral(mono, sr, (p) => onProgress?.(0.6 + p * 0.4))

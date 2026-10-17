@@ -1,0 +1,18 @@
+{
+  "kind": "Original AI-generated distant-space plate; not copied reference pixels or external stock imagery",
+  "purpose": "Opaque far field; separate from independently moving celestial, horizon and near-ground planes",
+  "generatedDate": "2026-10-17",
+  "referenceDirection": [
+    "01-cosmic-moodboard",
+    "11-alternative-studio",
+    "13-design-language-board"
+  ],
+  "referenceSourceRef": "900f07330f463d26bde0cc1d4bd731945c4fffec",
+  "dimensions": [
+    1376,
+    768
+  ],
+  "sha256": "bd07f4d9b2c351b96ef5db5e8424679e666c8b2c9559809640f9549a7329635f",
+  "bytes": 53281,
+  "limitations": "Illustrated atmospheric depth, not volumetric simulation; no planet, controls or text baked into this plate."
+}

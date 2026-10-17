@@ -1,0 +1,44 @@
+/* Host-owned functional arrangement, consuming P's existing reference13 tokens.
+   No competing environment/assets/theme. P can supply additive presentation. */
+.production-modes{position:relative;z-index:2;display:flex;gap:4px;min-height:38px;align-items:center;border-bottom:1px solid var(--mvo-border-subtle)}
+.production-modes button{border:0;border-radius:0;background:transparent;padding:8px 14px;color:var(--mvo-text-secondary)}
+.production-modes button[aria-pressed=true]{color:var(--mvo-text-primary);box-shadow:inset 0 -2px var(--mvo-color-ion-teal)}
+.production-modes small{margin-left:8px;color:var(--mvo-text-muted);font-size:10px}
+.workspace-root[data-editor=daw]>.workspace-heading,.workspace-root[data-editor=daw]>.studio-grid,.workspace-root[data-editor=daw]>.operation-progress,.workspace-root[data-editor=daw]>.operation-status{display:none!important}
+.workspace-root[data-editor]>.environment-banner{height:90px;min-height:90px;padding:10px 0}
+.workspace-root[data-editor]>.environment-banner .intro{padding:0}
+.workspace-root[data-editor]>.environment-banner .intro h1{font-size:24px;line-height:1.2;margin:4px 0}
+.workspace-root[data-editor]>.environment-banner .intro .eyebrow{font-size:9px;line-height:1.4}
+.workspace-root[data-editor]>.environment-banner .intro>p:last-child{font-size:11px;line-height:1.5}
+.daw-arrangement{position:relative;z-index:2;min-width:0;color:var(--mvo-text-primary);font-size:12px;border-top:1px solid var(--mvo-border-default);background:var(--mvo-surface-solid);border-radius:5px}
+.daw-arrangement[hidden]{display:none!important}
+.daw-project-header{padding:14px 16px;display:flex;gap:12px;align-items:center;justify-content:space-between;border-bottom:1px solid var(--mvo-border-subtle)}
+.daw-project-label{display:flex;align-items:center;gap:9px;margin-top:6px;color:var(--mvo-text-secondary);font-size:10px}
+.daw-project-name{background:transparent!important;border:0!important;font-size:17px!important;max-width:260px;padding:0!important;color:var(--mvo-text-primary)}
+.daw-project-actions,.daw-button-group{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.daw-arrangement button{min-height:30px;padding:6px 9px;line-height:1.2;font-size:11px}
+.daw-toolbar{display:flex;gap:12px;justify-content:space-between;align-items:center;flex-wrap:wrap;padding:10px 14px;background:var(--mvo-surface-1);border-bottom:1px solid var(--mvo-border-default)}
+.daw-clock{font-family:ui-monospace,monospace;font-size:12px;color:var(--mvo-text-primary);min-width:144px;text-align:center}
+.daw-zoom-label{display:flex;align-items:center;gap:6px;color:var(--mvo-text-secondary);font-size:10px}.daw-zoom{width:80px}
+.daw-layout{display:grid;grid-template-columns:minmax(0,1fr) 226px;min-width:0}.daw-timeline{overflow:auto;min-width:0;max-height:390px;scrollbar-width:thin;position:relative;background:var(--mvo-surface-recessed)}
+.daw-ruler-row,.daw-track-row{display:grid;grid-template-columns:204px var(--daw-timeline-width,680px);width:max-content;min-width:100%}
+.daw-ruler-row{position:sticky;top:0;z-index:5;height:32px;background:var(--mvo-surface-1);border-bottom:1px solid var(--mvo-border-default)}
+.daw-track-heading{position:sticky;left:0;z-index:6;background:var(--mvo-surface-1);padding:10px 12px;font-size:9px;letter-spacing:1px;border-right:1px solid var(--mvo-border-default)}.daw-track-count{float:right;color:var(--mvo-color-ion-teal)}
+.daw-ruler{position:relative;height:32px}.daw-ruler .daw-tick{position:absolute;top:0;height:32px;min-width:30px;border:0;border-left:1px solid var(--mvo-border-default);border-radius:0;padding:4px;background:transparent;color:var(--mvo-text-secondary);font-size:9px;text-align:left}
+.daw-track-row{min-height:112px;border-bottom:1px solid var(--mvo-border-subtle)}
+.daw-track-header{position:sticky;left:0;z-index:3;padding:9px 12px;background:var(--mvo-surface-1);border-right:1px solid var(--mvo-border-default);box-shadow:inset 3px 0 var(--track-color)}
+.daw-track-name{border:0!important;background:transparent!important;padding:0!important;font-weight:600;width:100%;font-size:11px!important;margin-bottom:6px;min-width:0}
+.daw-track-switches{display:flex;gap:5px;margin-bottom:6px}.daw-track-switches button{min-height:22px;font-size:10px;padding:3px 8px}.daw-track-switches .daw-remove-track{margin-left:auto;font-size:9px;color:var(--mvo-text-secondary)}
+.daw-track-switch[aria-pressed=true]{background:var(--mvo-color-amber);border-color:var(--mvo-color-amber);color:var(--mvo-space-0)}
+.daw-track-parameter{display:grid;grid-template-columns:30px 55px 1fr;align-items:center;gap:5px;font-size:9px;color:var(--mvo-text-secondary);margin:2px 0}.daw-track-parameter output{text-align:right;font-variant-numeric:tabular-nums}.daw-track-parameter input{width:100%;min-width:0;height:14px;min-height:14px;padding:0;margin:0}
+.daw-lane{position:relative;min-height:112px;overflow:hidden;background-image:linear-gradient(90deg,var(--mvo-border-subtle) 1px,transparent 1px);background-size:var(--daw-grid-step,50px) 100%}
+.daw-lane-playhead{position:absolute;z-index:2;top:0;bottom:0;width:1px;pointer-events:none;background:var(--mvo-color-ion-teal)}
+.daw-lane .daw-clip{position:absolute;top:15px;height:82px;overflow:hidden;border:1px solid var(--track-color);border-radius:3px;padding:0;text-align:left;background:color-mix(in srgb,var(--track-color) 18%,var(--mvo-surface-0));color:var(--mvo-text-primary);touch-action:none;cursor:grab}
+.daw-lane .daw-clip[aria-pressed=true]{outline:2px solid var(--mvo-text-primary);outline-offset:-3px;background:color-mix(in srgb,var(--track-color) 30%,var(--mvo-surface-0))}.daw-clip-label{display:block;padding:4px 8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:10px;background:color-mix(in srgb,var(--track-color) 18%,transparent)}
+.daw-clip-waveform{display:block;width:100%;height:48px;pointer-events:none}.daw-inspector{border-left:1px solid var(--mvo-border-default);padding:14px;min-width:0}.daw-inspector h2{font-size:13px;margin:0 0 12px}.daw-inspector p{font-size:11px;line-height:1.6;color:var(--mvo-text-secondary);overflow-wrap:anywhere}.daw-clip-name{font-weight:600;color:var(--mvo-text-primary)!important}
+.daw-clip-form label{display:block;font-size:10px;color:var(--mvo-text-secondary);margin:8px 0}.daw-clip-form input,.daw-clip-form select{display:block;width:100%;min-width:0;margin-top:4px;padding:5px 7px;font-size:11px}.daw-clip-form>button{width:100%;margin-top:5px}.daw-edit-buttons{display:flex;gap:5px;flex-wrap:wrap;margin-top:9px}.daw-edit-buttons button{font-size:10px}.daw-edit-note{font-size:10px!important;margin-top:15px}
+.daw-empty{padding:62px 28px;max-width:600px;min-height:300px}.daw-empty strong{font-size:20px;font-weight:500}.daw-empty p{font-size:12px;line-height:1.7;color:var(--mvo-text-secondary);margin:12px 0}.daw-seek-label{display:flex;align-items:center;gap:14px;padding:10px 14px;border-top:1px solid var(--mvo-border-default);font-size:10px}.daw-seek{flex:1;min-width:0}.daw-status{font-size:11px;padding:2px 14px 8px;color:var(--mvo-color-glacier);line-height:1.6;min-height:26px}.daw-limits{border-top:1px solid var(--mvo-border-subtle);font-size:10px;line-height:1.6;padding:9px 14px;color:var(--mvo-text-secondary);margin:0}
+@media(max-width:1199px){.daw-project-header{align-items:flex-start}.daw-project-actions{max-width:420px;justify-content:flex-end}.daw-project-actions button{font-size:10px}.daw-toolbar{gap:8px}.daw-zoom-label{margin-left:auto}.daw-layout{grid-template-columns:minmax(0,1fr) 204px}.daw-ruler-row,.daw-track-row{grid-template-columns:184px var(--daw-timeline-width,680px)}}
+@media(max-width:760px){.daw-project-header{flex-direction:column}.daw-project-actions{justify-content:flex-start;max-width:none}.daw-layout{grid-template-columns:minmax(0,1fr)}.daw-inspector{border-left:0;border-top:1px solid var(--mvo-border-default)}.daw-clip-form{display:grid;grid-template-columns:1fr 1fr;gap:6px}.daw-clip-form[hidden]{display:none}.daw-clip-name,.daw-edit-buttons{grid-column:1/-1}.production-modes small{display:none}.daw-timeline{max-height:360px}}
+
+@media(max-width:620px){.workspace-root[data-editor]>.environment-banner{height:auto;min-height:112px;padding:16px 0}.production-modes button{padding-inline:10px}}

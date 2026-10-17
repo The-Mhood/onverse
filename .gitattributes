@@ -1,0 +1,2 @@
+# Preserve exact captured TAP diagnostic padding; source whitespace rules are unchanged.
+docs/engineering/evidence/stabilization-20261016/*.txt -whitespace

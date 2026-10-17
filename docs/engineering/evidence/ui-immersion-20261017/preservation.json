@@ -1,0 +1,14 @@
+{
+  "originalFiles": 204,
+  "unchanged": 198,
+  "authorizedModified": [
+    "scripts/validation/run-workbench-browser.mjs",
+    "src/ui/presentation/rebuild/environment.css",
+    "src/ui/presentation/rebuild/tokens.css",
+    "src/ui/workbench/workspace.css",
+    "src/ui/workbench/workspace.js",
+    "tests/ui/cinematicShell.test.js"
+  ],
+  "missing": [],
+  "unexpectedModified": []
+}

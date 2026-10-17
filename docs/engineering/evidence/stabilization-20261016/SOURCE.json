@@ -1,0 +1,296 @@
+{
+  "baselineRef": "deb5b2ca4bb559b17dd123731224028ca085f59f",
+  "implementationRef": "f92fe04609cce2a007ee2f9535e14ea8eb221c87",
+  "browserHarnessRef": "5a1e10d591bc46e0d8503cb8203f75709de35cd4",
+  "finalHtmlSha256": "b316b5ab6328c9b7f65716ff4166cab18ef768e937d0416ec3d448ed7185cb83",
+  "cleanHtmlByteIdentical": true,
+  "captures": [
+    {
+      "phase": "before",
+      "state": "loaded",
+      "viewport": "1120x700",
+      "originalPath": "/home/user/reviews/stabilization-20261016/reviews/workbench-browser-20261016-hADRcJ/loaded-1120x700-full.png",
+      "file": "before-loaded-1120x700-full.png",
+      "sha256": "eb85d3c582a3f7afdde8ee672232a6e341ad3488cbcb39c2891658daf4ddc314",
+      "bytes": 737206,
+      "unmodified": true
+    },
+    {
+      "phase": "before",
+      "state": "loaded",
+      "viewport": "1480x920",
+      "originalPath": "/home/user/reviews/stabilization-20261016/reviews/workbench-browser-20261016-hADRcJ/loaded-1480x920-full.png",
+      "file": "before-loaded-1480x920-full.png",
+      "sha256": "fccb1e61190f4417329d15be1beb37b6935e9c74f55b8f937334fc6d44c1eb57",
+      "bytes": 1002465,
+      "unmodified": true
+    },
+    {
+      "phase": "after",
+      "state": "empty",
+      "viewport": "1120x700",
+      "originalPath": "/home/user/reviews/workbench-browser-20261016-nLd2c5/empty-1120x700-full.png",
+      "file": "after-empty-1120x700-full.png",
+      "sha256": "61eb1bd5138f2219327dd3a63f7698f8b0c8cf1dc1aad4b6eda1c53bbc019b62",
+      "bytes": 799499,
+      "unmodified": true
+    },
+    {
+      "phase": "after",
+      "state": "empty",
+      "viewport": "1480x920",
+      "originalPath": "/home/user/reviews/workbench-browser-20261016-nLd2c5/empty-1480x920-full.png",
+      "file": "after-empty-1480x920-full.png",
+      "sha256": "b9820e26188416816fa26fcbbac9e270bc6b9f91e9798019e3fee8064e74a0b4",
+      "bytes": 999167,
+      "unmodified": true
+    },
+    {
+      "phase": "after",
+      "state": "loaded",
+      "viewport": "1120x700",
+      "originalPath": "/home/user/reviews/workbench-browser-20261016-nLd2c5/loaded-1120x700-full.png",
+      "file": "after-loaded-1120x700-full.png",
+      "sha256": "5b1cf1f89fe00d5a22630eb83c9278308c5328eecdd1756d05a600fd0b241f09",
+      "bytes": 737578,
+      "unmodified": true
+    },
+    {
+      "phase": "after",
+      "state": "loaded",
+      "viewport": "1480x920",
+      "originalPath": "/home/user/reviews/workbench-browser-20261016-nLd2c5/loaded-1480x920-full.png",
+      "file": "after-loaded-1480x920-full.png",
+      "sha256": "fda1034d2a0d8b92ff6b5cda11c5c9a893c9d735399b3b463494c0f3ed25eb1c",
+      "bytes": 962266,
+      "unmodified": true
+    },
+    {
+      "phase": "after",
+      "state": "fixed",
+      "viewport": "1120x700",
+      "originalPath": "/home/user/reviews/workbench-browser-20261016-nLd2c5/fixed-1120x700-full.png",
+      "file": "after-fixed-1120x700-full.png",
+      "sha256": "eb76f19587128c3efd815fee74e90f8e413919b6eaad0d6ba6178fbcedd6a365",
+      "bytes": 740288,
+      "unmodified": true
+    },
+    {
+      "phase": "after",
+      "state": "fixed",
+      "viewport": "1480x920",
+      "originalPath": "/home/user/reviews/workbench-browser-20261016-nLd2c5/fixed-1480x920-full.png",
+      "file": "after-fixed-1480x920-full.png",
+      "sha256": "b55b60a2801ce80c44a64999fa830c501438c3939113737e9c02d447f476dce6",
+      "bytes": 961810,
+      "unmodified": true
+    },
+    {
+      "phase": "after",
+      "state": "manual-adjusted",
+      "viewport": "1120x700",
+      "originalPath": "/home/user/reviews/workbench-browser-20261016-nLd2c5/manual-adjusted-1120x700-full.png",
+      "file": "after-manual-adjusted-1120x700-full.png",
+      "sha256": "05e63ed153da2ff9215bab2a45c9b02b3b214581c82fd78827eee72fbf2924dd",
+      "bytes": 1116841,
+      "unmodified": true
+    },
+    {
+      "phase": "after",
+      "state": "manual-adjusted",
+      "viewport": "1480x920",
+      "originalPath": "/home/user/reviews/workbench-browser-20261016-nLd2c5/manual-adjusted-1480x920-full.png",
+      "file": "after-manual-adjusted-1480x920-full.png",
+      "sha256": "36587865d4e8c5ac0f3fb9ab6dc74f1fec4e55974cbaa64da237fa2999e9ccb0",
+      "bytes": 1550348,
+      "unmodified": true
+    },
+    {
+      "phase": "after",
+      "state": "panel-open",
+      "viewport": "1120x700",
+      "originalPath": "/home/user/reviews/workbench-browser-20261016-nLd2c5/panel-open-1120x700.png",
+      "file": "after-panel-open-1120x700.png",
+      "sha256": "1d3de076e4ceafcc1091ff1941153cffe463822a0f6b7f5bab45f61a06448719",
+      "bytes": 521253,
+      "unmodified": true
+    },
+    {
+      "phase": "after",
+      "state": "panel-open",
+      "viewport": "1480x920",
+      "originalPath": "/home/user/reviews/workbench-browser-20261016-nLd2c5/panel-open-1480x920.png",
+      "file": "after-panel-open-1480x920.png",
+      "sha256": "9a1503fb0158093d7586b017aeaaf525c3024b34250427a7b5d518f6b4dea19f",
+      "bytes": 809424,
+      "unmodified": true
+    },
+    {
+      "phase": "after",
+      "state": "reduced-motion",
+      "viewport": "1120x700",
+      "originalPath": "/home/user/reviews/workbench-browser-20261016-nLd2c5/reduced-motion-1120x700.png",
+      "file": "after-reduced-motion-1120x700.png",
+      "sha256": "fe56bfe3e934e0b463e8f4a83d1d565eb0a434b57d1cf1c37077f838f03688f1",
+      "bytes": 572296,
+      "unmodified": true
+    },
+    {
+      "phase": "after",
+      "state": "reduced-motion",
+      "viewport": "1480x920",
+      "originalPath": "/home/user/reviews/workbench-browser-20261016-nLd2c5/reduced-motion-1480x920.png",
+      "file": "after-reduced-motion-1480x920.png",
+      "sha256": "38eda9a7961839dd0ff9917d0c2bfe51246ed91541422546ce8b948a6e48b334",
+      "bytes": 921678,
+      "unmodified": true
+    },
+    {
+      "phase": "after",
+      "state": "fixed-cropped",
+      "viewport": "1120x700",
+      "originalPath": "/home/user/reviews/workbench-browser-20261016-nLd2c5/fixed-cropped-1120x700-full.png",
+      "file": "after-fixed-cropped-1120x700-full.png",
+      "sha256": "bcad1678bbf56af9be9bebce8c7f3a6d506fecdb63692316e88b6a502b6c27bd",
+      "bytes": 839020,
+      "unmodified": true
+    },
+    {
+      "phase": "after",
+      "state": "fixed-cropped",
+      "viewport": "1480x920",
+      "originalPath": "/home/user/reviews/workbench-browser-20261016-nLd2c5/fixed-cropped-1480x920-full.png",
+      "file": "after-fixed-cropped-1480x920-full.png",
+      "sha256": "ff04d50e4157ee9a7a87d2052d41d709627b2ca17fce9fecded5a820bba27319",
+      "bytes": 1141454,
+      "unmodified": true
+    },
+    {
+      "phase": "after",
+      "state": "decode-error-preserved",
+      "viewport": "1120x700",
+      "originalPath": "/home/user/reviews/workbench-browser-20261016-nLd2c5/decode-error-preserved-1120x700-full.png",
+      "file": "after-decode-error-preserved-1120x700-full.png",
+      "sha256": "9078c45d9026e1e40e61eb8f2afa0f48d397247a9e1d462897896f601566f632",
+      "bytes": 827872,
+      "unmodified": true
+    },
+    {
+      "phase": "after",
+      "state": "decode-error-preserved",
+      "viewport": "1480x920",
+      "originalPath": "/home/user/reviews/workbench-browser-20261016-nLd2c5/decode-error-preserved-1480x920-full.png",
+      "file": "after-decode-error-preserved-1480x920-full.png",
+      "sha256": "4c26a6f5983f51e11e336cc1f78453705148fc465698929022d496111f02e83e",
+      "bytes": 1142435,
+      "unmodified": true
+    }
+  ],
+  "artifactNotes": [
+    "Captures copied byte-for-byte. No retouching, compositing, generated UI or altered motion. Original absolute output locations in raw reports are historical capture locations; this manifest maps committed copies.",
+    "Baseline replay produced 16 PNGs; final replay 32 PNGs. Committed subset is both baseline loaded full pages and one actual capture for every final state/viewport (18 PNGs total). Complete remaining PNGs and synthetic outputs remain in local review directories.",
+    "Actual modules are separately bundled only for native OfflineAudioContext invariance/error probes. This does not substitute for the actual root production UI replay or prove standards conformance.",
+    "Executed .log files are copied unchanged under .txt names in this evidence directory, following the repository log-ignore convention."
+  ],
+  "rawEvidenceFiles": [
+    {
+      "file": "README.md",
+      "sha256": "7d1e61551c78f66e007a345fdfa3f8cd2a66fe30561be9f1f731dddfc32f9045",
+      "bytes": 4825
+    },
+    {
+      "file": "after-original-regressions.txt",
+      "sha256": "e829986d7f35cef01133669cee911626f82536625394d106438afda4ea5e6b9e",
+      "bytes": 12363
+    },
+    {
+      "file": "after-report.json",
+      "sha256": "ce4fe162ccec9f9ea3cc0fb5c1ad92d69fedc8fd5d18b89c9aec3744071375d4",
+      "bytes": 78694
+    },
+    {
+      "file": "asar-check.json",
+      "sha256": "631f96b08847ee159bcb067656701b015fdbe2caabafca9dd630b8df8626840b",
+      "bytes": 1274
+    },
+    {
+      "file": "before-disposal-regressions.txt",
+      "sha256": "3937e69906d317fe6eb5599fe9ca9a55fa654f9cfa5b26fe533dca1d49aeec47",
+      "bytes": 15251
+    },
+    {
+      "file": "before-normalization-evidence.txt",
+      "sha256": "f8d3c7bbda8acb8c4da6977cdd02d6a3fbc2ac575d7faf2cf2df58ef506e36c7",
+      "bytes": 10897
+    },
+    {
+      "file": "before-recorder-cleanup.txt",
+      "sha256": "52e76528ac445a174ddbb37d156a50f8419c2b81293b5f4d3dab0718e6d76a84",
+      "bytes": 2422
+    },
+    {
+      "file": "before-report.json",
+      "sha256": "8d9f470b1c2de81a99d5aba60630c636c42e078013c75acbe6c8669627278aa5",
+      "bytes": 62615
+    },
+    {
+      "file": "before-strict-audio.txt",
+      "sha256": "5411b91781b348524e841efe31789076f7c1d7cf03c631513c05751c875e8082",
+      "bytes": 15414
+    },
+    {
+      "file": "clean-build.txt",
+      "sha256": "ce664ff2c228b4e25706c81beed837fd288de62e241e81b89d6587a58ae39f9f",
+      "bytes": 461
+    },
+    {
+      "file": "clean-sanity.txt",
+      "sha256": "71b414b33e1a12214e56677bdd8c85857f79012a8f70a79df83b438670b437f4",
+      "bytes": 332
+    },
+    {
+      "file": "clean-tests.txt",
+      "sha256": "a0fa435208e0626179402a1fd6629f7b2e0a5e7b94378f9c3d3d6705f7702b9d",
+      "bytes": 84973
+    },
+    {
+      "file": "electron-version.txt",
+      "sha256": "773d57253af98214a31008e28142c380f4e2d49373452dd10010c9ce0ddc5a4e",
+      "bytes": 1527
+    },
+    {
+      "file": "final-processor-tests.txt",
+      "sha256": "883651db83b3453134bdc2480068f3895a1fe65950ed962bb16d98c21f2dd370",
+      "bytes": 5143
+    },
+    {
+      "file": "final-working-tests.txt",
+      "sha256": "6eecd5af5a685bf866e063572a55af750a170684f7eeb5c9ba3490cea5bd25cf",
+      "bytes": 130102
+    },
+    {
+      "file": "mp3-parity.txt",
+      "sha256": "6a70237890e2933611c32b6b771bb89fd140d12be45c9bb990fa727687873676",
+      "bytes": 1362
+    },
+    {
+      "file": "npm-audit-production.json",
+      "sha256": "a18ea025b09a523c70e706ebd80b92b06247e10cfba0edfb3c36c1c336c32bbf",
+      "bytes": 365
+    },
+    {
+      "file": "npm-audit.json",
+      "sha256": "dcc1f2c5806937be38a0fa458ee152b829b959920ec17d557d75165609f2e2a9",
+      "bytes": 20638
+    }
+  ],
+  "preservationAuditSummary": {
+    "backedUpPaths": 155,
+    "unchanged": 133,
+    "heldBodiesPreservedWithStatusPrefix": 2,
+    "scopedStabilizationChanges": 8,
+    "approvedPriorIconRetirements": 12,
+    "unexpected": 0
+  },
+  "sourceAndArtifactReadbackVerified": true
+}

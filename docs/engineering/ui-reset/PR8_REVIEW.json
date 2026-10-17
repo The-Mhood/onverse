@@ -1,0 +1,119 @@
+{
+  "profile": "fixed-pr8-reset-review-v1",
+  "base": "2faa3939b9e109e5a9ed2e0d53130dc51c5abc9e",
+  "head": "995306c927c6d0e71fb6483013f141ffd31ecb4b",
+  "sourceSha256": {
+    "src/main.js": "d732400d047e45ea2ae9118636fbe8ef8a3916111f857833e5a637475d2927c6",
+    "index.html": "8765dbba9ba37beea110ba2be13ea8fd56c0915739b1f5e36fa59ba21dc04843",
+    "src/audio/waveformPeaks.js": "98112ea172760d3929472809ded37e86b79ae6a594cd3341c320a78b9c5f29cf"
+  },
+  "status": "changes-requested",
+  "boot": {
+    "method": "Node-VM-tiny-DOM-not-browser",
+    "indexIds": [
+      "app"
+    ],
+    "error": {
+      "name": "TypeError",
+      "message": "Cannot set properties of null (setting 'onclick')",
+      "line": 1477
+    },
+    "missingElement": "#btnIdleUpload",
+    "engineCalls": [],
+    "windowEventsBeforeFailure": []
+  },
+  "preservedController": {
+    "method": "same-VM-context-after-initialization-failure-not-a-functional-audio-test",
+    "stopPlaybackError": {
+      "name": "ReferenceError",
+      "message": "stage is not defined"
+    },
+    "optionalChainingDoesNotGuardUndeclaredBindings": true
+  },
+  "peakExtraction": {
+    "bodyByteIdenticalToOriginal": true,
+    "widthCases": [
+      1,
+      2,
+      4,
+      9
+    ],
+    "syntheticInputsUnchanged": true,
+    "sameWidthCacheIdentity": true,
+    "productionConsumerAdded": false,
+    "existingEngineModified": false,
+    "protectedPathDiff": "A\tsrc/audio/waveformPeaks.js"
+  },
+  "residuals": {
+    "retainedAssets": [
+      "build/icon.icns",
+      "build/icon.iconset/icon_128x128.png",
+      "build/icon.iconset/icon_128x128@2x.png",
+      "build/icon.iconset/icon_16x16.png",
+      "build/icon.iconset/icon_16x16@2x.png",
+      "build/icon.iconset/icon_256x256.png",
+      "build/icon.iconset/icon_256x256@2x.png",
+      "build/icon.iconset/icon_32x32.png",
+      "build/icon.iconset/icon_32x32@2x.png",
+      "build/icon.iconset/icon_512x512.png",
+      "build/icon.iconset/icon_512x512@2x.png",
+      "build/icon_1024.png",
+      "public/favicon.svg",
+      "scripts/make-icon.mjs",
+      "src/assets/fonts/README.md",
+      "src/assets/fonts/manifest.json",
+      "src/assets/fonts/orbitron-OFL.txt",
+      "src/assets/fonts/orbitron-latin-wght-normal.woff2",
+      "src/assets/fonts/rajdhani-OFL.txt",
+      "src/assets/fonts/rajdhani-latin-400-normal.woff2",
+      "src/assets/fonts/rajdhani-latin-500-normal.woff2",
+      "src/assets/fonts/rajdhani-latin-600-normal.woff2",
+      "src/assets/fonts/rajdhani-latin-700-normal.woff2",
+      "src/assets/fonts/rajdhani-latin-ext-400-normal.woff2",
+      "src/assets/fonts/rajdhani-latin-ext-500-normal.woff2",
+      "src/assets/fonts/rajdhani-latin-ext-600-normal.woff2",
+      "src/assets/fonts/rajdhani-latin-ext-700-normal.woff2",
+      "src/assets/fonts/share-tech-mono-OFL.txt",
+      "src/assets/fonts/share-tech-mono-latin-400-normal.woff2"
+    ],
+    "oldRenderers": [
+      "ICONS",
+      "renderReport",
+      "buildRefHtml",
+      "renderTweakPanel",
+      "renderConvertPanel",
+      "renderAnalysis",
+      "updEnsure"
+    ],
+    "inlineSvgCount": 9,
+    "oldFaviconStillLinked": true
+  },
+  "limits": [
+    "not a browser/actual app boot",
+    "imports blanked and audio calls trapped; no decoded audio or listening",
+    "VM is a contract execution tool, not an untrusted-code security boundary",
+    "no build/native/Electron/Mac/provider verification",
+    "no candidate or protected code changes applied to working tree"
+  ],
+  "publication": {
+    "review": "https://github.com/The-Mhood/onverse/pull/8#issuecomment-6218369703",
+    "exactReproduction": "https://github.com/The-Mhood/onverse/pull/8#issuecomment-6218384660",
+    "apiBodiesReadbackExact": true,
+    "formalReview": "NOT-POSTED-self-review-rejected",
+    "approvalOrMerge": false
+  },
+  "freshNodeTests": {
+    "submittedHead": {
+      "tests": 154,
+      "pass": 151,
+      "fail": 0,
+      "todo": 3
+    },
+    "preservedLocalCore": {
+      "tests": 404,
+      "pass": 401,
+      "fail": 0,
+      "todo": 3
+    }
+  }
+}

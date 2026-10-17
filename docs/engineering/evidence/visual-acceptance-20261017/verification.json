@@ -1,0 +1,174 @@
+{
+  "baseCommit": "f32fa931e81c4a6949eb72c8f4fc37dd09a926be",
+  "branch": "arena/14df8ffa-onverse",
+  "pReviewedCommit": "295e0d31716ceb9d8e7cd978381b46450ceb73ea",
+  "disposition": "Incoming P and f32fa93 do not pass explicit visual review; corrected single-source studio passes bounded workbench visual/integration criteria. Full cinematic opening, full DAW and release qualification not complete.",
+  "pProofAdaptation": {
+    "onlyChange": "Port4173\u21924174 in isolated archived P harness; inverse replacement equals original bytes",
+    "upstreamHarnessSha256": "a98dc5ee19ceee460317e0764c223ee78e12afea9b64450e0d561735c911f88d",
+    "reviewHarnessSha256": "3a8b2823bd5782f8f26c3f1b791fcbc8b41998fa287aa4a3e30f7e99b39283b6",
+    "unchangedProtectedRegressionTestSha256": "2f45df3cd2de3cf36d8e58d465c9a89c486b709d45eaf112dfb9b94ac1e1ee33"
+  },
+  "tests": {
+    "p-protected-regressions": {
+      "tests": 23,
+      "pass": 17,
+      "fail": 6,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "published-tests": {
+      "tests": 383,
+      "pass": 383,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "held-tests": {
+      "tests": 573,
+      "pass": 573,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "root-tests": {
+      "tests": 573,
+      "pass": 572,
+      "fail": 1,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    }
+  },
+  "testCommand": "node --test; discovers scripts/test-analyze.mjs as one additional test. P negative control explicitly runs only the unchanged delivery controller test against P source.",
+  "rawTranscriptSha256": {
+    "p-protected-regressions": "51d65426af3b05f2960615798c88bd3a59fa916446bfce19ce8a8170a85f1dfe",
+    "published-tests": "f71503226382d9680f3736b17b4484303b03a90854fe70459254324470ce6a4b",
+    "held-tests": "55e9b7bfbaa490761e0389935f399f4e34b08d002bb0e5092eb9a536dc1599b5",
+    "root-tests": "6495cfd5bbd4aebe811c518112b9bb7a08e0741c1b8ce06ada550d230bb1fcdf",
+    "build": "a9cca52d30209b41be1f482ff69fc68277670a2700d9a71c6f8e88dfd7213517"
+  },
+  "transcriptFormatting": "Trailing whitespace removed in committed txt transcripts only; original local logs unchanged.",
+  "protectedTrackedPathsUnchanged": [
+    "electron/main.cjs",
+    "electron/notarize.cjs",
+    "electron/preload.cjs",
+    "package-lock.json",
+    "package.json",
+    "scripts/inline-dist.mjs",
+    "src/application/analysis/analysisController.js",
+    "src/application/analysis/analysisService.js",
+    "src/application/workbench/demo.js",
+    "src/application/workbench/workbenchController.js",
+    "src/audio/analyzer.js",
+    "src/audio/dsp.js",
+    "src/audio/genre.js",
+    "src/audio/processor.js",
+    "src/audio/reference.js",
+    "src/audio/vendor/lamejs-notices.js",
+    "src/audio/waveformPeaks.js"
+  ],
+  "originalPreservation": {
+    "originalFiles": 229,
+    "unchanged": 223,
+    "authorizedModified": [
+      "scripts/validation/run-workbench-browser.mjs",
+      "src/ui/presentation/rebuild/environment.css",
+      "src/ui/presentation/rebuild/tokens.css",
+      "src/ui/workbench/workspace.css",
+      "src/ui/workbench/workspace.js",
+      "tests/ui/cinematicShell.test.js"
+    ],
+    "missing": [],
+    "unexpectedChanges": [],
+    "heldTrackedDocs": 8,
+    "heldUntrackedFiles": 72
+  },
+  "scopedSourceSha256": {
+    "scripts/validation/run-workbench-browser.mjs": "9ba7ee56ed8df9d8fc2a8c98a8d8e3016bf27b170e00aa0314b6bb2afbdf2973",
+    "src/ui/presentation/rebuild/environment.css": "3a51d082633c5f06125344894117295fdad0dce146e09f74c34eede8a2d8b1c8",
+    "src/ui/presentation/rebuild/tokens.css": "f9341a7d400e8a05f4b40732482430d3bf60516c99d45c2f1de5b9273a074091",
+    "src/ui/workbench/workspace.css": "6a6bab2e3e176b299cad9387a63f121a7fdddee139056daa5ab88e56a988b123",
+    "src/ui/workbench/workspace.js": "f2e760dc7be351745a53c3e26ed6510b7350385f15bc1aa4d831851eb88accbe",
+    "tests/ui/cinematicShell.test.js": "259e3741b17866deb782cf0544f74502e69d11ac80e7d9a1193ac0c3fe24b1b3",
+    "src/ui/presentation/rebuild/assets/distant-nebula.jpg": "bd07f4d9b2c351b96ef5db5e8424679e666c8b2c9559809640f9549a7329635f",
+    "src/ui/presentation/rebuild/assets/distant-nebula.source.json": "c35e9885602ce0981d2bbee981930ffc78ae68a51f9d32fb89a1d4dcf7f84aa3"
+  },
+  "evidenceFiles": {
+    "audit-full.json": {
+      "bytes": 20638,
+      "sha256": "dcc1f2c5806937be38a0fa458ee152b829b959920ec17d557d75165609f2e2a9"
+    },
+    "audit-production.json": {
+      "bytes": 365,
+      "sha256": "a18ea025b09a523c70e706ebd80b92b06247e10cfba0edfb3c36c1c336c32bbf"
+    },
+    "build.txt": {
+      "bytes": 461,
+      "sha256": "a9cca52d30209b41be1f482ff69fc68277670a2700d9a71c6f8e88dfd7213517"
+    },
+    "corrected-browser.json": {
+      "bytes": 78288,
+      "sha256": "e96a9aef8086d805fa3627f5139723ab54f85fb7d0037122a603b1f7ea445864"
+    },
+    "corrected-empty-1480x920.png": {
+      "bytes": 498490,
+      "sha256": "21458980daca1ce70324a7e42b4a7ca1f1e7b4c358542ba85d3a34e82a88e0c4"
+    },
+    "corrected-loaded-1120x700.png": {
+      "bytes": 299449,
+      "sha256": "1aea75537e6d51d2adb83dd676c8ca665a0ae29146b9e12adf4d823248bde319"
+    },
+    "corrected-loaded-1480x920.png": {
+      "bytes": 429513,
+      "sha256": "33660ea04c0dad7cce3c195c7bb5cefc8745f7f24bbd8c662d570f05b2304c44"
+    },
+    "corrected-panel-open-1120x700.png": {
+      "bytes": 319753,
+      "sha256": "40012be3ecd11da2bce73c384d031eb83695e6b5bf33801533af524da2d85924"
+    },
+    "corrected-region-editing-1120x700.png": {
+      "bytes": 300323,
+      "sha256": "9cff1e380f01b1cd4cedc10328fa71ea96fcdd7009d468fce1c63c5cb77618a7"
+    },
+    "held-tests.txt": {
+      "bytes": 134566,
+      "sha256": "6a67c521e9a22e175c144bf6d4895b4ee5df3b46f00e0215ddaad078dfaefa2a"
+    },
+    "p-browser.json": {
+      "bytes": 69880,
+      "sha256": "f652e72dd21b4c25860d62d9bb53da9eb09007bc63ee4825076bc620a9827d2a"
+    },
+    "p-loaded-1120x700.png": {
+      "bytes": 495008,
+      "sha256": "2dd41c27f274d106f913fa145b4d87ee84e9bc0935cb05ea2963a965b369b374"
+    },
+    "p-loaded-1480x920.png": {
+      "bytes": 791448,
+      "sha256": "3fc22db164daa19f290da6e37b268b5ba3b7bb367c9cd70c6e0bb4d60764765f"
+    },
+    "p-protected-regressions.txt": {
+      "bytes": 19746,
+      "sha256": "99c361982d5c8563f157a19b770b035a810a62be91922ed88b587b5e004ddc24"
+    },
+    "preservation.json": {
+      "bytes": 436,
+      "sha256": "4e5835aa4741546aed4ba3ef37cc63e6286a4e47993ac1379aa17509c3634a78"
+    },
+    "published-tests.txt": {
+      "bytes": 89434,
+      "sha256": "adc88a5f2f50768122a1c69e307312f78a394da39b838eef88dbe97bc254149e"
+    },
+    "reference-verification.json": {
+      "bytes": 2716,
+      "sha256": "36adc058a92abe78d0964a7ffc7a2fb93946048a50d70f5c55b53af9d3e0a956"
+    },
+    "root-tests.txt": {
+      "bytes": 135551,
+      "sha256": "49c1a375b7bf1abb950b5f655dd1456f4f11fd6e5f41877a178d19b9404c2a09"
+    }
+  }
+}

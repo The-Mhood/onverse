@@ -1,0 +1,25 @@
+Downloading Electron binary...
+TypeError: fetch failed
+    at node:internal/deps/undici/undici:14976:13
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async FetchDownloader.download (file:///home/user/onverse/node_modules/@electron/get/dist/FetchDownloader.js:46:30)
+    at async file:///home/user/onverse/node_modules/@electron/get/dist/index.js:158:9
+    at async useAndRemoveDirectory (file:///home/user/onverse/node_modules/@electron/get/dist/utils.js:10:18)
+    at async downloadArtifact (file:///home/user/onverse/node_modules/@electron/get/dist/index.js:154:12)
+/home/user/onverse/node_modules/electron/index.js:43
+      throw new Error(
+      ^
+
+Error: Electron failed to install correctly. Please delete `node_modules/electron` and run "npx install-electron --no" manually.
+    at getElectronPath (/home/user/onverse/node_modules/electron/index.js:43:13)
+    at Object.<anonymous> (/home/user/onverse/node_modules/electron/index.js:52:18)
+    at Module._compile (node:internal/modules/cjs/loader:1781:14)
+    at Object..js (node:internal/modules/cjs/loader:1913:10)
+    at Module.load (node:internal/modules/cjs/loader:1505:32)
+    at Function._load (node:internal/modules/cjs/loader:1309:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:254:19)
+    at Module.require (node:internal/modules/cjs/loader:1527:12)
+    at require (node:internal/modules/helpers:147:16)
+    at Object.<anonymous> (/home/user/onverse/node_modules/electron/cli.js:5:18)
+
+Node.js v22.22.3

@@ -1,0 +1,22 @@
+{
+  "kind": "first-party-and-installed-production-dependency ASAR roundtrip ONLY",
+  "result": "PASS",
+  "source": "f92fe04",
+  "archiveSha256": "1a5e6e73ac928b5ac444d58910b4f6cb88bda5a1e498edd7644615bdc9220eba",
+  "bytes": 33223465,
+  "entries": 1931,
+  "checked": {
+    "dist/index.html": "b316b5ab6328c9b7f65716ff4166cab18ef768e937d0416ec3d448ed7185cb83",
+    "electron/main.cjs": "46d6d66b879cd8d884fb5a917d1bd2e0ac060da3c06be1a1773d7cfb9d574c63",
+    "electron/preload.cjs": "10e9bf6a5ef5762a7bdf1d706d2d17a52ca03b0f7c71ee1a488a9546eb9619d9",
+    "electron/notarize.cjs": "1245ee8e7de737011259a220ea29d463ad9584956410a88eca25e80ef1312aab",
+    "package.json": "f4e78274d110fdae27e7ba2031625dd64eac1898f79c212bb9a24fef66b96dda"
+  },
+  "externalEntryAssets": false,
+  "limits": [
+    "Not an electron-builder-produced executable or macOS .app/DMG/ZIP. No Electron launch, signing, Gatekeeper, updater, native permission or ownership/persistence qualification.",
+    "Dependency audit is separate; this archive demonstrates payload layout and byte-preserving ASAR packaging, not release acceptance."
+  ],
+  "artifactRetained": false,
+  "artifactCleanup": "Owned 33 MB synthetic qualification ASAR removed after successful byte/structure checks; not a release artifact."
+}

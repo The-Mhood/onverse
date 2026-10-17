@@ -1,0 +1,2560 @@
+TAP version 13
+# OK taxonomy: 13 platform categories, 35 sub-genres, all assigned
+# OK platform genre aliases
+# OK URL parsing
+# OK detection → category "Hip-Hop" · sub "Phonk" (45%) — Spotify Hip-Hop / Apple Hip-Hop/Rap / YTM Hip hop
+# OK score 32 | issues: 6
+# OK custom-target score 100 | issues: 1 | plan target lufs: -16.3
+# ALL SANITY CHECKS PASSED
+# Subtest: scripts/test-analyze.mjs
+ok 1 - scripts/test-analyze.mjs
+  ---
+  duration_ms: 321.0925
+  type: 'test'
+  ...
+# Subtest: deterministic PCM fixture controls
+    # Subtest: reproduces identical samples without sharing channel or fixture storage
+    ok 1 - reproduces identical samples without sharing channel or fixture storage
+      ---
+      duration_ms: 11.395783
+      type: 'test'
+      ...
+    # Subtest: copies input PCM and exposes the requested metadata
+    ok 2 - copies input PCM and exposes the requested metadata
+      ---
+      duration_ms: 0.182296
+      type: 'test'
+      ...
+    # Subtest: rejects malformed fixture geometry and invalid channel access
+    ok 3 - rejects malformed fixture geometry and invalid channel access
+      ---
+      duration_ms: 3.248791
+      type: 'test'
+      ...
+    1..3
+ok 2 - deterministic PCM fixture controls
+  ---
+  duration_ms: 15.908892
+  type: 'suite'
+  ...
+# Subtest: real analyze: control cases
+    # Subtest: measures the sample-aligned in-phase tone peak and finite spectrum
+    ok 1 - measures the sample-aligned in-phase tone peak and finite spectrum
+      ---
+      duration_ms: 63.700207
+      type: 'test'
+      ...
+    # Subtest: preserves every source channel during measurement
+    ok 2 - preserves every source channel during measurement
+      ---
+      duration_ms: 31.722038
+      type: 'test'
+      ...
+    # Subtest: returns finite spectral values for a full-length silent buffer
+    ok 3 - returns finite spectral values for a full-length silent buffer
+      ---
+      duration_ms: 26.992432
+      type: 'test'
+      ...
+    # Subtest: handles an input of 4096 frames at or above the FFT window
+    ok 4 - handles an input of 4096 frames at or above the FFT window
+      ---
+      duration_ms: 11.341567
+      type: 'test'
+      ...
+    # Subtest: handles an input of 4097 frames at or above the FFT window
+    ok 5 - handles an input of 4097 frames at or above the FFT window
+      ---
+      duration_ms: 12.007642
+      type: 'test'
+      ...
+    # Subtest: preserves the pre-fix complete-window spectral fingerprint at 4096 frames
+    ok 6 - preserves the pre-fix complete-window spectral fingerprint at 4096 frames
+      ---
+      duration_ms: 12.711199
+      type: 'test'
+      ...
+    # Subtest: preserves the pre-fix complete-window spectral fingerprint at 4097 frames
+    ok 7 - preserves the pre-fix complete-window spectral fingerprint at 4097 frames
+      ---
+      duration_ms: 13.549511
+      type: 'test'
+      ...
+    # Subtest: preserves the pre-fix complete-window spectral fingerprint at 8192 frames
+    ok 8 - preserves the pre-fix complete-window spectral fingerprint at 8192 frames
+      ---
+      duration_ms: 12.86635
+      type: 'test'
+      ...
+    1..8
+ok 3 - real analyze: control cases
+  ---
+  duration_ms: 185.800586
+  type: 'suite'
+  ...
+# Subtest: real analyze: short-input FFT regressions
+    # Subtest: zero-pads 1 frames without changing source samples or metadata
+    ok 1 - zero-pads 1 frames without changing source samples or metadata
+      ---
+      duration_ms: 21.686014
+      type: 'test'
+      ...
+    # Subtest: zero-pads 100 frames without changing source samples or metadata
+    ok 2 - zero-pads 100 frames without changing source samples or metadata
+      ---
+      duration_ms: 18.484892
+      type: 'test'
+      ...
+    # Subtest: zero-pads 4095 frames without changing source samples or metadata
+    ok 3 - zero-pads 4095 frames without changing source samples or metadata
+      ---
+      duration_ms: 17.987345
+      type: 'test'
+      ...
+    1..3
+ok 4 - real analyze: short-input FFT regressions
+  ---
+  duration_ms: 58.452489
+  type: 'suite'
+  ...
+# Subtest: real analyze: channel-aware sample measurements
+    # Subtest: keeps sample peak when only the right channel polarity is inverted
+    ok 1 - keeps sample peak when only the right channel polarity is inverted
+      ---
+      duration_ms: 13.586225
+      type: 'test'
+      ...
+    # Subtest: uses the strongest channel regardless of channel order
+    ok 2 - uses the strongest channel regardless of channel order
+      ---
+      duration_ms: 18.056517
+      type: 'test'
+      ...
+    # Subtest: keeps RMS and derived crest stable under channel polarity inversion
+    ok 3 - keeps RMS and derived crest stable under channel polarity inversion
+      ---
+      duration_ms: 31.306609
+      type: 'test'
+      ...
+    # Subtest: computes RMS from mean channel energy, not a mono channel average
+    ok 4 - computes RMS from mean channel energy, not a mono channel average
+      ---
+      duration_ms: 7.842401
+      type: 'test'
+      ...
+    # Subtest: examines all channels, not just the stereo pair
+    ok 5 - examines all channels, not just the stereo pair
+      ---
+      duration_ms: 8.85875
+      type: 'test'
+      ...
+    # Subtest: preserves sample peak and crest when a mono channel is duplicated
+    ok 6 - preserves sample peak and crest when a mono channel is duplicated
+      ---
+      duration_ms: 30.231877
+      type: 'test'
+      ...
+    1..6
+ok 5 - real analyze: channel-aware sample measurements
+  ---
+  duration_ms: 110.411719
+  type: 'suite'
+  ...
+# Subtest: real analyze: channel-energy loudness regression
+    # Subtest: keeps channel-energy loudness invariant under right-channel polarity inversion
+    ok 1 - keeps channel-energy loudness invariant under right-channel polarity inversion
+      ---
+      duration_ms: 29.555263
+      type: 'test'
+      ...
+    1..1
+ok 6 - real analyze: channel-energy loudness regression
+  ---
+  duration_ms: 29.747788
+  type: 'suite'
+  ...
+# Subtest: real analyzeFast: control cases
+    # Subtest: measures the sample-aligned in-phase tone peak and finite spectrum
+    ok 1 - measures the sample-aligned in-phase tone peak and finite spectrum
+      ---
+      duration_ms: 10.431485
+      type: 'test'
+      ...
+    # Subtest: preserves every source channel during measurement
+    ok 2 - preserves every source channel during measurement
+      ---
+      duration_ms: 10.284349
+      type: 'test'
+      ...
+    # Subtest: returns finite spectral values for a full-length silent buffer
+    ok 3 - returns finite spectral values for a full-length silent buffer
+      ---
+      duration_ms: 5.705359
+      type: 'test'
+      ...
+    # Subtest: handles an input of 4096 frames at or above the FFT window
+    ok 4 - handles an input of 4096 frames at or above the FFT window
+      ---
+      duration_ms: 3.326741
+      type: 'test'
+      ...
+    # Subtest: handles an input of 4097 frames at or above the FFT window
+    ok 5 - handles an input of 4097 frames at or above the FFT window
+      ---
+      duration_ms: 3.71241
+      type: 'test'
+      ...
+    # Subtest: preserves the pre-fix complete-window spectral fingerprint at 4096 frames
+    ok 6 - preserves the pre-fix complete-window spectral fingerprint at 4096 frames
+      ---
+      duration_ms: 2.651449
+      type: 'test'
+      ...
+    # Subtest: preserves the pre-fix complete-window spectral fingerprint at 4097 frames
+    ok 7 - preserves the pre-fix complete-window spectral fingerprint at 4097 frames
+      ---
+      duration_ms: 3.011612
+      type: 'test'
+      ...
+    # Subtest: preserves the pre-fix complete-window spectral fingerprint at 8192 frames
+    ok 8 - preserves the pre-fix complete-window spectral fingerprint at 8192 frames
+      ---
+      duration_ms: 4.397216
+      type: 'test'
+      ...
+    1..8
+ok 7 - real analyzeFast: control cases
+  ---
+  duration_ms: 44.053323
+  type: 'suite'
+  ...
+# Subtest: real analyzeFast: short-input FFT regressions
+    # Subtest: zero-pads 1 frames without changing source samples or metadata
+    ok 1 - zero-pads 1 frames without changing source samples or metadata
+      ---
+      duration_ms: 6.063616
+      type: 'test'
+      ...
+    # Subtest: zero-pads 100 frames without changing source samples or metadata
+    ok 2 - zero-pads 100 frames without changing source samples or metadata
+      ---
+      duration_ms: 5.670447
+      type: 'test'
+      ...
+    # Subtest: zero-pads 4095 frames without changing source samples or metadata
+    ok 3 - zero-pads 4095 frames without changing source samples or metadata
+      ---
+      duration_ms: 5.550185
+      type: 'test'
+      ...
+    1..3
+ok 8 - real analyzeFast: short-input FFT regressions
+  ---
+  duration_ms: 17.559143
+  type: 'suite'
+  ...
+# Subtest: real analyzeFast: channel-aware sample measurements
+    # Subtest: keeps sample peak when only the right channel polarity is inverted
+    ok 1 - keeps sample peak when only the right channel polarity is inverted
+      ---
+      duration_ms: 8.381221
+      type: 'test'
+      ...
+    # Subtest: uses the strongest channel regardless of channel order
+    ok 2 - uses the strongest channel regardless of channel order
+      ---
+      duration_ms: 4.588128
+      type: 'test'
+      ...
+    # Subtest: keeps RMS and derived crest stable under channel polarity inversion
+    ok 3 - keeps RMS and derived crest stable under channel polarity inversion
+      ---
+      duration_ms: 13.94107
+      type: 'test'
+      ...
+    # Subtest: computes RMS from mean channel energy, not a mono channel average
+    ok 4 - computes RMS from mean channel energy, not a mono channel average
+      ---
+      duration_ms: 3.085988
+      type: 'test'
+      ...
+    # Subtest: examines all channels, not just the stereo pair
+    ok 5 - examines all channels, not just the stereo pair
+      ---
+      duration_ms: 3.040711
+      type: 'test'
+      ...
+    # Subtest: preserves sample peak and crest when a mono channel is duplicated
+    ok 6 - preserves sample peak and crest when a mono channel is duplicated
+      ---
+      duration_ms: 15.349868
+      type: 'test'
+      ...
+    1..6
+ok 9 - real analyzeFast: channel-aware sample measurements
+  ---
+  duration_ms: 48.797738
+  type: 'suite'
+  ...
+# Subtest: real analyzeFast: channel-energy loudness regression
+    # Subtest: keeps channel-energy loudness invariant under right-channel polarity inversion
+    ok 1 - keeps channel-energy loudness invariant under right-channel polarity inversion
+      ---
+      duration_ms: 15.362877
+      type: 'test'
+      ...
+    1..1
+ok 10 - real analyzeFast: channel-energy loudness regression
+  ---
+  duration_ms: 15.543186
+  type: 'suite'
+  ...
+# Subtest: full analysis metadata and stereo controls
+    # Subtest: reports source geometry and detects opposite-polarity stereo correlation
+    ok 1 - reports source geometry and detects opposite-polarity stereo correlation
+      ---
+      duration_ms: 13.715294
+      type: 'test'
+      ...
+    # Subtest: detects clipping for an in-phase tone exceeding full scale
+    ok 2 - detects clipping for an in-phase tone exceeding full scale
+      ---
+      duration_ms: 21.170174
+      type: 'test'
+      ...
+    # Subtest: does not lose clipping when only right-channel polarity changes
+    ok 3 - does not lose clipping when only right-channel polarity changes
+      ---
+      duration_ms: 29.577954
+      type: 'test'
+      ...
+    # Subtest: counts a clipped frame once even when both channels clip
+    ok 4 - counts a clipped frame once even when both channels clip
+      ---
+      duration_ms: 8.925159
+      type: 'test'
+      ...
+    # Subtest: preserves the existing clipping threshold for positive and negative samples
+    ok 5 - preserves the existing clipping threshold for positive and negative samples
+      ---
+      duration_ms: 9.095826
+      type: 'test'
+      ...
+    # Subtest: detects negative clipping in a single active channel
+    ok 6 - detects negative clipping in a single active channel
+      ---
+      duration_ms: 7.834533
+      type: 'test'
+      ...
+    1..6
+ok 11 - full analysis metadata and stereo controls
+  ---
+  duration_ms: 90.844881
+  type: 'suite'
+  ...
+# Subtest: real quickLufs post-render measurement
+    # Subtest: returns a finite result for an in-phase tone
+    ok 1 - returns a finite result for an in-phase tone
+      ---
+      duration_ms: 3.662018
+      type: 'test'
+      ...
+    # Subtest: keeps channel-energy loudness invariant under right-channel polarity inversion
+    ok 2 - keeps channel-energy loudness invariant under right-channel polarity inversion
+      ---
+      duration_ms: 6.675533
+      type: 'test'
+      ...
+    1..2
+ok 12 - real quickLufs post-render measurement
+  ---
+  duration_ms: 10.461315
+  type: 'suite'
+  ...
+# Subtest: isolated candidate mathematical gates
+    # Subtest: uses inclusive absolute energy threshold without rounding
+    ok 1 - uses inclusive absolute energy threshold without rounding
+      ---
+      duration_ms: 1.067603
+      type: 'test'
+      ...
+    # Subtest: includes equality at the relative gate
+    ok 2 - includes equality at the relative gate
+      ---
+      duration_ms: 0.221873
+      type: 'test'
+      ...
+    # Subtest: excludes a value below the relative gate
+    ok 3 - excludes a value below the relative gate
+      ---
+      duration_ms: 0.128376
+      type: 'test'
+      ...
+    # Subtest: includes a value above the relative gate
+    ok 4 - includes a value above the relative gate
+      ---
+      duration_ms: 0.10328
+      type: 'test'
+      ...
+    # Subtest: averages energy rather than dB readings
+    ok 5 - averages energy rather than dB readings
+      ---
+      duration_ms: 0.186312
+      type: 'test'
+      ...
+    # Subtest: removes quiet windows through the relative gate
+    ok 6 - removes quiet windows through the relative gate
+      ---
+      duration_ms: 0.166272
+      type: 'test'
+      ...
+    # Subtest: represents no above-gate evidence without a numeric floor
+    ok 7 - represents no above-gate evidence without a numeric floor
+      ---
+      duration_ms: 0.190028
+      type: 'test'
+      ...
+    # Subtest: does not mutate energy inputs
+    ok 8 - does not mutate energy inputs
+      ---
+      duration_ms: 0.851051
+      type: 'test'
+      ...
+    # Subtest: rejects invalid energy input -1
+    ok 9 - rejects invalid energy input -1
+      ---
+      duration_ms: 0.353792
+      type: 'test'
+      ...
+    # Subtest: rejects invalid energy input NaN
+    ok 10 - rejects invalid energy input NaN
+      ---
+      duration_ms: 0.308621
+      type: 'test'
+      ...
+    # Subtest: rejects invalid energy input Infinity
+    ok 11 - rejects invalid energy input Infinity
+      ---
+      duration_ms: 0.092843
+      type: 'test'
+      ...
+    # Subtest: rejects invalid energy input
+    ok 12 - rejects invalid energy input
+      ---
+      duration_ms: 0.070471
+      type: 'test'
+      ...
+    # Subtest: rejects invalid energy input ,
+    ok 13 - rejects invalid energy input ,
+      ---
+      duration_ms: 0.057778
+      type: 'test'
+      ...
+    # Subtest: rejects invalid energy input null
+    ok 14 - rejects invalid energy input null
+      ---
+      duration_ms: 0.055338
+      type: 'test'
+      ...
+    # Subtest: rejects invalid energy input [object Object]
+    ok 15 - rejects invalid energy input [object Object]
+      ---
+      duration_ms: 0.052302
+      type: 'test'
+      ...
+    1..15
+ok 13 - isolated candidate mathematical gates
+  ---
+  duration_ms: 5.210513
+  type: 'suite'
+  ...
+# Subtest: isolated candidate actual PCM at 44100
+    # Subtest: sums duplicate stereo energy without changing mono to dual-mono
+    ok 1 - sums duplicate stereo energy without changing mono to dual-mono
+      ---
+      duration_ms: 37.966412
+      type: 'test'
+      ...
+    # Subtest: preserves energy through channel polarity inversion
+    ok 2 - preserves energy through channel polarity inversion
+      ---
+      duration_ms: 35.691061
+      type: 'test'
+      ...
+    # Subtest: handles active left/right channels
+    ok 3 - handles active left/right channels
+      ---
+      duration_ms: 26.454764
+      type: 'test'
+      ...
+    # Subtest: obeys linear-amplitude gain law above the gates
+    ok 4 - obeys linear-amplitude gain law above the gates
+      ---
+      duration_ms: 13.457321
+      type: 'test'
+      ...
+    # Subtest: returns below-gate status for silence and very quiet PCM
+    ok 5 - returns below-gate status for silence and very quiet PCM
+      ---
+      duration_ms: 12.416573
+      type: 'test'
+      ...
+    # Subtest: does not invent a 400 ms window for short PCM
+    ok 6 - does not invent a 400 ms window for short PCM
+      ---
+      duration_ms: 2.967939
+      type: 'test'
+      ...
+    # Subtest: counts complete overlapping windows and ignores the incomplete tail
+    ok 7 - counts complete overlapping windows and ignores the incomplete tail
+      ---
+      duration_ms: 8.259929
+      type: 'test'
+      ...
+    # Subtest: retains filter/window state across arbitrary chunk boundaries
+    ok 8 - retains filter/window state across arbitrary chunk boundaries
+      ---
+      duration_ms: 65.855837
+      type: 'test'
+      ...
+    # Subtest: weights frequencies rather than treating PCM RMS as LUFS
+    ok 9 - weights frequencies rather than treating PCM RMS as LUFS
+      ---
+      duration_ms: 12.983611
+      type: 'test'
+      ...
+    # Subtest: preserves over-full-scale source PCM and freezes research evidence
+    ok 10 - preserves over-full-scale source PCM and freezes research evidence
+      ---
+      duration_ms: 11.136938
+      type: 'test'
+      ...
+    1..10
+ok 14 - isolated candidate actual PCM at 44100
+  ---
+  duration_ms: 227.674086
+  type: 'suite'
+  ...
+# Subtest: isolated candidate actual PCM at 48000
+    # Subtest: sums duplicate stereo energy without changing mono to dual-mono
+    ok 1 - sums duplicate stereo energy without changing mono to dual-mono
+      ---
+      duration_ms: 18.503567
+      type: 'test'
+      ...
+    # Subtest: preserves energy through channel polarity inversion
+    ok 2 - preserves energy through channel polarity inversion
+      ---
+      duration_ms: 23.543735
+      type: 'test'
+      ...
+    # Subtest: handles active left/right channels
+    ok 3 - handles active left/right channels
+      ---
+      duration_ms: 27.354
+      type: 'test'
+      ...
+    # Subtest: obeys linear-amplitude gain law above the gates
+    ok 4 - obeys linear-amplitude gain law above the gates
+      ---
+      duration_ms: 15.581053
+      type: 'test'
+      ...
+    # Subtest: returns below-gate status for silence and very quiet PCM
+    ok 5 - returns below-gate status for silence and very quiet PCM
+      ---
+      duration_ms: 19.492775
+      type: 'test'
+      ...
+    # Subtest: does not invent a 400 ms window for short PCM
+    ok 6 - does not invent a 400 ms window for short PCM
+      ---
+      duration_ms: 4.044941
+      type: 'test'
+      ...
+    # Subtest: counts complete overlapping windows and ignores the incomplete tail
+    ok 7 - counts complete overlapping windows and ignores the incomplete tail
+      ---
+      duration_ms: 9.352343
+      type: 'test'
+      ...
+    # Subtest: retains filter/window state across arbitrary chunk boundaries
+    ok 8 - retains filter/window state across arbitrary chunk boundaries
+      ---
+      duration_ms: 62.694762
+      type: 'test'
+      ...
+    # Subtest: weights frequencies rather than treating PCM RMS as LUFS
+    ok 9 - weights frequencies rather than treating PCM RMS as LUFS
+      ---
+      duration_ms: 14.53101
+      type: 'test'
+      ...
+    # Subtest: preserves over-full-scale source PCM and freezes research evidence
+    ok 10 - preserves over-full-scale source PCM and freezes research evidence
+      ---
+      duration_ms: 10.805987
+      type: 'test'
+      ...
+    1..10
+ok 15 - isolated candidate actual PCM at 48000
+  ---
+  duration_ms: 206.364286
+  type: 'suite'
+  ...
+# Subtest: candidate validation and lifecycle
+    # Subtest: rejects unsupported sample rate undefined
+    ok 1 - rejects unsupported sample rate undefined
+      ---
+      duration_ms: 0.495338
+      type: 'test'
+      ...
+    # Subtest: rejects unsupported sample rate 0
+    ok 2 - rejects unsupported sample rate 0
+      ---
+      duration_ms: 0.079111
+      type: 'test'
+      ...
+    # Subtest: rejects unsupported sample rate 32000
+    ok 3 - rejects unsupported sample rate 32000
+      ---
+      duration_ms: 0.079733
+      type: 'test'
+      ...
+    # Subtest: rejects unsupported sample rate 96000
+    ok 4 - rejects unsupported sample rate 96000
+      ---
+      duration_ms: 0.068271
+      type: 'test'
+      ...
+    # Subtest: rejects unsupported sample rate NaN
+    ok 5 - rejects unsupported sample rate NaN
+      ---
+      duration_ms: 0.056294
+      type: 'test'
+      ...
+    # Subtest: rejects unsupported channels undefined
+    ok 6 - rejects unsupported channels undefined
+      ---
+      duration_ms: 0.104988
+      type: 'test'
+      ...
+    # Subtest: rejects unsupported channels 0
+    ok 7 - rejects unsupported channels 0
+      ---
+      duration_ms: 0.056816
+      type: 'test'
+      ...
+    # Subtest: rejects unsupported channels 3
+    ok 8 - rejects unsupported channels 3
+      ---
+      duration_ms: 0.055923
+      type: 'test'
+      ...
+    # Subtest: rejects unsupported channels 1.5
+    ok 9 - rejects unsupported channels 1.5
+      ---
+      duration_ms: 0.119739
+      type: 'test'
+      ...
+    # Subtest: represents an empty stream as insufficient duration, not silence
+    ok 10 - represents an empty stream as insufficient duration, not silence
+      ---
+      duration_ms: 0.094708
+      type: 'test'
+      ...
+    # Subtest: finalizes idempotently and refuses more input
+    ok 11 - finalizes idempotently and refuses more input
+      ---
+      duration_ms: 0.9072
+      type: 'test'
+      ...
+    # Subtest: rejects malformed or nonfinite chunks atomically, leaving prior state intact
+    ok 12 - rejects malformed or nonfinite chunks atomically, leaving prior state intact
+      ---
+      duration_ms: 13.484052
+      type: 'test'
+      ...
+    # Subtest: refuses shared mutable storage without consuming any frames
+    ok 13 - refuses shared mutable storage without consuming any frames
+      ---
+      duration_ms: 0.202489
+      type: 'test'
+      ...
+    # Subtest: bounds research input duration without partially accepting an oversized chunk
+    ok 14 - bounds research input duration without partially accepting an oversized chunk
+      ---
+      duration_ms: 0.161498
+      type: 'test'
+      ...
+    # Subtest: can measure a single over-full-scale sample without mutating it
+    ok 15 - can measure a single over-full-scale sample without mutating it
+      ---
+      duration_ms: 0.105886
+      type: 'test'
+      ...
+    1..15
+ok 16 - candidate validation and lifecycle
+  ---
+  duration_ms: 16.47156
+  type: 'suite'
+  ...
+# Subtest: offline comparison preflight
+    # Subtest: rejects an absent or unrelated report before measurements
+    ok 1 - rejects an absent or unrelated report before measurements
+      ---
+      duration_ms: 1.708255
+      type: 'test'
+      ...
+    # Subtest: rejects a different repository rather than resolving an imported path
+    ok 2 - rejects a different repository rather than resolving an imported path
+      ---
+      duration_ms: 0.18436
+      type: 'test'
+      ...
+    # Subtest: rejects a different reference revision
+    ok 3 - rejects a different reference revision
+      ---
+      duration_ms: 0.15872
+      type: 'test'
+      ...
+    1..3
+ok 17 - offline comparison preflight
+  ---
+  duration_ms: 2.223847
+  type: 'suite'
+  ...
+# Subtest: lamejs min distribution is byte-identical for 1 channels / 128 kbps
+ok 18 - lamejs min distribution is byte-identical for 1 channels / 128 kbps
+  ---
+  duration_ms: 588.241196
+  type: 'test'
+  ...
+# Subtest: lamejs min distribution is byte-identical for 1 channels / 192 kbps
+ok 19 - lamejs min distribution is byte-identical for 1 channels / 192 kbps
+  ---
+  duration_ms: 496.043772
+  type: 'test'
+  ...
+# Subtest: lamejs min distribution is byte-identical for 1 channels / 320 kbps
+ok 20 - lamejs min distribution is byte-identical for 1 channels / 320 kbps
+  ---
+  duration_ms: 520.383861
+  type: 'test'
+  ...
+# Subtest: lamejs min distribution is byte-identical for 2 channels / 128 kbps
+ok 21 - lamejs min distribution is byte-identical for 2 channels / 128 kbps
+  ---
+  duration_ms: 597.105119
+  type: 'test'
+  ...
+# Subtest: lamejs min distribution is byte-identical for 2 channels / 192 kbps
+ok 22 - lamejs min distribution is byte-identical for 2 channels / 192 kbps
+  ---
+  duration_ms: 462.814589
+  type: 'test'
+  ...
+# Subtest: lamejs min distribution is byte-identical for 2 channels / 320 kbps
+ok 23 - lamejs min distribution is byte-identical for 2 channels / 320 kbps
+  ---
+  duration_ms: 658.588437
+  type: 'test'
+  ...
+# Subtest: retains every upstream copyright/license comment and the package LICENSE
+ok 24 - retains every upstream copyright/license comment and the package LICENSE
+  ---
+  duration_ms: 2.680168
+  type: 'test'
+  ...
+# Subtest: automatic normalization rejects one frame before rendering, preserving PCM
+ok 25 - automatic normalization rejects one frame before rendering, preserving PCM
+  ---
+  duration_ms: 1.976773
+  type: 'test'
+  ...
+# Subtest: automatic normalization rejects incomplete window before rendering, preserving PCM
+ok 26 - automatic normalization rejects incomplete window before rendering, preserving PCM
+  ---
+  duration_ms: 7.134447
+  type: 'test'
+  ...
+# Subtest: automatic normalization rejects silence before rendering, preserving PCM
+ok 27 - automatic normalization rejects silence before rendering, preserving PCM
+  ---
+  duration_ms: 9.189456
+  type: 'test'
+  ...
+# Subtest: automatic normalization rejects below meter floor before rendering, preserving PCM
+ok 28 - automatic normalization rejects below meter floor before rendering, preserving PCM
+  ---
+  duration_ms: 11.025664
+  type: 'test'
+  ...
+# Subtest: normalization rejects non-finite target NaN before rendering
+ok 29 - normalization rejects non-finite target NaN before rendering
+  ---
+  duration_ms: 5.452529
+  type: 'test'
+  ...
+# Subtest: normalization rejects non-finite target Infinity before rendering
+ok 30 - normalization rejects non-finite target Infinity before rendering
+  ---
+  duration_ms: 2.608346
+  type: 'test'
+  ...
+# Subtest: normalization rejects non-finite target -Infinity before rendering
+ok 31 - normalization rejects non-finite target -Infinity before rendering
+  ---
+  duration_ms: 2.72205
+  type: 'test'
+  ...
+# Subtest: a rendered-silent result rejects before post-render multiplication and preserves A
+ok 32 - a rendered-silent result rejects before post-render multiplication and preserves A
+  ---
+  duration_ms: 12.510086
+  type: 'test'
+  ...
+# Subtest: recipes are independent objects with exact selection and source boundaries
+ok 33 - recipes are independent objects with exact selection and source boundaries
+  ---
+  duration_ms: 2.917395
+  type: 'test'
+  ...
+# Subtest: source Float32/gain/sum oracle has exact original and updated peaks/alignment
+ok 34 - source Float32/gain/sum oracle has exact original and updated peaks/alignment
+  ---
+  duration_ms: 11.624645
+  type: 'test'
+  ...
+# Subtest: unselected Vocal edit leaves source bytes identical
+ok 35 - unselected Vocal edit leaves source bytes identical
+  ---
+  duration_ms: 7.520643
+  type: 'test'
+  ...
+# Subtest: silence is finite exact zero
+ok 36 - silence is finite exact zero
+  ---
+  duration_ms: 2.745385
+  type: 'test'
+  ...
+# Subtest: independent over-range L/R impulses preserve signs/positions without crossfeed
+ok 37 - independent over-range L/R impulses preserve signs/positions without crossfeed
+  ---
+  duration_ms: 1.304513
+  type: 'test'
+  ...
+# Subtest: Float32 codec preserves over-range samples and negative-zero exact bytes
+ok 38 - Float32 codec preserves over-range samples and negative-zero exact bytes
+  ---
+  duration_ms: 0.325772
+  type: 'test'
+  ...
+# Subtest: codec rejects mismatched channel counts, lengths and unsupported/truncated dimensions
+ok 39 - codec rejects mismatched channel counts, lengths and unsupported/truncated dimensions
+  ---
+  duration_ms: 0.546522
+  type: 'test'
+  ...
+# Subtest: encoder rejects NaN, Infinity AND finite Float64 that overflows Float32
+ok 40 - encoder rejects NaN, Infinity AND finite Float64 that overflows Float32
+  ---
+  duration_ms: 0.1912
+  type: 'test'
+  ...
+# Subtest: decoder rejects nonfinite encoded Float32
+ok 41 - decoder rejects nonfinite encoded Float32
+  ---
+  duration_ms: 0.351096
+  type: 'test'
+  ...
+# Subtest: canonical complete base64 transport only
+ok 42 - canonical complete base64 transport only
+  ---
+  duration_ms: 4.091779
+  type: 'test'
+  ...
+# Subtest: independent RBJ oracle DC unity, zero gain identity, +3dB centre response
+ok 43 - independent RBJ oracle DC unity, zero gain identity, +3dB centre response
+  ---
+  duration_ms: 0.394793
+  type: 'test'
+  ...
+# Subtest: destination oracle preserves unrelated audio before linked placement and filter tail
+ok 44 - destination oracle preserves unrelated audio before linked placement and filter tail
+  ---
+  duration_ms: 10.959338
+  type: 'test'
+  ...
+# Subtest: unchanged numeric gate rejects errors above 2e-6 and invalid comparison data
+ok 45 - unchanged numeric gate rejects errors above 2e-6 and invalid comparison data
+  ---
+  duration_ms: 0.324393
+  type: 'test'
+  ...
+# Subtest: native absence is an explicit failure, not a JS substitute
+ok 46 - native absence is an explicit failure, not a JS substitute
+  ---
+  duration_ms: 0.653205
+  type: 'test'
+  ...
+# Subtest: separate-process reopening equals stored bytes; metadata contains no audio arrays
+ok 47 - separate-process reopening equals stored bytes; metadata contains no audio arrays
+  ---
+  duration_ms: 111.603938
+  type: 'test'
+  ...
+# Subtest: existing media or metadata is never overwritten
+ok 48 - existing media or metadata is never overwritten
+  ---
+  duration_ms: 21.611736
+  type: 'test'
+  ...
+# Subtest: validate complete media input BEFORE any file is written
+ok 49 - validate complete media input BEFORE any file is written
+  ---
+  duration_ms: 6.315166
+  type: 'test'
+  ...
+# Subtest: same-length corrupted media rejected by separate process
+ok 50 - same-length corrupted media rejected by separate process
+  ---
+  duration_ms: 51.723751
+  type: 'test'
+  ...
+# Subtest: truncated media rejected
+ok 51 - truncated media rejected
+  ---
+  duration_ms: 14.885951
+  type: 'test'
+  ...
+# Subtest: altered layout metadata rejected
+ok 52 - altered layout metadata rejected
+  ---
+  duration_ms: 8.226813
+  type: 'test'
+  ...
+# Subtest: altered sampleRate metadata rejected
+ok 53 - altered sampleRate metadata rejected
+  ---
+  duration_ms: 8.922917
+  type: 'test'
+  ...
+# Subtest: altered frames metadata rejected
+ok 54 - altered frames metadata rejected
+  ---
+  duration_ms: 10.292477
+  type: 'test'
+  ...
+# Subtest: oversized/malformed manifests rejected
+ok 55 - oversized/malformed manifests rejected
+  ---
+  duration_ms: 8.167932
+  type: 'test'
+  ...
+# Subtest: matching-byte symlink to foreign media is rejected
+ok 56 - matching-byte symlink to foreign media is rejected
+  ---
+  duration_ms: 11.307965
+  type: 'test'
+  ...
+# Subtest: traversal, wrong ownership, non-temporary root rejected
+ok 57 - traversal, wrong ownership, non-temporary root rejected
+  ---
+  duration_ms: 5.850938
+  type: 'test'
+  ...
+# Subtest: arbitrary toolkit directory refused before importing code
+ok 58 - arbitrary toolkit directory refused before importing code
+  ---
+  duration_ms: 2.225906
+  type: 'test'
+  ...
+# Subtest: toolkit audit refuses TMPDIR redirection before loading a toolkit
+ok 59 - toolkit audit refuses TMPDIR redirection before loading a toolkit
+  ---
+  duration_ms: 1.05906
+  type: 'test'
+  ...
+# Subtest: toolkit lock entries cannot traverse outside the private toolkit root
+ok 60 - toolkit lock entries cannot traverse outside the private toolkit root
+  ---
+  duration_ms: 6.143857
+  type: 'test'
+  ...
+# Subtest: recorder constructor failure closes its context/tracks and preserves the real error
+ok 61 - recorder constructor failure closes its context/tracks and preserves the real error
+  ---
+  duration_ms: 8.610575
+  type: 'test'
+  ...
+# Subtest: recorder start failure closes its context/tracks and preserves the real error
+ok 62 - recorder start failure closes its context/tracks and preserves the real error
+  ---
+  duration_ms: 3.494825
+  type: 'test'
+  ...
+# Subtest: recorder source-start failure closes its context/tracks and preserves the real error
+ok 63 - recorder source-start failure closes its context/tracks and preserves the real error
+  ---
+  duration_ms: 3.692014
+  type: 'test'
+  ...
+# Subtest: runtime recorder error rejects promptly, cancels timer and releases ownership
+ok 64 - runtime recorder error rejects promptly, cancels timer and releases ownership
+  ---
+  duration_ms: 4.197866
+  type: 'test'
+  ...
+# Subtest: timer stop failure rejects instead of hanging and still closes context
+ok 65 - timer stop failure rejects instead of hanging and still closes context
+  ---
+  duration_ms: 16.029035
+  type: 'test'
+  ...
+# Subtest: successful recorder owns its timer, source, tracks and context through onstop
+ok 66 - successful recorder owns its timer, source, tracks and context through onstop
+  ---
+  duration_ms: 4.108288
+  type: 'test'
+  ...
+# Subtest: empty recording rejects rather than fabricating successful output
+ok 67 - empty recording rejects rather than fabricating successful output
+  ---
+  duration_ms: 2.951861
+  type: 'test'
+  ...
+# Subtest: primary recorder error remains the cause when close also fails; every release is attempted
+ok 68 - primary recorder error remains the cause when close also fails; every release is attempted
+  ---
+  duration_ms: 3.252051
+  type: 'test'
+  ...
+# Subtest: analyze channel-energy semantics at 44100
+    # Subtest: preserves the existing mono filter/window calibration
+    ok 1 - preserves the existing mono filter/window calibration
+      ---
+      duration_ms: 59.663897
+      type: 'test'
+      ...
+    # Subtest: duplicate mono adds 10log10(2), not an implicit dual-mono correction
+    ok 2 - duplicate mono adds 10log10(2), not an implicit dual-mono correction
+      ---
+      duration_ms: 72.19805
+      type: 'test'
+      ...
+    # Subtest: one active L or R retains native mono energy
+    ok 3 - one active L or R retains native mono energy
+      ---
+      duration_ms: 55.925439
+      type: 'test'
+      ...
+    # Subtest: unequal channels sum energy rather than signed samples or average power
+    ok 4 - unequal channels sum energy rather than signed samples or average power
+      ---
+      duration_ms: 28.382405
+      type: 'test'
+      ...
+    # Subtest: quarter-cycle decorrelation sums the two independently measured powers
+    ok 5 - quarter-cycle decorrelation sums the two independently measured powers
+      ---
+      duration_ms: 38.885424
+      type: 'test'
+      ...
+    # Subtest: obeys gain law without changing or sharing original channel samples
+    ok 6 - obeys gain law without changing or sharing original channel samples
+      ---
+      duration_ms: 28.369636
+      type: 'test'
+      ...
+    1..6
+ok 69 - analyze channel-energy semantics at 44100
+  ---
+  duration_ms: 284.799758
+  type: 'suite'
+  ...
+# Subtest: analyzeFast channel-energy semantics at 44100
+    # Subtest: preserves the existing mono filter/window calibration
+    ok 1 - preserves the existing mono filter/window calibration
+      ---
+      duration_ms: 8.734683
+      type: 'test'
+      ...
+    # Subtest: duplicate mono adds 10log10(2), not an implicit dual-mono correction
+    ok 2 - duplicate mono adds 10log10(2), not an implicit dual-mono correction
+      ---
+      duration_ms: 14.241427
+      type: 'test'
+      ...
+    # Subtest: one active L or R retains native mono energy
+    ok 3 - one active L or R retains native mono energy
+      ---
+      duration_ms: 22.572762
+      type: 'test'
+      ...
+    # Subtest: unequal channels sum energy rather than signed samples or average power
+    ok 4 - unequal channels sum energy rather than signed samples or average power
+      ---
+      duration_ms: 12.587571
+      type: 'test'
+      ...
+    # Subtest: quarter-cycle decorrelation sums the two independently measured powers
+    ok 5 - quarter-cycle decorrelation sums the two independently measured powers
+      ---
+      duration_ms: 20.586988
+      type: 'test'
+      ...
+    # Subtest: obeys gain law without changing or sharing original channel samples
+    ok 6 - obeys gain law without changing or sharing original channel samples
+      ---
+      duration_ms: 15.659861
+      type: 'test'
+      ...
+    1..6
+ok 70 - analyzeFast channel-energy semantics at 44100
+  ---
+  duration_ms: 95.0402
+  type: 'suite'
+  ...
+# Subtest: quickLufs channel-energy semantics at 44100
+    # Subtest: preserves the existing mono filter/window calibration
+    ok 1 - preserves the existing mono filter/window calibration
+      ---
+      duration_ms: 2.303963
+      type: 'test'
+      ...
+    # Subtest: duplicate mono adds 10log10(2), not an implicit dual-mono correction
+    ok 2 - duplicate mono adds 10log10(2), not an implicit dual-mono correction
+      ---
+      duration_ms: 5.446401
+      type: 'test'
+      ...
+    # Subtest: one active L or R retains native mono energy
+    ok 3 - one active L or R retains native mono energy
+      ---
+      duration_ms: 8.464321
+      type: 'test'
+      ...
+    # Subtest: unequal channels sum energy rather than signed samples or average power
+    ok 4 - unequal channels sum energy rather than signed samples or average power
+      ---
+      duration_ms: 5.202881
+      type: 'test'
+      ...
+    # Subtest: quarter-cycle decorrelation sums the two independently measured powers
+    ok 5 - quarter-cycle decorrelation sums the two independently measured powers
+      ---
+      duration_ms: 5.614575
+      type: 'test'
+      ...
+    # Subtest: obeys gain law without changing or sharing original channel samples
+    ok 6 - obeys gain law without changing or sharing original channel samples
+      ---
+      duration_ms: 4.498031
+      type: 'test'
+      ...
+    1..6
+ok 71 - quickLufs channel-energy semantics at 44100
+  ---
+  duration_ms: 31.786958
+  type: 'suite'
+  ...
+# Subtest: analyze channel-energy semantics at 48000
+    # Subtest: preserves the existing mono filter/window calibration
+    ok 1 - preserves the existing mono filter/window calibration
+      ---
+      duration_ms: 34.169678
+      type: 'test'
+      ...
+    # Subtest: duplicate mono adds 10log10(2), not an implicit dual-mono correction
+    ok 2 - duplicate mono adds 10log10(2), not an implicit dual-mono correction
+      ---
+      duration_ms: 50.557482
+      type: 'test'
+      ...
+    # Subtest: one active L or R retains native mono energy
+    ok 3 - one active L or R retains native mono energy
+      ---
+      duration_ms: 45.162294
+      type: 'test'
+      ...
+    # Subtest: unequal channels sum energy rather than signed samples or average power
+    ok 4 - unequal channels sum energy rather than signed samples or average power
+      ---
+      duration_ms: 26.204561
+      type: 'test'
+      ...
+    # Subtest: quarter-cycle decorrelation sums the two independently measured powers
+    ok 5 - quarter-cycle decorrelation sums the two independently measured powers
+      ---
+      duration_ms: 44.989338
+      type: 'test'
+      ...
+    # Subtest: obeys gain law without changing or sharing original channel samples
+    ok 6 - obeys gain law without changing or sharing original channel samples
+      ---
+      duration_ms: 28.390296
+      type: 'test'
+      ...
+    1..6
+ok 72 - analyze channel-energy semantics at 48000
+  ---
+  duration_ms: 230.019496
+  type: 'suite'
+  ...
+# Subtest: analyzeFast channel-energy semantics at 48000
+    # Subtest: preserves the existing mono filter/window calibration
+    ok 1 - preserves the existing mono filter/window calibration
+      ---
+      duration_ms: 12.226597
+      type: 'test'
+      ...
+    # Subtest: duplicate mono adds 10log10(2), not an implicit dual-mono correction
+    ok 2 - duplicate mono adds 10log10(2), not an implicit dual-mono correction
+      ---
+      duration_ms: 14.676282
+      type: 'test'
+      ...
+    # Subtest: one active L or R retains native mono energy
+    ok 3 - one active L or R retains native mono energy
+      ---
+      duration_ms: 20.51756
+      type: 'test'
+      ...
+    # Subtest: unequal channels sum energy rather than signed samples or average power
+    ok 4 - unequal channels sum energy rather than signed samples or average power
+      ---
+      duration_ms: 14.854428
+      type: 'test'
+      ...
+    # Subtest: quarter-cycle decorrelation sums the two independently measured powers
+    ok 5 - quarter-cycle decorrelation sums the two independently measured powers
+      ---
+      duration_ms: 17.042716
+      type: 'test'
+      ...
+    # Subtest: obeys gain law without changing or sharing original channel samples
+    ok 6 - obeys gain law without changing or sharing original channel samples
+      ---
+      duration_ms: 12.758975
+      type: 'test'
+      ...
+    1..6
+ok 73 - analyzeFast channel-energy semantics at 48000
+  ---
+  duration_ms: 92.69834
+  type: 'suite'
+  ...
+# Subtest: quickLufs channel-energy semantics at 48000
+    # Subtest: preserves the existing mono filter/window calibration
+    ok 1 - preserves the existing mono filter/window calibration
+      ---
+      duration_ms: 2.876504
+      type: 'test'
+      ...
+    # Subtest: duplicate mono adds 10log10(2), not an implicit dual-mono correction
+    ok 2 - duplicate mono adds 10log10(2), not an implicit dual-mono correction
+      ---
+      duration_ms: 5.81946
+      type: 'test'
+      ...
+    # Subtest: one active L or R retains native mono energy
+    ok 3 - one active L or R retains native mono energy
+      ---
+      duration_ms: 8.73093
+      type: 'test'
+      ...
+    # Subtest: unequal channels sum energy rather than signed samples or average power
+    ok 4 - unequal channels sum energy rather than signed samples or average power
+      ---
+      duration_ms: 7.260377
+      type: 'test'
+      ...
+    # Subtest: quarter-cycle decorrelation sums the two independently measured powers
+    ok 5 - quarter-cycle decorrelation sums the two independently measured powers
+      ---
+      duration_ms: 6.2278
+      type: 'test'
+      ...
+    # Subtest: obeys gain law without changing or sharing original channel samples
+    ok 6 - obeys gain law without changing or sharing original channel samples
+      ---
+      duration_ms: 5.043879
+      type: 'test'
+      ...
+    1..6
+ok 74 - quickLufs channel-energy semantics at 48000
+  ---
+  duration_ms: 36.24621
+  type: 'suite'
+  ...
+# Subtest: analyze channel-energy semantics at 96000
+    # Subtest: preserves the existing mono filter/window calibration
+    ok 1 - preserves the existing mono filter/window calibration
+      ---
+      duration_ms: 19.759639
+      type: 'test'
+      ...
+    # Subtest: duplicate mono adds 10log10(2), not an implicit dual-mono correction
+    ok 2 - duplicate mono adds 10log10(2), not an implicit dual-mono correction
+      ---
+      duration_ms: 34.066406
+      type: 'test'
+      ...
+    # Subtest: one active L or R retains native mono energy
+    ok 3 - one active L or R retains native mono energy
+      ---
+      duration_ms: 55.253609
+      type: 'test'
+      ...
+    # Subtest: unequal channels sum energy rather than signed samples or average power
+    ok 4 - unequal channels sum energy rather than signed samples or average power
+      ---
+      duration_ms: 36.038306
+      type: 'test'
+      ...
+    # Subtest: quarter-cycle decorrelation sums the two independently measured powers
+    ok 5 - quarter-cycle decorrelation sums the two independently measured powers
+      ---
+      duration_ms: 52.332464
+      type: 'test'
+      ...
+    # Subtest: obeys gain law without changing or sharing original channel samples
+    ok 6 - obeys gain law without changing or sharing original channel samples
+      ---
+      duration_ms: 36.004379
+      type: 'test'
+      ...
+    1..6
+ok 75 - analyze channel-energy semantics at 96000
+  ---
+  duration_ms: 233.964635
+  type: 'suite'
+  ...
+# Subtest: analyzeFast channel-energy semantics at 96000
+    # Subtest: preserves the existing mono filter/window calibration
+    ok 1 - preserves the existing mono filter/window calibration
+      ---
+      duration_ms: 12.653493
+      type: 'test'
+      ...
+    # Subtest: duplicate mono adds 10log10(2), not an implicit dual-mono correction
+    ok 2 - duplicate mono adds 10log10(2), not an implicit dual-mono correction
+      ---
+      duration_ms: 22.628991
+      type: 'test'
+      ...
+    # Subtest: one active L or R retains native mono energy
+    ok 3 - one active L or R retains native mono energy
+      ---
+      duration_ms: 35.311618
+      type: 'test'
+      ...
+    # Subtest: unequal channels sum energy rather than signed samples or average power
+    ok 4 - unequal channels sum energy rather than signed samples or average power
+      ---
+      duration_ms: 22.528247
+      type: 'test'
+      ...
+    # Subtest: quarter-cycle decorrelation sums the two independently measured powers
+    ok 5 - quarter-cycle decorrelation sums the two independently measured powers
+      ---
+      duration_ms: 36.677609
+      type: 'test'
+      ...
+    # Subtest: obeys gain law without changing or sharing original channel samples
+    ok 6 - obeys gain law without changing or sharing original channel samples
+      ---
+      duration_ms: 25.205964
+      type: 'test'
+      ...
+    1..6
+ok 76 - analyzeFast channel-energy semantics at 96000
+  ---
+  duration_ms: 155.520623
+  type: 'suite'
+  ...
+# Subtest: quickLufs channel-energy semantics at 96000
+    # Subtest: preserves the existing mono filter/window calibration
+    ok 1 - preserves the existing mono filter/window calibration
+      ---
+      duration_ms: 6.062099
+      type: 'test'
+      ...
+    # Subtest: duplicate mono adds 10log10(2), not an implicit dual-mono correction
+    ok 2 - duplicate mono adds 10log10(2), not an implicit dual-mono correction
+      ---
+      duration_ms: 12.59417
+      type: 'test'
+      ...
+    # Subtest: one active L or R retains native mono energy
+    ok 3 - one active L or R retains native mono energy
+      ---
+      duration_ms: 16.563396
+      type: 'test'
+      ...
+    # Subtest: unequal channels sum energy rather than signed samples or average power
+    ok 4 - unequal channels sum energy rather than signed samples or average power
+      ---
+      duration_ms: 11.003331
+      type: 'test'
+      ...
+    # Subtest: quarter-cycle decorrelation sums the two independently measured powers
+    ok 5 - quarter-cycle decorrelation sums the two independently measured powers
+      ---
+      duration_ms: 13.483349
+      type: 'test'
+      ...
+    # Subtest: obeys gain law without changing or sharing original channel samples
+    ok 6 - obeys gain law without changing or sharing original channel samples
+      ---
+      duration_ms: 9.577816
+      type: 'test'
+      ...
+    1..6
+ok 77 - quickLufs channel-energy semantics at 96000
+  ---
+  duration_ms: 69.565519
+  type: 'suite'
+  ...
+# Subtest: analyze rejects non-finite PCM, including a partial-window tail, without mutating it
+ok 78 - analyze rejects non-finite PCM, including a partial-window tail, without mutating it
+  ---
+  duration_ms: 9.387532
+  type: 'test'
+  ...
+# Subtest: analyze rejects non-finite PCM, including a partial-window tail, without mutating it
+ok 79 - analyze rejects non-finite PCM, including a partial-window tail, without mutating it
+  ---
+  duration_ms: 15.717919
+  type: 'test'
+  ...
+# Subtest: analyze rejects non-finite PCM, including a partial-window tail, without mutating it
+ok 80 - analyze rejects non-finite PCM, including a partial-window tail, without mutating it
+  ---
+  duration_ms: 13.900573
+  type: 'test'
+  ...
+# Subtest: analyzeFast rejects non-finite PCM, including a partial-window tail, without mutating it
+ok 81 - analyzeFast rejects non-finite PCM, including a partial-window tail, without mutating it
+  ---
+  duration_ms: 6.714292
+  type: 'test'
+  ...
+# Subtest: analyzeFast rejects non-finite PCM, including a partial-window tail, without mutating it
+ok 82 - analyzeFast rejects non-finite PCM, including a partial-window tail, without mutating it
+  ---
+  duration_ms: 4.741578
+  type: 'test'
+  ...
+# Subtest: analyzeFast rejects non-finite PCM, including a partial-window tail, without mutating it
+ok 83 - analyzeFast rejects non-finite PCM, including a partial-window tail, without mutating it
+  ---
+  duration_ms: 6.451465
+  type: 'test'
+  ...
+# Subtest: quickLufs rejects non-finite PCM, including a partial-window tail, without mutating it
+ok 84 - quickLufs rejects non-finite PCM, including a partial-window tail, without mutating it
+  ---
+  duration_ms: 4.269487
+  type: 'test'
+  ...
+# Subtest: quickLufs rejects non-finite PCM, including a partial-window tail, without mutating it
+ok 85 - quickLufs rejects non-finite PCM, including a partial-window tail, without mutating it
+  ---
+  duration_ms: 3.196956
+  type: 'test'
+  ...
+# Subtest: quickLufs rejects non-finite PCM, including a partial-window tail, without mutating it
+ok 86 - quickLufs rejects non-finite PCM, including a partial-window tail, without mutating it
+  ---
+  duration_ms: 3.000294
+  type: 'test'
+  ...
+# Subtest: cinematic environment is non-interactive and layered, never an alternate app renderer
+ok 87 - cinematic environment is non-interactive and layered, never an alternate app renderer
+  ---
+  duration_ms: 1.297114
+  type: 'test'
+  ...
+# Subtest: all used presentation tokens resolve and waveform consumes the same canonical palette
+ok 88 - all used presentation tokens resolve and waveform consumes the same canonical palette
+  ---
+  duration_ms: 2.204378
+  type: 'test'
+  ...
+# Subtest: canonical 13-board hue anchors remain centralized, not a monochrome theme
+ok 89 - canonical 13-board hue anchors remain centralized, not a monochrome theme
+  ---
+  duration_ms: 0.443821
+  type: 'test'
+  ...
+# Subtest: real content identity drives panel entry, with cleanup instead of playback-tick animation
+ok 90 - real content identity drives panel entry, with cleanup instead of playback-tick animation
+  ---
+  duration_ms: 0.28923
+  type: 'test'
+  ...
+# Subtest: native limits panel has real open/close actions, focusable title and modal shortcut guard
+ok 91 - native limits panel has real open/close actions, focusable title and modal shortcut guard
+  ---
+  duration_ms: 0.253425
+  type: 'test'
+  ...
+# Subtest: reduced motion disables actual environment and panel motion; only materials are feathered
+ok 92 - reduced motion disables actual environment and panel motion; only materials are feathered
+  ---
+  duration_ms: 0.191187
+  type: 'test'
+  ...
+# Subtest: original 01–13 references have a reproducible project source and hash inventory
+ok 93 - original 01–13 references have a reproducible project source and hash inventory
+  ---
+  duration_ms: 0.582519
+  type: 'test'
+  ...
+# Subtest: independent celestial and near geometry is present, not a single moving wallpaper
+ok 94 - independent celestial and near geometry is present, not a single moving wallpaper
+  ---
+  duration_ms: 0.300128
+  type: 'test'
+  ...
+# Subtest: region handles are wired to real crop operations and expose precise accessible state
+ok 95 - region handles are wired to real crop operations and expose precise accessible state
+  ---
+  duration_ms: 0.373584
+  type: 'test'
+  ...
+# Subtest: reference13 integration uses one opaque matte workplane, not three luminous cards
+ok 96 - reference13 integration uses one opaque matte workplane, not three luminous cards
+  ---
+  duration_ms: 0.52866
+  type: 'test'
+  ...
+# Subtest: arrival framing follows the existing authoritative buffer, with no independent scene product state
+ok 97 - arrival framing follows the existing authoritative buffer, with no independent scene product state
+  ---
+  duration_ms: 0.229111
+  type: 'test'
+  ...
+# Subtest: rebuilt entry shell contract
+    # Subtest: provides a semantic mount and accessible loading status
+    ok 1 - provides a semantic mount and accessible loading status
+      ---
+      duration_ms: 1.691614
+      type: 'test'
+      ...
+    # Subtest: does not restore old theme, favicon, font requests, or hidden UI markup
+    ok 2 - does not restore old theme, favicon, font requests, or hidden UI markup
+      ---
+      duration_ms: 0.385004
+      type: 'test'
+      ...
+    # Subtest: keeps deleted presentation modules and the old app template detached
+    ok 3 - keeps deleted presentation modules and the old app template detached
+      ---
+      duration_ms: 0.235392
+      type: 'test'
+      ...
+    # Subtest: retires custom app-icon references without changing packaging identity or targets
+    ok 4 - retires custom app-icon references without changing packaging identity or targets
+      ---
+      duration_ms: 1.289812
+      type: 'test'
+      ...
+    # Subtest: mounts the real workspace before binding one controller, with no stale visual dependencies
+    ok 5 - mounts the real workspace before binding one controller, with no stale visual dependencies
+      ---
+      duration_ms: 0.288249
+      type: 'test'
+      ...
+    # Subtest: uses new semantic controls, real peak data and text-only report/metadata insertion
+    ok 6 - uses new semantic controls, real peak data and text-only report/metadata insertion
+      ---
+      duration_ms: 0.507438
+      type: 'test'
+      ...
+    # Subtest: keeps reduced-motion support and new asset-independent responsive styling
+    ok 7 - keeps reduced-motion support and new asset-independent responsive styling
+      ---
+      duration_ms: 0.407465
+      type: 'test'
+      ...
+    1..7
+ok 98 - rebuilt entry shell contract
+  ---
+  duration_ms: 5.981462
+  type: 'suite'
+  ...
+# Subtest: DOM-free candidate: original nine controller failure cases
+    # Subtest: commits successful analysis through the existing view path and releases busy state
+    ok 1 - commits successful analysis through the existing view path and releases busy state
+      ---
+      duration_ms: 2.534281
+      type: 'test'
+      ...
+    # Subtest: handles rejected reference preparation inside the same cleanup boundary
+    ok 2 - handles rejected reference preparation inside the same cleanup boundary
+      ---
+      duration_ms: 0.325628
+      type: 'test'
+      ...
+    # Subtest: cleans up a declined reference without starting analysis or reporting success
+    ok 3 - cleans up a declined reference without starting analysis or reporting success
+      ---
+      duration_ms: 0.342327
+      type: 'test'
+      ...
+    # Subtest: handles an engine rejection without replacing its error identity
+    ok 4 - handles an engine rejection without replacing its error identity
+      ---
+      duration_ms: 0.270427
+      type: 'test'
+      ...
+    # Subtest: handles a progress-consumer exception and releases busy state
+    ok 5 - handles a progress-consumer exception and releases busy state
+      ---
+      duration_ms: 0.301809
+      type: 'test'
+      ...
+    # Subtest: handles setup failure after acquiring busy state
+    ok 6 - handles setup failure after acquiring busy state
+      ---
+      duration_ms: 0.2247
+      type: 'test'
+      ...
+    # Subtest: reports non-Error rejection values without throwing while formatting them
+    ok 7 - reports non-Error rejection values without throwing while formatting them
+      ---
+      duration_ms: 0.474457
+      type: 'test'
+      ...
+    # Subtest: handles a synchronous analyzer throw
+    ok 8 - handles a synchronous analyzer throw
+      ---
+      duration_ms: 0.366614
+      type: 'test'
+      ...
+    # Subtest: does not start work without a buffer or while already busy
+    ok 9 - does not start work without a buffer or while already busy
+      ---
+      duration_ms: 0.750424
+      type: 'test'
+      ...
+    1..9
+ok 99 - DOM-free candidate: original nine controller failure cases
+  ---
+  duration_ms: 6.910533
+  type: 'suite'
+  ...
+# Subtest: candidate construction and state/operation effects
+    # Subtest: constructs without calls or state mutation and freezes only its API, not a duplicate store
+    ok 1 - constructs without calls or state mutation and freezes only its API, not a duplicate store
+      ---
+      duration_ms: 0.40707
+      type: 'test'
+      ...
+    # Subtest: refuses incomplete collaborators rather than installing successful-looking no-op effects
+    ok 2 - refuses incomplete collaborators rather than installing successful-looking no-op effects
+      ---
+      duration_ms: 0.79719
+      type: 'test'
+      ...
+    # Subtest: forwards exact state/buffer/result/plan identity and preserves the visible event order
+    ok 3 - forwards exact state/buffer/result/plan identity and preserves the visible event order
+      ---
+      duration_ms: 0.416222
+      type: 'test'
+      ...
+    # Subtest: reuses the caller's busy guard across two factories; never creates separate operation authority
+    ok 4 - reuses the caller's busy guard across two factories; never creates separate operation authority
+      ---
+      duration_ms: 0.265882
+      type: 'test'
+      ...
+    # Subtest: does not publish a result if scoreAnalysis throws
+    ok 5 - does not publish a result if scoreAnalysis throws
+      ---
+      duration_ms: 0.154869
+      type: 'test'
+      ...
+    # Subtest: does not publish a result if buildIssues throws
+    ok 6 - does not publish a result if buildIssues throws
+      ---
+      duration_ms: 0.101624
+      type: 'test'
+      ...
+    # Subtest: does not publish a result if buildFixPlan throws
+    ok 7 - does not publish a result if buildFixPlan throws
+      ---
+      duration_ms: 0.100214
+      type: 'test'
+      ...
+    # Subtest: retains existing post-publication view-error behavior, without inventing atomic rollback
+    ok 8 - retains existing post-publication view-error behavior, without inventing atomic rollback
+      ---
+      duration_ms: 1.101289
+      type: 'test'
+      ...
+    # Subtest: does not swallow a finally-consumer failure; busy is released before that error propagates
+    ok 9 - does not swallow a finally-consumer failure; busy is released before that error propagates
+      ---
+      duration_ms: 0.286836
+      type: 'test'
+      ...
+    1..9
+ok 100 - candidate construction and state/operation effects
+  ---
+  duration_ms: 4.072084
+  type: 'suite'
+  ...
+# Subtest: reference preparation without DOM/network startup
+    # Subtest: returns auto immediately without invoking effects or measurement
+    ok 1 - returns auto immediately without invoking effects or measurement
+      ---
+      duration_ms: 0.384547
+      type: 'test'
+      ...
+    # Subtest: declines a missing uploaded reference without measuring anything
+    ok 2 - declines a missing uploaded reference without measuring anything
+      ---
+      duration_ms: 0.126984
+      type: 'test'
+      ...
+    # Subtest: measures the exact uploaded buffer once and keeps reference features on the same ref object
+    ok 3 - measures the exact uploaded buffer once and keeps reference features on the same ref object
+      ---
+      duration_ms: 0.238832
+      type: 'test'
+      ...
+    # Subtest: declines failed uploaded measurement and does not analyze the main buffer
+    ok 4 - declines failed uploaded measurement and does not analyze the main buffer
+      ---
+      duration_ms: 0.195104
+      type: 'test'
+      ...
+    # Subtest: declines missing, failed and unidentified URL references without an invented measurement
+    ok 5 - declines missing, failed and unidentified URL references without an invented measurement
+      ---
+      duration_ms: 0.156603
+      type: 'test'
+      ...
+    # Subtest: accepts identified metadata-only references as profile, never measured streamed audio
+    ok 6 - accepts identified metadata-only references as profile, never measured streamed audio
+      ---
+      duration_ms: 0.117015
+      type: 'test'
+      ...
+    # Subtest: forwards an explicitly requested preview to injected fetch/measure ports once with original progress mapping
+    ok 7 - forwards an explicitly requested preview to injected fetch/measure ports once with original progress mapping
+      ---
+      duration_ms: 0.300478
+      type: 'test'
+      ...
+    # Subtest: preserves profile fallback when preview fetch fails, without retrying or fabricating features
+    ok 8 - preserves profile fallback when preview fetch fails, without retrying or fabricating features
+      ---
+      duration_ms: 0.332787
+      type: 'test'
+      ...
+    # Subtest: preserves the existing partial preview-buffer cache if preview measurement fails
+    ok 9 - preserves the existing partial preview-buffer cache if preview measurement fails
+      ---
+      duration_ms: 0.189152
+      type: 'test'
+      ...
+    1..9
+ok 101 - reference preparation without DOM/network startup
+  ---
+  duration_ms: 2.335334
+  type: 'suite'
+  ...
+# Subtest: unchanged reference target construction
+    # Subtest: keeps uploaded and measured-preview targets distinct from metadata profiles
+    ok 1 - keeps uploaded and measured-preview targets distinct from metadata profiles
+      ---
+      duration_ms: 0.509245
+      type: 'test'
+      ...
+    # Subtest: keeps a valid manual subgenre and uses the category's first when the requested subgenre is invalid
+    ok 2 - keeps a valid manual subgenre and uses the category's first when the requested subgenre is invalid
+      ---
+      duration_ms: 0.125224
+      type: 'test'
+      ...
+    # Subtest: marks unusable URL metadata as auto fallback rather than measured audio
+    ok 3 - marks unusable URL metadata as auto fallback rather than measured audio
+      ---
+      duration_ms: 0.092044
+      type: 'test'
+      ...
+    1..3
+ok 102 - unchanged reference target construction
+  ---
+  duration_ms: 0.825915
+  type: 'suite'
+  ...
+# Subtest: runs the SAME real analyzer/scoring/issue/plan path on synthetic PCM without a DOM or any network
+ok 103 - runs the SAME real analyzer/scoring/issue/plan path on synthetic PCM without a DOM or any network
+  ---
+  duration_ms: 99.811148
+  type: 'test'
+  ...
+# Subtest: controller analysis failure boundary
+    # Subtest: commits successful analysis through the existing view path and releases busy state
+    ok 1 - commits successful analysis through the existing view path and releases busy state
+      ---
+      duration_ms: 1.629679
+      type: 'test'
+      ...
+    # Subtest: handles rejected reference preparation inside the same cleanup boundary
+    ok 2 - handles rejected reference preparation inside the same cleanup boundary
+      ---
+      duration_ms: 0.33658
+      type: 'test'
+      ...
+    # Subtest: cleans up a declined reference without starting analysis or reporting success
+    ok 3 - cleans up a declined reference without starting analysis or reporting success
+      ---
+      duration_ms: 0.267909
+      type: 'test'
+      ...
+    # Subtest: handles an engine rejection without replacing its error identity
+    ok 4 - handles an engine rejection without replacing its error identity
+      ---
+      duration_ms: 0.292309
+      type: 'test'
+      ...
+    # Subtest: handles a progress-consumer exception and releases busy state
+    ok 5 - handles a progress-consumer exception and releases busy state
+      ---
+      duration_ms: 1.20085
+      type: 'test'
+      ...
+    # Subtest: handles setup failure after acquiring busy state
+    ok 6 - handles setup failure after acquiring busy state
+      ---
+      duration_ms: 0.259043
+      type: 'test'
+      ...
+    # Subtest: reports non-Error rejection values without throwing while formatting them
+    ok 7 - reports non-Error rejection values without throwing while formatting them
+      ---
+      duration_ms: 0.428737
+      type: 'test'
+      ...
+    # Subtest: handles a synchronous analyzer throw
+    ok 8 - handles a synchronous analyzer throw
+      ---
+      duration_ms: 0.269531
+      type: 'test'
+      ...
+    # Subtest: does not start work without a buffer or while already busy
+    ok 9 - does not start work without a buffer or while already busy
+      ---
+      duration_ms: 0.865578
+      type: 'test'
+      ...
+    1..9
+ok 104 - controller analysis failure boundary
+  ---
+  duration_ms: 6.929483
+  type: 'suite'
+  ...
+# Subtest: analysis service contract: analyze
+    # Subtest: forwards the exact buffer and callback and returns the engine result
+    ok 1 - forwards the exact buffer and callback and returns the engine result
+      ---
+      duration_ms: 8.783386
+      type: 'test'
+      ...
+    # Subtest: allows an omitted progress callback without supplying a replacement
+    ok 2 - allows an omitted progress callback without supplying a replacement
+      ---
+      duration_ms: 4.022186
+      type: 'test'
+      ...
+    # Subtest: propagates asynchronous rejection without changing the error
+    ok 3 - propagates asynchronous rejection without changing the error
+      ---
+      duration_ms: 4.632047
+      type: 'test'
+      ...
+    # Subtest: surfaces synchronous engine failures as promise rejections
+    ok 4 - surfaces synchronous engine failures as promise rejections
+      ---
+      duration_ms: 3.8239
+      type: 'test'
+      ...
+    # Subtest: does not swallow errors thrown by progress callbacks
+    ok 5 - does not swallow errors thrown by progress callbacks
+      ---
+      duration_ms: 3.860434
+      type: 'test'
+      ...
+    # Subtest: keeps engine method receivers intact
+    ok 6 - keeps engine method receivers intact
+      ---
+      duration_ms: 4.026166
+      type: 'test'
+      ...
+    # Subtest: keeps overlapping requests and progress callbacks independent
+    ok 7 - keeps overlapping requests and progress callbacks independent
+      ---
+      duration_ms: 8.326733
+      type: 'test'
+      ...
+    1..7
+ok 105 - analysis service contract: analyze
+  ---
+  duration_ms: 38.701458
+  type: 'suite'
+  ...
+# Subtest: analysis service contract: analyzeFast
+    # Subtest: forwards the exact buffer and callback and returns the engine result
+    ok 1 - forwards the exact buffer and callback and returns the engine result
+      ---
+      duration_ms: 3.931698
+      type: 'test'
+      ...
+    # Subtest: allows an omitted progress callback without supplying a replacement
+    ok 2 - allows an omitted progress callback without supplying a replacement
+      ---
+      duration_ms: 3.868876
+      type: 'test'
+      ...
+    # Subtest: propagates asynchronous rejection without changing the error
+    ok 3 - propagates asynchronous rejection without changing the error
+      ---
+      duration_ms: 4.505017
+      type: 'test'
+      ...
+    # Subtest: surfaces synchronous engine failures as promise rejections
+    ok 4 - surfaces synchronous engine failures as promise rejections
+      ---
+      duration_ms: 3.709444
+      type: 'test'
+      ...
+    # Subtest: does not swallow errors thrown by progress callbacks
+    ok 5 - does not swallow errors thrown by progress callbacks
+      ---
+      duration_ms: 4.121031
+      type: 'test'
+      ...
+    # Subtest: keeps engine method receivers intact
+    ok 6 - keeps engine method receivers intact
+      ---
+      duration_ms: 3.578976
+      type: 'test'
+      ...
+    # Subtest: keeps overlapping requests and progress callbacks independent
+    ok 7 - keeps overlapping requests and progress callbacks independent
+      ---
+      duration_ms: 7.443014
+      type: 'test'
+      ...
+    1..7
+ok 106 - analysis service contract: analyzeFast
+  ---
+  duration_ms: 31.71296
+  type: 'suite'
+  ...
+# Subtest: analysis service with the real local analyzer
+    # Subtest: analyze preserves real results, progress, PCM, and buffer metadata
+    ok 1 - analyze preserves real results, progress, PCM, and buffer metadata
+      ---
+      duration_ms: 99.639357
+      type: 'test'
+      ...
+    # Subtest: analyze works without progress reporting
+    ok 2 - analyze works without progress reporting
+      ---
+      duration_ms: 45.97905
+      type: 'test'
+      ...
+    # Subtest: analyze preserves real PCM access errors
+    ok 3 - analyze preserves real PCM access errors
+      ---
+      duration_ms: 4.126527
+      type: 'test'
+      ...
+    # Subtest: analyzeFast preserves real results, progress, PCM, and buffer metadata
+    ok 4 - analyzeFast preserves real results, progress, PCM, and buffer metadata
+      ---
+      duration_ms: 25.788907
+      type: 'test'
+      ...
+    # Subtest: analyzeFast works without progress reporting
+    ok 5 - analyzeFast works without progress reporting
+      ---
+      duration_ms: 16.911084
+      type: 'test'
+      ...
+    # Subtest: analyzeFast preserves real PCM access errors
+    ok 6 - analyzeFast preserves real PCM access errors
+      ---
+      duration_ms: 3.95019
+      type: 'test'
+      ...
+    # Subtest: dispatches full and fast requests to their respective engine methods
+    ok 7 - dispatches full and fast requests to their respective engine methods
+      ---
+      duration_ms: 5.232246
+      type: 'test'
+      ...
+    1..7
+ok 107 - analysis service with the real local analyzer
+  ---
+  duration_ms: 202.094081
+  type: 'suite'
+  ...
+# Subtest: buildProcessingPlan — existing controller behavior
+    # Subtest: returns null for a missing base plan without reading adjustments
+    ok 1 - returns null for a missing base plan without reading adjustments
+      ---
+      duration_ms: 1.10658
+      type: 'test'
+      ...
+    # Subtest: preserves a full automatic plan with neutral adjustments
+    ok 2 - preserves a full automatic plan with neutral adjustments
+      ---
+      duration_ms: 0.908393
+      type: 'test'
+      ...
+    # Subtest: adds an empty EQ list to a plan with no EQ
+    ok 3 - adds an empty EQ list to a plan with no EQ
+      ---
+      duration_ms: 0.210897
+      type: 'test'
+      ...
+    # Subtest: offsets a loudness target instead of changing linear gain
+    ok 4 - offsets a loudness target instead of changing linear gain
+      ---
+      duration_ms: 0.204988
+      type: 'test'
+      ...
+    # Subtest: treats a zero loudness target as present
+    ok 5 - treats a zero loudness target as present
+      ---
+      duration_ms: 0.28955
+      type: 'test'
+      ...
+    # Subtest: converts trim decibels to linear gain when no loudness target exists
+    ok 6 - converts trim decibels to linear gain when no loudness target exists
+      ---
+      duration_ms: 0.260135
+      type: 'test'
+      ...
+    # Subtest: uses linear gain for a null loudness target and preserves the null
+    ok 7 - uses linear gain for a null loudness target and preserves the null
+      ---
+      duration_ms: 0.258633
+      type: 'test'
+      ...
+    # Subtest: preserves the legacy unity fallback for missing or zero gain when trimming
+    ok 8 - preserves the legacy unity fallback for missing or zero gain when trimming
+      ---
+      duration_ms: 0.2457
+      type: 'test'
+      ...
+    # Subtest: does not introduce or replace gain when trim is neutral
+    ok 9 - does not introduce or replace gain when trim is neutral
+      ---
+      duration_ms: 0.262896
+      type: 'test'
+      ...
+    # Subtest: clamps adjusted linear gain to the existing 0.1–10 limits
+    ok 10 - clamps adjusted linear gain to the existing 0.1–10 limits
+      ---
+      duration_ms: 0.421433
+      type: 'test'
+      ...
+    # Subtest: scales compression distance from unity without changing the threshold
+    ok 11 - scales compression distance from unity without changing the threshold
+      ---
+      duration_ms: 0.325834
+      type: 'test'
+      ...
+    # Subtest: retains the existing compression ratio floor
+    ok 12 - retains the existing compression ratio floor
+      ---
+      duration_ms: 0.116405
+      type: 'test'
+      ...
+    # Subtest: does not add compression when the automatic plan has none
+    ok 13 - does not add compression when the automatic plan has none
+      ---
+      duration_ms: 0.08339
+      type: 'test'
+      ...
+    # Subtest: combines existing EQ gains with offsets and clamps adjusted bands
+    ok 14 - combines existing EQ gains with offsets and clamps adjusted bands
+      ---
+      duration_ms: 0.178071
+      type: 'test'
+      ...
+    # Subtest: adds only nonzero new bands in caller-supplied order
+    ok 15 - adds only nonzero new bands in caller-supplied order
+      ---
+      duration_ms: 1.10343
+      type: 'test'
+      ...
+    # Subtest: retains an existing EQ entry when its adjusted gain becomes zero
+    ok 16 - retains an existing EQ entry when its adjusted gain becomes zero
+      ---
+      duration_ms: 0.228179
+      type: 'test'
+      ...
+    # Subtest: keeps existing EQ order and the last value of duplicate bands
+    ok 17 - keeps existing EQ order and the last value of duplicate bands
+      ---
+      duration_ms: 0.14608
+      type: 'test'
+      ...
+    # Subtest: uses only caller-supplied bands for manual offsets, without validating the base chain
+    ok 18 - uses only caller-supplied bands for manual offsets, without validating the base chain
+      ---
+      duration_ms: 0.108328
+      type: 'test'
+      ...
+    # Subtest: offsets existing stereo width and clamps it to −6–6 dB
+    ok 19 - offsets existing stereo width and clamps it to −6–6 dB
+      ---
+      duration_ms: 0.109823
+      type: 'test'
+      ...
+    # Subtest: treats zero width as an existing width setting
+    ok 20 - treats zero width as an existing width setting
+      ---
+      duration_ms: 0.068282
+      type: 'test'
+      ...
+    # Subtest: adds width only for a nonzero offset when there is no base width
+    ok 21 - adds width only for a nonzero offset when there is no base width
+      ---
+      duration_ms: 0.142893
+      type: 'test'
+      ...
+    # Subtest: combines all supported manual controls in a single plan
+    ok 22 - combines all supported manual controls in a single plan
+      ---
+      duration_ms: 0.143387
+      type: 'test'
+      ...
+    # Subtest: accepts frozen inputs and returns independently mutable nested data
+    ok 23 - accepts frozen inputs and returns independently mutable nested data
+      ---
+      duration_ms: 0.174926
+      type: 'test'
+      ...
+    # Subtest: is repeatable without accumulating offsets or sharing output objects
+    ok 24 - is repeatable without accumulating offsets or sharing output objects
+      ---
+      duration_ms: 0.112164
+      type: 'test'
+      ...
+    1..24
+ok 108 - buildProcessingPlan — existing controller behavior
+  ---
+  duration_ms: 8.731601
+  type: 'suite'
+  ...
+# Subtest: environment adapter requires explicit real DOM collaborators
+ok 109 - environment adapter requires explicit real DOM collaborators
+  ---
+  duration_ms: 1.608406
+  type: 'test'
+  ...
+# Subtest: mount is idle: CSS owns autonomous drift; no animation loop or audio state is created
+ok 110 - mount is idle: CSS owns autonomous drift; no animation loop or audio state is created
+  ---
+  duration_ms: 1.790336
+  type: 'test'
+  ...
+# Subtest: pointer response is bounded, smoothed and stops scheduling when settled
+ok 111 - pointer response is bounded, smoothed and stops scheduling when settled
+  ---
+  duration_ms: 0.959896
+  type: 'test'
+  ...
+# Subtest: invalid coordinates and touch never schedule decorative pointer work
+ok 112 - invalid coordinates and touch never schedule decorative pointer work
+  ---
+  duration_ms: 0.284086
+  type: 'test'
+  ...
+# Subtest: touch/unknown devices are ignored even on coarse-primary hardware; an actual secondary mouse works
+ok 113 - touch/unknown devices are ignored even on coarse-primary hardware; an actual secondary mouse works
+  ---
+  duration_ms: 0.507521
+  type: 'test'
+  ...
+# Subtest: precise controls and modal content return parallax to neutral
+ok 114 - precise controls and modal content return parallax to neutral
+  ---
+  duration_ms: 0.80059
+  type: 'test'
+  ...
+# Subtest: reduced motion cancels pending RAF, clears offsets and freezes CSS; toggling back resumes in place
+ok 115 - reduced motion cancels pending RAF, clears offsets and freezes CSS; toggling back resumes in place
+  ---
+  duration_ms: 0.416824
+  type: 'test'
+  ...
+# Subtest: hidden documents freeze all CSS work and clear interaction frames, then resume without remount
+ok 116 - hidden documents freeze all CSS work and clear interaction frames, then resume without remount
+  ---
+  duration_ms: 0.269156
+  type: 'test'
+  ...
+# Subtest: blur and focus on controls clear pointer response without touching product controls
+ok 117 - blur and focus on controls clear pointer response without touching product controls
+  ---
+  duration_ms: 1.863911
+  type: 'test'
+  ...
+# Subtest: dispose is idempotent and releases every listener and pending frame, suppressing later work
+ok 118 - dispose is idempotent and releases every listener and pending frame, suppressing later work
+  ---
+  duration_ms: 0.810539
+  type: 'test'
+  ...
+# Subtest: initial g0 reopens in another process without a journal
+ok 119 - initial g0 reopens in another process without a journal
+  ---
+  duration_ms: 66.032481
+  type: 'test'
+  ...
+# Subtest: SIGKILL media-partial: actual artifacts and separate-process recovery
+ok 120 - SIGKILL media-partial: actual artifacts and separate-process recovery
+  ---
+  duration_ms: 95.403497
+  type: 'test'
+  ...
+# Subtest: SIGKILL media-synced: actual artifacts and separate-process recovery
+ok 121 - SIGKILL media-synced: actual artifacts and separate-process recovery
+  ---
+  duration_ms: 99.963195
+  type: 'test'
+  ...
+# Subtest: SIGKILL media-published: actual artifacts and separate-process recovery
+ok 122 - SIGKILL media-published: actual artifacts and separate-process recovery
+  ---
+  duration_ms: 97.048037
+  type: 'test'
+  ...
+# Subtest: SIGKILL generation-synced: actual artifacts and separate-process recovery
+ok 123 - SIGKILL generation-synced: actual artifacts and separate-process recovery
+  ---
+  duration_ms: 103.480271
+  type: 'test'
+  ...
+# Subtest: SIGKILL generation-published: actual artifacts and separate-process recovery
+ok 124 - SIGKILL generation-published: actual artifacts and separate-process recovery
+  ---
+  duration_ms: 96.630423
+  type: 'test'
+  ...
+# Subtest: SIGKILL journal-synced: actual artifacts and separate-process recovery
+ok 125 - SIGKILL journal-synced: actual artifacts and separate-process recovery
+  ---
+  duration_ms: 101.152287
+  type: 'test'
+  ...
+# Subtest: SIGKILL journal-published: actual artifacts and separate-process recovery
+ok 126 - SIGKILL journal-published: actual artifacts and separate-process recovery
+  ---
+  duration_ms: 103.341468
+  type: 'test'
+  ...
+# Subtest: SIGKILL pointer-synced: actual artifacts and separate-process recovery
+ok 127 - SIGKILL pointer-synced: actual artifacts and separate-process recovery
+  ---
+  duration_ms: 118.193621
+  type: 'test'
+  ...
+# Subtest: SIGKILL pointer-renamed: actual artifacts and separate-process recovery
+ok 128 - SIGKILL pointer-renamed: actual artifacts and separate-process recovery
+  ---
+  duration_ms: 114.208943
+  type: 'test'
+  ...
+# Subtest: SIGKILL directory-synced: actual artifacts and separate-process recovery
+ok 129 - SIGKILL directory-synced: actual artifacts and separate-process recovery
+  ---
+  duration_ms: 109.466418
+  type: 'test'
+  ...
+# Subtest: normal completion retains over-range Float32, destination metadata, unrelated media and g0 history
+ok 130 - normal completion retains over-range Float32, destination metadata, unrelated media and g0 history
+  ---
+  duration_ms: 107.736979
+  type: 'test'
+  ...
+# Subtest: post-commit idempotent retry makes no extra writes or history
+ok 131 - post-commit idempotent retry makes no extra writes or history
+  ---
+  duration_ms: 75.987976
+  type: 'test'
+  ...
+# Subtest: explicit pre-promotion retry reuses immutable names without replacement
+ok 132 - explicit pre-promotion retry reuses immutable names without replacement
+  ---
+  duration_ms: 121.169336
+  type: 'test'
+  ...
+# Subtest: missing pointer: validated previous generation, no reader mutation, writer refuses
+ok 133 - missing pointer: validated previous generation, no reader mutation, writer refuses
+  ---
+  duration_ms: 112.494658
+  type: 'test'
+  ...
+# Subtest: malformed pointer: validated previous generation, no reader mutation, writer refuses
+ok 134 - malformed pointer: validated previous generation, no reader mutation, writer refuses
+  ---
+  duration_ms: 121.504582
+  type: 'test'
+  ...
+# Subtest: oversized pointer: validated previous generation, no reader mutation, writer refuses
+ok 135 - oversized pointer: validated previous generation, no reader mutation, writer refuses
+  ---
+  duration_ms: 133.081402
+  type: 'test'
+  ...
+# Subtest: missing generation: validated previous generation, no reader mutation, writer refuses
+ok 136 - missing generation: validated previous generation, no reader mutation, writer refuses
+  ---
+  duration_ms: 119.224839
+  type: 'test'
+  ...
+# Subtest: corrupt generation: validated previous generation, no reader mutation, writer refuses
+ok 137 - corrupt generation: validated previous generation, no reader mutation, writer refuses
+  ---
+  duration_ms: 116.980507
+  type: 'test'
+  ...
+# Subtest: truncated media: validated previous generation, no reader mutation, writer refuses
+ok 138 - truncated media: validated previous generation, no reader mutation, writer refuses
+  ---
+  duration_ms: 120.219574
+  type: 'test'
+  ...
+# Subtest: same-length corrupt media: validated previous generation, no reader mutation, writer refuses
+ok 139 - same-length corrupt media: validated previous generation, no reader mutation, writer refuses
+  ---
+  duration_ms: 120.290911
+  type: 'test'
+  ...
+# Subtest: traversal generation ID: validated previous generation, no reader mutation, writer refuses
+ok 140 - traversal generation ID: validated previous generation, no reader mutation, writer refuses
+  ---
+  duration_ms: 112.209651
+  type: 'test'
+  ...
+# Subtest: forged checksum: validated previous generation, no reader mutation, writer refuses
+ok 141 - forged checksum: validated previous generation, no reader mutation, writer refuses
+  ---
+  duration_ms: 116.277556
+  type: 'test'
+  ...
+# Subtest: corrupt retained dependency g0.json: no complete route
+ok 142 - corrupt retained dependency g0.json: no complete route
+  ---
+  duration_ms: 68.085496
+  type: 'test'
+  ...
+# Subtest: corrupt retained dependency g0.f32: no complete route
+ok 143 - corrupt retained dependency g0.f32: no complete route
+  ---
+  duration_ms: 70.887193
+  type: 'test'
+  ...
+# Subtest: corrupt retained dependency unrelated.f32: no complete route
+ok 144 - corrupt retained dependency unrelated.f32: no complete route
+  ---
+  duration_ms: 67.809773
+  type: 'test'
+  ...
+# Subtest: invalid pending journal cannot override valid HEAD; invalid journal cannot recover broken HEAD
+ok 145 - invalid pending journal cannot override valid HEAD; invalid journal cannot recover broken HEAD
+  ---
+  duration_ms: 93.754298
+  type: 'test'
+  ...
+# Subtest: never scans newer orphan generation or rolls forward; fallback returns only previous
+ok 146 - never scans newer orphan generation or rolls forward; fallback returns only previous
+  ---
+  duration_ms: 181.605646
+  type: 'test'
+  ...
+# Subtest: immutable collision refuses replacement
+ok 147 - immutable collision refuses replacement
+  ---
+  duration_ms: 11.496842
+  type: 'test'
+  ...
+# Subtest: wrong ownership token and non-temporary/repository roots refused
+ok 148 - wrong ownership token and non-temporary/repository roots refused
+  ---
+  duration_ms: 6.296725
+  type: 'test'
+  ...
+# Subtest: matching foreign media bytes behind symlink are refused
+ok 149 - matching foreign media bytes behind symlink are refused
+  ---
+  duration_ms: 16.088222
+  type: 'test'
+  ...
+# Subtest: environment-controlled TMPDIR cannot authorize a non-system-temp root
+ok 150 - environment-controlled TMPDIR cannot authorize a non-system-temp root
+  ---
+  duration_ms: 6.196496
+  type: 'test'
+  ...
+# Subtest: requires real operation/view/reference ports; no default fake successes
+ok 151 - requires real operation/view/reference ports; no default fake successes
+  ---
+  duration_ms: 2.00078
+  type: 'test'
+  ...
+# Subtest: construction has no backend calls, audio context, rendering or second authority
+ok 152 - construction has no backend calls, audio context, rendering or second authority
+  ---
+  duration_ms: 0.867183
+  type: 'test'
+  ...
+# Subtest: import publishes the exact decoded buffer and uses the shared analysis service path
+ok 153 - import publishes the exact decoded buffer and uses the shared analysis service path
+  ---
+  duration_ms: 2.206136
+  type: 'test'
+  ...
+# Subtest: decode failure preserves the last valid buffer and reports the actual error
+ok 154 - decode failure preserves the last valid buffer and reports the actual error
+  ---
+  duration_ms: 1.044609
+  type: 'test'
+  ...
+# Subtest: resolver-declined metadata stays an error, never a successful measured reference
+ok 155 - resolver-declined metadata stays an error, never a successful measured reference
+  ---
+  duration_ms: 0.492216
+  type: 'test'
+  ...
+# Subtest: a rejected reference lookup reports failure and releases the resolving state
+ok 156 - a rejected reference lookup reports failure and releases the resolving state
+  ---
+  duration_ms: 0.272951
+  type: 'test'
+  ...
+# Subtest: failed mastering preserves original and prior fixed copy, clears busy and exposes failure
+ok 157 - failed mastering preserves original and prior fixed copy, clears busy and exposes failure
+  ---
+  duration_ms: 4.263461
+  type: 'test'
+  ...
+# Subtest: successful mastering publishes separate B only after render/remeasure and uses real playback port
+ok 158 - successful mastering publishes separate B only after render/remeasure and uses real playback port
+  ---
+  duration_ms: 3.811213
+  type: 'test'
+  ...
+# Subtest: region export retains exact floor/ceil sample boundaries without mutating A
+ok 159 - region export retains exact floor/ceil sample boundaries without mutating A
+  ---
+  duration_ms: 8.780816
+  type: 'test'
+  ...
+# Subtest: conversion always receives A even with B selected; failed conversion cannot replace the last output
+ok 160 - conversion always receives A even with B selected; failed conversion cannot replace the last output
+  ---
+  duration_ms: 3.734576
+  type: 'test'
+  ...
+# Subtest: clear invalidates working outputs and creates fresh adjustment values, not aliased nested defaults
+ok 161 - clear invalidates working outputs and creates fresh adjustment values, not aliased nested defaults
+  ---
+  duration_ms: 0.564937
+  type: 'test'
+  ...
+# Subtest: dispose closes the playback context and clears pending frame/tweak work
+ok 162 - dispose closes the playback context and clears pending frame/tweak work
+  ---
+  duration_ms: 0.521796
+  type: 'test'
+  ...
+# Subtest: dispose cancels a queued manual re-render before processing starts
+ok 163 - dispose cancels a queued manual re-render before processing starts
+  ---
+  duration_ms: 3.451621
+  type: 'test'
+  ...
+# Subtest: dispose suppresses late tweak progress/results without interrupting active render work
+ok 164 - dispose suppresses late tweak progress/results without interrupting active render work
+  ---
+  duration_ms: 6.652035
+  type: 'test'
+  ...
+# Subtest: dispose suppresses a late conversion result but does not stop the conversion promise
+ok 165 - dispose suppresses a late conversion result but does not stop the conversion promise
+  ---
+  duration_ms: 0.752193
+  type: 'test'
+  ...
+# Subtest: cropping B holds the view busy until remeasurement settles and releases on failure
+ok 166 - cropping B holds the view busy until remeasurement settles and releases on failure
+  ---
+  duration_ms: 4.554151
+  type: 'test'
+  ...
+# Subtest: dispose during render cannot promote B or recreate a playback context
+ok 167 - dispose during render cannot promote B or recreate a playback context
+  ---
+  duration_ms: 7.286882
+  type: 'test'
+  ...
+# Subtest: dispose during fast remeasurement prevents late B promotion
+ok 168 - dispose during fast remeasurement prevents late B promotion
+  ---
+  duration_ms: 5.683232
+  type: 'test'
+  ...
+# Subtest: dispose during full analysis preserves the last valid analysis and suppresses late effects
+ok 169 - dispose during full analysis preserves the last valid analysis and suppresses late effects
+  ---
+  duration_ms: 0.417912
+  type: 'test'
+  ...
+# Subtest: dispose during decode cannot replace the source or restart analysis
+ok 170 - dispose during decode cannot replace the source or restart analysis
+  ---
+  duration_ms: 2.992207
+  type: 'test'
+  ...
+# Subtest: dispose during conversion cannot publish/download a late output
+ok 171 - dispose during conversion cannot publish/download a late output
+  ---
+  duration_ms: 0.60258
+  type: 'test'
+  ...
+# Subtest: failed B-crop remeasurement preserves the last valid B and its analysis
+ok 172 - failed B-crop remeasurement preserves the last valid B and its analysis
+  ---
+  duration_ms: 4.413046
+  type: 'test'
+  ...
+# Subtest: dispose during reference lookup cannot publish success or failure afterward
+ok 173 - dispose during reference lookup cannot publish success or failure afterward
+  ---
+  duration_ms: 0.331735
+  type: 'test'
+  ...
+1..173
+# tests 383
+# suites 35
+# pass 383
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 11510.881449

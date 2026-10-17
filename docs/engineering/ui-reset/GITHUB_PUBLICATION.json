@@ -1,0 +1,26 @@
+{
+  "published": [
+    {
+      "role": "authority",
+      "number": 6,
+      "url": "https://github.com/The-Mhood/onverse/issues/6",
+      "bodySha256": "fe8a9d7ac9471d3f8455b7b60ff7b2780e7d2096cf6b253c45d17c9771b46bc8",
+      "apiBodyReadbackExact": true,
+      "state": "open"
+    },
+    {
+      "role": "p-packet",
+      "number": 7,
+      "url": "https://github.com/The-Mhood/onverse/issues/7",
+      "bodySha256": "db9a6acdd1690235c5d9dad97f30c00da1aa243362e9c44d131d15df27798447",
+      "apiBodyReadbackExact": true,
+      "state": "open"
+    }
+  ],
+  "machineInventorySha256": "c07e3b2c3d8a251c4e7b66cddf96d98ff7f51e85e17da547fb32a342134cab73",
+  "commentsAndExistingIssueEdits": "blocked-HTTP403-resource-not-accessible-by-integration",
+  "pr4Pr5Issue2Notifications": "NOT-PUBLISHED",
+  "pReceiptStart": "UNVERIFIED",
+  "gitCommitPushMerge": "NONE",
+  "uiFilesDeleted": 0
+}

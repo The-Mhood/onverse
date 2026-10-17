@@ -1,0 +1,260 @@
+{
+  "kind": "actual-production-shared-shell-navigation-and-lifecycle",
+  "tools": {
+    "packages": 43,
+    "lockSha256": "a7f6b2cbede15b047060d8f4cc059fc18b1a8b6aee33ab3a0d412faabb8b50e6",
+    "pins": {
+      "@sparticuz/chromium": {
+        "version": "153.0.0",
+        "integrity": "sha512-jiGWqSvPMdu4+P9TilYqAR7yEGPEHINx+lCvE/NqNO/EHYzF/x1hUiI5T6ioVIt7dEy7n88byyT0vk+dnsgQwA=="
+      },
+      "puppeteer-core": {
+        "version": "25.14.0",
+        "integrity": "sha512-LQitnes3tBeVbdZ7V/4iwJPLZGgkl9uBVK0W7YYMh68j/3Y9eNuvj4yl+Fdo7zN0SuajOMrhd7aPj3DifK8k6A=="
+      }
+    }
+  },
+  "checks": [
+    "Real entry opens Home, settles baseline launch/arrival/drift cue, and creates no startup AudioContext; desktop/mobile responsive opening.",
+    "Desktop/mobile Home, loaded workbench, actual3-track DAW and single visibly unconnected Sylune screenshots. Context follows destination; Space in help does not start playback; Escape closes and restores focus.1120px open-panel layouts fit without document overflow.",
+    "18 real navigation transitions retain identical environment and destination DOM, source,3-track project and zoom. Listener count does not grow; navigation pauses outgoing audio; hidden destinations do not receive playback shortcuts.",
+    "Synthetic persisted pagehide/pageshow preserves controllers, project and source and does not close retained contexts; this is lifecycle-event proof, not native BFCache qualification.",
+    "Reduced motion settles immediately and runs zero CSS animations. Repeated nonpersisted pagehide is idempotent: every created AudioContext closed, all audited listeners and pending rAFs removed, shell nodes removed."
+  ],
+  "errors": [],
+  "blocked": [],
+  "downloads": [],
+  "screenshots": [
+    {
+      "file": "opening-1480x920.png",
+      "width": 1480,
+      "scrollWidth": 1480,
+      "clipped": [],
+      "environmentCount": 1,
+      "navigationCount": 1,
+      "destination": "opening",
+      "companion": null
+    },
+    {
+      "file": "opening-390x844.png",
+      "width": 390,
+      "scrollWidth": 390,
+      "clipped": [],
+      "environmentCount": 1,
+      "navigationCount": 1,
+      "destination": "opening",
+      "companion": null
+    },
+    {
+      "file": "workbench-1480x920.png",
+      "width": 1480,
+      "scrollWidth": 1480,
+      "clipped": [],
+      "environmentCount": 1,
+      "navigationCount": 1,
+      "destination": "workbench",
+      "companion": null
+    },
+    {
+      "file": "workbench-390x844.png",
+      "width": 390,
+      "scrollWidth": 390,
+      "clipped": [],
+      "environmentCount": 1,
+      "navigationCount": 1,
+      "destination": "workbench",
+      "companion": null
+    },
+    {
+      "file": "daw-1480x920.png",
+      "width": 1480,
+      "scrollWidth": 1480,
+      "clipped": [],
+      "environmentCount": 1,
+      "navigationCount": 1,
+      "destination": "daw",
+      "companion": null
+    },
+    {
+      "file": "daw-390x844.png",
+      "width": 390,
+      "scrollWidth": 390,
+      "clipped": [],
+      "environmentCount": 1,
+      "navigationCount": 1,
+      "destination": "daw",
+      "companion": null
+    },
+    {
+      "file": "sylune-1480x920.png",
+      "width": 1480,
+      "scrollWidth": 1480,
+      "clipped": [],
+      "environmentCount": 1,
+      "navigationCount": 1,
+      "destination": "daw",
+      "companion": {
+        "position": "fixed",
+        "bottom": 898,
+        "right": 1460
+      }
+    },
+    {
+      "file": "sylune-390x844.png",
+      "width": 390,
+      "scrollWidth": 390,
+      "clipped": [],
+      "environmentCount": 1,
+      "navigationCount": 1,
+      "destination": "daw",
+      "companion": {
+        "position": "fixed",
+        "bottom": 822,
+        "right": 370
+      }
+    },
+    {
+      "file": "sylune-daw-1120x700.png",
+      "width": 1120,
+      "scrollWidth": 1120,
+      "clipped": [],
+      "environmentCount": 1,
+      "navigationCount": 1,
+      "destination": "daw",
+      "companion": {
+        "position": "fixed",
+        "bottom": 678,
+        "right": 1100
+      }
+    },
+    {
+      "file": "sylune-workbench-1120x700.png",
+      "width": 1120,
+      "scrollWidth": 1120,
+      "clipped": [],
+      "environmentCount": 1,
+      "navigationCount": 1,
+      "destination": "workbench",
+      "companion": {
+        "position": "fixed",
+        "bottom": 678,
+        "right": 1100
+      }
+    }
+  ],
+  "limitations": [
+    "Generated PCM only, no user audio or provider.",
+    "Disabled-sandbox headless Linux CPU raster, not Mac/Electron/security qualification.",
+    "Native source graph checked on isolated Vite4174; integrated UI checked on production4173 and file origin.",
+    "Not listening, metering certification, full DAW or owner cinematic acceptance.",
+    "Project downloads are not verified filesystem save receipts or autosave."
+  ],
+  "browser": "HeadlessChrome/153.0.8010.0",
+  "performance": {
+    "budget": {
+      "sampleMs": 5000,
+      "maxP95FrameMs": 50,
+      "minAverageFps": 30
+    },
+    "samples": [
+      {
+        "destination": "opening",
+        "width": 1120,
+        "height": 700,
+        "count": 222,
+        "elapsedMs": 5016.5,
+        "averageFps": 44.25396192564537,
+        "p95Ms": 50,
+        "maxMs": 100,
+        "over50Ms": 6
+      },
+      {
+        "destination": "opening",
+        "width": 1480,
+        "height": 920,
+        "count": 231,
+        "elapsedMs": 5033.0999999999985,
+        "averageFps": 45.89616737199739,
+        "p95Ms": 33.399999999999636,
+        "maxMs": 50,
+        "over50Ms": 0
+      },
+      {
+        "destination": "daw",
+        "width": 1120,
+        "height": 700,
+        "count": 250,
+        "elapsedMs": 5016.5,
+        "averageFps": 49.8355427090601,
+        "p95Ms": 50,
+        "maxMs": 150,
+        "over50Ms": 9
+      },
+      {
+        "destination": "daw",
+        "width": 1480,
+        "height": 920,
+        "count": 300,
+        "elapsedMs": 5016.4000000000015,
+        "averageFps": 59.80384339366875,
+        "p95Ms": 16.700000000000728,
+        "maxMs": 33.29999999999927,
+        "over50Ms": 0
+      }
+    ]
+  },
+  "navigation": {
+    "baseline": {
+      "listeners": 143,
+      "frames": 0,
+      "globalListeners": 9
+    },
+    "after": {
+      "listeners": 143,
+      "frames": 0,
+      "globalListeners": 9
+    },
+    "transitions": 18
+  },
+  "reducedMotion": {
+    "phase": "drift",
+    "animations": 0
+  },
+  "cleanup": {
+    "listeners": 0,
+    "frames": 0,
+    "globalListeners": 0,
+    "contexts": 1,
+    "closes": 1,
+    "offline": 0,
+    "starts": [
+      [
+        0.025,
+        0,
+        8
+      ],
+      [
+        0.025,
+        0,
+        8
+      ],
+      [
+        0.025,
+        0,
+        8
+      ]
+    ],
+    "shells": 0
+  },
+  "status": "PASS",
+  "codeSha256": {
+    "src/main.js": "484e09684d0a258053de811b58e7f4c60e230c669c2c2ad39f1d4e487defc0d5",
+    "src/ui/shell/applicationShell.js": "1c350b66896b2d28d56d4d151365a715845f33a5cdd91a6ff7282bf3092a76bf",
+    "src/ui/shell/applicationShell.css": "d0b7104bd5c58b482cb747c0218cc45f72959e2146ceef36a281a44f5f4cdd66",
+    "src/application/shell/destinationLifecycle.js": "c97ea190d669320f1a90079f2ab5d8b9055090a14fa8ed87064330c794063ed3",
+    "src/ui/daw/arrangement.js": "21c40e538c4240b12fb2a0439dc8365687ad6cbbcaeec532f0c60e1318c73759",
+    "src/ui/workbench/workspace.js": "ea7c6434d742ad2b4c0353137e072fe68a6679e6ea4b00dbfc7b957d7422fcf9",
+    "scripts/validation/run-shell-browser.mjs": "766bdd97df25f56c331061c394c52a680cebaab9181cf6cda96d5eb2ae6d4b0d"
+  },
+  "buildSha256": "a286014ca38702961b6e2a5ad052629e1de098b9a180758e7bc6d279a0ce4576"
+}

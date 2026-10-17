@@ -1,0 +1,24 @@
+{
+  "branch": "arena/14df8ffa-onverse",
+  "sourceCommit": "eca5aa9d555bd39940b55508875f07d1b3f3a658",
+  "baselineCommit": "a172fcf99be909824dc51f759fe962be611b48ce",
+  "requestedPresentation": "afd08b938349eca124db6fb4c5ab8cb26e53f7b9",
+  "requestedPresentationIntegrated": false,
+  "preview": "https://4173-iy0ptvfql17xhsa5cqu3k.e2b.app",
+  "buildBytes": 509424,
+  "buildSha256": "a286014ca38702961b6e2a5ad052629e1de098b9a180758e7bc6d279a0ce4576",
+  "workbench": {
+    "checks": 26,
+    "downloads": 13,
+    "screenshots": 18
+  },
+  "sourceSha256": {
+    "src/main.js": "484e09684d0a258053de811b58e7f4c60e230c669c2c2ad39f1d4e487defc0d5",
+    "src/application/shell/destinationLifecycle.js": "c97ea190d669320f1a90079f2ab5d8b9055090a14fa8ed87064330c794063ed3",
+    "src/ui/shell/applicationShell.js": "1c350b66896b2d28d56d4d151365a715845f33a5cdd91a6ff7282bf3092a76bf",
+    "src/ui/shell/applicationShell.css": "d0b7104bd5c58b482cb747c0218cc45f72959e2146ceef36a281a44f5f4cdd66",
+    "src/ui/workbench/workspace.js": "ea7c6434d742ad2b4c0353137e072fe68a6679e6ea4b00dbfc7b957d7422fcf9",
+    "src/ui/daw/arrangement.js": "21c40e538c4240b12fb2a0439dc8365687ad6cbbcaeec532f0c60e1318c73759",
+    "vite.config.ts": "b54b0daf02a7ef899e813bfb9172dd6f45079d274f8f566988764fa5119532e6"
+  }
+}

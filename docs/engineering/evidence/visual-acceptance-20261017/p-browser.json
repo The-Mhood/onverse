@@ -1,0 +1,2107 @@
+{
+  "kind": "actual-production-entry-and-synthetic-workflows",
+  "output": "/home/user/reviews/visual-acceptance-20261017/reviews/workbench-browser-20261016-ayTYrS",
+  "node": "v22.22.3",
+  "tools": {
+    "packages": 43,
+    "lockSha256": "4aa6546916fc247fcb132dd93055139c1905b79c1e58a155f4d8567747f09008",
+    "pins": {
+      "@sparticuz/chromium": {
+        "version": "153.0.0",
+        "integrity": "sha512-jiGWqSvPMdu4+P9TilYqAR7yEGPEHINx+lCvE/NqNO/EHYzF/x1hUiI5T6ioVIt7dEy7n88byyT0vk+dnsgQwA=="
+      },
+      "puppeteer-core": {
+        "version": "25.14.0",
+        "integrity": "sha512-LQitnes3tBeVbdZ7V/4iwJPLZGgkl9uBVK0W7YYMh68j/3Y9eNuvj4yl+Fdo7zN0SuajOMrhd7aPj3DifK8k6A=="
+      }
+    }
+  },
+  "checks": [
+    "Actual production HTML executes ESM, mounts and binds; zero startup audio contexts, no legacy selector/stage dependency.",
+    "Real 16-second synth demo and real analyzer complete through UI.",
+    "Local WAV file picker invokes real decoder and automatic analysis; 2-second stereo 48kHz fixture decodes at native AudioContext rate, preserving existing processor behavior.",
+    "Uploaded reference is decoded/measured and used for real comparison.",
+    "Manual category/subgenre selection re-analyzes against the actual built-in profile, labelled as heuristic.",
+    "Real AudioContext source advances, pauses, seeks and cycles playback rate. No listening claim.",
+    "IN/OUT region exports genuine 1-second stereo WAV with expected sample count.",
+    "Real OfflineAudioContext Master Fix + fast remeasurement publishes distinct B; original/fixed A\u2013B selection works.",
+    "Manual output trim produces different real rendered WAV bytes; reset triggers another real render.",
+    "WAV A bytes remain exactly equal before/after Master Fix and adjustments. WAV and MP3 conversion download real files; MP3 decodes back to stereo; the 530 kB MP3 module is requested only on MP3 conversion; text report downloads.",
+    "Four independent cinematic layers advance naturally at BOTH target sizes; five-second RAF/performance samples satisfy predeclared headless budget. Real limits dialog enters/exits with intermediate opacity, restores focus, closes by Escape and does not trigger playback. No filter/backdrop blur.",
+    "Real analysis results, Master Fix/manual processing and opened adjustment controls activate host surface transitions; playback ticks do not retrigger these animations.",
+    "BOTH target viewports: four environmental animations/transforms really stop under reduced motion, and native panel transitions are disabled. Captures have no horizontal overflow, clipped controls or broken images.",
+    "Cropping B preserves exact floor/ceil sample-boundary behavior at its rendered sample rate; A export remains byte-identical.",
+    "Applying crop to A re-analyzes the 1-second working buffer; original filesystem fixture remains unchanged.",
+    "Keyboard Space toggles real playback outside form controls on the decoded stereo fixture.",
+    "Invalid audio reports a genuine decoder failure and preserves the current buffer. Its console error is expected and recorded.",
+    "Three-channel PCM WAV decodes at the browser AudioContext rate without losing duration, L/R polarity or the third channel; channel-aware loudness is finite; WAV round-trip, crop-region export and rendered B retain all three channels. This does not claim a surround/LFE loudness layout.",
+    "Unsupported stream URL rejected by real resolver without any external request. Real platform lookup/preview not tested.",
+    "Clear source disables unavailable operations and restores truthful empty state.",
+    "Registered pagehide cleanup closes the real playback context; event/listener disposal executed. Not a native Electron quit test.",
+    "Offline Chromium file:// entry loads a local WAV, dynamically loads the bundled MP3 chunk from dist/assets and completes MP3 export with no non-file network requests. This validates the browser file-URL path, not Electron packaging."
+  ],
+  "errors": [],
+  "console": [
+    {
+      "phase": "expected-decode-error",
+      "type": "error",
+      "text": "EncodingError: Unable to decode audio data"
+    }
+  ],
+  "requests": [
+    {
+      "phase": "boot",
+      "url": "http://127.0.0.1:4174/"
+    },
+    {
+      "phase": "boot",
+      "url": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQIAHAAcAAD/2wBDAAQDAwQDAwQEBAQFBQQFBwsHBwYGBw4KCggLEA4RERAOEA8SFBoWEhMYEw8QFh8XGBsbHR0dERYgIh8cIhocHRz/2wBDAQUFBQcGBw0HBw0cEhASHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBz/wAARCAMABWADASIAAhEBAxEB/8QAHQAAAgMBAQEBAQAAAAAAAAAAAAECAwQFBgcIC"
+    },
+    {
+      "phase": "conversion",
+      "url": "http://127.0.0.1:4174/assets/lame.all-BWirrk2H.js"
+    }
+  ],
+  "failedResponses": [],
+  "blockedRequests": [],
+  "screenshots": [
+    {
+      "file": "empty-1120x700.png",
+      "fullPage": "empty-1120x700-full.png",
+      "width": 1120,
+      "scrollWidth": 1120,
+      "height": 700,
+      "scrollY": 0,
+      "scrollHeight": 1029,
+      "clippedControls": [],
+      "missingImages": []
+    },
+    {
+      "file": "empty-1480x920.png",
+      "fullPage": "empty-1480x920-full.png",
+      "width": 1480,
+      "scrollWidth": 1480,
+      "height": 920,
+      "scrollY": 0,
+      "scrollHeight": 1052,
+      "clippedControls": [],
+      "missingImages": []
+    },
+    {
+      "file": "loaded-1120x700.png",
+      "fullPage": "loaded-1120x700-full.png",
+      "width": 1120,
+      "scrollWidth": 1120,
+      "height": 700,
+      "scrollY": 0,
+      "scrollHeight": 1015,
+      "clippedControls": [],
+      "missingImages": []
+    },
+    {
+      "file": "loaded-1480x920.png",
+      "fullPage": "loaded-1480x920-full.png",
+      "width": 1480,
+      "scrollWidth": 1480,
+      "height": 920,
+      "scrollY": 0,
+      "scrollHeight": 1076,
+      "clippedControls": [],
+      "missingImages": []
+    },
+    {
+      "file": "panel-open-1120x700.png",
+      "fullPage": "panel-open-1120x700-full.png",
+      "width": 1120,
+      "scrollWidth": 1120,
+      "height": 700,
+      "scrollY": 0,
+      "scrollHeight": 1015,
+      "clippedControls": [],
+      "missingImages": []
+    },
+    {
+      "file": "panel-open-1480x920.png",
+      "fullPage": "panel-open-1480x920-full.png",
+      "width": 1480,
+      "scrollWidth": 1480,
+      "height": 920,
+      "scrollY": 0,
+      "scrollHeight": 1076,
+      "clippedControls": [],
+      "missingImages": []
+    },
+    {
+      "file": "reduced-motion-1120x700.png",
+      "fullPage": "reduced-motion-1120x700-full.png",
+      "width": 1120,
+      "scrollWidth": 1120,
+      "height": 700,
+      "scrollY": 0,
+      "scrollHeight": 1015,
+      "clippedControls": [],
+      "missingImages": []
+    },
+    {
+      "file": "reduced-motion-1480x920.png",
+      "fullPage": "reduced-motion-1480x920-full.png",
+      "width": 1480,
+      "scrollWidth": 1480,
+      "height": 920,
+      "scrollY": 0,
+      "scrollHeight": 1076,
+      "clippedControls": [],
+      "missingImages": []
+    }
+  ],
+  "downloads": [
+    {
+      "action": "convert",
+      "suggestedFilename": "signal-study.wav",
+      "file": "0-convert.wav",
+      "bytes": 705636,
+      "sha256": "d77052610a42b6111e37e0f6700dc382a8ff59238f85393042fed93a32e6e850",
+      "frames": 88199,
+      "channels": 2,
+      "sampleRate": 44100
+    },
+    {
+      "action": "export-region",
+      "suggestedFilename": "signal-study_region_0.3-1.3s.wav",
+      "file": "1-export-region.wav",
+      "bytes": 352844,
+      "sha256": "f8f393450a4315013c261ab98b332592bca7604a50928785fd1efa298b2247da",
+      "frames": 44100,
+      "channels": 2,
+      "sampleRate": 44100
+    },
+    {
+      "action": "save-fixed",
+      "suggestedFilename": "signal-study_masterfixed.wav",
+      "file": "2-save-fixed.wav",
+      "bytes": 793788,
+      "sha256": "469de60c8f5716b206ddeeb637777c4711567609dd2e5f5ae5ace89d98f3514b",
+      "frames": 99218,
+      "channels": 2,
+      "sampleRate": 49610
+    },
+    {
+      "action": "save-fixed",
+      "suggestedFilename": "signal-study_masterfixed.wav",
+      "file": "3-save-fixed.wav",
+      "bytes": 793788,
+      "sha256": "b077b29327458ed7d579f30ee7cdf8f65d75b1cc93b0a2e40ba2c758dc684a85",
+      "frames": 99218,
+      "channels": 2,
+      "sampleRate": 49610
+    },
+    {
+      "action": "convert",
+      "suggestedFilename": "signal-study.wav",
+      "file": "4-convert.wav",
+      "bytes": 705636,
+      "sha256": "d77052610a42b6111e37e0f6700dc382a8ff59238f85393042fed93a32e6e850",
+      "frames": 88199,
+      "channels": 2,
+      "sampleRate": 44100
+    },
+    {
+      "action": "convert",
+      "suggestedFilename": "signal-study.mp3",
+      "file": "5-convert.mp3",
+      "bytes": 81502,
+      "sha256": "9ed582c9d48a11bff0adc5cf4c4605ad08e1db2cec00921883a9c2e9d6886100"
+    },
+    {
+      "action": "report",
+      "suggestedFilename": "signal-study_analysis.txt",
+      "file": "6-report.txt",
+      "bytes": 1970,
+      "sha256": "c223e902820264369a609ad18035e3f894896eff32b03a2a3bfe8c2ba8f1959e"
+    },
+    {
+      "action": "convert",
+      "suggestedFilename": "signal-study.m4a",
+      "file": "7-convert.m4a",
+      "bytes": 64332,
+      "sha256": "dcc06883d3e080bb09c1c8e28626a3ea3515158945f593a6887d315b624bd058",
+      "decodedGeometry": {
+        "duration": 1.8999773242630384,
+        "channels": 2
+      }
+    },
+    {
+      "action": "convert",
+      "suggestedFilename": "signal-study.webm",
+      "file": "8-convert.webm",
+      "bytes": 63854,
+      "sha256": "829621d52145a052de8d7ee66662a83a41a26d53c1d74785ca6852714a664c29",
+      "decodedGeometry": {
+        "duration": 1.9799773242630385,
+        "channels": 2
+      }
+    },
+    {
+      "action": "save-fixed",
+      "suggestedFilename": "signal-study_masterfixed.wav",
+      "file": "9-save-fixed.wav",
+      "bytes": 396932,
+      "sha256": "c3ea84942e28603078c87e4505f6c46fef72bd5b13e219d6ff767e79a3ddd729",
+      "frames": 49611,
+      "channels": 2,
+      "sampleRate": 49610
+    },
+    {
+      "action": "convert",
+      "suggestedFilename": "signal-study.wav",
+      "file": "10-convert.wav",
+      "bytes": 705636,
+      "sha256": "d77052610a42b6111e37e0f6700dc382a8ff59238f85393042fed93a32e6e850",
+      "frames": 88199,
+      "channels": 2,
+      "sampleRate": 44100
+    },
+    {
+      "action": "convert",
+      "suggestedFilename": "signal-study_cropped.wav",
+      "file": "11-convert.wav",
+      "bytes": 352844,
+      "sha256": "f8f393450a4315013c261ab98b332592bca7604a50928785fd1efa298b2247da",
+      "frames": 44100,
+      "channels": 2,
+      "sampleRate": 44100
+    },
+    {
+      "action": "convert",
+      "suggestedFilename": "polarity-three-channel.wav",
+      "file": "12-convert.wav",
+      "bytes": 529232,
+      "sha256": "bfcf9ec462181e320b3c58aa77c3107c41be7372c9965b70ac9fe107d37932d3",
+      "frames": 44099,
+      "channels": 3,
+      "sampleRate": 44100
+    },
+    {
+      "action": "export-region",
+      "suggestedFilename": "polarity-three-channel_region_0.1-0.6s.wav",
+      "file": "13-export-region.wav",
+      "bytes": 264644,
+      "sha256": "083ffb380ddd6f206d400ecd32cb81332ad761ad1f82590a7dab6bda888eab43",
+      "frames": 22050,
+      "channels": 3,
+      "sampleRate": 44100
+    },
+    {
+      "action": "save-fixed",
+      "suggestedFilename": "polarity-three-channel_masterfixed.wav",
+      "file": "14-save-fixed.wav",
+      "bytes": 464672,
+      "sha256": "dae19b7c90ed1aad32f1094be88c28204aefca82a6cd4a0f019174e30612df79",
+      "frames": 38719,
+      "channels": 3,
+      "sampleRate": 38720
+    },
+    {
+      "action": "convert",
+      "suggestedFilename": "offline-url-input.mp3",
+      "file": "15-convert.mp3",
+      "bytes": 81502,
+      "sha256": "9ed582c9d48a11bff0adc5cf4c4605ad08e1db2cec00921883a9c2e9d6886100"
+    }
+  ],
+  "limits": [
+    "Trusted local synthetic PCM only; no user media, real provider or listening.",
+    "Headless Chromium with disabled sandbox; not Electron/Mac/security qualification.",
+    "Full-resolution numbered source images 01\u201313 were reviewed from the recovered project pack; only the authored horizon asset is bundled into the UI."
+  ],
+  "renderer": "Chromium CPU raster (--disable-gpu), no physical GPU qualification",
+  "browser": "HeadlessChrome/153.0.8010.0",
+  "decodedSampleRate": 44100,
+  "sourceDecode": {
+    "frames": 88199,
+    "sampleRate": 44100,
+    "channels": 2,
+    "sampleFrame": 12,
+    "samples": [
+      0.1981094926595688,
+      0.16839630901813507
+    ]
+  },
+  "playback": {
+    "advancedTo": 0.15,
+    "afterPause": "Play"
+  },
+  "mp3Decode": {
+    "duration": 2.0375510204081633,
+    "channels": 2
+  },
+  "mp3ChunkRequest": {
+    "phase": "conversion",
+    "url": "http://127.0.0.1:4174/assets/lame.all-BWirrk2H.js"
+  },
+  "recorderCapabilities": [
+    {
+      "format": "wav",
+      "disabled": false
+    },
+    {
+      "format": "mp3",
+      "disabled": false
+    },
+    {
+      "format": "m4a",
+      "disabled": false
+    },
+    {
+      "format": "ogg",
+      "disabled": true
+    },
+    {
+      "format": "webm",
+      "disabled": false
+    }
+  ],
+  "motion": {
+    "budget": {
+      "sampleMs": 5000,
+      "maxP95FrameMs": 50,
+      "minAverageFps": 30
+    },
+    "viewports": [
+      {
+        "width": 1120,
+        "height": 700,
+        "before": [
+          {
+            "layer": "environment",
+            "name": "mvo-deep-space-drift",
+            "duration": "212s",
+            "state": "running",
+            "transform": "matrix(1.02531, 0, 0, 1.02531, -3.79852, -1.47584)",
+            "opacity": "1",
+            "filter": "none",
+            "backdropFilter": "none"
+          },
+          {
+            "layer": "environment::before",
+            "name": "mvo-nebula-drift",
+            "duration": "212s",
+            "state": "running",
+            "transform": "matrix(1.025, 0, 0, 1.025, -1.106, 0.286475)",
+            "opacity": "0.76",
+            "filter": "none",
+            "backdropFilter": "none"
+          },
+          {
+            "layer": "environment::after",
+            "name": "mvo-horizon-drift",
+            "duration": "158s",
+            "state": "running",
+            "transform": "matrix(1.02, 0, 0, 1.02, 0.241048, -0.139038)",
+            "opacity": "0.58",
+            "filter": "none",
+            "backdropFilter": "none"
+          },
+          {
+            "layer": "workspace-root::before",
+            "name": "mvo-nearfield-drift",
+            "duration": "116s",
+            "state": "running",
+            "transform": "matrix(1.0169, 0, 0, 1.0169, -0.812013, 0.262909)",
+            "opacity": "0.38082",
+            "filter": "none",
+            "backdropFilter": "none"
+          }
+        ],
+        "after": [
+          {
+            "layer": "environment",
+            "name": "mvo-deep-space-drift",
+            "duration": "212s",
+            "state": "running",
+            "transform": "matrix(1.02551, 0, 0, 1.02551, -3.72196, -1.44609)",
+            "opacity": "1",
+            "filter": "none",
+            "backdropFilter": "none"
+          },
+          {
+            "layer": "environment::before",
+            "name": "mvo-nebula-drift",
+            "duration": "212s",
+            "state": "running",
+            "transform": "matrix(1.025, 0, 0, 1.025, -0.834668, 0.216195)",
+            "opacity": "0.76",
+            "filter": "none",
+            "backdropFilter": "none"
+          },
+          {
+            "layer": "environment::after",
+            "name": "mvo-horizon-drift",
+            "duration": "158s",
+            "state": "running",
+            "transform": "matrix(1.02, 0, 0, 1.02, -0.0176168, -0.0403024)",
+            "opacity": "0.58",
+            "filter": "none",
+            "backdropFilter": "none"
+          },
+          {
+            "layer": "workspace-root::before",
+            "name": "mvo-nearfield-drift",
+            "duration": "116s",
+            "state": "running",
+            "transform": "matrix(1.01727, 0, 0, 1.01727, -0.308299, 0.0998191)",
+            "opacity": "0.392718",
+            "filter": "none",
+            "backdropFilter": "none"
+          }
+        ],
+        "timing": {
+          "count": 298,
+          "elapsedMs": 5016.4000000000015,
+          "averageFps": 59.40515110437762,
+          "p50Ms": 16.69999999999709,
+          "p95Ms": 16.799999999999272,
+          "maxMs": 66.60000000000218,
+          "over50Ms": 1
+        },
+        "performanceDelta": {
+          "LayoutCount": 0,
+          "RecalcStyleCount": 300,
+          "LayoutDuration": 0,
+          "RecalcStyleDuration": 0.05866099999999996,
+          "ScriptDuration": 0.007636000000000032,
+          "TaskDuration": 0.12311700000000014
+        },
+        "panel": {
+          "entering": {
+            "samples": [
+              {
+                "timeMs": 9.900000000001455,
+                "opacity": 0,
+                "transform": "matrix(0.985, 0, 0, 0.985, 0, 9.6)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 59.900000000001455,
+                "opacity": 0,
+                "transform": "matrix(0.985, 0, 0, 0.985, 0, 9.6)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 76.5,
+                "opacity": 0.0238237,
+                "transform": "matrix(0.985357, 0, 0, 0.985357, 0, 9.37129)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 93.20000000000073,
+                "opacity": 0.0655539,
+                "transform": "matrix(0.985983, 0, 0, 0.985983, 0, 8.97068)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 109.90000000000146,
+                "opacity": 0.126321,
+                "transform": "matrix(0.986895, 0, 0, 0.986895, 0, 8.38732)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 126.5,
+                "opacity": 0.203437,
+                "transform": "matrix(0.988052, 0, 0, 0.988052, 0, 7.647)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 143.20000000000073,
+                "opacity": 0.291557,
+                "transform": "matrix(0.989373, 0, 0, 0.989373, 0, 6.80106)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 159.90000000000146,
+                "opacity": 0.382099,
+                "transform": "matrix(0.990731, 0, 0, 0.990731, 0, 5.93185)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 176.59999999999854,
+                "opacity": 0.468504,
+                "transform": "matrix(0.992028, 0, 0, 0.992028, 0, 5.10236)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 193.20000000000073,
+                "opacity": 0.546801,
+                "transform": "matrix(0.993202, 0, 0, 0.993202, 0, 4.35071)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 209.90000000000146,
+                "opacity": 0.616804,
+                "transform": "matrix(0.994252, 0, 0, 0.994252, 0, 3.67868)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 226.59999999999854,
+                "opacity": 0.678178,
+                "transform": "matrix(0.995173, 0, 0, 0.995173, 0, 3.0895)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 243.20000000000073,
+                "opacity": 0.731322,
+                "transform": "matrix(0.99597, 0, 0, 0.99597, 0, 2.5793)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 259.7999999999993,
+                "opacity": 0.777462,
+                "transform": "matrix(0.996662, 0, 0, 0.996662, 0, 2.13637)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 276.5,
+                "opacity": 0.817626,
+                "transform": "matrix(0.997264, 0, 0, 0.997264, 0, 1.75079)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 293.2000000000007,
+                "opacity": 0.852259,
+                "transform": "matrix(0.997784, 0, 0, 0.997784, 0, 1.41831)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 309.90000000000146,
+                "opacity": 0.882002,
+                "transform": "matrix(0.99823, 0, 0, 0.99823, 0, 1.13278)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 326.59999999999854,
+                "opacity": 0.907406,
+                "transform": "matrix(0.998611, 0, 0, 0.998611, 0, 0.888901)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 343.2000000000007,
+                "opacity": 0.928822,
+                "transform": "matrix(0.998932, 0, 0, 0.998932, 0, 0.683305)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 359.90000000000146,
+                "opacity": 0.946908,
+                "transform": "matrix(0.999204, 0, 0, 0.999204, 0, 0.509687)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 376.5,
+                "opacity": 0.961784,
+                "transform": "matrix(0.999427, 0, 0, 0.999427, 0, 0.366875)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 393.2000000000007,
+                "opacity": 0.973924,
+                "transform": "matrix(0.999609, 0, 0, 0.999609, 0, 0.250329)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 409.90000000000146,
+                "opacity": 0.983485,
+                "transform": "matrix(0.999752, 0, 0, 0.999752, 0, 0.158547)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 426.5,
+                "opacity": 0.990651,
+                "transform": "matrix(0.99986, 0, 0, 0.99986, 0, 0.0897528)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 443.2000000000007,
+                "opacity": 0.995701,
+                "transform": "matrix(0.999936, 0, 0, 0.999936, 0, 0.0412658)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 459.90000000000146,
+                "opacity": 0.998757,
+                "transform": "matrix(0.999981, 0, 0, 0.999981, 0, 0.0119332)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 476.59999999999854,
+                "opacity": 0.999967,
+                "transform": "matrix(1, 0, 0, 1, 0, 0.000313564)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 493.09999999999854,
+                "opacity": 1,
+                "transform": "matrix(1, 0, 0, 1, 0, 0)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 509.90000000000146,
+                "opacity": 1,
+                "transform": "matrix(1, 0, 0, 1, 0, 0)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 526.5,
+                "opacity": 1,
+                "transform": "matrix(1, 0, 0, 1, 0, 0)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 543.0999999999985,
+                "opacity": 1,
+                "transform": "matrix(1, 0, 0, 1, 0, 0)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 559.7999999999993,
+                "opacity": 1,
+                "transform": "matrix(1, 0, 0, 1, 0, 0)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 576.5,
+                "opacity": 1,
+                "transform": "matrix(1, 0, 0, 1, 0, 0)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 593.2000000000007,
+                "opacity": 1,
+                "transform": "matrix(1, 0, 0, 1, 0, 0)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 609.9000000000015,
+                "opacity": 1,
+                "transform": "matrix(1, 0, 0, 1, 0, 0)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 626.5999999999985,
+                "opacity": 1,
+                "transform": "matrix(1, 0, 0, 1, 0, 0)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 643.2000000000007,
+                "opacity": 1,
+                "transform": "matrix(1, 0, 0, 1, 0, 0)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 659.7999999999993,
+                "opacity": 1,
+                "transform": "matrix(1, 0, 0, 1, 0, 0)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 676.5,
+                "opacity": 1,
+                "transform": "matrix(1, 0, 0, 1, 0, 0)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 693.2000000000007,
+                "opacity": 1,
+                "transform": "matrix(1, 0, 0, 1, 0, 0)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 709.9000000000015,
+                "opacity": 1,
+                "transform": "matrix(1, 0, 0, 1, 0, 0)",
+                "display": "block",
+                "modal": true
+              }
+            ],
+            "open": true,
+            "filter": "none"
+          },
+          "exiting": {
+            "samples": [
+              {
+                "timeMs": -0.2000000001389708,
+                "opacity": 1,
+                "transform": "matrix(1, 0, 0, 1, 0, 0)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 16.499999999861757,
+                "opacity": 1,
+                "transform": "matrix(1, 0, 0, 1, 0, 0)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 33.0999999998603,
+                "opacity": 0.99999,
+                "transform": "matrix(1, 0, 0, 1, 0, 0.000100603)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 49.699999999858846,
+                "opacity": 0.976196,
+                "transform": "matrix(0.999643, 0, 0, 0.999643, 0, 0.228522)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 66.39999999985957,
+                "opacity": 0.934477,
+                "transform": "matrix(0.999017, 0, 0, 0.999017, 0, 0.629023)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 83.0999999998603,
+                "opacity": 0.873721,
+                "transform": "matrix(0.998106, 0, 0, 0.998106, 0, 1.21228)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 99.69999999985885,
+                "opacity": 0.796613,
+                "transform": "matrix(0.996949, 0, 0, 0.996949, 0, 1.95251)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 116.39999999985957,
+                "opacity": 0.708498,
+                "transform": "matrix(0.995627, 0, 0, 0.995627, 0, 2.79842)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 133.0999999998603,
+                "opacity": 0.617954,
+                "transform": "matrix(0.994269, 0, 0, 0.994269, 0, 3.66764)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 149.79999999986103,
+                "opacity": 0.531546,
+                "transform": "matrix(0.992973, 0, 0, 0.992973, 0, 4.49716)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 166.39999999985957,
+                "opacity": 0.453244,
+                "transform": "matrix(0.991799, 0, 0, 0.991799, 0, 5.24886)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 183.0999999998603,
+                "opacity": 0.383236,
+                "transform": "matrix(0.990749, 0, 0, 0.990749, 0, 5.92094)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 199.79999999986103,
+                "opacity": 0.321857,
+                "transform": "matrix(0.989828, 0, 0, 0.989828, 0, 6.51018)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 216.39999999985957,
+                "opacity": 0.268707,
+                "transform": "matrix(0.989031, 0, 0, 0.989031, 0, 7.02041)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 233.0999999998603,
+                "opacity": 0.222306,
+                "transform": "matrix(0.988335, 0, 0, 0.988335, 0, 7.46586)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 249.79999999986103,
+                "opacity": 0.182173,
+                "transform": "matrix(0.987733, 0, 0, 0.987733, 0, 7.85114)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 266.49999999986176,
+                "opacity": 0.147568,
+                "transform": "matrix(0.987213, 0, 0, 0.987213, 0, 8.18335)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 283.0999999998603,
+                "opacity": 0.118014,
+                "transform": "matrix(0.98677, 0, 0, 0.98677, 0, 8.46706)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 299.79999999986103,
+                "opacity": 0.0926078,
+                "transform": "matrix(0.986389, 0, 0, 0.986389, 0, 8.71097)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 316.49999999986176,
+                "opacity": 0.0710712,
+                "transform": "matrix(0.986066, 0, 0, 0.986066, 0, 8.91772)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 333.0999999998603,
+                "opacity": 0.0531022,
+                "transform": "matrix(0.985797, 0, 0, 0.985797, 0, 9.09022)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 349.69999999985885,
+                "opacity": 0.0382242,
+                "transform": "matrix(0.985573, 0, 0, 0.985573, 0, 9.23305)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 366.3999999998596,
+                "opacity": 0.0260824,
+                "transform": "matrix(0.985391, 0, 0, 0.985391, 0, 9.34961)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 383.0999999998603,
+                "opacity": 0.0165204,
+                "transform": "matrix(0.985248, 0, 0, 0.985248, 0, 9.44141)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 399.79999999986103,
+                "opacity": 0.00931639,
+                "transform": "matrix(0.98514, 0, 0, 0.98514, 0, 9.51056)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 416.3999999998596,
+                "opacity": 0.00430093,
+                "transform": "matrix(0.985065, 0, 0, 0.985065, 0, 9.55871)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 433.0999999998603,
+                "opacity": 0.00124431,
+                "transform": "matrix(0.985019, 0, 0, 0.985019, 0, 9.58805)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 449.79999999986103,
+                "opacity": 3.28629e-05,
+                "transform": "matrix(0.985, 0, 0, 0.985, 0, 9.59968)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 466.3999999998596,
+                "opacity": 0,
+                "transform": "none",
+                "display": "none",
+                "modal": false
+              },
+              {
+                "timeMs": 483.0999999998603,
+                "opacity": 0,
+                "transform": "none",
+                "display": "none",
+                "modal": false
+              },
+              {
+                "timeMs": 499.69999999985885,
+                "opacity": 0,
+                "transform": "none",
+                "display": "none",
+                "modal": false
+              },
+              {
+                "timeMs": 516.3999999998596,
+                "opacity": 0,
+                "transform": "none",
+                "display": "none",
+                "modal": false
+              },
+              {
+                "timeMs": 533.0999999998603,
+                "opacity": 0,
+                "transform": "none",
+                "display": "none",
+                "modal": false
+              },
+              {
+                "timeMs": 549.799999999861,
+                "opacity": 0,
+                "transform": "none",
+                "display": "none",
+                "modal": false
+              },
+              {
+                "timeMs": 566.3999999998596,
+                "opacity": 0,
+                "transform": "none",
+                "display": "none",
+                "modal": false
+              },
+              {
+                "timeMs": 583.0999999998603,
+                "opacity": 0,
+                "transform": "none",
+                "display": "none",
+                "modal": false
+              },
+              {
+                "timeMs": 599.799999999861,
+                "opacity": 0,
+                "transform": "none",
+                "display": "none",
+                "modal": false
+              },
+              {
+                "timeMs": 616.3999999998596,
+                "opacity": 0,
+                "transform": "none",
+                "display": "none",
+                "modal": false
+              },
+              {
+                "timeMs": 633.0999999998603,
+                "opacity": 0,
+                "transform": "none",
+                "display": "none",
+                "modal": false
+              },
+              {
+                "timeMs": 649.6999999998588,
+                "opacity": 0,
+                "transform": "none",
+                "display": "none",
+                "modal": false
+              },
+              {
+                "timeMs": 666.3999999998596,
+                "opacity": 0,
+                "transform": "none",
+                "display": "none",
+                "modal": false
+              },
+              {
+                "timeMs": 683.0999999998603,
+                "opacity": 0,
+                "transform": "none",
+                "display": "none",
+                "modal": false
+              },
+              {
+                "timeMs": 699.799999999861,
+                "opacity": 0,
+                "transform": "none",
+                "display": "none",
+                "modal": false
+              },
+              {
+                "timeMs": 716.3999999998596,
+                "opacity": 0,
+                "transform": "none",
+                "display": "none",
+                "modal": false
+              }
+            ],
+            "open": false,
+            "filter": "none"
+          }
+        }
+      },
+      {
+        "width": 1480,
+        "height": 920,
+        "before": [
+          {
+            "layer": "environment",
+            "name": "mvo-deep-space-drift",
+            "duration": "212s",
+            "state": "running",
+            "transform": "matrix(1.02561, 0, 0, 1.02561, -4.86552, -1.51625)",
+            "opacity": "1",
+            "filter": "none",
+            "backdropFilter": "none"
+          },
+          {
+            "layer": "environment::before",
+            "name": "mvo-nebula-drift",
+            "duration": "212s",
+            "state": "running",
+            "transform": "matrix(1.025, 0, 0, 1.025, -0.941574, 0.195613)",
+            "opacity": "0.76",
+            "filter": "none",
+            "backdropFilter": "none"
+          },
+          {
+            "layer": "environment::after",
+            "name": "mvo-horizon-drift",
+            "duration": "158s",
+            "state": "running",
+            "transform": "matrix(1.02, 0, 0, 1.02, -0.175106, 0.00376764)",
+            "opacity": "0.58",
+            "filter": "none",
+            "backdropFilter": "none"
+          },
+          {
+            "layer": "workspace-root::before",
+            "name": "mvo-nearfield-drift",
+            "duration": "116s",
+            "state": "running",
+            "transform": "matrix(1.01744, 0, 0, 1.01744, -0.108774, 0.0282483)",
+            "opacity": "0.398056",
+            "filter": "none",
+            "backdropFilter": "none"
+          }
+        ],
+        "after": [
+          {
+            "layer": "environment",
+            "name": "mvo-deep-space-drift",
+            "duration": "212s",
+            "state": "running",
+            "transform": "matrix(1.02588, 0, 0, 1.02588, -4.72417, -1.4722)",
+            "opacity": "1",
+            "filter": "none",
+            "backdropFilter": "none"
+          },
+          {
+            "layer": "environment::before",
+            "name": "mvo-nebula-drift",
+            "duration": "212s",
+            "state": "running",
+            "transform": "matrix(1.025, 0, 0, 1.025, -0.562973, 0.116958)",
+            "opacity": "0.76",
+            "filter": "none",
+            "backdropFilter": "none"
+          },
+          {
+            "layer": "environment::after",
+            "name": "mvo-horizon-drift",
+            "duration": "158s",
+            "state": "running",
+            "transform": "matrix(1.02, 0, 0, 1.02, -0.525057, 0.110909)",
+            "opacity": "0.58",
+            "filter": "none",
+            "backdropFilter": "none"
+          },
+          {
+            "layer": "workspace-root::before",
+            "name": "mvo-nearfield-drift",
+            "duration": "116s",
+            "state": "running",
+            "transform": "matrix(1.01782, 0, 0, 1.01782, 0.580872, -0.150851)",
+            "opacity": "0.410383",
+            "filter": "none",
+            "backdropFilter": "none"
+          }
+        ],
+        "timing": {
+          "count": 301,
+          "elapsedMs": 5016.4000000000015,
+          "averageFps": 60.00318953831431,
+          "p50Ms": 16.69999999999709,
+          "p95Ms": 16.799999999999272,
+          "maxMs": 16.80000000000291,
+          "over50Ms": 0
+        },
+        "performanceDelta": {
+          "LayoutCount": 1,
+          "RecalcStyleCount": 303,
+          "LayoutDuration": 4.800000000002025e-05,
+          "RecalcStyleDuration": 0.06920700000000002,
+          "ScriptDuration": 0.007334000000000007,
+          "TaskDuration": 0.17992000000000008
+        },
+        "panel": {
+          "entering": {
+            "samples": [
+              {
+                "timeMs": 11.799999999951979,
+                "opacity": 0,
+                "transform": "matrix(0.985, 0, 0, 0.985, 0, 9.6)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 78.39999999995416,
+                "opacity": 0,
+                "transform": "matrix(0.985, 0, 0, 0.985, 0, 9.6)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 95.19999999995343,
+                "opacity": 0.0240807,
+                "transform": "matrix(0.985361, 0, 0, 0.985361, 0, 9.36883)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 111.79999999995198,
+                "opacity": 0.0656522,
+                "transform": "matrix(0.985985, 0, 0, 0.985985, 0, 8.96974)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 128.4999999999527,
+                "opacity": 0.126455,
+                "transform": "matrix(0.986897, 0, 0, 0.986897, 0, 8.38603)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 145.0999999999549,
+                "opacity": 0.203598,
+                "transform": "matrix(0.988054, 0, 0, 0.988054, 0, 7.64545)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 161.79999999995198,
+                "opacity": 0.29173,
+                "transform": "matrix(0.989376, 0, 0, 0.989376, 0, 6.79939)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 178.4999999999527,
+                "opacity": 0.382271,
+                "transform": "matrix(0.990734, 0, 0, 0.990734, 0, 5.9302)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 195.0999999999549,
+                "opacity": 0.468166,
+                "transform": "matrix(0.992023, 0, 0, 0.992023, 0, 5.1056)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 211.79999999995198,
+                "opacity": 0.546943,
+                "transform": "matrix(0.993204, 0, 0, 0.993204, 0, 4.34934)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 228.4999999999527,
+                "opacity": 0.616929,
+                "transform": "matrix(0.994254, 0, 0, 0.994254, 0, 3.67748)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 245.0999999999549,
+                "opacity": 0.677944,
+                "transform": "matrix(0.995169, 0, 0, 0.995169, 0, 3.09174)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 261.69999999995343,
+                "opacity": 0.73112,
+                "transform": "matrix(0.995967, 0, 0, 0.995967, 0, 2.58125)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 278.4999999999527,
+                "opacity": 0.777803,
+                "transform": "matrix(0.996667, 0, 0, 0.996667, 0, 2.1331)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 295.0999999999549,
+                "opacity": 0.817698,
+                "transform": "matrix(0.997265, 0, 0, 0.997265, 0, 1.7501)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 311.69999999995343,
+                "opacity": 0.852128,
+                "transform": "matrix(0.997782, 0, 0, 0.997782, 0, 1.41957)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 328.4999999999527,
+                "opacity": 0.882055,
+                "transform": "matrix(0.998231, 0, 0, 0.998231, 0, 1.13227)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 345.0999999999549,
+                "opacity": 0.907311,
+                "transform": "matrix(0.99861, 0, 0, 0.99861, 0, 0.889816)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 361.799999999952,
+                "opacity": 0.92886,
+                "transform": "matrix(0.998933, 0, 0, 0.998933, 0, 0.682942)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 378.4999999999527,
+                "opacity": 0.946939,
+                "transform": "matrix(0.999204, 0, 0, 0.999204, 0, 0.509384)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 395.0999999999549,
+                "opacity": 0.96181,
+                "transform": "matrix(0.999427, 0, 0, 0.999427, 0, 0.366626)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 411.799999999952,
+                "opacity": 0.973945,
+                "transform": "matrix(0.999609, 0, 0, 0.999609, 0, 0.25013)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 428.4999999999527,
+                "opacity": 0.983501,
+                "transform": "matrix(0.999753, 0, 0, 0.999753, 0, 0.158394)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 445.0999999999549,
+                "opacity": 0.990662,
+                "transform": "matrix(0.99986, 0, 0, 0.99986, 0, 0.0896405)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 461.799999999952,
+                "opacity": 0.995709,
+                "transform": "matrix(0.999936, 0, 0, 0.999936, 0, 0.0411917)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 478.4999999999527,
+                "opacity": 0.998761,
+                "transform": "matrix(0.999981, 0, 0, 0.999981, 0, 0.0118944)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 495.0999999999549,
+                "opacity": 0.999966,
+                "transform": "matrix(0.999999, 0, 0, 0.999999, 0, 0.000326737)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 511.799999999952,
+                "opacity": 1,
+                "transform": "matrix(1, 0, 0, 1, 0, 0)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 528.3999999999542,
+                "opacity": 1,
+                "transform": "matrix(1, 0, 0, 1, 0, 0)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 545.0999999999549,
+                "opacity": 1,
+                "transform": "matrix(1, 0, 0, 1, 0, 0)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 561.799999999952,
+                "opacity": 1,
+                "transform": "matrix(1, 0, 0, 1, 0, 0)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 578.3999999999542,
+                "opacity": 1,
+                "transform": "matrix(1, 0, 0, 1, 0, 0)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 595.0999999999549,
+                "opacity": 1,
+                "transform": "matrix(1, 0, 0, 1, 0, 0)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 611.799999999952,
+                "opacity": 1,
+                "transform": "matrix(1, 0, 0, 1, 0, 0)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 628.3999999999542,
+                "opacity": 1,
+                "transform": "matrix(1, 0, 0, 1, 0, 0)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 645.0999999999549,
+                "opacity": 1,
+                "transform": "matrix(1, 0, 0, 1, 0, 0)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 661.799999999952,
+                "opacity": 1,
+                "transform": "matrix(1, 0, 0, 1, 0, 0)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 678.3999999999542,
+                "opacity": 1,
+                "transform": "matrix(1, 0, 0, 1, 0, 0)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 695.0999999999549,
+                "opacity": 1,
+                "transform": "matrix(1, 0, 0, 1, 0, 0)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 711.6999999999534,
+                "opacity": 1,
+                "transform": "matrix(1, 0, 0, 1, 0, 0)",
+                "display": "block",
+                "modal": true
+              }
+            ],
+            "open": true,
+            "filter": "none"
+          },
+          "exiting": {
+            "samples": [
+              {
+                "timeMs": -1.8000000000902219,
+                "opacity": 1,
+                "transform": "matrix(1, 0, 0, 1, 0, 0)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 31.599999999903957,
+                "opacity": 1,
+                "transform": "matrix(1, 0, 0, 1, 0, 0)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 64.89999999990687,
+                "opacity": 0.976106,
+                "transform": "matrix(0.999642, 0, 0, 0.999642, 0, 0.22938)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 81.49999999990541,
+                "opacity": 0.934642,
+                "transform": "matrix(0.99902, 0, 0, 0.99902, 0, 0.627433)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 98.19999999990978,
+                "opacity": 0.873947,
+                "transform": "matrix(0.998109, 0, 0, 0.998109, 0, 1.21011)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 114.89999999990687,
+                "opacity": 0.796381,
+                "transform": "matrix(0.996946, 0, 0, 0.996946, 0, 1.95474)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 131.4999999999054,
+                "opacity": 0.708791,
+                "transform": "matrix(0.995632, 0, 0, 0.995632, 0, 2.79561)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 148.19999999990978,
+                "opacity": 0.618243,
+                "transform": "matrix(0.994274, 0, 0, 0.994274, 0, 3.66487)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 164.89999999990687,
+                "opacity": 0.531814,
+                "transform": "matrix(0.992977, 0, 0, 0.992977, 0, 4.49459)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 181.59999999990396,
+                "opacity": 0.453039,
+                "transform": "matrix(0.991796, 0, 0, 0.991796, 0, 5.25083)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 198.19999999990978,
+                "opacity": 0.383448,
+                "transform": "matrix(0.990752, 0, 0, 0.990752, 0, 5.9189)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 214.89999999990687,
+                "opacity": 0.322042,
+                "transform": "matrix(0.989831, 0, 0, 0.989831, 0, 6.5084)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 231.59999999990396,
+                "opacity": 0.26857,
+                "transform": "matrix(0.989029, 0, 0, 0.989029, 0, 7.02173)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 248.19999999990978,
+                "opacity": 0.222445,
+                "transform": "matrix(0.988337, 0, 0, 0.988337, 0, 7.46452)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 264.89999999990687,
+                "opacity": 0.182293,
+                "transform": "matrix(0.987734, 0, 0, 0.987734, 0, 7.84999)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 281.59999999990396,
+                "opacity": 0.147672,
+                "transform": "matrix(0.987215, 0, 0, 0.987215, 0, 8.18235)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 298.1999999999098,
+                "opacity": 0.118103,
+                "transform": "matrix(0.986772, 0, 0, 0.986772, 0, 8.46621)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 314.89999999990687,
+                "opacity": 0.0926835,
+                "transform": "matrix(0.98639, 0, 0, 0.98639, 0, 8.71024)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 331.4999999999054,
+                "opacity": 0.0712534,
+                "transform": "matrix(0.986069, 0, 0, 0.986069, 0, 8.91597)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 348.1999999999098,
+                "opacity": 0.0531555,
+                "transform": "matrix(0.985797, 0, 0, 0.985797, 0, 9.08971)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 364.89999999990687,
+                "opacity": 0.038187,
+                "transform": "matrix(0.985573, 0, 0, 0.985573, 0, 9.23341)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 381.59999999990396,
+                "opacity": 0.0260526,
+                "transform": "matrix(0.985391, 0, 0, 0.985391, 0, 9.3499)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 398.1999999999098,
+                "opacity": 0.0165474,
+                "transform": "matrix(0.985248, 0, 0, 0.985248, 0, 9.44115)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 414.7999999999083,
+                "opacity": 0.00937265,
+                "transform": "matrix(0.985141, 0, 0, 0.985141, 0, 9.51002)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 431.59999999990396,
+                "opacity": 0.00428984,
+                "transform": "matrix(0.985064, 0, 0, 0.985064, 0, 9.55882)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 448.2999999999083,
+                "opacity": 0.0012385,
+                "transform": "matrix(0.985019, 0, 0, 0.985019, 0, 9.58811)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 464.89999999990687,
+                "opacity": 3.39536e-05,
+                "transform": "matrix(0.985, 0, 0, 0.985, 0, 9.59967)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 481.59999999990396,
+                "opacity": 0,
+                "transform": "none",
+                "display": "none",
+                "modal": false
+              },
+              {
+                "timeMs": 498.1999999999098,
+                "opacity": 0,
+                "transform": "none",
+                "display": "none",
+                "modal": false
+              },
+              {
+                "timeMs": 514.8999999999069,
+                "opacity": 0,
+                "transform": "none",
+                "display": "none",
+                "modal": false
+              },
+              {
+                "timeMs": 531.599999999904,
+                "opacity": 0,
+                "transform": "none",
+                "display": "none",
+                "modal": false
+              },
+              {
+                "timeMs": 548.1999999999098,
+                "opacity": 0,
+                "transform": "none",
+                "display": "none",
+                "modal": false
+              },
+              {
+                "timeMs": 564.8999999999069,
+                "opacity": 0,
+                "transform": "none",
+                "display": "none",
+                "modal": false
+              },
+              {
+                "timeMs": 581.599999999904,
+                "opacity": 0,
+                "transform": "none",
+                "display": "none",
+                "modal": false
+              },
+              {
+                "timeMs": 598.1999999999098,
+                "opacity": 0,
+                "transform": "none",
+                "display": "none",
+                "modal": false
+              },
+              {
+                "timeMs": 614.8999999999069,
+                "opacity": 0,
+                "transform": "none",
+                "display": "none",
+                "modal": false
+              },
+              {
+                "timeMs": 631.599999999904,
+                "opacity": 0,
+                "transform": "none",
+                "display": "none",
+                "modal": false
+              },
+              {
+                "timeMs": 648.1999999999098,
+                "opacity": 0,
+                "transform": "none",
+                "display": "none",
+                "modal": false
+              },
+              {
+                "timeMs": 664.7999999999083,
+                "opacity": 0,
+                "transform": "none",
+                "display": "none",
+                "modal": false
+              },
+              {
+                "timeMs": 681.599999999904,
+                "opacity": 0,
+                "transform": "none",
+                "display": "none",
+                "modal": false
+              },
+              {
+                "timeMs": 698.2999999999083,
+                "opacity": 0,
+                "transform": "none",
+                "display": "none",
+                "modal": false
+              },
+              {
+                "timeMs": 714.8999999999069,
+                "opacity": 0,
+                "transform": "none",
+                "display": "none",
+                "modal": false
+              }
+            ],
+            "open": false,
+            "filter": "none"
+          }
+        }
+      }
+    ]
+  },
+  "surfaceAnimations": [
+    {
+      "surface": "inspector",
+      "time": 4812.90000000014
+    },
+    {
+      "surface": "file-reference",
+      "time": 4957.800000000047
+    },
+    {
+      "surface": "inspector",
+      "time": 5374.600000000093
+    },
+    {
+      "surface": "profile-options",
+      "time": 5619.90000000014
+    },
+    {
+      "surface": "inspector",
+      "time": 6060.5
+    },
+    {
+      "surface": "region-controls",
+      "time": 6691.90000000014
+    },
+    {
+      "surface": "workspace",
+      "time": 7274.800000000047
+    },
+    {
+      "surface": "adjustment-inputs",
+      "time": 8474.300000000047
+    },
+    {
+      "surface": "workspace",
+      "time": 8627.699999999953
+    },
+    {
+      "surface": "workspace",
+      "time": 9971.300000000047
+    }
+  ],
+  "multichannel": {
+    "imported": {
+      "frames": 44099,
+      "sampleRate": 44100,
+      "channels": 3,
+      "sampleFrame": 12,
+      "samples": [
+        0.24759899079799652,
+        -0.24759143590927124,
+        0.1237950325012207
+      ]
+    },
+    "wavExport": {
+      "action": "convert",
+      "suggestedFilename": "polarity-three-channel.wav",
+      "file": "12-convert.wav",
+      "bytes": 529232,
+      "sha256": "bfcf9ec462181e320b3c58aa77c3107c41be7372c9965b70ac9fe107d37932d3",
+      "frames": 44099,
+      "channels": 3,
+      "sampleRate": 44100
+    },
+    "wavRoundTrip": {
+      "frames": 44099,
+      "sampleRate": 44100,
+      "channels": 3,
+      "samples": [
+        0.24759899079799652,
+        -0.24759143590927124,
+        0.1237950325012207
+      ]
+    },
+    "region": {
+      "action": "export-region",
+      "suggestedFilename": "polarity-three-channel_region_0.1-0.6s.wav",
+      "file": "13-export-region.wav",
+      "bytes": 264644,
+      "sha256": "083ffb380ddd6f206d400ecd32cb81332ad761ad1f82590a7dab6bda888eab43",
+      "frames": 22050,
+      "channels": 3,
+      "sampleRate": 44100
+    },
+    "fixed": {
+      "action": "save-fixed",
+      "suggestedFilename": "polarity-three-channel_masterfixed.wav",
+      "file": "14-save-fixed.wav",
+      "bytes": 464672,
+      "sha256": "dae19b7c90ed1aad32f1094be88c28204aefca82a6cd4a0f019174e30612df79",
+      "frames": 38719,
+      "channels": 3,
+      "sampleRate": 38720
+    }
+  },
+  "audioAudit": {
+    "contexts": 11,
+    "offline": 4,
+    "closes": 10,
+    "sampleRates": [
+      44100,
+      44100,
+      44100,
+      44100,
+      44100,
+      44100,
+      44100,
+      44100,
+      44100,
+      44100,
+      44100
+    ],
+    "decoded": [
+      {
+        "frames": 88199,
+        "sampleRate": 44100,
+        "channels": 2,
+        "sampleFrame": 12,
+        "samples": [
+          0.1981094926595688,
+          0.16839630901813507
+        ]
+      },
+      {
+        "frames": 88199,
+        "sampleRate": 44100,
+        "channels": 2,
+        "sampleFrame": 12,
+        "samples": [
+          0.1981094926595688,
+          0.16839630901813507
+        ]
+      },
+      {
+        "frames": 89856,
+        "sampleRate": 44100,
+        "channels": 2,
+        "sampleFrame": 12,
+        "samples": [
+          4.5138524862320395e-11,
+          7.542526325732268e-11
+        ]
+      },
+      {
+        "frames": 83789,
+        "sampleRate": 44100,
+        "channels": 2,
+        "sampleFrame": 12,
+        "samples": [
+          0.22415965795516968,
+          0.19096043705940247
+        ]
+      },
+      {
+        "frames": 87317,
+        "sampleRate": 44100,
+        "channels": 2,
+        "sampleFrame": 12,
+        "samples": [
+          1.4427061975630373e-12,
+          1.9295333560098715e-12
+        ]
+      },
+      {
+        "frames": 44099,
+        "sampleRate": 44100,
+        "channels": 3,
+        "sampleFrame": 12,
+        "samples": [
+          0.24759899079799652,
+          -0.24759143590927124,
+          0.1237950325012207
+        ]
+      },
+      {
+        "frames": 44099,
+        "sampleRate": 44100,
+        "channels": 3,
+        "sampleFrame": 12,
+        "samples": [
+          0.24759899079799652,
+          -0.24759143590927124,
+          0.1237950325012207
+        ]
+      }
+    ]
+  },
+  "closedAudioAudit": {
+    "contexts": 11,
+    "offline": 4,
+    "closes": 11,
+    "sampleRates": [
+      44100,
+      44100,
+      44100,
+      44100,
+      44100,
+      44100,
+      44100,
+      44100,
+      44100,
+      44100,
+      44100
+    ],
+    "decoded": [
+      {
+        "frames": 88199,
+        "sampleRate": 44100,
+        "channels": 2,
+        "sampleFrame": 12,
+        "samples": [
+          0.1981094926595688,
+          0.16839630901813507
+        ]
+      },
+      {
+        "frames": 88199,
+        "sampleRate": 44100,
+        "channels": 2,
+        "sampleFrame": 12,
+        "samples": [
+          0.1981094926595688,
+          0.16839630901813507
+        ]
+      },
+      {
+        "frames": 89856,
+        "sampleRate": 44100,
+        "channels": 2,
+        "sampleFrame": 12,
+        "samples": [
+          4.5138524862320395e-11,
+          7.542526325732268e-11
+        ]
+      },
+      {
+        "frames": 83789,
+        "sampleRate": 44100,
+        "channels": 2,
+        "sampleFrame": 12,
+        "samples": [
+          0.22415965795516968,
+          0.19096043705940247
+        ]
+      },
+      {
+        "frames": 87317,
+        "sampleRate": 44100,
+        "channels": 2,
+        "sampleFrame": 12,
+        "samples": [
+          1.4427061975630373e-12,
+          1.9295333560098715e-12
+        ]
+      },
+      {
+        "frames": 44099,
+        "sampleRate": 44100,
+        "channels": 3,
+        "sampleFrame": 12,
+        "samples": [
+          0.24759899079799652,
+          -0.24759143590927124,
+          0.1237950325012207
+        ]
+      },
+      {
+        "frames": 44099,
+        "sampleRate": 44100,
+        "channels": 3,
+        "sampleFrame": 12,
+        "samples": [
+          0.24759899079799652,
+          -0.24759143590927124,
+          0.1237950325012207
+        ]
+      }
+    ]
+  },
+  "fileUrlOffline": {
+    "entry": "file:///home/user/reviews/visual-acceptance-20261017/p-source/dist/index.html",
+    "requests": [
+      "index.html",
+      "data:image/jpeg",
+      "assets/lame.all-BWirrk2H.js"
+    ],
+    "mp3": {
+      "action": "convert",
+      "suggestedFilename": "offline-url-input.mp3",
+      "file": "15-convert.mp3",
+      "bytes": 81502,
+      "sha256": "9ed582c9d48a11bff0adc5cf4c4605ad08e1db2cec00921883a9c2e9d6886100"
+    }
+  },
+  "performanceMetrics": {
+    "Timestamp": 2057.041342,
+    "Documents": 8,
+    "Frames": 6,
+    "JSEventListeners": 83,
+    "Nodes": 3900,
+    "LayoutCount": 325,
+    "RecalcStyleCount": 1436,
+    "LayoutDuration": 0.223098,
+    "RecalcStyleDuration": 0.688061,
+    "ScriptDuration": 0.589135,
+    "TaskDuration": 6.64994,
+    "JSHeapUsedSize": 17919720,
+    "JSHeapTotalSize": 24174592
+  },
+  "result": "PASS",
+  "privateRuntimeRemoved": true,
+  "codeSha256": {
+    "index.html": "e384a640f28003888ac594a12c589d95f36d20bd7c863c37b922dfac3e012e2d",
+    "src/ui/presentation/rebuild/index.css": "36e5b2bd35d24c739b1cdae4890637cea5f213eb9394015ab6bd22328ed60fd3",
+    "src/ui/presentation/rebuild/environment.css": "c269f28505d310f613da7f5c3c9f15b2a92c64235bfc601ebeaba67b3c4c7476",
+    "src/ui/presentation/rebuild/workbench.css": "f2094f82be93953faee6a898f54c0a84930cb4c92a6618b681db86d371ee1556",
+    "src/ui/presentation/rebuild/tokens.css": "db55683566485f211377d43e8bfb11388432be261e5aacade31c165976435457",
+    "src/ui/presentation/rebuild/assets/first-person-cosmic-horizon.jpg": "e9f087201c2f061a8154bfd818fb1348da849a43dc835b2d150628d627e33fd4",
+    "src/application/workbench/demo.js": "59478f48d556561a1280371113e6432607dec54a2304fb43173baf5686ce4c18",
+    "src/main.js": "3d1160c21069cec1c41e427d3502f5aa5f5cde0b2d26a3401d1fd7ee32ea97f7",
+    "src/ui/workbench/workspace.js": "56df1b330ffe8ee4cdb3e9b5207ec8d6fa9f4349ab61f1bbbb1a97bdc5071911",
+    "src/ui/workbench/workspace.css": "dfd909c3f3f143a4bf8cc11a554e9b1a3bd729caeb1750fd7736da4d18a39681",
+    "src/application/workbench/workbenchController.js": "e35ac9ef3ecefe93422721e14b731b499bd9ed0d8373e60ede3d794ddf5c0c14",
+    "src/application/analysis/analysisController.js": "2387b8951ec33d993233c496dd06adc460a00c5f66d7ec306c55746ff0df3365",
+    "dist/index.html": "c80b619a8a499e9c3ca3a2c5c00aa72c36becf52f2170ed7e61cb1d35319ad9c",
+    "scripts/validation/run-workbench-browser.mjs": "3a8b2823bd5782f8f26c3f1b791fcbc8b41998fa287aa4a3e30f7e99b39283b6"
+  }
+}

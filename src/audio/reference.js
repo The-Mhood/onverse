@@ -14,8 +14,8 @@
  *
  * Streaming the full track into the page is not possible from these
  * platforms (DRM / terms / no public audio endpoint) — when no audio is
- * available the resolved track is matched against the closest mastered
- * profile for its platform genre, and the UI says so honestly.
+ * available the resolved track is matched against the closest built-in
+ * profile for its platform genre, and the UI should disclose that fallback.
  */
 import { mapPlatformGenre, categoryProfile } from "./genre.js"
 
@@ -195,7 +195,7 @@ export async function resolveStreamUrl(raw) {
   return meta
 }
 
-/* the mastered fingerprint to stand in when a resolved track has no audio */
+/* The built-in genre profile used when a resolved track has no audio. */
 export function profileForResolved(meta) {
   const cat = meta.cat ? categoryProfile(meta.cat) : null
   return cat
