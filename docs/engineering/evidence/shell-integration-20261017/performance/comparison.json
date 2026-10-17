@@ -1,0 +1,501 @@
+{
+  "kind": "baseline-versus-shared-shell-cpu-raster-investigation",
+  "tools": {
+    "packages": 43,
+    "lockSha256": "a7f6b2cbede15b047060d8f4cc059fc18b1a8b6aee33ab3a0d412faabb8b50e6",
+    "pins": {
+      "@sparticuz/chromium": {
+        "version": "153.0.0",
+        "integrity": "sha512-jiGWqSvPMdu4+P9TilYqAR7yEGPEHINx+lCvE/NqNO/EHYzF/x1hUiI5T6ioVIt7dEy7n88byyT0vk+dnsgQwA=="
+      },
+      "puppeteer-core": {
+        "version": "25.14.0",
+        "integrity": "sha512-LQitnes3tBeVbdZ7V/4iwJPLZGgkl9uBVK0W7YYMh68j/3Y9eNuvj4yl+Fdo7zN0SuajOMrhd7aPj3DifK8k6A=="
+      }
+    }
+  },
+  "checks": [],
+  "errors": [],
+  "blocked": [],
+  "downloads": [],
+  "screenshots": [],
+  "limitations": [
+    "Generated PCM only, no user audio or provider.",
+    "Disabled-sandbox headless Linux CPU raster, not Mac/Electron/security qualification.",
+    "Native source graph checked on isolated Vite4174; integrated UI checked on production4173 and file origin.",
+    "Not listening, metering certification, full DAW or owner cinematic acceptance.",
+    "Project downloads are not verified filesystem save receipts or autosave."
+  ],
+  "browser": "HeadlessChrome/153.0.8010.0",
+  "budget": {
+    "sampleMs": 5000,
+    "maxP95FrameMs": 50,
+    "minAverageFps": 30
+  },
+  "samples": [
+    {
+      "revision": "a172fcf",
+      "width": 1120,
+      "height": 700,
+      "pass": "first",
+      "count": 174,
+      "elapsedMs": 5049.799999999999,
+      "averageFps": 34.45681017069983,
+      "p95Ms": 66.69999999999982,
+      "maxMs": 83.40000000000009,
+      "over50Ms": 18,
+      "longtasks": [],
+      "trace": "a172fcf-1120-first.trace.json.gz",
+      "traceTotals": {
+        "PrePaint": {
+          "count": 350,
+          "totalMs": 46.11800000000006,
+          "maxMs": 0.598
+        },
+        "UpdateLayoutTree": {
+          "count": 177,
+          "totalMs": 188.86899999999997,
+          "maxMs": 8.24
+        },
+        "Layout": {
+          "count": 177,
+          "totalMs": 104.56200000000004,
+          "maxMs": 1.203
+        },
+        "Paint": {
+          "count": 715,
+          "totalMs": 118.09899999999979,
+          "maxMs": 0.862
+        },
+        "MinorGC": {
+          "count": 1,
+          "totalMs": 0.652,
+          "maxMs": 0.652
+        },
+        "MajorGC": {
+          "count": 1,
+          "totalMs": 10.556,
+          "maxMs": 10.556
+        }
+      },
+      "metrics": {
+        "LayoutCount": 189,
+        "RecalcStyleCount": 189,
+        "LayoutDuration": 0.11369699999999999,
+        "RecalcStyleDuration": 0.19491199999999997,
+        "ScriptDuration": 0.09535700000000003,
+        "TaskDuration": 0.9051459999999998,
+        "JSHeapUsedSize": -1257948
+      },
+      "budgetPassed": false
+    },
+    {
+      "revision": "a172fcf",
+      "width": 1120,
+      "height": 700,
+      "pass": "warm",
+      "count": 224,
+      "elapsedMs": 5033.200000000001,
+      "averageFps": 44.50449018517046,
+      "p95Ms": 33.399999999999636,
+      "maxMs": 50,
+      "over50Ms": 0,
+      "longtasks": [],
+      "trace": "a172fcf-1120-warm.trace.json.gz",
+      "traceTotals": {
+        "PrePaint": {
+          "count": 450,
+          "totalMs": 56.94500000000008,
+          "maxMs": 0.529
+        },
+        "UpdateLayoutTree": {
+          "count": 225,
+          "totalMs": 115.80800000000002,
+          "maxMs": 2.101
+        },
+        "Layout": {
+          "count": 225,
+          "totalMs": 120.23500000000003,
+          "maxMs": 0.856
+        },
+        "Paint": {
+          "count": 900,
+          "totalMs": 145.42299999999958,
+          "maxMs": 3.933
+        },
+        "MajorGC": {
+          "count": 3,
+          "totalMs": 12.062,
+          "maxMs": 7.035
+        }
+      },
+      "metrics": {
+        "LayoutCount": 243,
+        "RecalcStyleCount": 243,
+        "LayoutDuration": 0.13298200000000002,
+        "RecalcStyleDuration": 0.12540099999999998,
+        "ScriptDuration": 0.09317900000000001,
+        "TaskDuration": 0.7621989999999998,
+        "JSHeapUsedSize": 267092
+      },
+      "budgetPassed": true
+    },
+    {
+      "revision": "shared-shell",
+      "width": 1120,
+      "height": 700,
+      "pass": "first",
+      "count": 176,
+      "elapsedMs": 5033.1,
+      "averageFps": 34.96850847390276,
+      "p95Ms": 66.69999999999982,
+      "maxMs": 100,
+      "over50Ms": 17,
+      "longtasks": [],
+      "trace": "shared-shell-1120-first.trace.json.gz",
+      "traceTotals": {
+        "PrePaint": {
+          "count": 354,
+          "totalMs": 49.627000000000045,
+          "maxMs": 0.5
+        },
+        "UpdateLayoutTree": {
+          "count": 192,
+          "totalMs": 187.59900000000002,
+          "maxMs": 8.959
+        },
+        "Layout": {
+          "count": 192,
+          "totalMs": 105.07900000000002,
+          "maxMs": 0.882
+        },
+        "MinorGC": {
+          "count": 3,
+          "totalMs": 0.95,
+          "maxMs": 0.495
+        },
+        "Paint": {
+          "count": 721,
+          "totalMs": 124.69499999999975,
+          "maxMs": 0.785
+        },
+        "MajorGC": {
+          "count": 2,
+          "totalMs": 16.872,
+          "maxMs": 10.872
+        }
+      },
+      "metrics": {
+        "LayoutCount": 206,
+        "RecalcStyleCount": 206,
+        "LayoutDuration": 0.11832199999999998,
+        "RecalcStyleDuration": 0.195217,
+        "ScriptDuration": 0.10735799999999995,
+        "TaskDuration": 0.960051,
+        "JSHeapUsedSize": -381916
+      },
+      "budgetPassed": false
+    },
+    {
+      "revision": "shared-shell",
+      "width": 1120,
+      "height": 700,
+      "pass": "warm",
+      "count": 216,
+      "elapsedMs": 5033.1,
+      "averageFps": 42.91589676342612,
+      "p95Ms": 33.400000000001455,
+      "maxMs": 50.100000000000364,
+      "over50Ms": 1,
+      "longtasks": [],
+      "trace": "shared-shell-1120-warm.trace.json.gz",
+      "traceTotals": {
+        "PrePaint": {
+          "count": 434,
+          "totalMs": 55.155000000000044,
+          "maxMs": 0.389
+        },
+        "UpdateLayoutTree": {
+          "count": 217,
+          "totalMs": 108.52399999999999,
+          "maxMs": 4.039
+        },
+        "Layout": {
+          "count": 217,
+          "totalMs": 118.61399999999996,
+          "maxMs": 0.934
+        },
+        "Paint": {
+          "count": 868,
+          "totalMs": 136.9399999999996,
+          "maxMs": 0.648
+        },
+        "MajorGC": {
+          "count": 4,
+          "totalMs": 22.669,
+          "maxMs": 6.529
+        }
+      },
+      "metrics": {
+        "LayoutCount": 234,
+        "RecalcStyleCount": 234,
+        "LayoutDuration": 0.130463,
+        "RecalcStyleDuration": 0.11643200000000004,
+        "ScriptDuration": 0.09637600000000002,
+        "TaskDuration": 0.8053440000000003,
+        "JSHeapUsedSize": -215884
+      },
+      "budgetPassed": true
+    },
+    {
+      "revision": "a172fcf",
+      "width": 1480,
+      "height": 920,
+      "pass": "first",
+      "count": 133,
+      "elapsedMs": 5016.4,
+      "averageFps": 26.513037237859823,
+      "p95Ms": 133.20000000000073,
+      "maxMs": 316.5999999999999,
+      "over50Ms": 19,
+      "longtasks": [
+        {
+          "startTime": 3923.5999999999767,
+          "duration": 198
+        }
+      ],
+      "trace": "a172fcf-1480-first.trace.json.gz",
+      "traceTotals": {
+        "PrePaint": {
+          "count": 267,
+          "totalMs": 34.87500000000001,
+          "maxMs": 0.369
+        },
+        "UpdateLayoutTree": {
+          "count": 150,
+          "totalMs": 196.408,
+          "maxMs": 14.393
+        },
+        "Layout": {
+          "count": 150,
+          "totalMs": 77.43399999999994,
+          "maxMs": 0.895
+        },
+        "Paint": {
+          "count": 549,
+          "totalMs": 102.63999999999983,
+          "maxMs": 6
+        },
+        "MajorGC": {
+          "count": 2,
+          "totalMs": 14.042,
+          "maxMs": 10.293
+        }
+      },
+      "metrics": {
+        "LayoutCount": 160,
+        "RecalcStyleCount": 160,
+        "LayoutDuration": 0.084783,
+        "RecalcStyleDuration": 0.201229,
+        "ScriptDuration": 0.06516900000000003,
+        "TaskDuration": 0.8531819999999999,
+        "JSHeapUsedSize": -261204
+      },
+      "budgetPassed": false
+    },
+    {
+      "revision": "a172fcf",
+      "width": 1480,
+      "height": 920,
+      "pass": "warm",
+      "count": 215,
+      "elapsedMs": 5016.5,
+      "averageFps": 42.85856672979169,
+      "p95Ms": 33.400000000001455,
+      "maxMs": 50,
+      "over50Ms": 0,
+      "longtasks": [],
+      "trace": "a172fcf-1480-warm.trace.json.gz",
+      "traceTotals": {
+        "PrePaint": {
+          "count": 431,
+          "totalMs": 53.22400000000003,
+          "maxMs": 0.649
+        },
+        "UpdateLayoutTree": {
+          "count": 216,
+          "totalMs": 98.27099999999994,
+          "maxMs": 0.809
+        },
+        "Layout": {
+          "count": 216,
+          "totalMs": 116.48300000000003,
+          "maxMs": 1.126
+        },
+        "Paint": {
+          "count": 860,
+          "totalMs": 154.83199999999994,
+          "maxMs": 7.631
+        },
+        "MajorGC": {
+          "count": 4,
+          "totalMs": 19.168,
+          "maxMs": 9.151
+        }
+      },
+      "metrics": {
+        "LayoutCount": 232,
+        "RecalcStyleCount": 232,
+        "LayoutDuration": 0.12754,
+        "RecalcStyleDuration": 0.10536099999999998,
+        "ScriptDuration": 0.09045100000000006,
+        "TaskDuration": 0.7712990000000004,
+        "JSHeapUsedSize": -126996
+      },
+      "budgetPassed": true
+    },
+    {
+      "revision": "shared-shell",
+      "width": 1480,
+      "height": 920,
+      "pass": "first",
+      "count": 135,
+      "elapsedMs": 5016.4,
+      "averageFps": 26.911729527150946,
+      "p95Ms": 116.70000000000073,
+      "maxMs": 300,
+      "over50Ms": 18,
+      "longtasks": [
+        {
+          "startTime": 3416.1999999999534,
+          "duration": 176
+        }
+      ],
+      "trace": "shared-shell-1480-first.trace.json.gz",
+      "traceTotals": {
+        "PrePaint": {
+          "count": 272,
+          "totalMs": 43.835000000000036,
+          "maxMs": 6.047
+        },
+        "UpdateLayoutTree": {
+          "count": 153,
+          "totalMs": 205.91800000000012,
+          "maxMs": 19.548
+        },
+        "Layout": {
+          "count": 153,
+          "totalMs": 80.78300000000003,
+          "maxMs": 0.696
+        },
+        "Paint": {
+          "count": 562,
+          "totalMs": 101.99199999999978,
+          "maxMs": 9.78
+        },
+        "MajorGC": {
+          "count": 2,
+          "totalMs": 11.145,
+          "maxMs": 9.648
+        }
+      },
+      "metrics": {
+        "LayoutCount": 164,
+        "RecalcStyleCount": 164,
+        "LayoutDuration": 0.089199,
+        "RecalcStyleDuration": 0.21223399999999998,
+        "ScriptDuration": 0.06610799999999994,
+        "TaskDuration": 0.9145800000000002,
+        "JSHeapUsedSize": -28240
+      },
+      "budgetPassed": false
+    },
+    {
+      "revision": "shared-shell",
+      "width": 1480,
+      "height": 920,
+      "pass": "warm",
+      "count": 207,
+      "elapsedMs": 5033.1,
+      "averageFps": 41.12773439828336,
+      "p95Ms": 49.899999999999636,
+      "maxMs": 83.30000000000109,
+      "over50Ms": 2,
+      "longtasks": [],
+      "trace": "shared-shell-1480-warm.trace.json.gz",
+      "traceTotals": {
+        "PrePaint": {
+          "count": 416,
+          "totalMs": 52.35700000000002,
+          "maxMs": 0.44
+        },
+        "UpdateLayoutTree": {
+          "count": 208,
+          "totalMs": 98.22599999999998,
+          "maxMs": 1.041
+        },
+        "Layout": {
+          "count": 208,
+          "totalMs": 116.14800000000001,
+          "maxMs": 1.32
+        },
+        "Paint": {
+          "count": 832,
+          "totalMs": 139.8579999999997,
+          "maxMs": 1.062
+        },
+        "MajorGC": {
+          "count": 2,
+          "totalMs": 5.966,
+          "maxMs": 3.64
+        }
+      },
+      "metrics": {
+        "LayoutCount": 221,
+        "RecalcStyleCount": 221,
+        "LayoutDuration": 0.127003,
+        "RecalcStyleDuration": 0.10652699999999998,
+        "ScriptDuration": 0.08848599999999995,
+        "TaskDuration": 0.7623169999999999,
+        "JSHeapUsedSize": -17388
+      },
+      "budgetPassed": true
+    }
+  ],
+  "budgetViolations": [
+    {
+      "revision": "a172fcf",
+      "width": 1120,
+      "pass": "first",
+      "p95Ms": 66.69999999999982,
+      "averageFps": 34.45681017069983
+    },
+    {
+      "revision": "shared-shell",
+      "width": 1120,
+      "pass": "first",
+      "p95Ms": 66.69999999999982,
+      "averageFps": 34.96850847390276
+    },
+    {
+      "revision": "a172fcf",
+      "width": 1480,
+      "pass": "first",
+      "p95Ms": 133.20000000000073,
+      "averageFps": 26.513037237859823
+    },
+    {
+      "revision": "shared-shell",
+      "width": 1480,
+      "pass": "first",
+      "p95Ms": 116.70000000000073,
+      "averageFps": 26.911729527150946
+    }
+  ],
+  "status": "FAIL",
+  "failure": {
+    "message": "[{\"revision\":\"a172fcf\",\"width\":1120,\"pass\":\"first\",\"p95Ms\":66.69999999999982,\"averageFps\":34.45681017069983},{\"revision\":\"shared-shell\",\"width\":1120,\"pass\":\"first\",\"p95Ms\":66.69999999999982,\"averageFps\":34.96850847390276},{\"revision\":\"a172fcf\",\"width\":1480,\"pass\":\"first\",\"p95Ms\":133.20000000000073,\"averageFps\":26.513037237859823},{\"revision\":\"shared-shell\",\"width\":1480,\"pass\":\"first\",\"p95Ms\":116.70000000000073,\"averageFps\":26.911729527150946}]\n\n4 !== 0\n",
+    "stack": "AssertionError [ERR_ASSERTION]: [{\"revision\":\"a172fcf\",\"width\":1120,\"pass\":\"first\",\"p95Ms\":66.69999999999982,\"averageFps\":34.45681017069983},{\"revision\":\"shared-shell\",\"width\":1120,\"pass\":\"first\",\"p95Ms\":66.69999999999982,\"averageFps\":34.96850847390276},{\"revision\":\"a172fcf\",\"width\":1480,\"pass\":\"first\",\"p95Ms\":133.20000000000073,\"averageFps\":26.513037237859823},{\"revision\":\"shared-shell\",\"width\":1480,\"pass\":\"first\",\"p95Ms\":116.70000000000073,\"averageFps\":26.911729527150946}]\n\n4 !== 0\n\n    at file:///home/user/onverse/scripts/validation/run-shell-performance-comparison.mjs:59:246"
+  },
+  "buildSha256": "a286014ca38702961b6e2a5ad052629e1de098b9a180758e7bc6d279a0ce4576"
+}

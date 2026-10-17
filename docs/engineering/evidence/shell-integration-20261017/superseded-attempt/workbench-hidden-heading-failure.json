@@ -1,0 +1,1847 @@
+{
+  "kind": "actual-production-entry-and-synthetic-workflows",
+  "output": "/home/user/reviews/workbench-browser-20261016-1yfH9a",
+  "node": "v22.22.3",
+  "tools": {
+    "packages": 43,
+    "lockSha256": "a7f6b2cbede15b047060d8f4cc059fc18b1a8b6aee33ab3a0d412faabb8b50e6",
+    "pins": {
+      "@sparticuz/chromium": {
+        "version": "153.0.0",
+        "integrity": "sha512-jiGWqSvPMdu4+P9TilYqAR7yEGPEHINx+lCvE/NqNO/EHYzF/x1hUiI5T6ioVIt7dEy7n88byyT0vk+dnsgQwA=="
+      },
+      "puppeteer-core": {
+        "version": "25.14.0",
+        "integrity": "sha512-LQitnes3tBeVbdZ7V/4iwJPLZGgkl9uBVK0W7YYMh68j/3Y9eNuvj4yl+Fdo7zN0SuajOMrhd7aPj3DifK8k6A=="
+      }
+    }
+  },
+  "checks": [
+    "Actual production HTML executes ESM, mounts and binds; zero startup audio contexts, no legacy selector/stage dependency.",
+    "Real 16-second synth demo and real analyzer complete through UI.",
+    "Local WAV file picker invokes real decoder and automatic analysis; 2-second stereo 48kHz fixture decodes at native AudioContext rate, preserving existing processor behavior.",
+    "Uploaded reference is decoded/measured and used for real comparison.",
+    "Manual category/subgenre selection re-analyzes against the actual built-in profile, labelled as heuristic.",
+    "Real AudioContext source advances, pauses, seeks and cycles playback rate while celestial time advances and depth planes remain running. No listening claim.",
+    "Real region handles support keyboard increments and captured pointer drag; exact numeric inputs and ARIA values stay synchronized, without modifying source PCM.",
+    "IN/OUT region exports genuine 1-second stereo WAV with expected sample count.",
+    "Real OfflineAudioContext Master Fix + fast remeasurement publishes distinct B; original/fixed A–B selection works.",
+    "Manual output trim produces different real rendered WAV bytes; reset triggers another real render.",
+    "WAV A bytes remain exactly equal before/after Master Fix and adjustments. WAV and MP3 conversion download real files; MP3 decodes back to stereo of expected duration; text report downloads.",
+    "Both viewports: one opaque matte precision plane, no individual card halos; enabled controls meet measured 4.5:1 text and 3:1 boundary contrast. Large-viewport output actions fit without scrolling. Not a full WCAG certification.",
+    "Eight independent scene/atmosphere layers advance naturally at BOTH target sizes; five-second RAF/performance samples satisfy predeclared headless budget. Real limits dialog enters/exits with intermediate opacity, restores focus, closes by Escape and does not trigger playback. No filter/backdrop blur.",
+    "Real analysis results, Master Fix/manual processing and opened adjustment controls activate host surface transitions; playback ticks do not retrigger these animations.",
+    "BOTH target viewports: all eight environmental animations/transforms really stop under reduced motion, and native panel transitions are disabled. Captures have no horizontal overflow, clipped controls or broken images.",
+    "Turning reduced motion back off resumes all depth layers without remounting or resetting audio.",
+    "Cropping B preserves exact floor/ceil sample-boundary behavior at its rendered sample rate; A export remains byte-identical.",
+    "Applying crop to A re-analyzes the 1-second working buffer; original filesystem fixture remains unchanged.",
+    "Invalid audio reports a genuine decoder failure and preserves the current buffer. Its console error is expected and recorded."
+  ],
+  "errors": [],
+  "console": [
+    {
+      "phase": "boot",
+      "type": "info",
+      "text": "Autofocus processing was blocked because a document already has a focused element."
+    },
+    {
+      "phase": "expected-decode-error",
+      "type": "error",
+      "text": "EncodingError: Unable to decode audio data"
+    }
+  ],
+  "requests": [
+    {
+      "phase": "boot",
+      "url": "http://127.0.0.1:4173/"
+    },
+    {
+      "phase": "boot",
+      "url": "data:image/jpeg;base64,/9j/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAMABWADASIAAhEBAxEB/8QAHAABAQEBAQEBAQEAAAAAAAAAAAECAwQFBgcI/8QAOBAAAgICAQMDBAEDBAICA"
+    },
+    {
+      "phase": "boot",
+      "url": "data:image/webp;base64,UklGRhZNAABXRUJQVlA4WAoAAAAQAAAAXwUA/wIAQUxQSBkWAAANHMVt2ziR9l871+svIibApjG7new+VFOAUWgXpUnHonLjcC2wKZ9e39r2ps22bZtkSm9mZp7/meF7CIYYHjgbk5bFltOkDaiLjoGIkEDbahBHGjoUyU+n7okxAmrbjecABeLvP4qIoCRJbhhJQgKs+f93t0UgzShWn0GlrDciIEGSG7dZioRBQOsk+9CJ3MnDJNvQuNuXvvmDn//qFz/46mcdwiXPlP//n"
+    },
+    {
+      "phase": "boot",
+      "url": "data:image/webp;base64,UklGRl7FAABXRUJQVlA4WAoAAAAQAAAAXwUA/wIAQUxQSJkWAAANHMZtGznSWv1XvXkvPiNiAtheflvO7OVcjlX0FFRzogoqJwrWZK816bLeLjmAXFpcibJ4DEgAsroH6bNeSUK2lnvWtyRJjiTbtmVmDiJ7Yvw239D/f11nODAj8vCAlSNzULjSqIiQBdtW1FjI9ZjjvZc32CkaASeSD6BA/P1HEREOG7mNo/5LvivgNyDd3gCJCEhoI0mSTkMu2fltqCjPPQOybFut4wiQn"
+    }
+  ],
+  "failedResponses": [],
+  "blockedRequests": [],
+  "screenshots": [
+    {
+      "file": "empty-1120x700.png",
+      "fullPage": "empty-1120x700-full.png",
+      "width": 1120,
+      "scrollWidth": 1120,
+      "height": 700,
+      "scrollY": 0,
+      "scrollHeight": 1025,
+      "clippedControls": [],
+      "missingImages": []
+    },
+    {
+      "file": "empty-1480x920.png",
+      "fullPage": "empty-1480x920-full.png",
+      "width": 1480,
+      "scrollWidth": 1480,
+      "height": 920,
+      "scrollY": 0,
+      "scrollHeight": 1040,
+      "clippedControls": [],
+      "missingImages": []
+    },
+    {
+      "file": "region-editing-1120x700.png",
+      "fullPage": "region-editing-1120x700-full.png",
+      "width": 1120,
+      "scrollWidth": 1120,
+      "height": 700,
+      "scrollY": 0,
+      "scrollHeight": 1206,
+      "clippedControls": [],
+      "missingImages": []
+    },
+    {
+      "file": "region-editing-1480x920.png",
+      "fullPage": "region-editing-1480x920-full.png",
+      "width": 1480,
+      "scrollWidth": 1480,
+      "height": 920,
+      "scrollY": 0,
+      "scrollHeight": 1204,
+      "clippedControls": [],
+      "missingImages": []
+    },
+    {
+      "file": "fixed-1120x700.png",
+      "fullPage": "fixed-1120x700-full.png",
+      "width": 1120,
+      "scrollWidth": 1120,
+      "height": 700,
+      "scrollY": 0,
+      "scrollHeight": 1025,
+      "clippedControls": [],
+      "missingImages": []
+    },
+    {
+      "file": "fixed-1480x920.png",
+      "fullPage": "fixed-1480x920-full.png",
+      "width": 1480,
+      "scrollWidth": 1480,
+      "height": 920,
+      "scrollY": 0,
+      "scrollHeight": 1040,
+      "clippedControls": [],
+      "missingImages": []
+    },
+    {
+      "file": "manual-adjusted-1120x700.png",
+      "fullPage": "manual-adjusted-1120x700-full.png",
+      "width": 1120,
+      "scrollWidth": 1120,
+      "height": 700,
+      "scrollY": 0,
+      "scrollHeight": 1618,
+      "clippedControls": [],
+      "missingImages": []
+    },
+    {
+      "file": "manual-adjusted-1480x920.png",
+      "fullPage": "manual-adjusted-1480x920-full.png",
+      "width": 1480,
+      "scrollWidth": 1480,
+      "height": 920,
+      "scrollY": 0,
+      "scrollHeight": 1667,
+      "clippedControls": [],
+      "missingImages": []
+    },
+    {
+      "file": "loaded-1120x700.png",
+      "fullPage": "loaded-1120x700-full.png",
+      "width": 1120,
+      "scrollWidth": 1120,
+      "height": 700,
+      "scrollY": 0,
+      "scrollHeight": 1025,
+      "clippedControls": [],
+      "missingImages": []
+    },
+    {
+      "file": "loaded-1480x920.png",
+      "fullPage": "loaded-1480x920-full.png",
+      "width": 1480,
+      "scrollWidth": 1480,
+      "height": 920,
+      "scrollY": 0,
+      "scrollHeight": 1040,
+      "clippedControls": [],
+      "missingImages": []
+    },
+    {
+      "file": "panel-open-1120x700.png",
+      "fullPage": "panel-open-1120x700-full.png",
+      "width": 1120,
+      "scrollWidth": 1120,
+      "height": 700,
+      "scrollY": 0,
+      "scrollHeight": 1025,
+      "clippedControls": [],
+      "missingImages": []
+    },
+    {
+      "file": "panel-open-1480x920.png",
+      "fullPage": "panel-open-1480x920-full.png",
+      "width": 1480,
+      "scrollWidth": 1480,
+      "height": 920,
+      "scrollY": 0,
+      "scrollHeight": 1040,
+      "clippedControls": [],
+      "missingImages": []
+    },
+    {
+      "file": "reduced-motion-1120x700.png",
+      "fullPage": "reduced-motion-1120x700-full.png",
+      "width": 1120,
+      "scrollWidth": 1120,
+      "height": 700,
+      "scrollY": 0,
+      "scrollHeight": 1025,
+      "clippedControls": [],
+      "missingImages": []
+    },
+    {
+      "file": "reduced-motion-1480x920.png",
+      "fullPage": "reduced-motion-1480x920-full.png",
+      "width": 1480,
+      "scrollWidth": 1480,
+      "height": 920,
+      "scrollY": 0,
+      "scrollHeight": 1040,
+      "clippedControls": [],
+      "missingImages": []
+    },
+    {
+      "file": "fixed-cropped-1120x700.png",
+      "fullPage": "fixed-cropped-1120x700-full.png",
+      "width": 1120,
+      "scrollWidth": 1120,
+      "height": 700,
+      "scrollY": 0,
+      "scrollHeight": 1025,
+      "clippedControls": [],
+      "missingImages": []
+    },
+    {
+      "file": "fixed-cropped-1480x920.png",
+      "fullPage": "fixed-cropped-1480x920-full.png",
+      "width": 1480,
+      "scrollWidth": 1480,
+      "height": 920,
+      "scrollY": 0,
+      "scrollHeight": 1040,
+      "clippedControls": [],
+      "missingImages": []
+    },
+    {
+      "file": "decode-error-preserved-1120x700.png",
+      "fullPage": "decode-error-preserved-1120x700-full.png",
+      "width": 1120,
+      "scrollWidth": 1120,
+      "height": 700,
+      "scrollY": 0,
+      "scrollHeight": 1025,
+      "clippedControls": [],
+      "missingImages": []
+    },
+    {
+      "file": "decode-error-preserved-1480x920.png",
+      "fullPage": "decode-error-preserved-1480x920-full.png",
+      "width": 1480,
+      "scrollWidth": 1480,
+      "height": 920,
+      "scrollY": 0,
+      "scrollHeight": 1040,
+      "clippedControls": [],
+      "missingImages": []
+    }
+  ],
+  "downloads": [
+    {
+      "action": "convert",
+      "suggestedFilename": "signal-study.wav",
+      "file": "0-convert.wav",
+      "bytes": 705636,
+      "sha256": "d77052610a42b6111e37e0f6700dc382a8ff59238f85393042fed93a32e6e850",
+      "frames": 88199,
+      "channels": 2,
+      "sampleRate": 44100
+    },
+    {
+      "action": "export-region",
+      "suggestedFilename": "signal-study_region_0.3-1.3s.wav",
+      "file": "1-export-region.wav",
+      "bytes": 352844,
+      "sha256": "f8f393450a4315013c261ab98b332592bca7604a50928785fd1efa298b2247da",
+      "frames": 44100,
+      "channels": 2,
+      "sampleRate": 44100
+    },
+    {
+      "action": "save-fixed",
+      "suggestedFilename": "signal-study_masterfixed.wav",
+      "file": "2-save-fixed.wav",
+      "bytes": 793788,
+      "sha256": "469de60c8f5716b206ddeeb637777c4711567609dd2e5f5ae5ace89d98f3514b",
+      "frames": 99218,
+      "channels": 2,
+      "sampleRate": 49610
+    },
+    {
+      "action": "save-fixed",
+      "suggestedFilename": "signal-study_masterfixed.wav",
+      "file": "3-save-fixed.wav",
+      "bytes": 793788,
+      "sha256": "b077b29327458ed7d579f30ee7cdf8f65d75b1cc93b0a2e40ba2c758dc684a85",
+      "frames": 99218,
+      "channels": 2,
+      "sampleRate": 49610
+    },
+    {
+      "action": "convert",
+      "suggestedFilename": "signal-study.wav",
+      "file": "4-convert.wav",
+      "bytes": 705636,
+      "sha256": "d77052610a42b6111e37e0f6700dc382a8ff59238f85393042fed93a32e6e850",
+      "frames": 88199,
+      "channels": 2,
+      "sampleRate": 44100
+    },
+    {
+      "action": "convert",
+      "suggestedFilename": "signal-study.mp3",
+      "file": "5-convert.mp3",
+      "bytes": 81502,
+      "sha256": "9ed582c9d48a11bff0adc5cf4c4605ad08e1db2cec00921883a9c2e9d6886100"
+    },
+    {
+      "action": "report",
+      "suggestedFilename": "signal-study_analysis.txt",
+      "file": "6-report.txt",
+      "bytes": 1970,
+      "sha256": "c223e902820264369a609ad18035e3f894896eff32b03a2a3bfe8c2ba8f1959e"
+    },
+    {
+      "action": "convert",
+      "suggestedFilename": "signal-study.m4a",
+      "file": "7-convert.m4a",
+      "bytes": 64332,
+      "sha256": "5cd4145726dc87b274c7e39b7b4ec0c51019f03ce4890b180a31e4575458501e",
+      "decodedGeometry": {
+        "duration": 1.8999773242630384,
+        "channels": 2
+      }
+    },
+    {
+      "action": "convert",
+      "suggestedFilename": "signal-study.webm",
+      "file": "8-convert.webm",
+      "bytes": 63854,
+      "sha256": "7614b5b69fd3c7269bf1bd83f51dd4777bd42267f7cdf3a9bb76f0f1c20cc5fd",
+      "decodedGeometry": {
+        "duration": 1.9799773242630385,
+        "channels": 2
+      }
+    },
+    {
+      "action": "save-fixed",
+      "suggestedFilename": "signal-study_masterfixed.wav",
+      "file": "9-save-fixed.wav",
+      "bytes": 396932,
+      "sha256": "c3ea84942e28603078c87e4505f6c46fef72bd5b13e219d6ff767e79a3ddd729",
+      "frames": 49611,
+      "channels": 2,
+      "sampleRate": 49610
+    },
+    {
+      "action": "convert",
+      "suggestedFilename": "signal-study.wav",
+      "file": "10-convert.wav",
+      "bytes": 705636,
+      "sha256": "d77052610a42b6111e37e0f6700dc382a8ff59238f85393042fed93a32e6e850",
+      "frames": 88199,
+      "channels": 2,
+      "sampleRate": 44100
+    },
+    {
+      "action": "convert",
+      "suggestedFilename": "signal-study_cropped.wav",
+      "file": "11-convert.wav",
+      "bytes": 352844,
+      "sha256": "f8f393450a4315013c261ab98b332592bca7604a50928785fd1efa298b2247da",
+      "frames": 44100,
+      "channels": 2,
+      "sampleRate": 44100
+    }
+  ],
+  "limits": [
+    "Trusted local synthetic PCM only; no user media, real provider or listening.",
+    "Headless Chromium with disabled sandbox; not Electron/Mac/security qualification.",
+    "Original01–13 project reference pack recovered and inspected; runtime screenshots are not pixel-fidelity signoff."
+  ],
+  "renderer": "Chromium CPU raster (--disable-gpu), no physical GPU qualification",
+  "pointerSetup": "Actual CDP mouse PointerEvents; no fine-pointer media override or physical input-device qualification",
+  "browser": "HeadlessChrome/153.0.8010.0",
+  "decodedSampleRate": 44100,
+  "sourceDecode": {
+    "frames": 88199,
+    "sampleRate": 44100,
+    "channels": 2
+  },
+  "playback": {
+    "advancedTo": 0.1,
+    "afterPause": "Play",
+    "sceneBefore": 6933.058999999997,
+    "sceneAfter": 6999.792999999997,
+    "planesRunning": true
+  },
+  "mp3Decode": {
+    "duration": 2.0375510204081633,
+    "channels": 2
+  },
+  "recorderCapabilities": [
+    {
+      "format": "wav",
+      "disabled": false
+    },
+    {
+      "format": "mp3",
+      "disabled": false
+    },
+    {
+      "format": "m4a",
+      "disabled": false
+    },
+    {
+      "format": "ogg",
+      "disabled": true
+    },
+    {
+      "format": "webm",
+      "disabled": false
+    }
+  ],
+  "precisionPlane": [
+    {
+      "width": 1120,
+      "height": 700,
+      "gap": "0px",
+      "background": "rgb(18, 26, 39)",
+      "alpha": 1,
+      "sourceState": "ready",
+      "surfaceBackgrounds": [
+        "rgba(0, 0, 0, 0)",
+        "rgba(0, 0, 0, 0)",
+        "rgba(0, 0, 0, 0)"
+      ],
+      "surfaceGlows": [
+        "none",
+        "none",
+        "none"
+      ],
+      "controls": [
+        {
+          "label": "import",
+          "textContrast": 8.766427399391358,
+          "boundaryContrast": 7.882937804863718
+        },
+        {
+          "label": "demo",
+          "textContrast": 14.510061669315219,
+          "boundaryContrast": 4.643841687456098
+        },
+        {
+          "label": "reference-source",
+          "textContrast": 17.21616762850402,
+          "boundaryContrast": 4.643841687456098
+        },
+        {
+          "label": "category",
+          "textContrast": 17.21616762850402,
+          "boundaryContrast": 4.643841687456098
+        },
+        {
+          "label": "subgenre",
+          "textContrast": 17.21616762850402,
+          "boundaryContrast": 4.643841687456098
+        },
+        {
+          "label": "analyze",
+          "textContrast": 14.510061669315219,
+          "boundaryContrast": 4.643841687456098
+        },
+        {
+          "label": "Seek backward 10 seconds",
+          "textContrast": 14.510061669315219,
+          "boundaryContrast": 4.643841687456098
+        },
+        {
+          "label": "play",
+          "textContrast": 9.082497375581749,
+          "boundaryContrast": 4.643841687456098
+        },
+        {
+          "label": "Seek forward 10 seconds",
+          "textContrast": 14.510061669315219,
+          "boundaryContrast": 4.643841687456098
+        },
+        {
+          "label": "Cycle playback speed",
+          "textContrast": 14.510061669315219,
+          "boundaryContrast": 4.643841687456098
+        },
+        {
+          "label": "original",
+          "textContrast": 14.510061669315219,
+          "boundaryContrast": 4.643841687456098
+        },
+        {
+          "label": "fixed",
+          "textContrast": 11.274206612348623,
+          "boundaryContrast": 7.882937804863718
+        },
+        {
+          "label": "crop",
+          "textContrast": 14.510061669315219,
+          "boundaryContrast": 4.643841687456098
+        },
+        {
+          "label": "reset",
+          "textContrast": 15.34371476702797,
+          "boundaryContrast": 4.643841687456098
+        },
+        {
+          "label": "output-format",
+          "textContrast": 17.21616762850402,
+          "boundaryContrast": 4.643841687456098
+        },
+        {
+          "label": "output-bitrate",
+          "textContrast": 17.21616762850402,
+          "boundaryContrast": 4.643841687456098
+        },
+        {
+          "label": "output-depth",
+          "textContrast": 17.21616762850402,
+          "boundaryContrast": 4.643841687456098
+        },
+        {
+          "label": "convert",
+          "textContrast": 14.510061669315219,
+          "boundaryContrast": 4.643841687456098
+        },
+        {
+          "label": "save-fixed",
+          "textContrast": 14.510061669315219,
+          "boundaryContrast": 4.643841687456098
+        },
+        {
+          "label": "report",
+          "textContrast": 15.34371476702797,
+          "boundaryContrast": 4.643841687456098
+        },
+        {
+          "label": "fix",
+          "textContrast": 8.766427399391358,
+          "boundaryContrast": 7.882937804863718
+        },
+        {
+          "label": "reset-tweaks",
+          "textContrast": 10.836406003167491,
+          "boundaryContrast": 3.6276320082700533
+        }
+      ]
+    },
+    {
+      "width": 1480,
+      "height": 920,
+      "gap": "0px",
+      "background": "rgb(18, 26, 39)",
+      "alpha": 1,
+      "sourceState": "ready",
+      "surfaceBackgrounds": [
+        "rgba(0, 0, 0, 0)",
+        "rgba(0, 0, 0, 0)",
+        "rgba(0, 0, 0, 0)"
+      ],
+      "surfaceGlows": [
+        "none",
+        "none",
+        "none"
+      ],
+      "controls": [
+        {
+          "label": "import",
+          "textContrast": 8.766427399391358,
+          "boundaryContrast": 7.882937804863718
+        },
+        {
+          "label": "demo",
+          "textContrast": 14.639986756891695,
+          "boundaryContrast": 4.643841687456098
+        },
+        {
+          "label": "reference-source",
+          "textContrast": 17.21616762850402,
+          "boundaryContrast": 4.643841687456098
+        },
+        {
+          "label": "category",
+          "textContrast": 17.21616762850402,
+          "boundaryContrast": 4.643841687456098
+        },
+        {
+          "label": "subgenre",
+          "textContrast": 17.21616762850402,
+          "boundaryContrast": 4.643841687456098
+        },
+        {
+          "label": "analyze",
+          "textContrast": 14.639986756891695,
+          "boundaryContrast": 4.643841687456098
+        },
+        {
+          "label": "Seek backward 10 seconds",
+          "textContrast": 14.639986756891695,
+          "boundaryContrast": 4.643841687456098
+        },
+        {
+          "label": "play",
+          "textContrast": 9.163823306086305,
+          "boundaryContrast": 4.643841687456098
+        },
+        {
+          "label": "Seek forward 10 seconds",
+          "textContrast": 14.639986756891695,
+          "boundaryContrast": 4.643841687456098
+        },
+        {
+          "label": "Cycle playback speed",
+          "textContrast": 14.639986756891695,
+          "boundaryContrast": 4.643841687456098
+        },
+        {
+          "label": "original",
+          "textContrast": 11.274206612348623,
+          "boundaryContrast": 7.882937804863718
+        },
+        {
+          "label": "fixed",
+          "textContrast": 14.639986756891695,
+          "boundaryContrast": 4.643841687456098
+        },
+        {
+          "label": "crop",
+          "textContrast": 14.639986756891695,
+          "boundaryContrast": 4.643841687456098
+        },
+        {
+          "label": "reset",
+          "textContrast": 15.481104499083372,
+          "boundaryContrast": 4.643841687456098
+        },
+        {
+          "label": "output-format",
+          "textContrast": 17.21616762850402,
+          "boundaryContrast": 4.643841687456098
+        },
+        {
+          "label": "output-bitrate",
+          "textContrast": 17.21616762850402,
+          "boundaryContrast": 4.643841687456098
+        },
+        {
+          "label": "output-depth",
+          "textContrast": 17.21616762850402,
+          "boundaryContrast": 4.643841687456098
+        },
+        {
+          "label": "convert",
+          "textContrast": 14.639986756891695,
+          "boundaryContrast": 4.643841687456098
+        },
+        {
+          "label": "save-fixed",
+          "textContrast": 14.639986756891695,
+          "boundaryContrast": 4.643841687456098
+        },
+        {
+          "label": "report",
+          "textContrast": 15.481104499083372,
+          "boundaryContrast": 4.643841687456098
+        },
+        {
+          "label": "fix",
+          "textContrast": 17.21616762850402,
+          "boundaryContrast": 15.481104499083372
+        },
+        {
+          "label": "reset-tweaks",
+          "textContrast": 14.639986756891695,
+          "boundaryContrast": 4.643841687456098
+        }
+      ],
+      "outputBottom": 908.625
+    }
+  ],
+  "motion": {
+    "budget": {
+      "sampleMs": 5000,
+      "maxP95FrameMs": 50,
+      "minAverageFps": 30
+    },
+    "viewports": [
+      {
+        "width": 1120,
+        "height": 700,
+        "before": [
+          {
+            "layer": "environment",
+            "name": "mvo-deep-space-drift",
+            "duration": "212s",
+            "state": "running",
+            "transform": "matrix(1.02573, 0, 0, 1.02573, -3.85001, -1.03126)",
+            "opacity": "1",
+            "translate": "none",
+            "filter": "none",
+            "backdropFilter": "none"
+          },
+          {
+            "layer": "environment::before",
+            "name": "mvo-nebula-drift",
+            "duration": "212s",
+            "state": "running",
+            "transform": "matrix(1.025, 0, 0, 1.025, -0.530946, 0.0948114)",
+            "opacity": "0.76",
+            "translate": "none",
+            "filter": "none",
+            "backdropFilter": "none"
+          },
+          {
+            "layer": "environment::after",
+            "name": "mvo-horizon-drift",
+            "duration": "158s",
+            "state": "running",
+            "transform": "matrix(1.02, 0, 0, 1.02, -0.34857, 0.0573627)",
+            "opacity": "0.58",
+            "translate": "none",
+            "filter": "none",
+            "backdropFilter": "none"
+          },
+          {
+            "layer": "workspace-root::before",
+            "name": "mvo-nearfield-drift",
+            "duration": "116s",
+            "state": "running",
+            "transform": "matrix(1.01772, 0, 0, 1.01772, 0.304735, -0.0995832)",
+            "opacity": "0.407198",
+            "translate": "none",
+            "filter": "none",
+            "backdropFilter": "none"
+          },
+          {
+            "layer": "scene-plane scene-stars",
+            "name": "mvo-star-distance",
+            "duration": "337s",
+            "state": "running",
+            "transform": "matrix(1.02109, 0, 0, 1.02109, -4.33021, -0.701054)",
+            "opacity": "0.4",
+            "translate": "0px",
+            "filter": "none",
+            "backdropFilter": "none"
+          },
+          {
+            "layer": "scene-plane scene-celestial",
+            "name": "mvo-celestial-orbit",
+            "duration": "263s",
+            "state": "running",
+            "transform": "matrix(1.02628, -0.000873418, 0.000873418, 1.02628, -1.05787, -0.593076)",
+            "opacity": "0.62",
+            "translate": "0px",
+            "filter": "none",
+            "backdropFilter": "none"
+          },
+          {
+            "layer": "scene-plane scene-horizon",
+            "name": "mvo-ground-horizon",
+            "duration": "193s",
+            "state": "running",
+            "transform": "matrix(1, -0.000586879, 0.000586879, 1, -0.0154098, -0.382452)",
+            "opacity": "1",
+            "translate": "0px",
+            "filter": "none",
+            "backdropFilter": "none"
+          },
+          {
+            "layer": "scene-plane scene-foreground",
+            "name": "mvo-ground-presence",
+            "duration": "137s",
+            "state": "running",
+            "transform": "matrix(1.03882, 0, 0, 1.03882, -1.0908, 0.193379)",
+            "opacity": "0.55",
+            "translate": "0px",
+            "filter": "none",
+            "backdropFilter": "none"
+          }
+        ],
+        "after": [
+          {
+            "layer": "environment",
+            "name": "mvo-deep-space-drift",
+            "duration": "212s",
+            "state": "running",
+            "transform": "matrix(1.02602, 0, 0, 1.02602, -3.72936, -0.998946)",
+            "opacity": "1",
+            "translate": "none",
+            "filter": "none",
+            "backdropFilter": "none"
+          },
+          {
+            "layer": "environment::before",
+            "name": "mvo-nebula-drift",
+            "duration": "212s",
+            "state": "running",
+            "transform": "matrix(1.025, 0, 0, 1.025, -0.231837, 0.0413992)",
+            "opacity": "0.76",
+            "translate": "none",
+            "filter": "none",
+            "backdropFilter": "none"
+          },
+          {
+            "layer": "environment::after",
+            "name": "mvo-horizon-drift",
+            "duration": "158s",
+            "state": "running",
+            "transform": "matrix(1.02, 0, 0, 1.02, -0.619157, 0.12857)",
+            "opacity": "0.58",
+            "translate": "none",
+            "filter": "none",
+            "backdropFilter": "none"
+          },
+          {
+            "layer": "workspace-root::before",
+            "name": "mvo-nearfield-drift",
+            "duration": "116s",
+            "state": "running",
+            "transform": "matrix(1.01809, 0, 0, 1.01809, 0.805339, -0.263174)",
+            "opacity": "0.419023",
+            "translate": "none",
+            "filter": "none",
+            "backdropFilter": "none"
+          },
+          {
+            "layer": "scene-plane scene-stars",
+            "name": "mvo-star-distance",
+            "duration": "337s",
+            "state": "running",
+            "transform": "matrix(1.0212, 0, 0, 1.0212, -3.91885, -0.620711)",
+            "opacity": "0.4",
+            "translate": "0px",
+            "filter": "none",
+            "backdropFilter": "none"
+          },
+          {
+            "layer": "scene-plane scene-celestial",
+            "name": "mvo-celestial-orbit",
+            "duration": "263s",
+            "state": "running",
+            "transform": "matrix(1.02677, -0.000520664, 0.000520664, 1.02677, 0.11819, -0.82119)",
+            "opacity": "0.62",
+            "translate": "0px",
+            "filter": "none",
+            "backdropFilter": "none"
+          },
+          {
+            "layer": "scene-plane scene-horizon",
+            "name": "mvo-ground-horizon",
+            "duration": "193s",
+            "state": "running",
+            "transform": "matrix(1, -0.000274137, 0.000274137, 1, 0.929107, -0.589863)",
+            "opacity": "1",
+            "translate": "0px",
+            "filter": "none",
+            "backdropFilter": "none"
+          },
+          {
+            "layer": "scene-plane scene-foreground",
+            "name": "mvo-ground-presence",
+            "duration": "137s",
+            "state": "running",
+            "transform": "matrix(1.03945, 0, 0, 1.03945, 0.143299, -0.21638)",
+            "opacity": "0.55",
+            "translate": "0px",
+            "filter": "none",
+            "backdropFilter": "none"
+          }
+        ],
+        "timing": {
+          "count": 229,
+          "elapsedMs": 5049.800000000003,
+          "averageFps": 45.348330626955494,
+          "p50Ms": 16.69999999999709,
+          "p95Ms": 33.400000000001455,
+          "maxMs": 316.7000000000007,
+          "over50Ms": 1
+        },
+        "performanceDelta": {
+          "LayoutCount": 1,
+          "RecalcStyleCount": 233,
+          "LayoutDuration": 0.00014300000000000423,
+          "RecalcStyleDuration": 0.09207399999999999,
+          "ScriptDuration": 0.010259999999999936,
+          "TaskDuration": 0.20872599999999952
+        },
+        "inputEnvironment": {
+          "fine": false,
+          "primaryFine": false,
+          "reduced": false,
+          "hidden": false,
+          "paused": "false",
+          "target": "<section class=\"environment-banner\" aria-label=\"Workspace introduction\">\n        <div class=\"intro\"><p class=\"eyebrow\">LISTEN · COMPARE · SHAPE</p><h1 tabindex=\"-1\">Audio shaping</h1><p>Analyze, compare and shape your audio. Original audio "
+        },
+        "parallax": {
+          "far": -0.17808,
+          "celestial": -0.61056,
+          "near": -2.9256,
+          "position": "fixed"
+        },
+        "panel": {
+          "entering": {
+            "samples": [
+              {
+                "timeMs": 34.80000000000291,
+                "opacity": 0,
+                "transform": "matrix(0.985, 0, 0, 0.985, 0, 9.6)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 151.40000000000146,
+                "opacity": 0,
+                "transform": "matrix(0.985, 0, 0, 0.985, 0, 9.6)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 351.40000000000146,
+                "opacity": 0.777513,
+                "transform": "matrix(0.996663, 0, 0, 0.996663, 0, 2.13587)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 418.09999999999854,
+                "opacity": 0.907294,
+                "transform": "matrix(0.998609, 0, 0, 0.998609, 0, 0.889977)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 434.8000000000029,
+                "opacity": 0.928846,
+                "transform": "matrix(0.998933, 0, 0, 0.998933, 0, 0.683078)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 534.8000000000029,
+                "opacity": 0.995706,
+                "transform": "matrix(0.999936, 0, 0, 0.999936, 0, 0.0412195)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 601.4000000000015,
+                "opacity": 1,
+                "transform": "matrix(1, 0, 0, 1, 0, 0)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 701.4000000000015,
+                "opacity": 1,
+                "transform": "matrix(1, 0, 0, 1, 0, 0)",
+                "display": "block",
+                "modal": true
+              }
+            ],
+            "open": true,
+            "filter": "none"
+          },
+          "exiting": {
+            "samples": [
+              {
+                "timeMs": 5.69999999999709,
+                "opacity": 1,
+                "transform": "matrix(1, 0, 0, 1, 0, 0)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 89,
+                "opacity": 1,
+                "transform": "matrix(1, 0, 0, 1, 0, 0)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 122.30000000000291,
+                "opacity": 0.934642,
+                "transform": "matrix(0.99902, 0, 0, 0.99902, 0, 0.627433)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 139,
+                "opacity": 0.873947,
+                "transform": "matrix(0.998109, 0, 0, 0.998109, 0, 1.21011)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 155.8000000000029,
+                "opacity": 0.795877,
+                "transform": "matrix(0.996938, 0, 0, 0.996938, 0, 1.95958)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 205.6999999999971,
+                "opacity": 0.531814,
+                "transform": "matrix(0.992977, 0, 0, 0.992977, 0, 4.49459)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 222.3000000000029,
+                "opacity": 0.453485,
+                "transform": "matrix(0.991802, 0, 0, 0.991802, 0, 5.24655)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 239,
+                "opacity": 0.383448,
+                "transform": "matrix(0.990752, 0, 0, 0.990752, 0, 5.9189)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 272.3000000000029,
+                "opacity": 0.268868,
+                "transform": "matrix(0.989033, 0, 0, 0.989033, 0, 7.01886)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 289,
+                "opacity": 0.222445,
+                "transform": "matrix(0.988337, 0, 0, 0.988337, 0, 7.46452)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 322.40000000000146,
+                "opacity": 0.147672,
+                "transform": "matrix(0.987215, 0, 0, 0.987215, 0, 8.18235)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 339,
+                "opacity": 0.118103,
+                "transform": "matrix(0.986772, 0, 0, 0.986772, 0, 8.46621)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 355.6999999999971,
+                "opacity": 0.0926835,
+                "transform": "matrix(0.98639, 0, 0, 0.98639, 0, 8.71024)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 389.09999999999854,
+                "opacity": 0.0530569,
+                "transform": "matrix(0.985796, 0, 0, 0.985796, 0, 9.09065)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 405.6999999999971,
+                "opacity": 0.038187,
+                "transform": "matrix(0.985573, 0, 0, 0.985573, 0, 9.23341)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 422.3000000000029,
+                "opacity": 0.0261173,
+                "transform": "matrix(0.985392, 0, 0, 0.985392, 0, 9.34927)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 455.6999999999971,
+                "opacity": 0.0093361,
+                "transform": "matrix(0.98514, 0, 0, 0.98514, 0, 9.51037)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 472.40000000000146,
+                "opacity": 0.00428984,
+                "transform": "matrix(0.985064, 0, 0, 0.985064, 0, 9.55882)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 505.6999999999971,
+                "opacity": 0.0000339536,
+                "transform": "matrix(0.985, 0, 0, 0.985, 0, 9.59967)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 522.4000000000015,
+                "opacity": 0,
+                "transform": "none",
+                "display": "none",
+                "modal": false
+              },
+              {
+                "timeMs": 539,
+                "opacity": 0,
+                "transform": "none",
+                "display": "none",
+                "modal": false
+              },
+              {
+                "timeMs": 572.3000000000029,
+                "opacity": 0,
+                "transform": "none",
+                "display": "none",
+                "modal": false
+              },
+              {
+                "timeMs": 589,
+                "opacity": 0,
+                "transform": "none",
+                "display": "none",
+                "modal": false
+              },
+              {
+                "timeMs": 605.6999999999971,
+                "opacity": 0,
+                "transform": "none",
+                "display": "none",
+                "modal": false
+              },
+              {
+                "timeMs": 622.3000000000029,
+                "opacity": 0,
+                "transform": "none",
+                "display": "none",
+                "modal": false
+              },
+              {
+                "timeMs": 639,
+                "opacity": 0,
+                "transform": "none",
+                "display": "none",
+                "modal": false
+              },
+              {
+                "timeMs": 655.6999999999971,
+                "opacity": 0,
+                "transform": "none",
+                "display": "none",
+                "modal": false
+              },
+              {
+                "timeMs": 672.4000000000015,
+                "opacity": 0,
+                "transform": "none",
+                "display": "none",
+                "modal": false
+              },
+              {
+                "timeMs": 689,
+                "opacity": 0,
+                "transform": "none",
+                "display": "none",
+                "modal": false
+              },
+              {
+                "timeMs": 705.6999999999971,
+                "opacity": 0,
+                "transform": "none",
+                "display": "none",
+                "modal": false
+              }
+            ],
+            "open": false,
+            "filter": "none"
+          }
+        }
+      },
+      {
+        "width": 1480,
+        "height": 920,
+        "before": [
+          {
+            "layer": "environment",
+            "name": "mvo-deep-space-drift",
+            "duration": "212s",
+            "state": "running",
+            "transform": "matrix(1.02622, 0, 0, 1.02622, -4.81941, -1.28393)",
+            "opacity": "1",
+            "translate": "none",
+            "filter": "none",
+            "backdropFilter": "none"
+          },
+          {
+            "layer": "environment::before",
+            "name": "mvo-nebula-drift",
+            "duration": "212s",
+            "state": "running",
+            "transform": "matrix(1.025, 0, 0, 1.025, -0.0682287, 0.0121176)",
+            "opacity": "0.76",
+            "translate": "none",
+            "filter": "none",
+            "backdropFilter": "none"
+          },
+          {
+            "layer": "environment::after",
+            "name": "mvo-horizon-drift",
+            "duration": "158s",
+            "state": "running",
+            "transform": "matrix(1.02, 0, 0, 1.02, -1.02781, 0.223843)",
+            "opacity": "0.58",
+            "translate": "none",
+            "filter": "none",
+            "backdropFilter": "none"
+          },
+          {
+            "layer": "workspace-root::before",
+            "name": "mvo-nearfield-drift",
+            "duration": "116s",
+            "state": "running",
+            "transform": "matrix(1.01831, 0, 0, 1.01831, 1.44692, -0.363238)",
+            "opacity": "0.425864",
+            "translate": "none",
+            "filter": "none",
+            "backdropFilter": "none"
+          },
+          {
+            "layer": "scene-plane scene-stars",
+            "name": "mvo-star-distance",
+            "duration": "337s",
+            "state": "running",
+            "transform": "matrix(1.02126, 0, 0, 1.02126, -4.84311, -0.75064)",
+            "opacity": "0.4",
+            "translate": "0px",
+            "filter": "none",
+            "backdropFilter": "none"
+          },
+          {
+            "layer": "scene-plane scene-celestial",
+            "name": "mvo-celestial-orbit",
+            "duration": "263s",
+            "state": "running",
+            "transform": "matrix(1.02707, -0.00030778, 0.00030778, 1.02707, 1.09334, -1.26008)",
+            "opacity": "0.62",
+            "translate": "0px",
+            "filter": "none",
+            "backdropFilter": "none"
+          },
+          {
+            "layer": "scene-plane scene-horizon",
+            "name": "mvo-ground-horizon",
+            "duration": "193s",
+            "state": "running",
+            "transform": "matrix(1, -8.53175e-05, 8.53175e-05, 1, 1.98129, -0.939837)",
+            "opacity": "1",
+            "translate": "0px",
+            "filter": "none",
+            "backdropFilter": "none"
+          },
+          {
+            "layer": "scene-plane scene-foreground",
+            "name": "mvo-ground-presence",
+            "duration": "137s",
+            "state": "running",
+            "transform": "matrix(1.03983, 0, 0, 1.03983, 1.18217, -0.612246)",
+            "opacity": "0.55",
+            "translate": "0px",
+            "filter": "none",
+            "backdropFilter": "none"
+          }
+        ],
+        "after": [
+          {
+            "layer": "environment",
+            "name": "mvo-deep-space-drift",
+            "duration": "212s",
+            "state": "running",
+            "transform": "matrix(1.02659, 0, 0, 1.02659, -4.61568, -1.22966)",
+            "opacity": "1",
+            "translate": "none",
+            "filter": "none",
+            "backdropFilter": "none"
+          },
+          {
+            "layer": "environment::before",
+            "name": "mvo-nebula-drift",
+            "duration": "212s",
+            "state": "running",
+            "transform": "matrix(1.025, 0, 0, 1.025, 0.329623, -0.058542)",
+            "opacity": "0.76",
+            "translate": "none",
+            "filter": "none",
+            "backdropFilter": "none"
+          },
+          {
+            "layer": "environment::after",
+            "name": "mvo-horizon-drift",
+            "duration": "158s",
+            "state": "running",
+            "transform": "matrix(1.02, 0, 0, 1.02, -1.36703, 0.312629)",
+            "opacity": "0.58",
+            "translate": "none",
+            "filter": "none",
+            "backdropFilter": "none"
+          },
+          {
+            "layer": "workspace-root::before",
+            "name": "mvo-nearfield-drift",
+            "duration": "116s",
+            "state": "running",
+            "transform": "matrix(1.01865, 0, 0, 1.01865, 2.05247, -0.51526)",
+            "opacity": "0.436689",
+            "translate": "none",
+            "filter": "none",
+            "backdropFilter": "none"
+          },
+          {
+            "layer": "scene-plane scene-stars",
+            "name": "mvo-star-distance",
+            "duration": "337s",
+            "state": "running",
+            "transform": "matrix(1.02137, 0, 0, 1.02137, -4.26702, -0.638731)",
+            "opacity": "0.4",
+            "translate": "0px",
+            "filter": "none",
+            "backdropFilter": "none"
+          },
+          {
+            "layer": "scene-plane scene-celestial",
+            "name": "mvo-celestial-orbit",
+            "duration": "263s",
+            "state": "running",
+            "transform": "matrix(1.02757, 4.9259e-05, -4.9259e-05, 1.02757, 2.66389, -1.56307)",
+            "opacity": "0.62",
+            "translate": "0px",
+            "filter": "none",
+            "backdropFilter": "none"
+          },
+          {
+            "layer": "scene-plane scene-horizon",
+            "name": "mvo-ground-horizon",
+            "duration": "193s",
+            "state": "running",
+            "transform": "matrix(1, 0.000230434, -0.000230434, 1, 3.24141, -1.21506)",
+            "opacity": "1",
+            "translate": "0px",
+            "filter": "none",
+            "backdropFilter": "none"
+          },
+          {
+            "layer": "scene-plane scene-foreground",
+            "name": "mvo-ground-presence",
+            "duration": "137s",
+            "state": "running",
+            "transform": "matrix(1.04046, 0, 0, 1.04046, 2.84425, -1.16112)",
+            "opacity": "0.55",
+            "translate": "0px",
+            "filter": "none",
+            "backdropFilter": "none"
+          }
+        ],
+        "timing": {
+          "count": 212,
+          "elapsedMs": 5016.470000000001,
+          "averageFps": 42.260792948029184,
+          "p50Ms": 16.69999999999709,
+          "p95Ms": 33.400000000001455,
+          "maxMs": 466.5699999999997,
+          "over50Ms": 3
+        },
+        "performanceDelta": {
+          "LayoutCount": 2,
+          "RecalcStyleCount": 216,
+          "LayoutDuration": 0.00028000000000000247,
+          "RecalcStyleDuration": 0.08487800000000001,
+          "ScriptDuration": 0.009292000000000078,
+          "TaskDuration": 0.20863300000000073
+        },
+        "inputEnvironment": {
+          "fine": false,
+          "primaryFine": false,
+          "reduced": false,
+          "hidden": false,
+          "paused": "false",
+          "target": "<section class=\"environment-banner\" aria-label=\"Workspace introduction\">\n        <div class=\"intro\"><p class=\"eyebrow\">LISTEN · COMPARE · SHAPE</p><h1 tabindex=\"-1\">Audio shaping</h1><p>Analyze, compare and shape your audio. Original audio "
+        },
+        "parallax": {
+          "far": -0.17808,
+          "celestial": -0.61056,
+          "near": -2.9256,
+          "position": "fixed"
+        },
+        "panel": {
+          "entering": {
+            "samples": [
+              {
+                "timeMs": 110.40000000002328,
+                "opacity": 0,
+                "transform": "matrix(0.985, 0, 0, 0.985, 0, 9.6)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 227.00000000002183,
+                "opacity": 0,
+                "transform": "matrix(0.985, 0, 0, 0.985, 0, 9.6)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 360.4000000000233,
+                "opacity": 0.547023,
+                "transform": "matrix(0.993205, 0, 0, 0.993205, 0, 4.34857)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 477.0000000000218,
+                "opacity": 0.88192,
+                "transform": "matrix(0.998229, 0, 0, 0.998229, 0, 1.13357)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 577.0000000000218,
+                "opacity": 0.98346,
+                "transform": "matrix(0.999752, 0, 0, 0.999752, 0, 0.158787)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 693.7000000000262,
+                "opacity": 1,
+                "transform": "matrix(1, 0, 0, 1, 0, 0)",
+                "display": "block",
+                "modal": true
+              },
+              {
+                "timeMs": 827.0000000000218,
+                "opacity": 1,
+                "transform": "matrix(1, 0, 0, 1, 0, 0)",
+                "display": "block",
+                "modal": true
+              }
+            ],
+            "open": true,
+            "filter": "none"
+          },
+          "exiting": {
+            "samples": [
+              {
+                "timeMs": 9.95799999999872,
+                "opacity": 1,
+                "transform": "matrix(1, 0, 0, 1, 0, 0)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 159.90000000000146,
+                "opacity": 1,
+                "transform": "matrix(1, 0, 0, 1, 0, 0)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 176.5,
+                "opacity": 0.976149,
+                "transform": "matrix(0.999642, 0, 0, 0.999642, 0, 0.228969)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 209.8000000000029,
+                "opacity": 0.874039,
+                "transform": "matrix(0.998111, 0, 0, 0.998111, 0, 1.20923)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 226.5,
+                "opacity": 0.796492,
+                "transform": "matrix(0.996947, 0, 0, 0.996947, 0, 1.95367)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 259.90000000000146,
+                "opacity": 0.617826,
+                "transform": "matrix(0.994267, 0, 0, 0.994267, 0, 3.66887)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 276.59999999999854,
+                "opacity": 0.531426,
+                "transform": "matrix(0.992971, 0, 0, 0.992971, 0, 4.49831)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 309.8000000000029,
+                "opacity": 0.383534,
+                "transform": "matrix(0.990753, 0, 0, 0.990753, 0, 5.91807)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 326.59999999999854,
+                "opacity": 0.321774,
+                "transform": "matrix(0.989827, 0, 0, 0.989827, 0, 6.51097)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 343.1999999999971,
+                "opacity": 0.268636,
+                "transform": "matrix(0.98903, 0, 0, 0.98903, 0, 7.0211)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 359.8000000000029,
+                "opacity": 0.222502,
+                "transform": "matrix(0.988338, 0, 0, 0.988338, 0, 7.46398)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 376.59999999999854,
+                "opacity": 0.182119,
+                "transform": "matrix(0.987732, 0, 0, 0.987732, 0, 7.85166)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 393.1999999999971,
+                "opacity": 0.147714,
+                "transform": "matrix(0.987216, 0, 0, 0.987216, 0, 8.18195)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 426.5,
+                "opacity": 0.0927144,
+                "transform": "matrix(0.986391, 0, 0, 0.986391, 0, 8.70994)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 443.1999999999971,
+                "opacity": 0.071161,
+                "transform": "matrix(0.986067, 0, 0, 0.986067, 0, 8.91685)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 459.90000000000146,
+                "opacity": 0.0530786,
+                "transform": "matrix(0.985796, 0, 0, 0.985796, 0, 9.09045)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 493.1999999999971,
+                "opacity": 0.0260668,
+                "transform": "matrix(0.985391, 0, 0, 0.985391, 0, 9.34976)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 509.90000000000146,
+                "opacity": 0.0165084,
+                "transform": "matrix(0.985248, 0, 0, 0.985248, 0, 9.44152)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 526.5,
+                "opacity": 0.00934413,
+                "transform": "matrix(0.98514, 0, 0, 0.98514, 0, 9.5103)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 559.9000000000015,
+                "opacity": 0.00124128,
+                "transform": "matrix(0.985019, 0, 0, 0.985019, 0, 9.58808)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 576.5,
+                "opacity": 0.000034403,
+                "transform": "matrix(0.985, 0, 0, 0.985, 0, 9.59967)",
+                "display": "block",
+                "modal": false
+              },
+              {
+                "timeMs": 593.0999999999985,
+                "opacity": 0,
+                "transform": "none",
+                "display": "none",
+                "modal": false
+              },
+              {
+                "timeMs": 609.8000000000029,
+                "opacity": 0,
+                "transform": "none",
+                "display": "none",
+                "modal": false
+              },
+              {
+                "timeMs": 643.1999999999971,
+                "opacity": 0,
+                "transform": "none",
+                "display": "none",
+                "modal": false
+              },
+              {
+                "timeMs": 659.9000000000015,
+                "opacity": 0,
+                "transform": "none",
+                "display": "none",
+                "modal": false
+              },
+              {
+                "timeMs": 693.1999999999971,
+                "opacity": 0,
+                "transform": "none",
+                "display": "none",
+                "modal": false
+              },
+              {
+                "timeMs": 709.8000000000029,
+                "opacity": 0,
+                "transform": "none",
+                "display": "none",
+                "modal": false
+              }
+            ],
+            "open": false,
+            "filter": "none"
+          }
+        }
+      }
+    ],
+    "touchIgnoresParallax": true
+  },
+  "surfaceAnimations": [
+    {
+      "surface": "inspector",
+      "time": 5737
+    },
+    {
+      "surface": "file-reference",
+      "time": 6031.200000000012
+    },
+    {
+      "surface": "inspector",
+      "time": 6465.700000000012
+    },
+    {
+      "surface": "profile-options",
+      "time": 6689.599999999977
+    },
+    {
+      "surface": "inspector",
+      "time": 7517.099999999977
+    },
+    {
+      "surface": "region-controls",
+      "time": 8138.299999999988
+    },
+    {
+      "surface": "workspace",
+      "time": 12325.099999999977
+    },
+    {
+      "surface": "adjustment-inputs",
+      "time": 15536.099999999977
+    },
+    {
+      "surface": "workspace",
+      "time": 16612.099999999977
+    },
+    {
+      "surface": "workspace",
+      "time": 21365.899999999965
+    }
+  ],
+  "result": "FAIL",
+  "failure": {
+    "phase": "keyboard",
+    "message": "Node is either not clickable or not an Element",
+    "stack": "Error: Node is either not clickable or not an Element\n    at CdpElementHandle.clickablePoint (file:///tmp/onverse-browser-tools-wgwkvk2p/node_modules/puppeteer-core/lib/puppeteer/api/ElementHandle.js:693:23)\n    at async CdpElementHandle.<anonymous> (file:///tmp/onverse-browser-tools-wgwkvk2p/node_modules/puppeteer-core/lib/puppeteer/api/ElementHandle.js:119:20)\n    at async CdpElementHandle.click (file:///tmp/onverse-browser-tools-wgwkvk2p/node_modules/puppeteer-core/lib/puppeteer/api/ElementHandle.js:723:30)\n    at async CdpElementHandle.<anonymous> (file:///tmp/onverse-browser-tools-wgwkvk2p/node_modules/puppeteer-core/lib/puppeteer/api/ElementHandle.js:130:24)\n    at async CdpFrame.click (file:///tmp/onverse-browser-tools-wgwkvk2p/node_modules/puppeteer-core/lib/puppeteer/api/Frame.js:754:17)\n    at async file:///home/user/onverse/scripts/validation/run-workbench-browser.mjs:409:23",
+    "dom": {
+      "play": "Play",
+      "position": "0",
+      "audio": {
+        "contexts": 9,
+        "offline": 3,
+        "closes": 8,
+        "sampleRates": [
+          44100,
+          44100,
+          44100,
+          44100,
+          44100,
+          44100,
+          44100,
+          44100,
+          44100
+        ],
+        "decoded": [
+          {
+            "frames": 88199,
+            "sampleRate": 44100,
+            "channels": 2
+          },
+          {
+            "frames": 88199,
+            "sampleRate": 44100,
+            "channels": 2
+          },
+          {
+            "frames": 89856,
+            "sampleRate": 44100,
+            "channels": 2
+          },
+          {
+            "frames": 83789,
+            "sampleRate": 44100,
+            "channels": 2
+          },
+          {
+            "frames": 87317,
+            "sampleRate": 44100,
+            "channels": 2
+          }
+        ]
+      },
+      "surfaceAnimations": [
+        {
+          "surface": "inspector",
+          "time": 5737
+        },
+        {
+          "surface": "file-reference",
+          "time": 6031.200000000012
+        },
+        {
+          "surface": "inspector",
+          "time": 6465.700000000012
+        },
+        {
+          "surface": "profile-options",
+          "time": 6689.599999999977
+        },
+        {
+          "surface": "inspector",
+          "time": 7517.099999999977
+        },
+        {
+          "surface": "region-controls",
+          "time": 8138.299999999988
+        },
+        {
+          "surface": "workspace",
+          "time": 12325.099999999977
+        },
+        {
+          "surface": "adjustment-inputs",
+          "time": 15536.099999999977
+        },
+        {
+          "surface": "workspace",
+          "time": 16612.099999999977
+        },
+        {
+          "surface": "workspace",
+          "time": 21365.899999999965
+        },
+        {
+          "surface": "workspace",
+          "time": 51141.899999999965
+        },
+        {
+          "surface": "inspector",
+          "time": 54604.899999999965
+        }
+      ]
+    }
+  },
+  "privateRuntimeRemoved": true,
+  "codeSha256": {
+    "index.html": "e384a640f28003888ac594a12c589d95f36d20bd7c863c37b922dfac3e012e2d",
+    "src/ui/presentation/rebuild/index.css": "36e5b2bd35d24c739b1cdae4890637cea5f213eb9394015ab6bd22328ed60fd3",
+    "src/ui/presentation/rebuild/environment.css": "3a51d082633c5f06125344894117295fdad0dce146e09f74c34eede8a2d8b1c8",
+    "src/ui/presentation/rebuild/environmentMotion.js": "a8dc5af9cd0e6722b0737f7c79222ab53e256f3b990d9359117fe504bbedb6a2",
+    "src/ui/presentation/rebuild/assets/celestial-plane.webp": "caa39876abc197deb0b49689dc747f2e1c2ce551ea8e02c41f09a75bfd9f44a3",
+    "src/ui/presentation/rebuild/assets/distant-nebula.jpg": "bd07f4d9b2c351b96ef5db5e8424679e666c8b2c9559809640f9549a7329635f",
+    "src/ui/presentation/rebuild/assets/near-rocks-plane.webp": "3f60295fa8f642aabc1a26ad89b2ac64cf7623a8aa42e353e8969cb32e21bd94",
+    "scripts/validation/derive-environment-planes.py": "7ff8144bd161e8cdb4553ec4eb471a5c54c90ebd559244c9466393b0db73d81b",
+    "src/ui/presentation/rebuild/workbench.css": "f2094f82be93953faee6a898f54c0a84930cb4c92a6618b681db86d371ee1556",
+    "src/ui/presentation/rebuild/tokens.css": "f9341a7d400e8a05f4b40732482430d3bf60516c99d45c2f1de5b9273a074091",
+    "src/ui/presentation/rebuild/assets/first-person-cosmic-horizon.jpg": "e9f087201c2f061a8154bfd818fb1348da849a43dc835b2d150628d627e33fd4",
+    "src/application/workbench/demo.js": "59478f48d556561a1280371113e6432607dec54a2304fb43173baf5686ce4c18",
+    "src/main.js": "484e09684d0a258053de811b58e7f4c60e230c669c2c2ad39f1d4e487defc0d5",
+    "src/audio/analyzer.js": "fc6e6386e80de369b358915c0608b864f00b640cebc50ce49bce6515cc57b707",
+    "src/audio/processor.js": "209c0c4c50b74a4fe7f9b8c60dc9a670c326348243c0f81e7e9ade46c86cc635",
+    "src/audio/dsp.js": "cb2de9e3c5876bdcc3f34930549b385ee1e99d4ae5a53d8a0697f9321f88eddf",
+    "src/audio/genre.js": "92387a31edae1854ad61efb70a60a1ff547c9790489be97c9df35d9961ef700f",
+    "src/audio/vendor/lamejs-notices.js": "467784bb5e65262dee87fca8a53df26e2afc879bc0f793f005b6e4264232879c",
+    "tests/fixtures/audioStabilizationBridge.js": "32658aec04efb7b3ecc8371a05656c80db0a52e341e78a37ed7ba9ba21cadba1",
+    "scripts/validation/audio-stabilization-probe.mjs": "e3ec4ed736470a738d3591da97736b75aa96dc2f9dbcc9b6be56346d9eb172bd",
+    "src/ui/workbench/workspace.js": "ea7c6434d742ad2b4c0353137e072fe68a6679e6ea4b00dbfc7b957d7422fcf9",
+    "src/ui/workbench/workspace.css": "6a6bab2e3e176b299cad9387a63f121a7fdddee139056daa5ab88e56a988b123",
+    "src/application/workbench/workbenchController.js": "5e3cb3d19509a25594be323d90b80a19839f23ce818e37631185c8da1e76a906",
+    "src/application/analysis/analysisController.js": "824be6622d59a3fdbcc096c78050189d080575cbcb065ed3464754f1103cf012",
+    "dist/index.html": "a8d926f82726a4f0c595ef17ef5b11f1fcfbdef7e3c808e95c4163ca5f63e846",
+    "scripts/validation/run-workbench-browser.mjs": "bbdd931ae7134c9130e56a94913564046b4c907686851c448adfb372addddec8"
+  }
+}
