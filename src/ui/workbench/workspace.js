@@ -70,7 +70,7 @@ export function mountWorkspace(root, { recorders = [] } = {}) {
       <header><h2 id="capability-title" tabindex="-1" autofocus>One source. Real processing.</h2><button data-action="close-capabilities" aria-label="Close scope and limits">Close</button></header>
       <p class="capability-limit">Loudness is an ungated estimate; peak/gain limitations remain. Check your result before delivery. This is not a standards-certified meter; no project persistence or undo is exposed.</p>
       <p>Import or generate a demo. Analyze your mix, compare a reference, play A/B, crop a region, apply Master Fix and manual adjustments, then export real audio.</p>
-      <p class="capability-limit">This is a single-source audio workbench. Multitrack, mixer routing, plugins, a media library and SYLUNE execution are not implemented. Local browser codec support varies.</p>
+      <p class="capability-limit">This destination edits one source. Use Arrangement for real multitrack editing and mixdown. Plugin hosting, MIDI, a media library and SYLUNE execution are not implemented. Local browser codec support varies.</p>
       <p class="capability-limit">Browser verification is not packaged Mac qualification, device listening, or a release/standards certification.</p>
     </dialog>
   </div>`
@@ -268,12 +268,13 @@ export function mountWorkspace(root, { recorders = [] } = {}) {
 
     on(elements["adjustment-inputs"], "input", event => { const input = event.target; if (!input.dataset.tweak) return; input.previousElementSibling.textContent = input.value; c.setTweak(input.dataset.tweak, Number(input.value)) })
     on(window, "keydown", event => {
+      if (root.querySelector(".workspace-root").dataset.editor === "daw") return
       if (sheet.open || event.target.closest("input,select,textarea,button,[contenteditable=true],summary,a")) return
       if (event.code === "Space") { event.preventDefault(); invoke(c.togglePlay) }
       if (event.code === "ArrowRight" || event.code === "ArrowLeft") { event.preventDefault(); c.seekBy((event.code === "ArrowRight" ? 1 : -1) * (event.shiftKey ? 10 : 5)) }
     })
     on(root, "dragover", event => event.preventDefault())
-    on(root, "drop", event => { event.preventDefault(); const f = event.dataTransfer.files[0]; if (f) invoke(() => c.openFile(f)) })
+    on(root, "drop", event => { event.preventDefault(); if (root.querySelector(".workspace-root").dataset.editor === "daw") return; const f = event.dataTransfer.files[0]; if (f) invoke(() => c.openFile(f)) })
     observer = new ResizeObserver(() => { lastWidth = undefined; draw() }); observer.observe(elements["audio-waveform"])
     render(c.state)
   }

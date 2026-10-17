@@ -240,6 +240,7 @@ try {
   await page.setViewport({ width: 1480, height: 920, deviceScaleFactor: 1 });
   await page.goto('http://127.0.0.1:4173/', { waitUntil: 'networkidle0' });
   await page.waitForSelector('.workspace-root');
+  await page.click('[data-destination="workbench"]');
   assert.equal(await page.$eval('.mix-picker', e => e.type), 'file');
   assert.deepEqual(await page.evaluate(() => window.__audioAudit), { contexts: 0, offline: 0, closes: 0, sampleRates: [], decoded: [] });
   assert.equal(await page.$eval('[data-action="fix"]', e => e.disabled), true);
@@ -438,6 +439,8 @@ try {
     assert.equal(report.finalAudioAudit.contexts, report.finalAudioAudit.closes);
     phase = 'self-contained-file-origin';
     await page.goto(localBuildUrl, { waitUntil: 'networkidle0' });
+    await page.waitForSelector('[data-destination="workbench"]');
+    await page.click('[data-destination="workbench"]');
     assert.equal(await page.$eval('.source-name', e => e.textContent), 'No audio loaded');
     await (await page.$('.mix-picker')).uploadFile(path.join(runtime, 'signal-study.wav'));
     await page.waitForFunction(() => document.querySelector('.source-name').textContent === 'signal-study.wav'); await waitReady();
