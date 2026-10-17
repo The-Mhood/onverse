@@ -3,4 +3,6 @@ import tailwindcss from "@tailwindcss/vite"
 
 export default defineConfig({
   plugins: [tailwindcss()],
+  server: { host: "0.0.0.0", allowedHosts: [".e2b.app"] },
+  preview: { host: "0.0.0.0", allowedHosts: [".e2b.app"] },
 })

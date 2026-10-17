@@ -4,11 +4,11 @@ const clock = frames => `${Math.floor(frames / SAMPLE_RATE / 60)}:${(frames / SA
 
 // Functional host adapter. Project/audio authority stays in dawController.
 // Selection, zoom and tentative pointer movement are view-only state.
-export function mountArrangement(workspace, { onDestination } = {}) {
+export function mountArrangement(workspace, { onDestination, navigation = true } = {}) {
   const abort = new AbortController(), on = (el, type, callback) => el.addEventListener(type, callback, { signal: abort.signal })
   const nav = document.createElement("nav"); nav.className = "production-modes"; nav.setAttribute("aria-label", "Music production destinations")
   nav.innerHTML = `<button type="button" data-destination="daw">Arrangement <small>Multitrack</small></button><button type="button" data-destination="workbench">Audio shaping <small>Single-file tools</small></button>`
-  workspace.querySelector(".studio-header").after(nav)
+  if (navigation) workspace.querySelector(".studio-header").after(nav)
   const section = document.createElement("section"); section.className = "daw-arrangement"; section.setAttribute("aria-label", "Multitrack arrangement")
   section.innerHTML = `
     <header class="daw-project-header"><div><span class="eyebrow">MUSICONVERSE / MULTITRACK</span><label class="daw-project-label">Project <input class="daw-project-name" maxlength="160" value="Untitled session" aria-label="Project name"></label></div><div class="daw-project-actions"><button data-daw="open">Open project</button><button data-daw="save">Download project</button><button data-daw="export">Export mix · WAV</button><button data-daw="shape">Mix → audio shaping</button></div></header>
@@ -148,7 +148,8 @@ export function mountArrangement(workspace, { onDestination } = {}) {
     on(section, "dragover", event => { event.preventDefault(); event.stopPropagation() })
     on(section, "drop", event => { event.preventDefault(); event.stopPropagation(); void c.importFiles(event.dataTransfer.files) })
     on(window, "keydown", event => {
-      if (destination !== "daw" || event.defaultPrevented || event.target.closest("input,select,textarea,button,[contenteditable=true],summary,a") || document.querySelector("dialog[open]")) return
+      if (event.target.closest?.(".sylune-panel")) return
+      if (workspace.dataset.editor !== "daw" || event.defaultPrevented || event.target.closest("input,select,textarea,button,[contenteditable=true],summary,a") || document.querySelector("dialog[open]")) return
       if (event.code === "Space") { event.preventDefault(); void (state.playing ? c.pause() : c.play()) }
       if ((event.ctrlKey || event.metaKey) && ["KeyZ", "KeyY", "KeyS"].includes(event.code)) {
         event.preventDefault(); if (event.code === "KeyS") void c.saveProject(); else if (event.code === "KeyY" || event.shiftKey) c.redo(); else c.undo()

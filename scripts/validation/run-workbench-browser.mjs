@@ -406,7 +406,7 @@ try {
   report.checks.push('Invalid audio reports a genuine decoder failure and preserves the current buffer. Its console error is expected and recorded.');
 
   await capture('decode-error-preserved', 1120, 700); await capture('decode-error-preserved', 1480, 920);
-  phase = 'keyboard'; await page.click('h1'); await page.keyboard.press('Space');
+  phase = 'keyboard'; await page.click('.intro h1'); await page.keyboard.press('Space');
   await page.waitForFunction(() => document.querySelector('[data-action="play"]').textContent === 'Pause'); await page.keyboard.press('Space');
   report.checks.push('Keyboard Space toggles real playback outside form controls.');
   phase = 'expected-url-validation'; await page.select('.reference-source', 'url'); await edit('.reference-url', 'https://example.invalid/not-a-track');

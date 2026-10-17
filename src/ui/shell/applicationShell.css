@@ -1,0 +1,28 @@
+/* Shared-shell host styles only; no edits to P's reserved presentation package. */
+.application-navigation{position:relative;z-index:5;flex-wrap:wrap;gap:0}
+.application-navigation .sylune-toggle{margin-left:auto}
+.workspace-root[data-editor=opening]>.environment-banner,.workspace-root[data-editor=opening]>.workspace-heading,.workspace-root[data-editor=opening]>.studio-grid,.workspace-root[data-editor=opening]>.daw-arrangement,.workspace-root[data-editor=opening]>.operation-progress,.workspace-root[data-editor=opening]>.operation-status{display:none!important}
+.cosmic-opening{position:relative;z-index:2;min-height:calc(100svh - 180px);padding:clamp(60px,12vh,130px) 3vw 28px;max-width:1100px}
+.cosmic-opening[hidden],.sylune-panel[hidden]{display:none!important}
+.cosmic-opening h1{font-size:clamp(38px,5vw,70px);line-height:1.08;font-weight:450;letter-spacing:-.04em;margin:18px 0 24px;color:var(--mvo-text-primary);text-wrap:balance}
+.opening-description{color:var(--mvo-text-secondary);font-size:15px;line-height:1.7}
+.cosmic-destinations{display:flex;gap:24px;margin-top:42px;max-width:820px}
+.cosmic-destinations button{position:relative;flex:1;display:flex;flex-direction:column;gap:10px;text-align:left;border:0;border-top:1px solid var(--mvo-border-default);border-radius:0;padding:22px 22px 22px 0;background:linear-gradient(90deg,var(--mvo-panel-workspace-bottom),transparent);color:var(--mvo-text-primary)}
+.cosmic-destinations button>span:first-child{font-size:9px;letter-spacing:.13em;color:var(--mvo-color-glacier)}
+.cosmic-destinations strong{font-size:23px;font-weight:450}.cosmic-destinations small{font-size:12px;color:var(--mvo-text-secondary);line-height:1.6}.cosmic-destinations button>span:last-child{position:absolute;right:16px;top:22px;color:var(--mvo-color-ion-teal);font-size:20px}
+.opening-phase{font-size:11px;line-height:1.6;color:var(--mvo-color-glacier);margin:28px 0 12px;min-height:18px}.opening-note{font-size:10px;line-height:1.7;color:var(--mvo-text-secondary);max-width:600px}
+/* One brief compositor-only baseline launch cue. This is not P's missing renderer
+   and is not represented as final cinematic fidelity or navigable3D. */
+.workspace-root[data-journey-phase=launch]>.environment{animation:mvo-host-launch 1300ms cubic-bezier(.14,.48,.3,1) both}
+.workspace-root[data-journey-phase=arrival]>.environment{animation:mvo-host-arrive 450ms ease-out both}
+@keyframes mvo-host-launch{from{transform:scale(.72) translate3d(0,2%,0);opacity:.45}to{transform:scale(1.05);opacity:1}}
+@keyframes mvo-host-arrive{from{transform:scale(1.05)}to{transform:scale(1.025)}}
+.workspace-root>.sylune-panel{position:fixed;z-index:12;right:20px;bottom:22px;width:min(340px,calc(100vw - 24px));max-height:calc(100svh - 150px);overflow:auto;padding:20px;background:var(--mvo-surface-solid);color:var(--mvo-text-primary);border:1px solid var(--mvo-border-default);border-top:2px solid var(--mvo-color-ion-teal);box-shadow:0 12px 40px var(--mvo-shadow-ink-soft);border-radius:8px}
+.sylune-panel header{display:flex;justify-content:space-between;gap:16px;align-items:center}.sylune-panel h2{font-size:22px;font-weight:450;margin:5px 0}.sylune-panel h3{font-size:11px;margin:18px 0 5px}.sylune-panel p{font-size:12px;line-height:1.7;color:var(--mvo-text-secondary)}.sylune-panel .sylune-connection{color:var(--mvo-color-amber);font-weight:600;margin:12px 0}.sylune-panel .sylune-disclosure{font-size:10px;margin-top:18px}
+@media(min-width:1120px){.workspace-root[data-sylune-open=true]{padding-right:370px}}
+@media(max-width:760px){.application-navigation button{padding:8px!important;min-height:40px;font-size:11px!important}.application-navigation small{display:none}.application-navigation .sylune-toggle{margin-left:auto}.cosmic-opening{padding:54px 4px 20px;min-height:calc(100svh - 200px)}.cosmic-destinations{flex-direction:column;gap:18px;margin-top:30px}.cosmic-destinations button{min-height:135px}.sylune-panel{right:12px;bottom:12px;max-height:55svh}.workspace-root>.studio-header .brand{font-size:15px}.workspace-root>.studio-header .local-badge{font-size:9px}.workspace-root>.environment-banner .intro{max-width:100%}}
+@media(prefers-reduced-motion:reduce){.workspace-root[data-journey-phase]>.environment{animation:none!important;transform:none!important}}
+
+@media(min-width:1120px){.workspace-root[data-sylune-open=true]>.studio-grid[data-surface=body]{grid-template-columns:180px minmax(0,1fr)}.workspace-root[data-sylune-open=true] .studio-grid>.inspector{grid-column:1/-1}.workspace-root[data-sylune-open=true] .daw-layout{grid-template-columns:minmax(0,1fr)}.workspace-root[data-sylune-open=true] .daw-inspector{border-left:0;border-top:1px solid var(--mvo-border-default)}}
+
+.workspace-root>.skip-link{position:absolute;z-index:20}

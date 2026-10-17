@@ -9,7 +9,7 @@ const number = (n, digits = 1) => Number.isFinite(n) ? n.toFixed(digits) : "—"
  * filenames, reference metadata and engine reports are always textContent.
  * Presentation can be replaced without giving it an audio/state authority.
  */
-export function mountWorkspace(root, { recorders = [] } = {}) {
+export function mountWorkspace(root, { recorders = [], manageEnvironment = true } = {}) {
   if (!root) throw new Error("Missing application mount: #app")
   const template = document.createElement("template")
   template.innerHTML = `
@@ -75,7 +75,7 @@ export function mountWorkspace(root, { recorders = [] } = {}) {
     </dialog>
   </div>`
   root.replaceChildren(template.content.cloneNode(true))
-  const environmentMotion = mountEnvironmentMotion(root.querySelector(".workspace-root"))
+  const environmentMotion = manageEnvironment ? mountEnvironmentMotion(root.querySelector(".workspace-root")) : { dispose() {} }
   const must = selector => {
     const node = root.querySelector(selector)
     if (!node) throw new Error(`Workspace DOM contract missing: ${selector}`)
@@ -268,13 +268,14 @@ export function mountWorkspace(root, { recorders = [] } = {}) {
 
     on(elements["adjustment-inputs"], "input", event => { const input = event.target; if (!input.dataset.tweak) return; input.previousElementSibling.textContent = input.value; c.setTweak(input.dataset.tweak, Number(input.value)) })
     on(window, "keydown", event => {
-      if (root.querySelector(".workspace-root").dataset.editor === "daw") return
+      if (event.target.closest?.(".sylune-panel")) return
+      if (root.querySelector(".workspace-root").dataset.editor && root.querySelector(".workspace-root").dataset.editor !== "workbench") return
       if (sheet.open || event.target.closest("input,select,textarea,button,[contenteditable=true],summary,a")) return
       if (event.code === "Space") { event.preventDefault(); invoke(c.togglePlay) }
       if (event.code === "ArrowRight" || event.code === "ArrowLeft") { event.preventDefault(); c.seekBy((event.code === "ArrowRight" ? 1 : -1) * (event.shiftKey ? 10 : 5)) }
     })
     on(root, "dragover", event => event.preventDefault())
-    on(root, "drop", event => { event.preventDefault(); if (root.querySelector(".workspace-root").dataset.editor === "daw") return; const f = event.dataTransfer.files[0]; if (f) invoke(() => c.openFile(f)) })
+    on(root, "drop", event => { event.preventDefault(); if (root.querySelector(".workspace-root").dataset.editor && root.querySelector(".workspace-root").dataset.editor !== "workbench") return; const f = event.dataTransfer.files[0]; if (f) invoke(() => c.openFile(f)) })
     observer = new ResizeObserver(() => { lastWidth = undefined; draw() }); observer.observe(elements["audio-waveform"])
     render(c.state)
   }

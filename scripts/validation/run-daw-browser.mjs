@@ -9,7 +9,7 @@ import { createHash } from 'node:crypto'
 import { auditTools } from './run-offline-render-probe.mjs'
 const tools = process.argv[2], audit = await auditTools(tools)
 assert.equal(audit.packages, 43)
-const output = path.resolve('docs/engineering/evidence/daw-20261017')
+const output = path.resolve('docs/engineering/evidence/shell-integration-20261017/daw')
 await fs.mkdir(output, { recursive: true })
 const runtime = await fs.mkdtemp('/tmp/onverse-browser-runtime-'); await fs.chmod(runtime, 0o700)
 const originalEnv = { ...process.env }, sha = bytes => createHash('sha256').update(bytes).digest('hex')
@@ -77,11 +77,11 @@ try {
   async function ready() { await page.waitForFunction(() => !document.querySelector('[data-daw="demo"]').disabled) }
   async function set(selector, value) { await page.$eval(selector, (el, v) => { el.value = v; el.dispatchEvent(new Event('change', { bubbles: true })) }, String(value)) }
   await page.setViewport({ width: 1480, height: 920, deviceScaleFactor: 1 }); await page.goto('http://127.0.0.1:4173/', { waitUntil: 'networkidle0' })
-  await page.waitForSelector('.daw-arrangement'); assert.equal(await page.$eval('.workspace-root', el => el.dataset.editor), 'daw')
+  await page.waitForSelector('.daw-arrangement'); await page.click('[data-destination="daw"]'); assert.equal(await page.$eval('.workspace-root', el => el.dataset.editor), 'daw')
   assert.equal(await page.evaluate(() => window.__dawAudioAudit.contexts), 0)
   await capture('empty', 1480, 920)
   await page.click('[data-daw="demo"]'); await ready(); assert.equal(await page.$$eval('.daw-track-row', rows => rows.length), 3); assert.equal(await page.$$eval('.daw-clip', rows => rows.length), 3)
-  report.checks.push('Production entry defaults to actual DAW adapter; zero startup AudioContexts; generated3-track PCM session with real waveform regions.')
+  report.checks.push('Production shared-shell navigation opens actual DAW adapter; zero startup AudioContexts; generated3-track PCM session with real waveform regions.')
   await capture('loaded', 1480, 920); await capture('loaded', 1120, 700)
   await page.$eval('.daw-zoom', el => { el.value = '100'; el.dispatchEvent(new Event('input', { bubbles: true })) })
   assert.match(await page.$eval('.daw-lane', el => getComputedStyle(el).backgroundSize), /^100px/)
@@ -145,7 +145,7 @@ try {
   report.checks.push('Real mix-to-workbench bridge imports native rendered audio through preserved analysis pipeline; MasterFix becomes available; reduced-motion navigation and live resize preserve project.')
   await page.evaluate(() => window.dispatchEvent(new PageTransitionEvent('pagehide')))
   const lifecycle = await page.evaluate(() => window.__dawAudioAudit); assert.equal(lifecycle.contexts, lifecycle.closes); report.lifecycle = lifecycle
-  await page.goto(fileUrl, { waitUntil: 'networkidle0' }); await page.waitForSelector('.daw-arrangement'); await (await page.$('.daw-project-file')).uploadFile(saved.filename); await ready()
+  await page.goto(fileUrl, { waitUntil: 'networkidle0' }); await page.waitForSelector('.daw-arrangement'); await page.click('[data-destination="daw"]'); await (await page.$('.daw-project-file')).uploadFile(saved.filename); await ready()
   const fileSaved = await download('save'); assert.equal(fileSaved.result.sha256, saved.result.sha256)
   await page.evaluate(() => window.dispatchEvent(new PageTransitionEvent('pagehide')))
   report.checks.push('Self-contained production file:// entry opens and exports byte-identical project; all realtime decoder/playback AudioContexts close on pagehide.')
