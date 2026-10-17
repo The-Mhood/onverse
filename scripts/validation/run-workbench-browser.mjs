@@ -44,11 +44,11 @@ const motionBudget = { sampleMs: 5000, maxP95FrameMs: 50, minAverageFps: 30 };
 async function motionSnapshot() {
   return page.evaluate(() => {
     const env = document.querySelector('.environment'), root = document.querySelector('.workspace-root');
-    return [[env, null], [env, '::before'], [env, '::after'], [root, '::before']].map(([el, pseudo]) => {
+    return [[env, null], [env, '::before'], [env, '::after'], [root, '::before'], ...[...env.querySelectorAll('.scene-plane')].map(el => [el, null])].map(([el, pseudo]) => {
       const style = getComputedStyle(el, pseudo);
       return { layer: pseudo ? `${el.className}${pseudo}` : el.className, name: style.animationName,
         duration: style.animationDuration, state: style.animationPlayState, transform: style.transform,
-        opacity: style.opacity, filter: style.filter, backdropFilter: style.backdropFilter };
+        opacity: style.opacity, translate: style.translate, filter: style.filter, backdropFilter: style.backdropFilter };
     });
   });
 }
@@ -58,8 +58,8 @@ async function verifyMotionAndPanels() {
     await page.setViewport({ width, height, deviceScaleFactor: 1 });
     await page.evaluate(() => scrollTo(0, 0));
     const before = await motionSnapshot(), metricsBefore = await page.metrics();
-    assert.equal(before.length, 4); assert.ok(before.every(l => l.name !== 'none' && l.state === 'running'));
-    assert.equal(new Set(before.map(l => l.name)).size, 4);
+    assert.equal(before.length, 8); assert.ok(before.every(l => l.name !== 'none' && l.state === 'running'));
+    assert.equal(new Set(before.map(l => l.name)).size, 8);
     assert.ok(before.every(l => l.filter === 'none' && l.backdropFilter === 'none'));
     const timing = await page.evaluate(sampleMs => new Promise(resolve => {
       const frames = []; let start, prior;
@@ -74,11 +74,26 @@ async function verifyMotionAndPanels() {
       requestAnimationFrame(tick);
     }), motionBudget.sampleMs);
     const after = await motionSnapshot(), metricsAfter = await page.metrics();
-    assert.ok(after.every((layer, i) => layer.transform !== before[i].transform), 'All four actual motion layers must advance');
+    assert.ok(after.every((layer, i) => layer.transform !== before[i].transform), 'All eight actual motion layers must advance');
     assert.ok(timing.p95Ms <= motionBudget.maxP95FrameMs, JSON.stringify(timing));
     assert.ok(timing.averageFps >= motionBudget.minAverageFps, JSON.stringify(timing));
     report.motion.viewports.push({ width, height, before, after, timing,
       performanceDelta: Object.fromEntries(['LayoutCount','RecalcStyleCount','LayoutDuration','RecalcStyleDuration','ScriptDuration','TaskDuration'].map(k => [k, metricsAfter[k]-metricsBefore[k]])) });
+
+    // Actual pointer-driven differential depth, with stationary precision UI.
+    const controlBounds = () => page.$eval('.transport', e => { const r = e.getBoundingClientRect(); return { x:r.x, y:r.y, width:r.width, height:r.height } });
+    const controlsBefore = await controlBounds();
+    report.motion.viewports.at(-1).inputEnvironment = await page.evaluate(() => ({ fine: matchMedia('(any-pointer: fine)').matches, primaryFine: matchMedia('(pointer: fine)').matches, reduced: matchMedia('(prefers-reduced-motion: reduce)').matches, hidden: document.hidden, paused: document.querySelector('.workspace-root').dataset.environmentPaused, target: document.elementFromPoint(innerWidth*.8,130)?.outerHTML.slice(0,240) }));
+    await page.mouse.move(width * .8, 130);
+    await page.waitForFunction(() => Math.abs(parseFloat(document.querySelector('.workspace-root').style.getPropertyValue('--mvo-scene-x'))) > 1);
+    const parallax = await page.evaluate(() => {
+      const read = name => parseFloat(getComputedStyle(document.querySelector(name)).translate);
+      return { far: read('.scene-stars'), celestial: read('.scene-celestial'), near: read('.scene-foreground'), position: getComputedStyle(document.querySelector('.environment')).position };
+    });
+    assert.equal(parallax.position, 'fixed');
+    assert.ok(Math.abs(parallax.near) > Math.abs(parallax.celestial) && Math.abs(parallax.celestial) > Math.abs(parallax.far), JSON.stringify(parallax));
+    assert.deepEqual(await controlBounds(), controlsBefore, 'Parallax must never move the transport');
+    report.motion.viewports.at(-1).parallax = parallax;
 
     // Observe in the SAME browser task as the real wired button activation.
     // A remote CDP round trip may outlast a 420ms transition, so polling for an
@@ -97,6 +112,10 @@ async function verifyMotionAndPanels() {
     const audioBefore = await page.$eval('[data-action="play"]', el => el.textContent);
     const entering = await traceTransition('capabilities');
     assert.equal(entering.open, true); assert.equal(entering.filter, 'none');
+    const modalTime = await page.$eval('.scene-celestial', e => e.getAnimations()[0].currentTime);
+    await page.evaluate(() => new Promise(resolve => { let n=0; const tick=()=>++n===5?resolve():requestAnimationFrame(tick); requestAnimationFrame(tick) }));
+    assert.ok(await page.$eval('.scene-celestial', e => e.getAnimations()[0].currentTime) > modalTime, 'Celestial drift continues behind modal content');
+
     assert.ok(entering.samples.some(s => s.opacity > .02 && s.opacity < .98 && s.modal), JSON.stringify(entering));
     assert.equal(entering.samples.at(-1).opacity, 1);
     await capture('panel-open', width, height);
@@ -114,7 +133,19 @@ async function verifyMotionAndPanels() {
     await click('capabilities'); await page.keyboard.press('Escape');
     assert.equal(await page.$eval('dialog', el => el.open), false);
   }
-  report.checks.push('Four independent cinematic layers advance naturally at BOTH target sizes; five-second RAF/performance samples satisfy predeclared headless budget. Real limits dialog enters/exits with intermediate opacity, restores focus, closes by Escape and does not trigger playback. No filter/backdrop blur.');
+  // Native CDP touch input must not drive decorative pointer depth. This does
+  // not replace media APIs or alter the production adapter for the proof.
+  await page.waitForFunction(() => document.querySelector('.workspace-root').style.getPropertyValue('--mvo-scene-x') === '0.000px');
+  const touchCdp = await page.createCDPSession();
+  await touchCdp.send('Emulation.setTouchEmulationEnabled', { enabled: true, maxTouchPoints: 1 });
+  await page.touchscreen.touchStart(700, 120);
+  await page.touchscreen.touchMove(740, 120);
+  await page.touchscreen.touchEnd();
+  assert.equal(await page.$eval('.workspace-root', e => e.style.getPropertyValue('--mvo-scene-x')), '0.000px');
+  await touchCdp.send('Emulation.setTouchEmulationEnabled', { enabled: false });
+  await touchCdp.detach();
+  report.motion.touchIgnoresParallax = true;
+  report.checks.push('Eight independent scene/atmosphere layers advance naturally at BOTH target sizes; five-second RAF/performance samples satisfy predeclared headless budget. Real limits dialog enters/exits with intermediate opacity, restores focus, closes by Escape and does not trigger playback. No filter/backdrop blur.');
 }
 async function waitReady() { await page.waitForFunction(() => !document.querySelector('[data-action="analyze"]').disabled, { timeout: 60000 }); }
 async function click(action) { await page.click(`[data-action="${action}"]`); }
@@ -158,6 +189,7 @@ try {
   report.renderer = cpuRenderer ? 'Chromium CPU raster (--disable-gpu), no physical GPU qualification' : 'Default Sparticuz SwiftShader emulated GPU';
   browser = await pm.default.launch({ executablePath, headless: true, pipe: true, userDataDir: path.join(runtime, 'profile'), env: { ...process.env }, args: [...rendererArgs,
     '--disable-background-networking', '--disable-component-update', '--disable-domain-reliability', '--disable-sync', '--no-first-run', '--no-default-browser-check', '--host-resolver-rules=MAP * ~NOTFOUND, EXCLUDE 127.0.0.1', '--disk-cache-dir=' + path.join(runtime, 'cache')] });
+  report.pointerSetup = 'Actual CDP mouse PointerEvents; no fine-pointer media override or physical input-device qualification';
   report.browser = await browser.version(); page = await browser.newPage();
   page.on('pageerror', error => report.errors.push({ phase, error: error.message }));
   page.on('console', message => report.console.push({ phase, type: message.type(), text: message.text() }));
@@ -229,23 +261,38 @@ try {
   // can arrive after natural end and restart it, particularly under CPU load.
   const playback = await page.evaluate(() => new Promise((resolve, reject) => {
     const deadline = performance.now() + 10000;
+    const celestial = document.querySelector('.scene-celestial');
+    const sceneBefore = celestial.getAnimations()[0].currentTime;
     function observe() {
       const play = document.querySelector('[data-action="play"]'), position = Number(document.querySelector('.position').value);
       if (position > .05 && play.textContent === 'Pause') {
-        play.click(); resolve({ advancedTo: position, afterPause: play.textContent }); return;
+        const sceneAfter = celestial.getAnimations()[0].currentTime;
+        const planesRunning = [...document.querySelectorAll('.scene-plane')].every(e => getComputedStyle(e).animationPlayState === 'running');
+        play.click(); resolve({ advancedTo: position, afterPause: play.textContent, sceneBefore, sceneAfter, planesRunning }); return;
       }
       if (performance.now() > deadline) { reject(Error('Real playback did not advance before pause')); return; }
       requestAnimationFrame(observe);
     }
     requestAnimationFrame(observe);
   }));
-  assert.ok(playback.advancedTo > .05); assert.equal(playback.afterPause, 'Play'); report.playback = playback;
+  assert.ok(playback.advancedTo > .05); assert.equal(playback.afterPause, 'Play');
+  assert.ok(playback.sceneAfter > playback.sceneBefore && playback.planesRunning, 'Real playback must not suspend celestial motion'); report.playback = playback;
   await edit('.position', .5); await click('rate'); assert.equal(await page.$eval('[data-action="rate"]', e => e.textContent), '1.5×');
   await click('rate'); await click('rate'); await click('rate');
-  report.checks.push('Real AudioContext source advances, pauses, seeks and cycles playback rate. No listening claim.');
+  report.checks.push('Real AudioContext source advances, pauses, seeks and cycles playback rate while celestial time advances and depth planes remain running. No listening claim.');
 
   phase = 'region-export'; await click('crop'); await edit('.region-in', .25); await edit('.region-out', 1.25);
   const region = await download('export-region'); assert.equal(region.frames, decodedSampleRate); assert.equal(region.channels, 2);
+  await page.$eval('[data-region-handle="in"]', e => e.focus()); await page.keyboard.press('ArrowRight');
+  assert.ok(Math.abs(Number(await page.$eval('.region-in', e => e.value)) - .3) < 1e-6);
+  const ruler = await page.$eval('.audio-waveform', e => { const r=e.getBoundingClientRect(); return { x:r.x, y:r.y, width:r.width, height:r.height } });
+  const handle = await page.$eval('[data-region-handle="out"]', e => { const r=e.getBoundingClientRect(); return { x:r.x+r.width/2,y:r.y+r.height/2 } });
+  await page.mouse.move(handle.x,handle.y); await page.mouse.down();
+  await page.mouse.move(ruler.x+ruler.width*.7,ruler.y+12,{steps:6}); await page.mouse.up();
+  const outTime=Number(await page.$eval('.region-out', e=>e.value)); assert.ok(Math.abs(outTime-1.4)<.025, String(outTime));
+  assert.equal(await page.$eval('[data-region-handle="out"]',e=>Number(e.getAttribute('aria-valuenow')).toFixed(2)),outTime.toFixed(2));
+  await capture('region-editing',1120,700); await capture('region-editing',1480,920);
+  report.checks.push('Real region handles support keyboard increments and captured pointer drag; exact numeric inputs and ARIA values stay synchronized, without modifying source PCM.');
   await click('crop'); report.checks.push('IN/OUT region exports genuine 1-second stereo WAV with expected sample count.');
 
   phase = 'master-fix'; await click('fix'); await waitReady();
@@ -304,7 +351,12 @@ try {
     assert.deepEqual(reducedDialog, { animations: 0, opacity: '1', transform: 'none' });
     await capture('reduced-motion', width, height); await click('close-capabilities');
   }
-  report.checks.push('BOTH target viewports: four environmental animations/transforms really stop under reduced motion, and native panel transitions are disabled. Captures have no horizontal overflow, clipped controls or broken images.');
+  report.checks.push('BOTH target viewports: all eight environmental animations/transforms really stop under reduced motion, and native panel transitions are disabled. Captures have no horizontal overflow, clipped controls or broken images.');
+
+  await page.emulateMediaFeatures([{ name: 'prefers-reduced-motion', value: 'no-preference' }]);
+  await page.waitForFunction(() => document.querySelector('.workspace-root').dataset.environmentPaused === 'false');
+  assert.ok((await motionSnapshot()).every(l => l.name !== 'none' && l.state === 'running'));
+  report.checks.push('Turning reduced motion back off resumes all depth layers without remounting or resetting audio.');
 
   phase = 'crop-fixed'; await click('fixed'); await click('crop'); await edit('.region-in', .25); await edit('.region-out', 1.25); await click('apply-crop');
   await page.waitForFunction(() => document.querySelector('.operation-status').textContent.includes('B cropped and re-measured'));
@@ -339,6 +391,13 @@ try {
   await page.evaluate(() => window.dispatchEvent(new PageTransitionEvent('pagehide')));
   await page.waitForFunction(() => window.__audioAudit.closes === window.__audioAudit.contexts);
   report.closedAudioAudit = await page.evaluate(() => window.__audioAudit);
+  assert.equal(await page.$eval('.workspace-root', e => e.dataset.environmentPaused), 'true');
+  assert.ok((await motionSnapshot()).every(l => l.state === 'paused'), 'Disposed environment must stop animation work');
+  const disposedOffset = await page.$eval('.workspace-root',e=>e.style.getPropertyValue('--mvo-scene-x'));
+  await page.mouse.move(40,100);
+  assert.equal(await page.$eval('.workspace-root',e=>e.style.getPropertyValue('--mvo-scene-x')),disposedOffset);
+  report.checks.push('Pagehide disposes the environment listener/RAF adapter and pauses all eight CSS layers; subsequent pointer movement cannot revive it.');
+
   report.checks.push('Registered pagehide cleanup closes the real playback context; event/listener disposal executed. Not a native Electron quit test.');
   } else {
     phase = 'motion-and-panels'; await verifyMotionAndPanels();
@@ -381,7 +440,7 @@ try {
   if (closed) { await fs.rm(runtime, { recursive: true, force: true }); report.privateRuntimeRemoved = true; }
   else report.privateRuntimeRemoved = false;
   const code = {};
-  for (const relative of ['index.html', 'src/ui/presentation/rebuild/index.css', 'src/ui/presentation/rebuild/environment.css', 'src/ui/presentation/rebuild/workbench.css', 'src/ui/presentation/rebuild/tokens.css', 'src/ui/presentation/rebuild/assets/first-person-cosmic-horizon.jpg', 'src/application/workbench/demo.js', 'src/main.js', 'src/audio/analyzer.js', 'src/audio/processor.js', 'src/audio/dsp.js', 'src/audio/genre.js', 'src/audio/vendor/lamejs-notices.js', 'tests/fixtures/audioStabilizationBridge.js', 'scripts/validation/audio-stabilization-probe.mjs', 'src/ui/workbench/workspace.js', 'src/ui/workbench/workspace.css', 'src/application/workbench/workbenchController.js', 'src/application/analysis/analysisController.js', 'dist/index.html', 'scripts/validation/run-workbench-browser.mjs']) code[relative] = sha(await fs.readFile(new URL('../../' + relative, import.meta.url)));
+  for (const relative of ['index.html', 'src/ui/presentation/rebuild/index.css', 'src/ui/presentation/rebuild/environment.css', 'src/ui/presentation/rebuild/environmentMotion.js', 'src/ui/presentation/rebuild/assets/celestial-plane.webp', 'src/ui/presentation/rebuild/assets/near-rocks-plane.webp', 'scripts/validation/derive-environment-planes.py', 'src/ui/presentation/rebuild/workbench.css', 'src/ui/presentation/rebuild/tokens.css', 'src/ui/presentation/rebuild/assets/first-person-cosmic-horizon.jpg', 'src/application/workbench/demo.js', 'src/main.js', 'src/audio/analyzer.js', 'src/audio/processor.js', 'src/audio/dsp.js', 'src/audio/genre.js', 'src/audio/vendor/lamejs-notices.js', 'tests/fixtures/audioStabilizationBridge.js', 'scripts/validation/audio-stabilization-probe.mjs', 'src/ui/workbench/workspace.js', 'src/ui/workbench/workspace.css', 'src/application/workbench/workbenchController.js', 'src/application/analysis/analysisController.js', 'dist/index.html', 'scripts/validation/run-workbench-browser.mjs']) code[relative] = sha(await fs.readFile(new URL('../../' + relative, import.meta.url)));
   report.codeSha256 = code;
   await fs.writeFile(path.join(output, 'report.json'), JSON.stringify(report, null, 2) + '\n');
   console.log(JSON.stringify(report, null, 2));

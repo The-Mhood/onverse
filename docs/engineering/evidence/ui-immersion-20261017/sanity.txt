@@ -1,0 +1,8 @@
+OK taxonomy: 13 platform categories, 35 sub-genres, all assigned
+OK platform genre aliases
+OK URL parsing
+OK detection → category "Hip-Hop" · sub "Phonk" (45%) — Spotify Hip-Hop / Apple Hip-Hop/Rap / YTM Hip hop
+OK score 32 | issues: 6
+OK custom-target score 100 | issues: 1 | plan target lufs: -16.3
+
+ALL SANITY CHECKS PASSED

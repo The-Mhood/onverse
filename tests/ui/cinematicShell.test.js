@@ -80,3 +80,21 @@ test('original 01–13 references have a reproducible project source and hash in
     assert.ok(file.bytes > 1000000);
   }
 });
+
+test('independent celestial and near geometry is present, not a single moving wallpaper', () => {
+  for (const name of ['stars', 'celestial', 'horizon', 'foreground']) assert.ok(view.includes(`scene-plane scene-${name}`));
+  assert.match(environment, /position: fixed/);
+  for (const name of ['celestial-plane', 'near-rocks-plane']) assert.ok(environment.includes(`${name}.webp?inline`));
+  assert.doesNotMatch(environment, /url\([^\n]*first-person-cosmic-horizon/);
+  assert.match(view, /environmentMotion\.dispose\(\)/);
+});
+
+test('region handles are wired to real crop operations and expose precise accessible state', () => {
+  assert.match(view, /data-region-handle="in" role="slider" aria-label="Region start"/);
+  assert.match(view, /data-region-handle="out" role="slider" aria-label="Region end"/);
+  assert.match(view, /setPointerCapture\(event\.pointerId\)/);
+  assert.match(view, /releasePointerCapture/);
+  assert.match(view, /c\.setCrop\(which, value\)/);
+  assert.match(view, /aria-valuenow/);
+  assert.match(view, /event\.stopPropagation\(\)/);
+});

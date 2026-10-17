@@ -15,8 +15,8 @@
 /* Workspace-first density: environmental framing must not consume the editor. */
 @media(min-width:951px){.studio-header{height:60px}.environment-banner{height:112px;padding-top:15px;padding-bottom:15px}.intro{padding-top:0}.intro h1{font-size:27px;margin:5px 0 6px}.workspace-heading{height:58px}.environment-coordinate{bottom:15px}.surface{padding:16px}.operation-status{padding-top:11px;padding-bottom:11px;min-height:38px}}
 @media(min-width:1400px){.waveform-well{height:174px}.studio-footer{padding-bottom:16px}.section-heading{margin-bottom:16px}}
-/* Lead-owned semantic adapter for P's a965e189 presentation entry. The P layer
-   stays byte-identical; this file owns functional density, not a parallel theme. */
+/* Semantic host adapter for the shared presentation system. Functional density
+   and real editor integration live here, without a parallel theme/state store. */
 :root{background:var(--mvo-space-0);color:var(--mvo-text-primary);--surface:var(--mvo-surface-1);--edge:var(--mvo-border-default);--muted:var(--mvo-text-secondary);--accent:var(--mvo-accent-functional);--warm:var(--mvo-warning)}
 .workspace-root{display:block;background:transparent;color:var(--mvo-text-primary);font-family:var(--mvo-font-ui);line-height:1.4}
 .workspace-root>.studio-grid[data-surface=body]{grid-template-columns:206px minmax(0,1fr) 280px;gap:12px}
@@ -41,8 +41,8 @@
 @media(max-width:950px){.workspace-root>.studio-grid[data-surface=body]{grid-template-columns:180px minmax(0,1fr)}}
 @media(max-width:620px){.workspace-root>.studio-grid[data-surface=body]{display:flex}}
 
-/* Live host integration: P's distant image and three atmosphere layers remain
-   independent. Only transform/opacity evolve, never filter/blur or layout. */
+/* The environment group drifts around its independently moving geometry and
+   atmosphere. Only transform/opacity evolve, never filter/blur or layout. */
 .workspace-root > .environment {
   animation: mvo-deep-space-drift var(--mvo-motion-environment-far) ease-in-out infinite alternate;
   transform-origin: 50% 58%;
@@ -168,3 +168,39 @@
   .workspace-root .surface,
   .workspace-root > .capability-sheet { border: 1px solid CanvasText; }
 }
+
+/* One quiet work plane within the scene, not independent luminous cards.
+   Feather materials only: no opacity/mask/filter is applied to functional data. */
+.workspace-root .surface::before { inset: -9px; }
+.workspace-root .surface::after {
+  background: linear-gradient(90deg, transparent, var(--mvo-light-spill-cool), var(--mvo-light-spill-warm), transparent);
+}
+@media(min-width:951px) {
+  .workspace-root > .studio-grid[data-surface=body] { gap: 18px; }
+  .workspace-root > .environment-banner { background: linear-gradient(90deg, var(--mvo-header-wash), transparent 76%); }
+}
+@media(min-width:1400px) {
+  .workspace-root > .studio-grid[data-surface=body] { gap: 22px; }
+}
+
+/* Real region boundaries, bound to the same setCrop operation as numeric IN/OUT.
+   Labels and wide hit areas do not blur/mask the waveform or imply fake fades. */
+.workspace-root .region-highlight { overflow: visible; }
+.workspace-root .region-handle {
+  position: absolute;
+  top: 0;
+  min-width: 30px;
+  min-height: 30px;
+  padding: 3px;
+  border-radius: 0 0 5px 5px;
+  border-color: var(--mvo-accent-selected);
+  color: var(--mvo-text-primary);
+  background: var(--mvo-surface-solid);
+  font: 9px var(--mvo-font-mono);
+  cursor: ew-resize;
+  touch-action: none;
+  pointer-events: auto;
+}
+.workspace-root .region-handle-in { left: 0; }
+.workspace-root .region-handle-out { right: 0; top: auto; bottom: 0; }
+.workspace-root .region-handle:focus-visible { outline-offset: -3px; }

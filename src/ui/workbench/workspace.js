@@ -1,3 +1,4 @@
+import { mountEnvironmentMotion } from "../presentation/rebuild/environmentMotion.js"
 import { CATEGORIES, BAND_KEYS, BAND_META, categoryById } from "../../audio/genre.js"
 import { peaksFor } from "../../audio/waveformPeaks.js"
 
@@ -13,7 +14,7 @@ export function mountWorkspace(root, { recorders = [] } = {}) {
   const template = document.createElement("template")
   template.innerHTML = `
     <div class="workspace-root">
-      <div class="environment" aria-hidden="true"></div>
+      <div class="environment" aria-hidden="true"><div class="scene-plane scene-stars"></div><div class="scene-plane scene-celestial"></div><div class="scene-plane scene-horizon"></div><div class="scene-plane scene-foreground"></div></div>
       <a class="skip-link" href="#workbench">Skip to workspace</a>
       <header class="studio-header" data-surface="header"><a class="brand" href="#workbench"><span class="brand-mark" aria-hidden="true">m/v</span> MusicOnVerse</a>
         <span class="header-caption">A SPACE TO LISTEN CLOSELY</span><span class="local-badge"><i aria-hidden="true"></i> Local audio</span>
@@ -41,7 +42,7 @@ export function mountWorkspace(root, { recorders = [] } = {}) {
         <section class="editor-panel surface" data-surface="workspace" aria-label="Single audio file editor">
           <div class="section-heading"><div><h3>Waveform</h3><p class="subtle small">One source. Original preserved during Master Fix.</p></div><span class="audio-side">A / ORIGINAL</span></div>
           <div class="timeline-scale" data-role="timeline-ruler" aria-hidden="true"><span>0:00</span><span class="quarter-time">—</span><span class="half-time">—</span><span class="end-time">—</span></div>
-          <div class="waveform-well"><canvas class="audio-waveform" aria-label="Peak waveform of the selected audio copy"></canvas><div class="waveform-empty"><span class="empty-symbol" aria-hidden="true">∿</span><strong>Your audio starts here.</strong><span>Import a file or generate the real synth demo.</span></div><div class="region-highlight" data-role="selection" hidden></div><div class="playhead" hidden></div></div>
+          <div class="waveform-well"><canvas class="audio-waveform" aria-label="Peak waveform of the selected audio copy"></canvas><div class="waveform-empty"><span class="empty-symbol" aria-hidden="true">∿</span><strong>Your audio starts here.</strong><span>Import a file or generate the real synth demo.</span></div><div class="region-highlight" data-role="selection" hidden><button type="button" class="region-handle region-handle-in" data-region-handle="in" role="slider" aria-label="Region start" aria-orientation="horizontal">IN</button><button type="button" class="region-handle region-handle-out" data-region-handle="out" role="slider" aria-label="Region end" aria-orientation="horizontal">OUT</button></div><div class="playhead" hidden></div></div>
           <label class="seek-label"><span>Playhead <output class="position-label">0:00.00 / 0:00.00</output></span><input class="position" type="range" min="0" max="1" step="0.05" value="0" aria-label="Seek in audio"></label>
           <div class="transport" data-surface="transport" role="group" aria-label="Playback transport"><div class="transport-buttons"><button type="button" data-action="back" aria-label="Seek backward 10 seconds">−10s</button><button type="button" data-action="play" class="play-button">Play</button><button type="button" data-action="forward" aria-label="Seek forward 10 seconds">+10s</button><button type="button" data-action="rate" class="rate-button" aria-label="Cycle playback speed">1×</button></div><div class="ab-switch" role="group" aria-label="Compare original and fixed audio"><button type="button" data-action="original" aria-pressed="true">A <span>Original</span></button><button type="button" data-action="fixed" aria-pressed="false">B <span>Fixed</span></button></div></div>
           <div class="edit-tools"><button type="button" data-action="crop" aria-expanded="false">Select region</button><button type="button" data-action="reset" class="text-button">Clear source</button><span class="subtle small">Space: play · ← / →: seek</span></div>
@@ -55,7 +56,7 @@ export function mountWorkspace(root, { recorders = [] } = {}) {
           <div class="section-heading"><h3>Analysis</h3><span class="analysis-state">AWAITING AUDIO</span></div>
           <div class="score-line"><strong class="overall-score">—</strong><span>/ 100<br><span class="small subtle">profile comparison</span></span></div>
           <p class="target-label subtle small">Choose audio to inspect its signal.</p>
-          <dl class="measurements"><div><dt>Loudness</dt><dd class="measurement-lufs">— LUFS</dd></div><div><dt>True peak</dt><dd class="measurement-peak">— dBFS</dd></div><div><dt>Sample rate</dt><dd class="measurement-rate">— kHz</dd></div></dl>
+          <dl class="measurements"><div><dt>Loudness</dt><dd class="measurement-lufs">— LUFS</dd></div><div><dt>Peak estimate</dt><dd class="measurement-peak">— dBFS</dd></div><div><dt>Sample rate</dt><dd class="measurement-rate">— kHz</dd></div></dl>
           <button type="button" data-action="fix" class="primary fix-button">Render Master Fix</button><p class="fixed-measurement small subtle">Renders a separate copy using the existing local processor.</p>
           <details class="adjustments"><summary>Manual adjustments</summary><p class="small subtle">Offsets on the automatic plan. Original A is not overwritten.</p><div class="adjustment-inputs"></div><button type="button" data-action="reset-tweaks">Reset adjustments</button></details>
           <div class="analysis-issues" aria-label="Analysis findings"></div>
@@ -67,13 +68,14 @@ export function mountWorkspace(root, { recorders = [] } = {}) {
       <footer class="studio-footer"><span>MusicOnVerse <span aria-hidden="true">/</span> LOCAL WORKBENCH</span><button type="button" data-action="capabilities" aria-haspopup="dialog">Engine limits &amp; capabilities</button></footer>
       <dialog class="capability-sheet" aria-labelledby="capability-title">
       <header><h2 id="capability-title" tabindex="-1" autofocus>One source. Real processing.</h2><button data-action="close-capabilities" aria-label="Close scope and limits">Close</button></header>
-      <p class="capability-limit">Known stereo loudness and peak/gain limitations remain. Check your result before delivery. This is not a standards-certified meter; no project persistence or undo is exposed.</p>
+      <p class="capability-limit">Loudness is an ungated estimate; peak/gain limitations remain. Check your result before delivery. This is not a standards-certified meter; no project persistence or undo is exposed.</p>
       <p>Import or generate a demo. Analyze your mix, compare a reference, play A/B, crop a region, apply Master Fix and manual adjustments, then export real audio.</p>
       <p class="capability-limit">This is a single-source audio workbench. Multitrack, mixer routing, plugins, a media library and SYLUNE execution are not implemented. Local browser codec support varies.</p>
       <p class="capability-limit">Browser verification is not packaged Mac qualification, device listening, or a release/standards certification.</p>
     </dialog>
   </div>`
   root.replaceChildren(template.content.cloneNode(true))
+  const environmentMotion = mountEnvironmentMotion(root.querySelector(".workspace-root"))
   const must = selector => {
     const node = root.querySelector(selector)
     if (!node) throw new Error(`Workspace DOM contract missing: ${selector}`)
@@ -92,6 +94,7 @@ export function mountWorkspace(root, { recorders = [] } = {}) {
   }
   const events = new AbortController()
   let state, controller, oldRefCategory, lastIssues, lastBuffer, lastFixed, lastSide, lastCrop, lastWidth, observer
+  let regionGesture = null
   let previousAnalysis, previousFixed, previousRefSource, previousCropVisible = false
   const sheet = must(".capability-sheet")
   const palette = getComputedStyle(root)
@@ -166,7 +169,7 @@ export function mountWorkspace(root, { recorders = [] } = {}) {
     elements["analysis-state"].textContent = busy ? "PROCESSING" : s.analysis ? "MEASURED" : "AWAITING AUDIO"
     elements["target-label"].textContent = s.targetUsed ? `${s.targetUsed.meta?.title || s.targetUsed.g.name} · ${s.targetUsed.kind === 'auto' || s.targetUsed.kind === 'profile' ? 'built-in profile' : 'measured reference'}` : "Choose audio to inspect its signal."
     elements["measurement-lufs"].textContent = `${number(s.analysis?.lufs)} LUFS`; elements["measurement-peak"].textContent = `${number(s.analysis?.truePeakDb)} dBFS`; elements["measurement-rate"].textContent = `${number(s.buffer?.sampleRate / 1000)} kHz`
-    elements["fixed-measurement"].textContent = s.fixedFast ? `B: ${number(s.fixedFast.lufs)} LUFS · ${number(s.fixedFast.truePeakDb)} dBFS true peak. Compare and verify before delivery.` : "Renders a separate copy using the existing local processor."
+    elements["fixed-measurement"].textContent = s.fixedFast ? `B: ${number(s.fixedFast.lufs)} LUFS · ${number(s.fixedFast.truePeakDb)} dBFS peak estimate. Compare and verify before delivery.` : "Renders a separate copy using the existing local processor."
     if (lastIssues !== s.issues) {
       lastIssues = s.issues; elements["analysis-issues"].replaceChildren()
       for (const issue of s.issues?.issues || []) {
@@ -179,6 +182,14 @@ export function mountWorkspace(root, { recorders = [] } = {}) {
       const key = input.dataset.tweak, v = key.startsWith("band:") ? s.tweaks.band[key.slice(5)] : s.tweaks[key]
       input.disabled = !s.fixed || s.busy
       if (document.activeElement !== input) { input.value = v; input.previousElementSibling.textContent = v }
+    }
+    for (const handle of root.querySelectorAll("[data-region-handle]")) {
+      const which = handle.dataset.regionHandle, b = s.ab === "fixed" && s.fixed ? s.fixed : s.buffer
+      handle.disabled = !s.crop || s.busy || s.tweakBusy
+      handle.setAttribute("aria-valuemin", "0")
+      handle.setAttribute("aria-valuemax", String(b?.duration || 0))
+      handle.setAttribute("aria-valuenow", String(s.crop?.[which] || 0))
+      handle.setAttribute("aria-valuetext", `${(s.crop?.[which] || 0).toFixed(2)} seconds`)
     }
     buttons.capabilities.disabled = false; buttons["close-capabilities"].disabled = false
     if (s.analysis && s.analysis !== previousAnalysis) reveal(must(".inspector"))
@@ -226,6 +237,34 @@ export function mountWorkspace(root, { recorders = [] } = {}) {
     on(elements.position, "change", () => c.seekTo(Number(elements.position.value)))
     on(elements["audio-waveform"], "click", event => { const r = event.target.getBoundingClientRect(), b = c.state.ab === "fixed" && c.state.fixed ? c.state.fixed : c.state.buffer; if (b) c.seekTo((event.clientX - r.left) / r.width * b.duration) })
     for (const which of ["in", "out"]) on(elements[`region-${which}`], "change", () => c.setCrop(which, Number(elements[`region-${which}`].value)))
+    for (const handle of root.querySelectorAll("[data-region-handle]")) {
+      const which = handle.dataset.regionHandle
+      const move = event => {
+        const b = c.state.ab === "fixed" && c.state.fixed ? c.state.fixed : c.state.buffer
+        const rect = elements["audio-waveform"].getBoundingClientRect()
+        if (b && rect.width && !handle.disabled) c.setCrop(which, (event.clientX - rect.left) / rect.width * b.duration)
+      }
+      on(handle, "pointerdown", event => {
+        if (regionGesture || handle.disabled || event.button !== 0) return
+        event.preventDefault(); handle.focus({ preventScroll: true }); handle.setPointerCapture(event.pointerId)
+        regionGesture = { handle, id: event.pointerId }; move(event)
+      })
+      on(handle, "pointermove", event => { if (regionGesture?.handle === handle && regionGesture.id === event.pointerId) move(event) })
+      const release = event => {
+        if (regionGesture?.handle !== handle || regionGesture.id !== event.pointerId) return
+        if (handle.hasPointerCapture(event.pointerId)) handle.releasePointerCapture(event.pointerId)
+        regionGesture = null
+      }
+      on(handle, "pointerup", release); on(handle, "pointercancel", release); on(handle, "lostpointercapture", release)
+      on(handle, "keydown", event => {
+        if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key) || handle.disabled || !c.state.crop) return
+        event.preventDefault(); event.stopPropagation()
+        const b = c.state.ab === "fixed" && c.state.fixed ? c.state.fixed : c.state.buffer
+        const value = event.key === "Home" ? 0 : event.key === "End" ? b.duration : c.state.crop[which] + (event.key === "ArrowRight" ? 1 : -1) * (event.shiftKey ? .5 : .05)
+        c.setCrop(which, value)
+      })
+    }
+
     on(elements["adjustment-inputs"], "input", event => { const input = event.target; if (!input.dataset.tweak) return; input.previousElementSibling.textContent = input.value; c.setTweak(input.dataset.tweak, Number(input.value)) })
     on(window, "keydown", event => {
       if (sheet.open || event.target.closest("input,select,textarea,button,[contenteditable=true],summary,a")) return
@@ -246,5 +285,5 @@ export function mountWorkspace(root, { recorders = [] } = {}) {
     elements["install-update"].onclick = install
     elements["dismiss-update"].onclick = () => { box.hidden = true }
   }
-  return { render, toast, progress, showPanel, bind, update, dispose() { events.abort(); observer?.disconnect(); if (sheet.open) sheet.close(); elements["install-update"].onclick = null; elements["dismiss-update"].onclick = null } }
+  return { render, toast, progress, showPanel, bind, update, dispose() { if (regionGesture?.handle.hasPointerCapture(regionGesture.id)) regionGesture.handle.releasePointerCapture(regionGesture.id); regionGesture = null; environmentMotion.dispose(); events.abort(); observer?.disconnect(); if (sheet.open) sheet.close(); elements["install-update"].onclick = null; elements["dismiss-update"].onclick = null } }
 }

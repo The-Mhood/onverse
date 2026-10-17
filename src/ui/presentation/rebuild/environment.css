@@ -1,25 +1,83 @@
-/* A grounded horizon image plus three independent, low-amplitude atmospheric
-   layers. Composited transform/opacity drift evolves gently without a canvas,
-   camera motion, or animated background repaint. The local art stays bundled. */
+/* Grounded 2.5D environment: four geometric/depth planes, three atmospheric
+   fields and a gently drifting group. Independently composited transform/opacity
+   motion; no whole-scene wallpaper, animated blur, canvas or camera authority.
+   Alpha art is reproducibly derived from the existing local authored scene. */
 .workspace-root > .environment {
-  position: absolute;
+  position: fixed;
   z-index: 0;
-  inset: 0;
+  inset: -3%;
   overflow: hidden;
   contain: paint;
   isolation: isolate;
   pointer-events: none;
-  background-color: var(--mvo-space-0);
-  background-image:
-    linear-gradient(90deg, var(--mvo-scene-shade-left) 0%, var(--mvo-scene-shade-mid) 43%, var(--mvo-scene-shade-right) 100%),
-    linear-gradient(180deg, var(--mvo-scene-shade-top) 0%, transparent 34%, var(--mvo-scene-shade-band) 64%, var(--mvo-scene-shade-low) 100%),
-    url("./assets/first-person-cosmic-horizon.jpg?inline");
-  background-repeat: no-repeat;
-  background-position: center, center, 56% 48%;
+  background:
+    radial-gradient(ellipse at 28% 30%, var(--mvo-atmosphere-indigo), transparent 62%),
+    var(--mvo-space-0);
+}
+.environment .scene-plane {
+  position: absolute;
+  inset: -2%;
+  pointer-events: none;
+  background-position: center;
   background-size: cover;
+  background-repeat: no-repeat;
+  will-change: transform;
+}
+.environment .scene-stars {
+  z-index: 0;
+  opacity: .4;
+  background-image:
+    radial-gradient(1px 1px at 12% 14%, var(--mvo-color-glacier) 80%, transparent),
+    radial-gradient(1px 1px at 37% 22%, var(--mvo-text-secondary) 80%, transparent),
+    radial-gradient(1px 1px at 67% 11%, var(--mvo-color-amber) 80%, transparent),
+    radial-gradient(1px 1px at 81% 42%, var(--mvo-text-secondary) 80%, transparent);
+  background-size: 311px 227px;
+  translate: calc(var(--mvo-scene-x) * -.07) calc(var(--mvo-scene-y) * -.07);
+  animation: mvo-star-distance 337s ease-in-out -79s infinite alternate;
+}
+.environment .scene-celestial {
+  z-index: 2;
+  background-image: url("./assets/celestial-plane.webp?inline");
+  opacity: .84;
+  translate: calc(var(--mvo-scene-x) * -.24) calc(var(--mvo-scene-y) * -.24);
+  animation: mvo-celestial-orbit 263s ease-in-out -89s infinite alternate;
+}
+.environment .scene-horizon {
+  z-index: 3;
+  top: 48%; right: -24%; left: -24%; bottom: -52%;
+  border-radius: 50% 50% 0 0;
+  background:
+    radial-gradient(ellipse 60% 8% at 72% 0, var(--mvo-light-spill-warm), transparent 80%),
+    linear-gradient(180deg, var(--mvo-space-1), var(--mvo-space-0) 19%);
+  border-top: 1px solid var(--mvo-light-spill-cool);
+  box-shadow: 0 -12px 55px -24px var(--mvo-color-glacier);
+  translate: calc(var(--mvo-scene-x) * -.5) calc(var(--mvo-scene-y) * -.5);
+  animation: mvo-ground-horizon 193s ease-in-out -57s infinite alternate;
+}
+.environment .scene-foreground {
+  z-index: 4;
+  background-image: url("./assets/near-rocks-plane.webp?inline");
+  translate: calc(var(--mvo-scene-x) * -1.15) calc(var(--mvo-scene-y) * -1.15);
+  animation: mvo-ground-presence 137s ease-in-out -29s infinite alternate;
+}
+@keyframes mvo-star-distance {
+  from { transform: translate3d(-.7%, -.2%, 0) scale(1.02); }
+  to { transform: translate3d(.9%, .3%, 0) scale(1.025); }
+}
+@keyframes mvo-celestial-orbit {
+  from { transform: translate3d(-1.3%, .3%, 0) rotate(-.3deg) scale(1.02); }
+  to { transform: translate3d(1.6%, -.6%, 0) rotate(.3deg) scale(1.035); }
+}
+@keyframes mvo-ground-horizon {
+  from { transform: translate3d(-.5%, .2%, 0) rotate(-.2deg); }
+  to { transform: translate3d(.7%, -.4%, 0) rotate(.2deg); }
+}
+@keyframes mvo-ground-presence {
+  from { transform: translate3d(-.7%, .35%, 0) scale(1.035); }
+  to { transform: translate3d(.9%, -.5%, 0) scale(1.045); }
 }
 
-/* Far field: broad nebular colour drifts against the fixed horizon image. */
+/* Far field: broad nebular colour drifts behind the independent horizon geometry. */
 .workspace-root > .environment::before,
 .workspace-root > .environment::after {
   position: absolute;
@@ -29,6 +87,7 @@
 }
 
 .workspace-root > .environment::before {
+  z-index: 1;
   background:
     radial-gradient(ellipse 38% 38% at 20% 36%, var(--mvo-atmosphere-violet) 0%, transparent 78%),
     radial-gradient(ellipse 36% 34% at 72% 43%, var(--mvo-atmosphere-indigo) 0%, transparent 79%),
@@ -41,6 +100,7 @@
 
 /* Mid field: warm/cool light spill slowly changes its relation to the horizon. */
 .workspace-root > .environment::after {
+  z-index: 5;
   background:
     radial-gradient(ellipse 25% 21% at 66% 52%, var(--mvo-atmosphere-amber) 0%, transparent 78%),
     radial-gradient(ellipse 36% 28% at 38% 79%, var(--mvo-atmosphere-teal) 0%, transparent 80%),
@@ -92,6 +152,8 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .workspace-root { --mvo-scene-x: 0px !important; --mvo-scene-y: 0px !important; }
+  .workspace-root .environment .scene-plane,
   .workspace-root::before,
   .workspace-root > .environment::before,
   .workspace-root > .environment::after {
@@ -99,3 +161,10 @@
     transform: none !important;
   }
 }
+
+/* Backgrounded/disposed views consume no animation frames; resume in-place. */
+.workspace-root[data-environment-paused="true"] > .environment,
+.workspace-root[data-environment-paused="true"] > .environment *,
+.workspace-root[data-environment-paused="true"] > .environment::before,
+.workspace-root[data-environment-paused="true"] > .environment::after,
+.workspace-root[data-environment-paused="true"]::before { animation-play-state: paused !important; }

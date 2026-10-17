@@ -1,0 +1,1722 @@
+{
+  "baseCommit": "bccebbeb4dee884f0b179319bd569ad36a423c80",
+  "branch": "arena/14df8ffa-onverse",
+  "status": "Scoped single-source UI integration verified; full reference vision and release qualification NOT complete",
+  "before": {
+    "result": "PASS",
+    "checks": 22,
+    "screenshots": 32,
+    "output": "/home/user/reviews/ui-immersion-20261017/reviews/workbench-browser-20261016-QAB4bE"
+  },
+  "after": {
+    "result": "PASS",
+    "checks": 25,
+    "screenshots": 36,
+    "downloads": 13,
+    "output": "/home/user/reviews/workbench-browser-20261016-b9jhZI",
+    "playback": {
+      "advancedTo": 0.1,
+      "afterPause": "Play",
+      "sceneBefore": 7383.118999999953,
+      "sceneAfter": 7483.018999999954,
+      "planesRunning": true
+    },
+    "motion": {
+      "budget": {
+        "sampleMs": 5000,
+        "maxP95FrameMs": 50,
+        "minAverageFps": 30
+      },
+      "viewports": [
+        {
+          "width": 1120,
+          "height": 700,
+          "before": [
+            {
+              "layer": "environment",
+              "name": "mvo-deep-space-drift",
+              "duration": "212s",
+              "state": "running",
+              "transform": "matrix(1.02584, 0, 0, 1.02584, -3.80526, -1.01928)",
+              "opacity": "1",
+              "translate": "none",
+              "filter": "none",
+              "backdropFilter": "none"
+            },
+            {
+              "layer": "environment::before",
+              "name": "mvo-nebula-drift",
+              "duration": "212s",
+              "state": "running",
+              "transform": "matrix(1.025, 0, 0, 1.025, -0.490816, 0.0876452)",
+              "opacity": "0.76",
+              "translate": "none",
+              "filter": "none",
+              "backdropFilter": "none"
+            },
+            {
+              "layer": "environment::after",
+              "name": "mvo-horizon-drift",
+              "duration": "158s",
+              "state": "running",
+              "transform": "matrix(1.02, 0, 0, 1.02, -0.385358, 0.0670437)",
+              "opacity": "0.58",
+              "translate": "none",
+              "filter": "none",
+              "backdropFilter": "none"
+            },
+            {
+              "layer": "workspace-root::before",
+              "name": "mvo-nearfield-drift",
+              "duration": "116s",
+              "state": "running",
+              "transform": "matrix(1.01778, 0, 0, 1.01778, 0.373089, -0.120797)",
+              "opacity": "0.408813",
+              "translate": "none",
+              "filter": "none",
+              "backdropFilter": "none"
+            },
+            {
+              "layer": "scene-plane scene-stars",
+              "name": "mvo-star-distance",
+              "duration": "337s",
+              "state": "running",
+              "transform": "matrix(1.02111, 0, 0, 1.02111, -4.27567, -0.690403)",
+              "opacity": "0.4",
+              "translate": "0px",
+              "filter": "none",
+              "backdropFilter": "none"
+            },
+            {
+              "layer": "scene-plane scene-celestial",
+              "name": "mvo-celestial-orbit",
+              "duration": "263s",
+              "state": "running",
+              "transform": "matrix(1.02635, -0.000826103, 0.000826103, 1.02635, -0.900058, -0.623686)",
+              "opacity": "0.84",
+              "translate": "0px",
+              "filter": "none",
+              "backdropFilter": "none"
+            },
+            {
+              "layer": "scene-plane scene-horizon",
+              "name": "mvo-ground-horizon",
+              "duration": "193s",
+              "state": "running",
+              "transform": "matrix(1, -0.000544984, 0.000544984, 1, 0.111118, -0.410237)",
+              "opacity": "1",
+              "translate": "0px",
+              "filter": "none",
+              "backdropFilter": "none"
+            },
+            {
+              "layer": "scene-plane scene-foreground",
+              "name": "mvo-ground-presence",
+              "duration": "137s",
+              "state": "running",
+              "transform": "matrix(1.03891, 0, 0, 1.03891, -0.926589, 0.138855)",
+              "opacity": "1",
+              "translate": "0px",
+              "filter": "none",
+              "backdropFilter": "none"
+            }
+          ],
+          "after": [
+            {
+              "layer": "environment",
+              "name": "mvo-deep-space-drift",
+              "duration": "212s",
+              "state": "running",
+              "transform": "matrix(1.02615, 0, 0, 1.02615, -3.67736, -0.985017)",
+              "opacity": "1",
+              "translate": "none",
+              "filter": "none",
+              "backdropFilter": "none"
+            },
+            {
+              "layer": "environment::before",
+              "name": "mvo-nebula-drift",
+              "duration": "212s",
+              "state": "running",
+              "transform": "matrix(1.025, 0, 0, 1.025, -0.193267, 0.0345117)",
+              "opacity": "0.76",
+              "translate": "none",
+              "filter": "none",
+              "backdropFilter": "none"
+            },
+            {
+              "layer": "environment::after",
+              "name": "mvo-horizon-drift",
+              "duration": "158s",
+              "state": "running",
+              "transform": "matrix(1.02, 0, 0, 1.02, -0.653406, 0.137582)",
+              "opacity": "0.58",
+              "translate": "none",
+              "filter": "none",
+              "backdropFilter": "none"
+            },
+            {
+              "layer": "workspace-root::before",
+              "name": "mvo-nearfield-drift",
+              "duration": "116s",
+              "state": "running",
+              "transform": "matrix(1.01814, 0, 0, 1.01814, 0.868185, -0.281096)",
+              "opacity": "0.420507",
+              "translate": "none",
+              "filter": "none",
+              "backdropFilter": "none"
+            },
+            {
+              "layer": "scene-plane scene-stars",
+              "name": "mvo-star-distance",
+              "duration": "337s",
+              "state": "running",
+              "transform": "matrix(1.02121, 0, 0, 1.02121, -3.86493, -0.610179)",
+              "opacity": "0.4",
+              "translate": "0px",
+              "filter": "none",
+              "backdropFilter": "none"
+            },
+            {
+              "layer": "scene-plane scene-celestial",
+              "name": "mvo-celestial-orbit",
+              "duration": "263s",
+              "state": "running",
+              "transform": "matrix(1.02684, -0.000475134, 0.000475134, 1.02684, 0.269901, -0.850616)",
+              "opacity": "0.84",
+              "translate": "0px",
+              "filter": "none",
+              "backdropFilter": "none"
+            },
+            {
+              "layer": "scene-plane scene-horizon",
+              "name": "mvo-ground-horizon",
+              "duration": "193s",
+              "state": "running",
+              "transform": "matrix(1, -0.000233742, 0.000233742, 1, 1.0511, -0.616654)",
+              "opacity": "1",
+              "translate": "0px",
+              "filter": "none",
+              "backdropFilter": "none"
+            },
+            {
+              "layer": "scene-plane scene-foreground",
+              "name": "mvo-ground-presence",
+              "duration": "137s",
+              "state": "running",
+              "transform": "matrix(1.03953, 0, 0, 1.03953, 0.303784, -0.269665)",
+              "opacity": "1",
+              "translate": "0px",
+              "filter": "none",
+              "backdropFilter": "none"
+            }
+          ],
+          "timing": {
+            "count": 247,
+            "elapsedMs": 5016.448,
+            "averageFps": 49.238026587736975,
+            "p50Ms": 16.69999999999709,
+            "p95Ms": 33.400000000001455,
+            "maxMs": 233.34799999999814,
+            "over50Ms": 6
+          },
+          "performanceDelta": {
+            "LayoutCount": 1,
+            "RecalcStyleCount": 249,
+            "LayoutDuration": 0.00013399999999999523,
+            "RecalcStyleDuration": 0.07487299999999997,
+            "ScriptDuration": 0.008404999999999996,
+            "TaskDuration": 0.15222899999999928
+          },
+          "inputEnvironment": {
+            "fine": false,
+            "primaryFine": false,
+            "reduced": false,
+            "hidden": false,
+            "paused": "false",
+            "target": "<section class=\"environment-banner\" aria-label=\"Workspace introduction\">\n        <div class=\"intro\"><p class=\"eyebrow\">YOUR SIGNAL. YOUR SPACE.</p><h1>Make room for the details.</h1><p>Listen, compare and shape a single audio file. Nothing "
+          },
+          "parallax": {
+            "far": -0.08477,
+            "celestial": -0.29064,
+            "near": -1.39265,
+            "position": "fixed"
+          },
+          "panel": {
+            "entering": {
+              "samples": [
+                {
+                  "timeMs": 3.4999999999563443,
+                  "opacity": 0,
+                  "transform": "matrix(0.985, 0, 0, 0.985, 0, 9.6)",
+                  "display": "block",
+                  "modal": true
+                },
+                {
+                  "timeMs": 36.79999999995198,
+                  "opacity": 0,
+                  "transform": "matrix(0.985, 0, 0, 0.985, 0, 9.6)",
+                  "display": "block",
+                  "modal": true
+                },
+                {
+                  "timeMs": 53.39999999995052,
+                  "opacity": 0,
+                  "transform": "matrix(0.985, 0, 0, 0.985, 0, 9.6)",
+                  "display": "block",
+                  "modal": true
+                },
+                {
+                  "timeMs": 70.19999999995343,
+                  "opacity": 0.0240183,
+                  "transform": "matrix(0.98536, 0, 0, 0.98536, 0, 9.36942)",
+                  "display": "block",
+                  "modal": true
+                },
+                {
+                  "timeMs": 86.79999999995198,
+                  "opacity": 0.0655539,
+                  "transform": "matrix(0.985983, 0, 0, 0.985983, 0, 8.97068)",
+                  "display": "block",
+                  "modal": true
+                },
+                {
+                  "timeMs": 103.49999999995634,
+                  "opacity": 0.126321,
+                  "transform": "matrix(0.986895, 0, 0, 0.986895, 0, 8.38732)",
+                  "display": "block",
+                  "modal": true
+                },
+                {
+                  "timeMs": 120.09999999995489,
+                  "opacity": 0.203437,
+                  "transform": "matrix(0.988052, 0, 0, 0.988052, 0, 7.647)",
+                  "display": "block",
+                  "modal": true
+                },
+                {
+                  "timeMs": 136.79999999995198,
+                  "opacity": 0.291557,
+                  "transform": "matrix(0.989373, 0, 0, 0.989373, 0, 6.80106)",
+                  "display": "block",
+                  "modal": true
+                },
+                {
+                  "timeMs": 153.49999999995634,
+                  "opacity": 0.382099,
+                  "transform": "matrix(0.990731, 0, 0, 0.990731, 0, 5.93185)",
+                  "display": "block",
+                  "modal": true
+                },
+                {
+                  "timeMs": 186.79999999995198,
+                  "opacity": 0.546801,
+                  "transform": "matrix(0.993202, 0, 0, 0.993202, 0, 4.35071)",
+                  "display": "block",
+                  "modal": true
+                },
+                {
+                  "timeMs": 203.49999999995634,
+                  "opacity": 0.616804,
+                  "transform": "matrix(0.994252, 0, 0, 0.994252, 0, 3.67868)",
+                  "display": "block",
+                  "modal": true
+                },
+                {
+                  "timeMs": 220.0999999999549,
+                  "opacity": 0.677834,
+                  "transform": "matrix(0.995167, 0, 0, 0.995167, 0, 3.09279)",
+                  "display": "block",
+                  "modal": true
+                },
+                {
+                  "timeMs": 236.79999999995198,
+                  "opacity": 0.731322,
+                  "transform": "matrix(0.99597, 0, 0, 0.99597, 0, 2.5793)",
+                  "display": "block",
+                  "modal": true
+                },
+                {
+                  "timeMs": 253.49999999995634,
+                  "opacity": 0.77772,
+                  "transform": "matrix(0.996666, 0, 0, 0.996666, 0, 2.13389)",
+                  "display": "block",
+                  "modal": true
+                },
+                {
+                  "timeMs": 270.0999999999549,
+                  "opacity": 0.817626,
+                  "transform": "matrix(0.997264, 0, 0, 0.997264, 0, 1.75079)",
+                  "display": "block",
+                  "modal": true
+                },
+                {
+                  "timeMs": 286.799999999952,
+                  "opacity": 0.852259,
+                  "transform": "matrix(0.997784, 0, 0, 0.997784, 0, 1.41831)",
+                  "display": "block",
+                  "modal": true
+                },
+                {
+                  "timeMs": 336.799999999952,
+                  "opacity": 0.928822,
+                  "transform": "matrix(0.998932, 0, 0, 0.998932, 0, 0.683305)",
+                  "display": "block",
+                  "modal": true
+                },
+                {
+                  "timeMs": 353.49999999995634,
+                  "opacity": 0.946908,
+                  "transform": "matrix(0.999204, 0, 0, 0.999204, 0, 0.509687)",
+                  "display": "block",
+                  "modal": true
+                },
+                {
+                  "timeMs": 370.0999999999549,
+                  "opacity": 0.961784,
+                  "transform": "matrix(0.999427, 0, 0, 0.999427, 0, 0.366875)",
+                  "display": "block",
+                  "modal": true
+                },
+                {
+                  "timeMs": 386.799999999952,
+                  "opacity": 0.973924,
+                  "transform": "matrix(0.999609, 0, 0, 0.999609, 0, 0.250329)",
+                  "display": "block",
+                  "modal": true
+                },
+                {
+                  "timeMs": 403.49999999995634,
+                  "opacity": 0.983485,
+                  "transform": "matrix(0.999752, 0, 0, 0.999752, 0, 0.158547)",
+                  "display": "block",
+                  "modal": true
+                },
+                {
+                  "timeMs": 420.19999999995343,
+                  "opacity": 0.990687,
+                  "transform": "matrix(0.99986, 0, 0, 0.99986, 0, 0.0894023)",
+                  "display": "block",
+                  "modal": true
+                },
+                {
+                  "timeMs": 436.799999999952,
+                  "opacity": 0.995701,
+                  "transform": "matrix(0.999936, 0, 0, 0.999936, 0, 0.0412658)",
+                  "display": "block",
+                  "modal": true
+                },
+                {
+                  "timeMs": 453.49999999995634,
+                  "opacity": 0.998757,
+                  "transform": "matrix(0.999981, 0, 0, 0.999981, 0, 0.0119332)",
+                  "display": "block",
+                  "modal": true
+                },
+                {
+                  "timeMs": 470.0999999999549,
+                  "opacity": 0.999965,
+                  "transform": "matrix(0.999999, 0, 0, 0.999999, 0, 0.00033303)",
+                  "display": "block",
+                  "modal": true
+                },
+                {
+                  "timeMs": 486.799999999952,
+                  "opacity": 1,
+                  "transform": "matrix(1, 0, 0, 1, 0, 0)",
+                  "display": "block",
+                  "modal": true
+                },
+                {
+                  "timeMs": 520.0999999999549,
+                  "opacity": 1,
+                  "transform": "matrix(1, 0, 0, 1, 0, 0)",
+                  "display": "block",
+                  "modal": true
+                },
+                {
+                  "timeMs": 536.799999999952,
+                  "opacity": 1,
+                  "transform": "matrix(1, 0, 0, 1, 0, 0)",
+                  "display": "block",
+                  "modal": true
+                },
+                {
+                  "timeMs": 553.4999999999563,
+                  "opacity": 1,
+                  "transform": "matrix(1, 0, 0, 1, 0, 0)",
+                  "display": "block",
+                  "modal": true
+                },
+                {
+                  "timeMs": 570.1999999999534,
+                  "opacity": 1,
+                  "transform": "matrix(1, 0, 0, 1, 0, 0)",
+                  "display": "block",
+                  "modal": true
+                },
+                {
+                  "timeMs": 586.799999999952,
+                  "opacity": 1,
+                  "transform": "matrix(1, 0, 0, 1, 0, 0)",
+                  "display": "block",
+                  "modal": true
+                },
+                {
+                  "timeMs": 603.3999999999505,
+                  "opacity": 1,
+                  "transform": "matrix(1, 0, 0, 1, 0, 0)",
+                  "display": "block",
+                  "modal": true
+                },
+                {
+                  "timeMs": 620.0999999999549,
+                  "opacity": 1,
+                  "transform": "matrix(1, 0, 0, 1, 0, 0)",
+                  "display": "block",
+                  "modal": true
+                },
+                {
+                  "timeMs": 636.799999999952,
+                  "opacity": 1,
+                  "transform": "matrix(1, 0, 0, 1, 0, 0)",
+                  "display": "block",
+                  "modal": true
+                },
+                {
+                  "timeMs": 653.3999999999505,
+                  "opacity": 1,
+                  "transform": "matrix(1, 0, 0, 1, 0, 0)",
+                  "display": "block",
+                  "modal": true
+                },
+                {
+                  "timeMs": 670.1999999999534,
+                  "opacity": 1,
+                  "transform": "matrix(1, 0, 0, 1, 0, 0)",
+                  "display": "block",
+                  "modal": true
+                },
+                {
+                  "timeMs": 686.6999999999534,
+                  "opacity": 1,
+                  "transform": "matrix(1, 0, 0, 1, 0, 0)",
+                  "display": "block",
+                  "modal": true
+                },
+                {
+                  "timeMs": 703.4999999999563,
+                  "opacity": 1,
+                  "transform": "matrix(1, 0, 0, 1, 0, 0)",
+                  "display": "block",
+                  "modal": true
+                }
+              ],
+              "open": true,
+              "filter": "none"
+            },
+            "exiting": {
+              "samples": [
+                {
+                  "timeMs": 1.457999999904132,
+                  "opacity": 1,
+                  "transform": "matrix(1, 0, 0, 1, 0, 0)",
+                  "display": "block",
+                  "modal": false
+                },
+                {
+                  "timeMs": 34.79999999990832,
+                  "opacity": 0.934336,
+                  "transform": "matrix(0.999015, 0, 0, 0.999015, 0, 0.630379)",
+                  "display": "block",
+                  "modal": false
+                },
+                {
+                  "timeMs": 51.39999999990687,
+                  "opacity": 0.873947,
+                  "transform": "matrix(0.998109, 0, 0, 0.998109, 0, 1.21011)",
+                  "display": "block",
+                  "modal": false
+                },
+                {
+                  "timeMs": 68.09999999990396,
+                  "opacity": 0.796381,
+                  "transform": "matrix(0.996946, 0, 0, 0.996946, 0, 1.95474)",
+                  "display": "block",
+                  "modal": false
+                },
+                {
+                  "timeMs": 84.79999999990832,
+                  "opacity": 0.708248,
+                  "transform": "matrix(0.995624, 0, 0, 0.995624, 0, 2.80082)",
+                  "display": "block",
+                  "modal": false
+                },
+                {
+                  "timeMs": 101.49999999990541,
+                  "opacity": 0.617708,
+                  "transform": "matrix(0.994266, 0, 0, 0.994266, 0, 3.67)",
+                  "display": "block",
+                  "modal": false
+                },
+                {
+                  "timeMs": 118.09999999990396,
+                  "opacity": 0.531814,
+                  "transform": "matrix(0.992977, 0, 0, 0.992977, 0, 4.49459)",
+                  "display": "block",
+                  "modal": false
+                },
+                {
+                  "timeMs": 134.69999999990978,
+                  "opacity": 0.453485,
+                  "transform": "matrix(0.991802, 0, 0, 0.991802, 0, 5.24655)",
+                  "display": "block",
+                  "modal": false
+                },
+                {
+                  "timeMs": 151.4999999999054,
+                  "opacity": 0.383055,
+                  "transform": "matrix(0.990746, 0, 0, 0.990746, 0, 5.92267)",
+                  "display": "block",
+                  "modal": false
+                },
+                {
+                  "timeMs": 184.69999999990978,
+                  "opacity": 0.268868,
+                  "transform": "matrix(0.989033, 0, 0, 0.989033, 0, 7.01886)",
+                  "display": "block",
+                  "modal": false
+                },
+                {
+                  "timeMs": 201.39999999990687,
+                  "opacity": 0.222445,
+                  "transform": "matrix(0.988337, 0, 0, 0.988337, 0, 7.46452)",
+                  "display": "block",
+                  "modal": false
+                },
+                {
+                  "timeMs": 218.09999999990396,
+                  "opacity": 0.182293,
+                  "transform": "matrix(0.987734, 0, 0, 0.987734, 0, 7.84999)",
+                  "display": "block",
+                  "modal": false
+                },
+                {
+                  "timeMs": 234.79999999990832,
+                  "opacity": 0.147672,
+                  "transform": "matrix(0.987215, 0, 0, 0.987215, 0, 8.18235)",
+                  "display": "block",
+                  "modal": false
+                },
+                {
+                  "timeMs": 251.39999999990687,
+                  "opacity": 0.118103,
+                  "transform": "matrix(0.986772, 0, 0, 0.986772, 0, 8.46621)",
+                  "display": "block",
+                  "modal": false
+                },
+                {
+                  "timeMs": 268.09999999990396,
+                  "opacity": 0.0926835,
+                  "transform": "matrix(0.98639, 0, 0, 0.98639, 0, 8.71024)",
+                  "display": "block",
+                  "modal": false
+                },
+                {
+                  "timeMs": 284.6999999999098,
+                  "opacity": 0.0712534,
+                  "transform": "matrix(0.986069, 0, 0, 0.986069, 0, 8.91597)",
+                  "display": "block",
+                  "modal": false
+                },
+                {
+                  "timeMs": 301.39999999990687,
+                  "opacity": 0.0531555,
+                  "transform": "matrix(0.985797, 0, 0, 0.985797, 0, 9.08971)",
+                  "display": "block",
+                  "modal": false
+                },
+                {
+                  "timeMs": 318.09999999990396,
+                  "opacity": 0.038187,
+                  "transform": "matrix(0.985573, 0, 0, 0.985573, 0, 9.23341)",
+                  "display": "block",
+                  "modal": false
+                },
+                {
+                  "timeMs": 334.7999999999083,
+                  "opacity": 0.0260526,
+                  "transform": "matrix(0.985391, 0, 0, 0.985391, 0, 9.3499)",
+                  "display": "block",
+                  "modal": false
+                },
+                {
+                  "timeMs": 368.09999999990396,
+                  "opacity": 0.0093361,
+                  "transform": "matrix(0.98514, 0, 0, 0.98514, 0, 9.51037)",
+                  "display": "block",
+                  "modal": false
+                },
+                {
+                  "timeMs": 384.6999999999098,
+                  "opacity": 0.00431396,
+                  "transform": "matrix(0.985065, 0, 0, 0.985065, 0, 9.55859)",
+                  "display": "block",
+                  "modal": false
+                },
+                {
+                  "timeMs": 401.39999999990687,
+                  "opacity": 0.00125114,
+                  "transform": "matrix(0.985019, 0, 0, 0.985019, 0, 9.58799)",
+                  "display": "block",
+                  "modal": false
+                },
+                {
+                  "timeMs": 418.09999999990396,
+                  "opacity": 3.39536e-05,
+                  "transform": "matrix(0.985, 0, 0, 0.985, 0, 9.59967)",
+                  "display": "block",
+                  "modal": false
+                },
+                {
+                  "timeMs": 434.7999999999083,
+                  "opacity": 0,
+                  "transform": "none",
+                  "display": "none",
+                  "modal": false
+                },
+                {
+                  "timeMs": 451.39999999990687,
+                  "opacity": 0,
+                  "transform": "none",
+                  "display": "none",
+                  "modal": false
+                },
+                {
+                  "timeMs": 468.09999999990396,
+                  "opacity": 0,
+                  "transform": "none",
+                  "display": "none",
+                  "modal": false
+                },
+                {
+                  "timeMs": 484.6999999999098,
+                  "opacity": 0,
+                  "transform": "none",
+                  "display": "none",
+                  "modal": false
+                },
+                {
+                  "timeMs": 501.39999999990687,
+                  "opacity": 0,
+                  "transform": "none",
+                  "display": "none",
+                  "modal": false
+                },
+                {
+                  "timeMs": 534.7999999999083,
+                  "opacity": 0,
+                  "transform": "none",
+                  "display": "none",
+                  "modal": false
+                },
+                {
+                  "timeMs": 551.3999999999069,
+                  "opacity": 0,
+                  "transform": "none",
+                  "display": "none",
+                  "modal": false
+                },
+                {
+                  "timeMs": 568.099999999904,
+                  "opacity": 0,
+                  "transform": "none",
+                  "display": "none",
+                  "modal": false
+                },
+                {
+                  "timeMs": 584.6999999999098,
+                  "opacity": 0,
+                  "transform": "none",
+                  "display": "none",
+                  "modal": false
+                },
+                {
+                  "timeMs": 601.3999999999069,
+                  "opacity": 0,
+                  "transform": "none",
+                  "display": "none",
+                  "modal": false
+                },
+                {
+                  "timeMs": 618.099999999904,
+                  "opacity": 0,
+                  "transform": "none",
+                  "display": "none",
+                  "modal": false
+                },
+                {
+                  "timeMs": 634.7999999999083,
+                  "opacity": 0,
+                  "transform": "none",
+                  "display": "none",
+                  "modal": false
+                },
+                {
+                  "timeMs": 651.3999999999069,
+                  "opacity": 0,
+                  "transform": "none",
+                  "display": "none",
+                  "modal": false
+                },
+                {
+                  "timeMs": 668.099999999904,
+                  "opacity": 0,
+                  "transform": "none",
+                  "display": "none",
+                  "modal": false
+                },
+                {
+                  "timeMs": 684.6999999999098,
+                  "opacity": 0,
+                  "transform": "none",
+                  "display": "none",
+                  "modal": false
+                },
+                {
+                  "timeMs": 701.3999999999069,
+                  "opacity": 0,
+                  "transform": "none",
+                  "display": "none",
+                  "modal": false
+                }
+              ],
+              "open": false,
+              "filter": "none"
+            }
+          }
+        },
+        {
+          "width": 1480,
+          "height": 920,
+          "before": [
+            {
+              "layer": "environment",
+              "name": "mvo-deep-space-drift",
+              "duration": "212s",
+              "state": "running",
+              "transform": "matrix(1.02633, 0, 0, 1.02633, -4.76068, -1.26829)",
+              "opacity": "1",
+              "translate": "none",
+              "filter": "none",
+              "backdropFilter": "none"
+            },
+            {
+              "layer": "environment::before",
+              "name": "mvo-nebula-drift",
+              "duration": "212s",
+              "state": "running",
+              "transform": "matrix(1.025, 0, 0, 1.025, -0.0498903, 0.00886067)",
+              "opacity": "0.76",
+              "translate": "none",
+              "filter": "none",
+              "backdropFilter": "none"
+            },
+            {
+              "layer": "environment::after",
+              "name": "mvo-horizon-drift",
+              "duration": "158s",
+              "state": "running",
+              "transform": "matrix(1.02, 0, 0, 1.02, -1.04375, 0.228017)",
+              "opacity": "0.58",
+              "translate": "none",
+              "filter": "none",
+              "backdropFilter": "none"
+            },
+            {
+              "layer": "workspace-root::before",
+              "name": "mvo-nearfield-drift",
+              "duration": "116s",
+              "state": "running",
+              "transform": "matrix(1.01832, 0, 0, 1.01832, 1.47581, -0.383264)",
+              "opacity": "0.42638",
+              "translate": "none",
+              "filter": "none",
+              "backdropFilter": "none"
+            },
+            {
+              "layer": "scene-plane scene-stars",
+              "name": "mvo-star-distance",
+              "duration": "337s",
+              "state": "running",
+              "transform": "matrix(1.02126, 0, 0, 1.02126, -4.81701, -0.745569)",
+              "opacity": "0.4",
+              "translate": "0px",
+              "filter": "none",
+              "backdropFilter": "none"
+            },
+            {
+              "layer": "scene-plane scene-celestial",
+              "name": "mvo-celestial-orbit",
+              "duration": "263s",
+              "state": "running",
+              "transform": "matrix(1.02709, -0.000291365, 0.000291365, 1.02709, 1.16558, -1.27402)",
+              "opacity": "0.84",
+              "translate": "0px",
+              "filter": "none",
+              "backdropFilter": "none"
+            },
+            {
+              "layer": "scene-plane scene-horizon",
+              "name": "mvo-ground-horizon",
+              "duration": "193s",
+              "state": "running",
+              "transform": "matrix(1, -7.07683e-05, 7.07683e-05, 1, 2.03936, -0.952518)",
+              "opacity": "1",
+              "translate": "0px",
+              "filter": "none",
+              "backdropFilter": "none"
+            },
+            {
+              "layer": "scene-plane scene-foreground",
+              "name": "mvo-ground-presence",
+              "duration": "137s",
+              "state": "running",
+              "transform": "matrix(1.03986, 0, 0, 1.03986, 1.25878, -0.637547)",
+              "opacity": "1",
+              "translate": "0px",
+              "filter": "none",
+              "backdropFilter": "none"
+            }
+          ],
+          "after": [
+            {
+              "layer": "environment",
+              "name": "mvo-deep-space-drift",
+              "duration": "212s",
+              "state": "running",
+              "transform": "matrix(1.02674, 0, 0, 1.02674, -4.53585, -1.20839)",
+              "opacity": "1",
+              "translate": "none",
+              "filter": "none",
+              "backdropFilter": "none"
+            },
+            {
+              "layer": "environment::before",
+              "name": "mvo-nebula-drift",
+              "duration": "212s",
+              "state": "running",
+              "transform": "matrix(1.025, 0, 0, 1.025, 0.370088, -0.0657288)",
+              "opacity": "0.76",
+              "translate": "none",
+              "filter": "none",
+              "backdropFilter": "none"
+            },
+            {
+              "layer": "environment::after",
+              "name": "mvo-horizon-drift",
+              "duration": "158s",
+              "state": "running",
+              "transform": "matrix(1.02, 0, 0, 1.02, -1.4007, 0.321442)",
+              "opacity": "0.58",
+              "translate": "none",
+              "filter": "none",
+              "backdropFilter": "none"
+            },
+            {
+              "layer": "workspace-root::before",
+              "name": "mvo-nearfield-drift",
+              "duration": "116s",
+              "state": "running",
+              "transform": "matrix(1.01868, 0, 0, 1.01868, 2.11139, -0.548324)",
+              "opacity": "0.437742",
+              "translate": "none",
+              "filter": "none",
+              "backdropFilter": "none"
+            },
+            {
+              "layer": "scene-plane scene-stars",
+              "name": "mvo-star-distance",
+              "duration": "337s",
+              "state": "running",
+              "transform": "matrix(1.02138, 0, 0, 1.02138, -4.20721, -0.627112)",
+              "opacity": "0.4",
+              "translate": "0px",
+              "filter": "none",
+              "backdropFilter": "none"
+            },
+            {
+              "layer": "scene-plane scene-celestial",
+              "name": "mvo-celestial-orbit",
+              "duration": "263s",
+              "state": "running",
+              "transform": "matrix(1.02762, 8.5704e-05, -8.5704e-05, 1.02762, 2.82412, -1.59398)",
+              "opacity": "0.84",
+              "translate": "0px",
+              "filter": "none",
+              "backdropFilter": "none"
+            },
+            {
+              "layer": "scene-plane scene-horizon",
+              "name": "mvo-ground-horizon",
+              "duration": "193s",
+              "state": "running",
+              "transform": "matrix(1, 0.000262551, -0.000262551, 1, 3.36958, -1.24305)",
+              "opacity": "1",
+              "translate": "0px",
+              "filter": "none",
+              "backdropFilter": "none"
+            },
+            {
+              "layer": "scene-plane scene-foreground",
+              "name": "mvo-ground-presence",
+              "duration": "137s",
+              "state": "running",
+              "transform": "matrix(1.04053, 0, 0, 1.04053, 3.0129, -1.21681)",
+              "opacity": "1",
+              "translate": "0px",
+              "filter": "none",
+              "backdropFilter": "none"
+            }
+          ],
+          "timing": {
+            "count": 287,
+            "elapsedMs": 5016.414000000004,
+            "averageFps": 57.21218384288054,
+            "p50Ms": 16.69999999999709,
+            "p95Ms": 16.80000000000291,
+            "maxMs": 50,
+            "over50Ms": 0
+          },
+          "performanceDelta": {
+            "LayoutCount": 1,
+            "RecalcStyleCount": 290,
+            "LayoutDuration": 6.80000000000125e-05,
+            "RecalcStyleDuration": 0.07289400000000001,
+            "ScriptDuration": 0.006132000000000026,
+            "TaskDuration": 0.14134099999999972
+          },
+          "inputEnvironment": {
+            "fine": false,
+            "primaryFine": false,
+            "reduced": false,
+            "hidden": false,
+            "paused": "false",
+            "target": "<section class=\"environment-banner\" aria-label=\"Workspace introduction\">\n        <div class=\"intro\"><p class=\"eyebrow\">YOUR SIGNAL. YOUR SPACE.</p><h1>Make room for the details.</h1><p>Listen, compare and shape a single audio file. Nothing "
+          },
+          "parallax": {
+            "far": -0.15365,
+            "celestial": -0.5268,
+            "near": -2.52425,
+            "position": "fixed"
+          },
+          "panel": {
+            "entering": {
+              "samples": [
+                {
+                  "timeMs": 28.0999999998603,
+                  "opacity": 0,
+                  "transform": "matrix(0.985, 0, 0, 0.985, 0, 9.6)",
+                  "display": "block",
+                  "modal": true
+                },
+                {
+                  "timeMs": 78.0999999998603,
+                  "opacity": 0,
+                  "transform": "matrix(0.985, 0, 0, 0.985, 0, 9.6)",
+                  "display": "block",
+                  "modal": true
+                },
+                {
+                  "timeMs": 111.39999999986321,
+                  "opacity": 0.0656153,
+                  "transform": "matrix(0.985984, 0, 0, 0.985984, 0, 8.97009)",
+                  "display": "block",
+                  "modal": true
+                },
+                {
+                  "timeMs": 144.7999999998574,
+                  "opacity": 0.204042,
+                  "transform": "matrix(0.988061, 0, 0, 0.988061, 0, 7.6412)",
+                  "display": "block",
+                  "modal": true
+                },
+                {
+                  "timeMs": 178.0999999998603,
+                  "opacity": 0.382206,
+                  "transform": "matrix(0.990733, 0, 0, 0.990733, 0, 5.93082)",
+                  "display": "block",
+                  "modal": true
+                },
+                {
+                  "timeMs": 211.3999999998632,
+                  "opacity": 0.54689,
+                  "transform": "matrix(0.993203, 0, 0, 0.993203, 0, 4.34986)",
+                  "display": "block",
+                  "modal": true
+                },
+                {
+                  "timeMs": 244.69999999985885,
+                  "opacity": 0.677903,
+                  "transform": "matrix(0.995169, 0, 0, 0.995169, 0, 3.09213)",
+                  "display": "block",
+                  "modal": true
+                },
+                {
+                  "timeMs": 278.0999999998603,
+                  "opacity": 0.777772,
+                  "transform": "matrix(0.996667, 0, 0, 0.996667, 0, 2.13339)",
+                  "display": "block",
+                  "modal": true
+                },
+                {
+                  "timeMs": 294.69999999985885,
+                  "opacity": 0.817671,
+                  "transform": "matrix(0.997265, 0, 0, 0.997265, 0, 1.75036)",
+                  "display": "block",
+                  "modal": true
+                },
+                {
+                  "timeMs": 361.3999999998632,
+                  "opacity": 0.928846,
+                  "transform": "matrix(0.998933, 0, 0, 0.998933, 0, 0.683078)",
+                  "display": "block",
+                  "modal": true
+                },
+                {
+                  "timeMs": 377.99999999986176,
+                  "opacity": 0.946829,
+                  "transform": "matrix(0.999202, 0, 0, 0.999202, 0, 0.510444)",
+                  "display": "block",
+                  "modal": true
+                },
+                {
+                  "timeMs": 394.69999999985885,
+                  "opacity": 0.9618,
+                  "transform": "matrix(0.999427, 0, 0, 0.999427, 0, 0.366719)",
+                  "display": "block",
+                  "modal": true
+                },
+                {
+                  "timeMs": 428.0999999998603,
+                  "opacity": 0.983495,
+                  "transform": "matrix(0.999752, 0, 0, 0.999752, 0, 0.158451)",
+                  "display": "block",
+                  "modal": true
+                },
+                {
+                  "timeMs": 444.69999999985885,
+                  "opacity": 0.990658,
+                  "transform": "matrix(0.99986, 0, 0, 0.99986, 0, 0.0896826)",
+                  "display": "block",
+                  "modal": true
+                },
+                {
+                  "timeMs": 477.99999999986176,
+                  "opacity": 0.998747,
+                  "transform": "matrix(0.999981, 0, 0, 0.999981, 0, 0.0120304)",
+                  "display": "block",
+                  "modal": true
+                },
+                {
+                  "timeMs": 511.3999999998632,
+                  "opacity": 1,
+                  "transform": "matrix(1, 0, 0, 1, 0, 0)",
+                  "display": "block",
+                  "modal": true
+                },
+                {
+                  "timeMs": 561.3999999998632,
+                  "opacity": 1,
+                  "transform": "matrix(1, 0, 0, 1, 0, 0)",
+                  "display": "block",
+                  "modal": true
+                },
+                {
+                  "timeMs": 594.6999999998588,
+                  "opacity": 1,
+                  "transform": "matrix(1, 0, 0, 1, 0, 0)",
+                  "display": "block",
+                  "modal": true
+                },
+                {
+                  "timeMs": 611.3999999998632,
+                  "opacity": 1,
+                  "transform": "matrix(1, 0, 0, 1, 0, 0)",
+                  "display": "block",
+                  "modal": true
+                },
+                {
+                  "timeMs": 644.6999999998588,
+                  "opacity": 1,
+                  "transform": "matrix(1, 0, 0, 1, 0, 0)",
+                  "display": "block",
+                  "modal": true
+                },
+                {
+                  "timeMs": 677.9999999998618,
+                  "opacity": 1,
+                  "transform": "matrix(1, 0, 0, 1, 0, 0)",
+                  "display": "block",
+                  "modal": true
+                },
+                {
+                  "timeMs": 694.6999999998588,
+                  "opacity": 1,
+                  "transform": "matrix(1, 0, 0, 1, 0, 0)",
+                  "display": "block",
+                  "modal": true
+                },
+                {
+                  "timeMs": 728.0999999998603,
+                  "opacity": 1,
+                  "transform": "matrix(1, 0, 0, 1, 0, 0)",
+                  "display": "block",
+                  "modal": true
+                }
+              ],
+              "open": true,
+              "filter": "none"
+            },
+            "exiting": {
+              "samples": [
+                {
+                  "timeMs": 5.220000000001164,
+                  "opacity": 1,
+                  "transform": "matrix(1, 0, 0, 1, 0, 0)",
+                  "display": "block",
+                  "modal": false
+                },
+                {
+                  "timeMs": 21.900000000001455,
+                  "opacity": 1,
+                  "transform": "matrix(1, 0, 0, 1, 0, 0)",
+                  "display": "block",
+                  "modal": false
+                },
+                {
+                  "timeMs": 38.5,
+                  "opacity": 0.976176,
+                  "transform": "matrix(0.999643, 0, 0, 0.999643, 0, 0.228708)",
+                  "display": "block",
+                  "modal": false
+                },
+                {
+                  "timeMs": 55.19999999999709,
+                  "opacity": 0.934446,
+                  "transform": "matrix(0.999017, 0, 0, 0.999017, 0, 0.629318)",
+                  "display": "block",
+                  "modal": false
+                },
+                {
+                  "timeMs": 105.19999999999709,
+                  "opacity": 0.708443,
+                  "transform": "matrix(0.995627, 0, 0, 0.995627, 0, 2.79894)",
+                  "display": "block",
+                  "modal": false
+                },
+                {
+                  "timeMs": 121.90000000000146,
+                  "opacity": 0.617901,
+                  "transform": "matrix(0.994269, 0, 0, 0.994269, 0, 3.66815)",
+                  "display": "block",
+                  "modal": false
+                },
+                {
+                  "timeMs": 138.59999999999854,
+                  "opacity": 0.531496,
+                  "transform": "matrix(0.992972, 0, 0, 0.992972, 0, 4.49764)",
+                  "display": "block",
+                  "modal": false
+                },
+                {
+                  "timeMs": 155.1999999999971,
+                  "opacity": 0.453199,
+                  "transform": "matrix(0.991798, 0, 0, 0.991798, 0, 5.24929)",
+                  "display": "block",
+                  "modal": false
+                },
+                {
+                  "timeMs": 171.90000000000146,
+                  "opacity": 0.383196,
+                  "transform": "matrix(0.990748, 0, 0, 0.990748, 0, 5.92132)",
+                  "display": "block",
+                  "modal": false
+                },
+                {
+                  "timeMs": 205.1999999999971,
+                  "opacity": 0.268678,
+                  "transform": "matrix(0.98903, 0, 0, 0.98903, 0, 7.0207)",
+                  "display": "block",
+                  "modal": false
+                },
+                {
+                  "timeMs": 221.90000000000146,
+                  "opacity": 0.22228,
+                  "transform": "matrix(0.988334, 0, 0, 0.988334, 0, 7.46611)",
+                  "display": "block",
+                  "modal": false
+                },
+                {
+                  "timeMs": 238.5,
+                  "opacity": 0.182373,
+                  "transform": "matrix(0.987736, 0, 0, 0.987736, 0, 7.84921)",
+                  "display": "block",
+                  "modal": false
+                },
+                {
+                  "timeMs": 255.1999999999971,
+                  "opacity": 0.147741,
+                  "transform": "matrix(0.987216, 0, 0, 0.987216, 0, 8.18169)",
+                  "display": "block",
+                  "modal": false
+                },
+                {
+                  "timeMs": 271.90000000000146,
+                  "opacity": 0.117998,
+                  "transform": "matrix(0.98677, 0, 0, 0.98677, 0, 8.46722)",
+                  "display": "block",
+                  "modal": false
+                },
+                {
+                  "timeMs": 288.5,
+                  "opacity": 0.092734,
+                  "transform": "matrix(0.986391, 0, 0, 0.986391, 0, 8.70975)",
+                  "display": "block",
+                  "modal": false
+                },
+                {
+                  "timeMs": 305.1999999999971,
+                  "opacity": 0.0711776,
+                  "transform": "matrix(0.986068, 0, 0, 0.986068, 0, 8.9167)",
+                  "display": "block",
+                  "modal": false
+                },
+                {
+                  "timeMs": 321.8000000000029,
+                  "opacity": 0.053191,
+                  "transform": "matrix(0.985798, 0, 0, 0.985798, 0, 9.08937)",
+                  "display": "block",
+                  "modal": false
+                },
+                {
+                  "timeMs": 338.5,
+                  "opacity": 0.0382161,
+                  "transform": "matrix(0.985573, 0, 0, 0.985573, 0, 9.23313)",
+                  "display": "block",
+                  "modal": false
+                },
+                {
+                  "timeMs": 355.1999999999971,
+                  "opacity": 0.0260759,
+                  "transform": "matrix(0.985391, 0, 0, 0.985391, 0, 9.34967)",
+                  "display": "block",
+                  "modal": false
+                },
+                {
+                  "timeMs": 371.90000000000146,
+                  "opacity": 0.0165154,
+                  "transform": "matrix(0.985248, 0, 0, 0.985248, 0, 9.44145)",
+                  "display": "block",
+                  "modal": false
+                },
+                {
+                  "timeMs": 388.5,
+                  "opacity": 0.00934925,
+                  "transform": "matrix(0.98514, 0, 0, 0.98514, 0, 9.51025)",
+                  "display": "block",
+                  "modal": false
+                },
+                {
+                  "timeMs": 405.1999999999971,
+                  "opacity": 0.00429852,
+                  "transform": "matrix(0.985065, 0, 0, 0.985065, 0, 9.55873)",
+                  "display": "block",
+                  "modal": false
+                },
+                {
+                  "timeMs": 421.90000000000146,
+                  "opacity": 0.00124304,
+                  "transform": "matrix(0.985019, 0, 0, 0.985019, 0, 9.58807)",
+                  "display": "block",
+                  "modal": false
+                },
+                {
+                  "timeMs": 438.5,
+                  "opacity": 3.46906e-05,
+                  "transform": "matrix(0.985, 0, 0, 0.985, 0, 9.59967)",
+                  "display": "block",
+                  "modal": false
+                },
+                {
+                  "timeMs": 455.09999999999854,
+                  "opacity": 0,
+                  "transform": "none",
+                  "display": "none",
+                  "modal": false
+                },
+                {
+                  "timeMs": 471.90000000000146,
+                  "opacity": 0,
+                  "transform": "none",
+                  "display": "none",
+                  "modal": false
+                },
+                {
+                  "timeMs": 488.5,
+                  "opacity": 0,
+                  "transform": "none",
+                  "display": "none",
+                  "modal": false
+                },
+                {
+                  "timeMs": 505.1999999999971,
+                  "opacity": 0,
+                  "transform": "none",
+                  "display": "none",
+                  "modal": false
+                },
+                {
+                  "timeMs": 521.8000000000029,
+                  "opacity": 0,
+                  "transform": "none",
+                  "display": "none",
+                  "modal": false
+                },
+                {
+                  "timeMs": 538.5,
+                  "opacity": 0,
+                  "transform": "none",
+                  "display": "none",
+                  "modal": false
+                },
+                {
+                  "timeMs": 555.1999999999971,
+                  "opacity": 0,
+                  "transform": "none",
+                  "display": "none",
+                  "modal": false
+                },
+                {
+                  "timeMs": 571.8000000000029,
+                  "opacity": 0,
+                  "transform": "none",
+                  "display": "none",
+                  "modal": false
+                },
+                {
+                  "timeMs": 588.5,
+                  "opacity": 0,
+                  "transform": "none",
+                  "display": "none",
+                  "modal": false
+                },
+                {
+                  "timeMs": 621.8000000000029,
+                  "opacity": 0,
+                  "transform": "none",
+                  "display": "none",
+                  "modal": false
+                },
+                {
+                  "timeMs": 638.5,
+                  "opacity": 0,
+                  "transform": "none",
+                  "display": "none",
+                  "modal": false
+                },
+                {
+                  "timeMs": 655.0999999999985,
+                  "opacity": 0,
+                  "transform": "none",
+                  "display": "none",
+                  "modal": false
+                },
+                {
+                  "timeMs": 671.8000000000029,
+                  "opacity": 0,
+                  "transform": "none",
+                  "display": "none",
+                  "modal": false
+                },
+                {
+                  "timeMs": 688.5,
+                  "opacity": 0,
+                  "transform": "none",
+                  "display": "none",
+                  "modal": false
+                },
+                {
+                  "timeMs": 738.5999999999985,
+                  "opacity": 0,
+                  "transform": "none",
+                  "display": "none",
+                  "modal": false
+                }
+              ],
+              "open": false,
+              "filter": "none"
+            }
+          }
+        }
+      ],
+      "touchIgnoresParallax": true
+    },
+    "audioContextsClosed": 10,
+    "audioContextsCreated": 10,
+    "offlineRegressionCases": 12,
+    "tolerance": 1e-06
+  },
+  "tests": {
+    "published-tests": {
+      "tests": 381,
+      "pass": 381,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "held-tests": {
+      "tests": 571,
+      "pass": 571,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "root-tests": {
+      "tests": 571,
+      "pass": 570,
+      "fail": 1,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "focused-tests": {
+      "tests": 251,
+      "pass": 251,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    }
+  },
+  "testCommand": "node --test (includes scripts/test-analyze.mjs as one additional test versus explicit tests-only runs)",
+  "focusedCommand": "node --test tests/audio/stereoLoudness.test.js tests/audio/analyzerRegression.test.js tests/audio/recorderCleanup.test.js tests/audio/normalizationEvidence.test.js tests/audio/mp3DistributionParity.test.js tests/unit/workbenchController.test.js tests/unit/analysisController.test.js tests/unit/analysisErrorFlow.test.js tests/unit/analysisService.test.js tests/unit/buildProcessingPlan.test.js tests/unit/environmentMotion.test.js",
+  "protectedTrackedPathsUnchanged": [
+    "electron/main.cjs",
+    "electron/notarize.cjs",
+    "electron/preload.cjs",
+    "package-lock.json",
+    "package.json",
+    "scripts/inline-dist.mjs",
+    "src/application/analysis/analysisController.js",
+    "src/application/analysis/analysisService.js",
+    "src/application/workbench/demo.js",
+    "src/application/workbench/workbenchController.js",
+    "src/audio/analyzer.js",
+    "src/audio/dsp.js",
+    "src/audio/genre.js",
+    "src/audio/processor.js",
+    "src/audio/reference.js",
+    "src/audio/vendor/lamejs-notices.js",
+    "src/audio/waveformPeaks.js"
+  ],
+  "originalPreservation": {
+    "originalFiles": 204,
+    "unchanged": 198,
+    "authorizedModified": [
+      "scripts/validation/run-workbench-browser.mjs",
+      "src/ui/presentation/rebuild/environment.css",
+      "src/ui/presentation/rebuild/tokens.css",
+      "src/ui/workbench/workspace.css",
+      "src/ui/workbench/workspace.js",
+      "tests/ui/cinematicShell.test.js"
+    ],
+    "missing": [],
+    "unexpectedModified": []
+  },
+  "references": {
+    "sourceRef": "900f07330f463d26bde0cc1d4bd731945c4fffec",
+    "originalBlobsVerified": [
+      {
+        "file": "01-cosmic-moodboard.png",
+        "sha256": "e8c8172d43e32f09b0f15f5ad91c08ebbf0136317a2213ba6373248667c53c9a",
+        "verified": true
+      },
+      {
+        "file": "02-universe-opening.png",
+        "sha256": "eba71add12cc96fbd00535864d654dff7cb55521c3c945431ade395fb76da087",
+        "verified": true
+      },
+      {
+        "file": "03-studio-arrival.png",
+        "sha256": "7fb4349986c35d4c3ec9fa65c82d8fdc71fdc26f8d09a228549dd55b870c2dd8",
+        "verified": true
+      },
+      {
+        "file": "04-immersive-studio.png",
+        "sha256": "72059e337846a5c0980ab929718cadda2870ccbf5daefc71023b1fa6477e8058",
+        "verified": true
+      },
+      {
+        "file": "05-arrangement-reference.png",
+        "sha256": "d2920876670b7e9218220f9fafaa36b64951be2d293795f39ddb7b90bb8a9a73",
+        "verified": true
+      },
+      {
+        "file": "06-mixer-reference.png",
+        "sha256": "b63fce6f9a01f754bca2b8b271cb747204628936e7db199095bfd76f89ea6b19",
+        "verified": true
+      },
+      {
+        "file": "07-plugin-reference.png",
+        "sha256": "58ceebd071df1ac9b0a23ed8c3ca7bf82fe9e2f8b41a604e592623bdeaf1e551",
+        "verified": true
+      },
+      {
+        "file": "08-sylune.png",
+        "sha256": "c50e9bf91b8e6c43c3d8e3f7691c81a33987757245c5ffe537f7410f1c05ef44",
+        "verified": true
+      },
+      {
+        "file": "09-detailed-editing.png",
+        "sha256": "16f88647e12685bcb3095bf2b6d10f3a3b9ff4620a635eb064afc2f627d526e5",
+        "verified": true
+      },
+      {
+        "file": "10-sound-library.png",
+        "sha256": "9cb2844591984e2d44ff46b43c640df2c53a545ed0244a5ce7dbca5b4cfeb573",
+        "verified": true
+      },
+      {
+        "file": "11-alternative-studio.png",
+        "sha256": "5bddf36f63efff9e97c23774aea865118a5c090c03fb4396079699cd351ab8f3",
+        "verified": true
+      },
+      {
+        "file": "12-numbered-overview.png",
+        "sha256": "c8f68a2418301193f81faa988fede1e1f2b135679fe745833a690e01e8433b7b",
+        "verified": true
+      },
+      {
+        "file": "13-design-language-board.png",
+        "sha256": "57b2af73c31e380915a72ce03ed0dc53bceb9720913ec2e0443ea2562d46c8af",
+        "verified": true
+      },
+      {
+        "file": "IMPLEMENTATION-GUIDE.md",
+        "sha256": "991b5d03592913a16c17591d9fc76d7869b1a58aeaad922e02463254ed0434b8",
+        "verified": true
+      },
+      {
+        "file": "MANIFEST.md",
+        "sha256": "ada4a25df300939ca70e411f2985ac4a4af1274deb79e7f362c62590798c0e15",
+        "verified": true
+      },
+      {
+        "file": "contact-sheet.png",
+        "sha256": "d4d2c475d12bbc3d190477c606bab11c2b80645ce2c8c413ec9c22278ea37c0b",
+        "verified": true
+      }
+    ],
+    "numberedPreviewsVisuallyInspected": 13
+  },
+  "scopedSourceSha256": {
+    "scripts/validation/run-workbench-browser.mjs": "186b83c4dc8c05f07a696d3dfe56b454fce9a83733bd76f953bf4ba1bb22fb05",
+    "src/ui/presentation/rebuild/environment.css": "e5571d04c05510e38c23cf8dc159828e5d59ba1706cc8fed18c0ff52c0c18b7d",
+    "src/ui/presentation/rebuild/tokens.css": "1756f5121dea42fc0b6f8d87b23afc6c0efd78f5b3862fdf0ebc837d523a8664",
+    "src/ui/workbench/workspace.css": "9fc03c61fc131762096167a401771dba2d962286aee8fa6f97cf41c4ea386c6d",
+    "src/ui/workbench/workspace.js": "b753fc9a3d52c6b595ba8852713031ccf2f8036cf819dfe03c7bf96a6b9fc624",
+    "tests/ui/cinematicShell.test.js": "d68fb216ffca954d13de0b7769306f697e76d62fcdc25b7e1d3e91b6c57fbe6e",
+    "scripts/validation/derive-environment-planes.py": "7ff8144bd161e8cdb4553ec4eb471a5c54c90ebd559244c9466393b0db73d81b",
+    "src/ui/presentation/rebuild/environmentMotion.js": "a8dc5af9cd0e6722b0737f7c79222ab53e256f3b990d9359117fe504bbedb6a2",
+    "src/ui/presentation/rebuild/assets/celestial-plane.webp": "caa39876abc197deb0b49689dc747f2e1c2ce551ea8e02c41f09a75bfd9f44a3",
+    "src/ui/presentation/rebuild/assets/near-rocks-plane.webp": "3f60295fa8f642aabc1a26ad89b2ac64cf7623a8aa42e353e8969cb32e21bd94",
+    "tests/unit/environmentMotion.test.js": "9ac14cd52ee460b2b5e59b78a4bc85f64fd70388a8389671c61fcdccbbcde474"
+  },
+  "evidenceFiles": {
+    "after-loaded-1120x700.png": {
+      "bytes": 470943,
+      "sha256": "28afa0cd27372dacc8529acf56607cdef4856ad6a53661dc5f4f5e152c8b720c"
+    },
+    "after-loaded-1480x920.png": {
+      "bytes": 727461,
+      "sha256": "50a693a3a281d0c78851f5982cff1b2b99488f91e73e8197bbf5724f439435b7"
+    },
+    "after-panel-open-1480x920.png": {
+      "bytes": 757798,
+      "sha256": "b9efe751f706302529d16916fa4180a1dcd42640f7c4e12d5487a0278f61da63"
+    },
+    "after-region-editing-1120x700.png": {
+      "bytes": 466365,
+      "sha256": "f19afad1eebf56cab50bce2eaa7134c59f1b9de592acbc3775e86b5234b4cf5b"
+    },
+    "after-report.json": {
+      "bytes": 82531,
+      "sha256": "14ca4f1af6b93d7374a4df781ae6c62a0dd5af90130a8981209a64ec6bb66ea7"
+    },
+    "asset-derivation.txt": {
+      "bytes": 175,
+      "sha256": "e9f69bf2c6710c7eb6a61f28423b5d46e50d7d84b1acef7f693a651352444664"
+    },
+    "audit-full.json": {
+      "bytes": 20638,
+      "sha256": "dcc1f2c5806937be38a0fa458ee152b829b959920ec17d557d75165609f2e2a9"
+    },
+    "audit-production.json": {
+      "bytes": 365,
+      "sha256": "a18ea025b09a523c70e706ebd80b92b06247e10cfba0edfb3c36c1c336c32bbf"
+    },
+    "before-loaded-1120x700.png": {
+      "bytes": 494972,
+      "sha256": "ab3f29d345f27455878f67076862672962f963eb8c0c5ad85ed1c3194d97cbc1"
+    },
+    "before-loaded-1480x920.png": {
+      "bytes": 784255,
+      "sha256": "7aee2998dfc307ad569dbdaeb3b02e85ead7ed39c4d9f4f2285a086dc39b2ab4"
+    },
+    "before-report.json": {
+      "bytes": 76268,
+      "sha256": "05b3bd4671dac6916f23815936a86e4b64ccbd1a7f6703ca174760d3b481745e"
+    },
+    "build.txt": {
+      "bytes": 458,
+      "sha256": "d4f3fa78f8501055dda107b152ead3b7fc3549a12d92447f329e2b10cd09429d"
+    },
+    "focused-tests.txt": {
+      "bytes": 61244,
+      "sha256": "32a8d61e497107823f00eaa1087ad94958c237b8f8fe105bb6df782ab622c888"
+    },
+    "held-tests.txt": {
+      "bytes": 134043,
+      "sha256": "e9dcc8971fe15559bd5233c2a94ecb5fe9caffa8112ccae257233b1a94e1cb43"
+    },
+    "preservation.json": {
+      "bytes": 385,
+      "sha256": "dddb4a198a0c02b723b25c0e194418d3bb5cc38899beef656cdc823ec9721500"
+    },
+    "published-tests.txt": {
+      "bytes": 88937,
+      "sha256": "98fb4fd10d18eabdbf1f6363b84eeb84a95d199bd7483fed0c360bceee991467"
+    },
+    "root-tests.txt": {
+      "bytes": 135030,
+      "sha256": "c04939017a7be7f4be76a2678e6bb34ad0b50b8bd961b9947a6dc45900ed98e4"
+    },
+    "sanity.txt": {
+      "bytes": 332,
+      "sha256": "71b414b33e1a12214e56677bdd8c85857f79012a8f70a79df83b438670b437f4"
+    }
+  },
+  "transcriptFormatting": "Evidence txt transcripts trim trailing whitespace only; original local raw logs remain unchanged. Original SHA-256 before formatting follows.",
+  "rawTranscriptSha256": {
+    "asset-derivation.txt": "e9f69bf2c6710c7eb6a61f28423b5d46e50d7d84b1acef7f693a651352444664",
+    "build.txt": "d4f3fa78f8501055dda107b152ead3b7fc3549a12d92447f329e2b10cd09429d",
+    "focused-tests.txt": "32a8d61e497107823f00eaa1087ad94958c237b8f8fe105bb6df782ab622c888",
+    "held-tests.txt": "99327f3b94ee702828b30d60ff83113c92e7769c08a3e07cdb11c934c289d16a",
+    "published-tests.txt": "e4a4376686208d68cfb298fe3e015c0b4076694f7dc98bb92eae33e8f44d5b5d",
+    "root-tests.txt": "63b3a9a3d340221dd41aacda8c3fe73fdc56cec05882cc76f0fe09cb4df27f55",
+    "sanity.txt": "71b414b33e1a12214e56677bdd8c85857f79012a8f70a79df83b438670b437f4"
+  }
+}

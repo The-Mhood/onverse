@@ -5,6 +5,8 @@
  */
 :root {
   color-scheme: dark;
+  --mvo-scene-x: 0px;
+  --mvo-scene-y: 0px;
 
   /* Reference 13 named swatches; other shades below are sampled supports. */
   --mvo-color-abyss: #090d17;
